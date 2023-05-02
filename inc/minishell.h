@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maaliber <maaliber@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lletourn <lletourn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 15:01:58 by maaliber          #+#    #+#             */
-/*   Updated: 2023/04/27 13:01:38 by maaliber         ###   ########.fr       */
+/*   Updated: 2023/05/02 14:07:49 by lletourn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,30 +47,38 @@ typedef enum e_config_error	t_error;
 typedef struct s_funct
 {
 	char	**data;
-	char	*name;
-	char	*args;
+	char	*name; // = data[0]
+	char	**args; // = ++data
 	char	*path;
 }	t_funct;
+
+typedef struct s_redirect
+{
+	char	*filepath; // NULL si pipe, input, error ou output
+	int		fd;
+	int		type; // < == 0, << == 1 here_doc, > = 2 Overwrite, 3 = >> APPEND
+}	t_redirect;
 
 /*Stack structure - Chained list with index and run number*/
 typedef struct s_cmd
 {
-	int				idx;
+	int				cmd_no;
 	int				pid;
-	struct s_funct	*ft;
+	struct s_funct	*fct;
 	int				ret;
-	s_		in;
+	int				in;
 	int				out;
 }	t_cmd;
 
 /*Stack structure - Chained list with index and run number*/
 typedef struct s_data
 {
-	char			**env;
-	int				env_local;
+	int				fd_env;
+	int				fd_history;
 	int				nb_process;
-	struct s_cmd	**cmds;
+	struct s_cmd	cmds[CMD_MAX];
 	int				fd[OPEN_MAX];
+	int				exit_status;
 }	t_data;
 
 #endif
