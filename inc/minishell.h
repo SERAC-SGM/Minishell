@@ -6,7 +6,7 @@
 /*   By: lletourn <lletourn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 15:01:58 by maaliber          #+#    #+#             */
-/*   Updated: 2023/05/03 12:49:24 by lletourn         ###   ########.fr       */
+/*   Updated: 2023/05/03 17:01:59 by lletourn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,8 @@
 # include "executor.h"
 # include "builtins.h"
 
-#define OPEN_MAX 4096
-#define CMD_MAX (OPEN_MAX + 1)
-
+# define OPEN_MAX 4096
+# define CMD_MAX 4097
 
 enum e_config_error
 {
