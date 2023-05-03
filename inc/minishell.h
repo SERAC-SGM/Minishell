@@ -6,7 +6,7 @@
 /*   By: lletourn <lletourn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 15:01:58 by maaliber          #+#    #+#             */
-/*   Updated: 2023/05/03 12:43:03 by lletourn         ###   ########.fr       */
+/*   Updated: 2023/05/03 12:49:24 by lletourn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,10 @@
 # include "expander.h"
 # include "executor.h"
 # include "builtins.h"
+
+#define OPEN_MAX 4096
+#define CMD_MAX (OPEN_MAX + 1)
+
 
 enum e_config_error
 {
@@ -81,7 +85,6 @@ typedef struct s_redirect
 	int		fd;
 	int		type;
 }	t_redirect;
-
 
 /*Stack structure - Linked list with index and run number*/
 typedef struct s_data
