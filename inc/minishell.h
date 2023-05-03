@@ -6,12 +6,12 @@
 /*   By: maaliber <maaliber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 15:01:58 by maaliber          #+#    #+#             */
-/*   Updated: 2023/04/27 13:01:38 by maaliber         ###   ########.fr       */
+/*   Updated: 2023/05/03 11:47:35 by maaliber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PIPEX_H
-# define PIPEX_H
+#ifndef MINISHELL_H
+# define MINISHELL_H
 
 # include <errno.h>
 # include <sys/types.h>
@@ -59,7 +59,7 @@ typedef struct s_cmd
 	int				pid;
 	struct s_funct	*ft;
 	int				ret;
-	s_		in;
+	int				in;
 	int				out;
 }	t_cmd;
 
