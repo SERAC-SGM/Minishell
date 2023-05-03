@@ -3,15 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maaliber <maaliber@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lletourn <lletourn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 15:01:58 by maaliber          #+#    #+#             */
-/*   Updated: 2023/05/03 11:57:02 by maaliber         ###   ########.fr       */
+/*   Updated: 2023/05/03 12:43:03 by lletourn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
-# define MINISHELL_H
+# define MINISHEL_H
 
 # include <errno.h>
 # include <sys/types.h>
@@ -39,38 +39,51 @@ enum e_config_error
 	E_FORK,
 	E_ENV,
 	E_CMD,
-	E_HEREDOC,
+	E_HEREDOC
 };
+typedef enum e_config_error	t_config_error;
 
-typedef enum e_config_error	t_error;
-
-typedef struct s_funct
+/*
+• *name (data[0]): name of the command.
+• **args (data[1, ..., n]): optional arguments.
+• *path: path to the command.
+*/
+typedef struct s_single_cmd
 {
 	char	**data;
-	char	*name; // = data[0]
-	char	**args; // = ++data
+	char	*name;
+	char	**args;
 	char	*path;
-}	t_funct;
+}	t_single_cmd;
 
-typedef struct s_redirect
-{
-	char	*filepath; // NULL si pipe, input, error ou output
-	int		fd;
-	int		type; // < == 0, << == 1 here_doc, > = 2 Overwrite, 3 = >> APPEND
-}	t_redirect;
-
-/*Stack structure - Chained list with index and run number*/
+/*Stack structure - Linked list with index and run number*/
 typedef struct s_cmd
 {
-	int				cmd_no;
+	int				cmd_number;
 	int				pid;
-	struct s_funct	*fct;
-	int				ret;
+	t_single_cmd	*cmd;
+	int				return_value;
 	int				in;
 	int				out;
 }	t_cmd;
 
-/*Stack structure - Chained list with index and run number*/
+/*
+• *filepath: NULL if pipe, input, output or error
+• type:
+.   <:    0 (read from)
+.   <<:   1 (here_doc)
+.   >:    2 (overwrite - O_TRUNC)
+.   >>:   3 (append - O_APPEND)
+*/
+typedef struct s_redirect
+{
+	char	*filepath;
+	int		fd;
+	int		type;
+}	t_redirect;
+
+
+/*Stack structure - Linked list with index and run number*/
 typedef struct s_data
 {
 	int				fd_env;
