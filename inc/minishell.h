@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maaliber <maaliber@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lletourn <lletourn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 15:01:58 by maaliber          #+#    #+#             */
-/*   Updated: 2023/05/04 14:22:55 by maaliber         ###   ########.fr       */
+/*   Updated: 2023/05/04 16:35:38 by lletourn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ typedef enum e_config_error	t_config_error;
 /*Stack structure - Linked list with index and run number*/
 typedef struct s_cmd
 {
-	int				cmd_number;
+	int				cmd_count;
 	int				pid;
 	char			**cmd;
 	int				return_value;
@@ -88,13 +88,15 @@ typedef struct s_data
 	t_list			*env;
 	HIST_ENTRY		**hist;
 	char			*cmd_line;
-	int				nb_process; //
-	struct s_cmd	cmds[CMD_MAX];//
+	int				cmd_nbr; //
+	struct s_cmd	command_list[CMD_MAX];//
 	int				fd[OPEN_MAX];//?
 	char			*infile;//
 	int				fd_infile;//?
 	char			*outfile;//
 	int				fd_outfile;//?
+	int				outfile_mode;
+	int				here_doc;
 	int				status;
 	int				exit;
 }	t_data;
