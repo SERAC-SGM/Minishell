@@ -6,7 +6,7 @@
 /*   By: lletourn <lletourn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 14:57:51 by maaliber          #+#    #+#             */
-/*   Updated: 2023/05/04 13:33:45 by lletourn         ###   ########.fr       */
+/*   Updated: 2023/05/04 13:34:24 by lletourn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ t_tkn_lst	*lexer(t_data *data)
 	t_tkn_lst	*tkn_lst;
 	t_tkn_lst	*token;
 	char		*cmd_l;
-	int			mode; 
+	int			mode;
 
 	tkn_lst = NULL;
 	mode = 0;
