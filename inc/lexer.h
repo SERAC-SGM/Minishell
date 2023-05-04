@@ -6,7 +6,7 @@
 /*   By: maaliber <maaliber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/27 12:43:34 by maaliber          #+#    #+#             */
-/*   Updated: 2023/05/04 12:50:16 by maaliber         ###   ########.fr       */
+/*   Updated: 2023/05/04 14:22:31 by maaliber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,18 @@
 # define APPEND 22
 # define PIPE 30
 
+/*
+•type:
+.RD_IN
+.HERE
+.RD_OUT
+.APPEND
+.PIPE
+*/
 typedef struct s_tkn_lst
 {
 	char		*content;
-	int			type; // 0: Regular entry, 1: Single quoted string, 2: Double quoted string
+	int			type;
 	t_tkn_lst	*next;
 }	t_tkn_lst;
 

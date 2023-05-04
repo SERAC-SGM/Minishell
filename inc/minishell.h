@@ -6,7 +6,7 @@
 /*   By: maaliber <maaliber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 15:01:58 by maaliber          #+#    #+#             */
-/*   Updated: 2023/05/04 12:53:54 by maaliber         ###   ########.fr       */
+/*   Updated: 2023/05/04 14:22:55 by maaliber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,19 +47,6 @@ enum e_config_error
 };
 typedef enum e_config_error	t_config_error;
 
-/*
-• *name (data[0]): name of the command.
-• **args (data[1, ..., n]): optional arguments.
-• *path: path to the command.
-*/
-typedef struct s_single_cmd
-{
-	char	**data;
-	char	*name;
-	char	**args;
-	char	*path;
-}	t_single_cmd;
-
 /*Stack structure - Linked list with index and run number*/
 typedef struct s_cmd
 {
@@ -92,15 +79,22 @@ typedef struct s_list
 	t_list	*next;
 }	t_list;
 
-/*Stack structure - Linked list with index and run number*/
+/*
+Stack structure - Linked list with index and run number
+
+*/
 typedef struct s_data
 {
 	t_list			*env;
 	HIST_ENTRY		**hist;
 	char			*cmd_line;
-	int				nb_process;
-	struct s_cmd	cmds[CMD_MAX];
-	int				fd[OPEN_MAX];
+	int				nb_process; //
+	struct s_cmd	cmds[CMD_MAX];//
+	int				fd[OPEN_MAX];//?
+	char			*infile;//
+	int				fd_infile;//?
+	char			*outfile;//
+	int				fd_outfile;//?
 	int				status;
 	int				exit;
 }	t_data;
