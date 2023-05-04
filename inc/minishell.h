@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maaliber <maaliber@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lletourn <lletourn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 15:01:58 by maaliber          #+#    #+#             */
-/*   Updated: 2023/05/04 12:18:26 by maaliber         ###   ########.fr       */
+/*   Updated: 2023/05/04 12:23:02 by lletourn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,12 +78,12 @@ typedef struct s_cmd
 .   >:    2 (overwrite - O_TRUNC)
 .   >>:   3 (append - O_APPEND)
 */
-typedef struct s_redirect
+typedef struct s_file
 {
 	char	*filepath;
 	int		fd;
 	int		type;
-}	t_redirect;
+}	t_file;
 
 typedef struct s_list
 {

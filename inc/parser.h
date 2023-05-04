@@ -3,10 +3,11 @@
 /*                                                        :::      ::::::::   */
 /*   parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maaliber <maaliber@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lletourn <lletourn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/27 12:43:55 by maaliber          #+#    #+#             */
-/*   Updated: 2023/04/27 12:43:56 by maaliber         ###   ########.fr       */
+/*   Updated: 2023/05/04 12:21:36 by lletourn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+t_data	parser(t_data *data, t_tkn_lst)
