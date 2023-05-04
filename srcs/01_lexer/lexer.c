@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maaliber <maaliber@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lletourn <lletourn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 14:57:51 by maaliber          #+#    #+#             */
-/*   Updated: 2023/05/04 12:16:26 by maaliber         ###   ########.fr       */
+/*   Updated: 2023/05/04 13:33:45 by lletourn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,12 +30,17 @@ int	is_special(char *str)
 	return (0);
 }
 
+/*
+0 = standard (interpreting everything)
+1 = Single quote (interpreting nothing)
+2 = double quote (interpreting nothing but $)
+*/
 t_tkn_lst	*lexer(t_data *data)
 {
 	t_tkn_lst	*tkn_lst;
 	t_tkn_lst	*token;
 	char		*cmd_l;
-	int			mode; //0 = standard (interpreting everything), 1 = Single quote (interpreting nothing), 2 = double quote (interpreting nothing but $)
+	int			mode; 
 
 	tkn_lst = NULL;
 	mode = 0;
