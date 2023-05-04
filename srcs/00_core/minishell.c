@@ -6,7 +6,7 @@
 /*   By: maaliber <maaliber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 14:58:49 by maaliber          #+#    #+#             */
-/*   Updated: 2023/05/03 16:56:53 by maaliber         ###   ########.fr       */
+/*   Updated: 2023/05/04 12:02:30 by maaliber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	exec_cmd_line(t_data *data)
 		data->cmd_line = free_strtrim(data->cmd_line, "\v\t ");
 		if (!data->cmd_line)
 			exit_error(E_MEM, data);
-		lex = lexer(data->cmd_line);
+		lex = lexer(data);
 		parser(data, lex);
 		expander(data);
 		executor(data);

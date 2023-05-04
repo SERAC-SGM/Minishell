@@ -6,7 +6,7 @@
 /*   By: maaliber <maaliber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 15:01:58 by maaliber          #+#    #+#             */
-/*   Updated: 2023/05/04 11:52:53 by maaliber         ###   ########.fr       */
+/*   Updated: 2023/05/04 12:18:26 by maaliber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,15 +85,23 @@ typedef struct s_redirect
 	int		type;
 }	t_redirect;
 
+typedef struct s_list
+{
+	char	*line;
+	t_list	*next;
+}	t_list;
+
 /*Stack structure - Linked list with index and run number*/
 typedef struct s_data
 {
-	int				fd_env;
-	int				fd_history;
+	t_list			*env;
+	HIST_ENTRY		**hist;
+	char			*cmd_line;
 	int				nb_process;
 	struct s_cmd	cmds[CMD_MAX];
 	int				fd[OPEN_MAX];
-	int				exit_status;
+	int				status;
+	int				exit;
 }	t_data;
 
 #endif
