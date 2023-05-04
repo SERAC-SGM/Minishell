@@ -6,7 +6,7 @@
 /*   By: maaliber <maaliber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/27 12:43:34 by maaliber          #+#    #+#             */
-/*   Updated: 2023/05/04 14:22:31 by maaliber         ###   ########.fr       */
+/*   Updated: 2023/05/04 15:34:20 by maaliber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # define PIPE 30
 
 /*
+If content is NULL pointer the token is a special character
 •type:
 .RD_IN
 .HERE
@@ -39,6 +40,11 @@ t_tkn_lst	*last_token(t_tkn_lst *tk_list);
 void		add_back_token(t_tkn_lst **tk_list, t_tkn_lst *token);
 void		del1_token(t_tkn_lst *token);
 void		clear_token_list(t_tkn_lst **tk_list);
+t_tkn_lst	*standard_token(char **str, t_list *env);
+t_tkn_lst	*single_quote_token(char **str);
+t_tkn_lst	*double_quote_token(char **str, t_list *env);
+t_tkn_lst	*generate_token(char **cmd_line, int mode, t_list *env);
+t_tkn_lst	*special_token(char **str);
 
 t_tkn_lst	*lexer(t_data *data);
 

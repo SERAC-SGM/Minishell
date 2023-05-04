@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lletourn <lletourn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: maaliber <maaliber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 14:57:51 by maaliber          #+#    #+#             */
-/*   Updated: 2023/05/04 13:51:07 by lletourn         ###   ########.fr       */
+/*   Updated: 2023/05/04 15:31:58 by maaliber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,9 @@ int	is_special(char *str)
 }
 
 /*
+Create token list from command line passed as argument
+Identifies special characters (|, ', ", <, <<, >, >>)
+Mode :
 0 = standard (interpreting everything)
 1 = Single quote (interpreting nothing)
 2 = double quote (interpreting nothing but $)
@@ -57,10 +60,7 @@ t_tkn_lst	*lexer(t_data *data)
 	cmd_l = data->cmd_line;
 	while (cmd_l)
 	{
-		if (is_special(cmd_l))
-			token = special_token(cmd_l);
-		else
-			token = generate_token(cmd_l, mode);
+		token = generate_token(&cmd_l, mode, data->env);
 		if (!token)
 			return (clear_token_list(tkn_lst), 0);
 		add_back_token(tkn_lst, token);	
