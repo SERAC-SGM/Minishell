@@ -6,7 +6,7 @@
 /*   By: maaliber <maaliber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 11:59:08 by maaliber          #+#    #+#             */
-/*   Updated: 2023/05/04 11:56:45 by maaliber         ###   ########.fr       */
+/*   Updated: 2023/05/04 12:50:07 by maaliber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ void	clear_token_list(t_tkn_lst **tk_list)
 	while (*tk_list)
 	{
 		tk_next = (*tk_list)->next;
-		ft_lstdelone_arg(*tk_list);
+		del1_token(*tk_list);
 		*tk_list = tk_next;
 	}
 }

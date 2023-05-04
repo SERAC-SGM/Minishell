@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lletourn <lletourn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: maaliber <maaliber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 15:01:58 by maaliber          #+#    #+#             */
-/*   Updated: 2023/05/04 12:23:02 by lletourn         ###   ########.fr       */
+/*   Updated: 2023/05/04 12:53:54 by maaliber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 # include <stdio.h>
 # include <readline/readline.h>
 # include <readline/history.h>
+# include "libft.h"
 # include "lexer.h"
 # include "parser.h"
 # include "expander.h"
@@ -64,7 +65,7 @@ typedef struct s_cmd
 {
 	int				cmd_number;
 	int				pid;
-	t_single_cmd	*cmd;
+	char			**cmd;
 	int				return_value;
 	int				in;
 	int				out;
@@ -103,5 +104,11 @@ typedef struct s_data
 	int				status;
 	int				exit;
 }	t_data;
+
+t_list	*ft_lstnew(void *content);
+t_list	*ft_lstlast(t_list *lst);
+void	ft_lstadd_back(t_list **lst, t_list *nnew);
+void	ft_lstdelone(t_list *lst, void (*del)(void *));
+void	ft_lstclear(t_list **lst, void (*del)(void *));
 
 #endif

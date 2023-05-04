@@ -6,7 +6,7 @@
 /*   By: maaliber <maaliber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 14:58:49 by maaliber          #+#    #+#             */
-/*   Updated: 2023/05/04 12:02:30 by maaliber         ###   ########.fr       */
+/*   Updated: 2023/05/04 12:48:47 by maaliber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,23 @@ void	exec_cmd_line(t_data *data)
 	}
 }
 
+void	init_env(t_data *data, char *env[])
+{
+	t_list	*node;
+	int		i;
+
+	i = 0;
+	if (!env)
+		return ;
+	while (env[i])
+	{
+		node = ft_lstnew(ft_strdup(env[i]));
+		if (!node)
+			ft_lstclear(&data->env);
+		ft_lstadd_back(&data->env, node);
+	}
+	return ;
+}
 
 int	main(int ac, char *av[], char *env[])
 {
@@ -41,7 +58,8 @@ int	main(int ac, char *av[], char *env[])
 	
 	(void)ac;
 	(void)av;
-	data.env = init_env(env);
+	ft_bzero(&data, sizeof(t_data));
+	init_env(&data, env);
 	while (1)
 	{
 		reset_cmd(&data);

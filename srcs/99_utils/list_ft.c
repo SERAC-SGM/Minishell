@@ -1,0 +1,71 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   list_ft.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: maaliber <maaliber@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/05/04 12:39:31 by maaliber          #+#    #+#             */
+/*   Updated: 2023/05/04 12:46:56 by maaliber         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "minishell.h"
+
+t_list	*ft_lstnew(void *content)
+{
+	t_list	*node;
+
+	node = malloc(sizeof(t_list));
+	if (!node)
+		return (NULL);
+	node->line = content;
+	node->next = NULL;
+	return (node);
+}
+
+t_list	*ft_lstlast(t_list *lst)
+{
+	if (!lst)
+		return (NULL);
+	while (lst->next)
+		lst = lst->next;
+	return (lst);
+}
+
+void	ft_lstadd_back(t_list **lst, t_list *new)
+{
+	t_list	*nlast;
+
+	if (!lst || !new)
+		return ;
+	if (!(*lst))
+	{
+		(*lst) = new;
+		return ;
+	}
+	nlast = ft_lstlast(*lst);
+	nlast->next = new;
+}
+
+void	ft_lstdelone(t_list *lst, void (*del)(void *))
+{
+	if (!lst || !del)
+		return ;
+	(*del)(lst->line);
+	free(lst);
+}
+
+void	ft_lstclear(t_list **lst, void (*del)(void *))
+{
+	t_list	*nnext;
+
+	if (!lst || !del)
+		return ;
+	while (*lst)
+	{
+		nnext = (*lst)->next;
+		ft_lstdelone(*lst, del);
+		*lst = nnext;
+	}
+}
