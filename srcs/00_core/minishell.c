@@ -6,24 +6,32 @@
 /*   By: maaliber <maaliber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 14:58:49 by maaliber          #+#    #+#             */
-/*   Updated: 2023/05/03 11:50:40 by maaliber         ###   ########.fr       */
+/*   Updated: 2023/05/03 16:56:53 by maaliber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+void	reset_cmd(t_data *data)
+{
+	
+}
+
 void	exec_cmd_line(t_data *data)
 {
-	char	**lex;
-	
-	data->cmd_line = readline(READLINE_MSG);
-	data->cmd_line = free_strtrim(data->cmd_line, "\v\t ");
-	if (!data->cmd_line)
-		exit_error(E_MEM, data);
-	lex = lexer(data->cmd_line);
-	parser(&data, lex);
-	expander(&data);
-	executor(&data);
+	t_tkn_lst	*lex;
+
+	while (get_next_line(0, &line) > 0)
+	{
+		data->cmd_line = get_next_line(0);
+		data->cmd_line = free_strtrim(data->cmd_line, "\v\t ");
+		if (!data->cmd_line)
+			exit_error(E_MEM, data);
+		lex = lexer(data->cmd_line);
+		parser(data, lex);
+		expander(data);
+		executor(data);
+	}
 }
 
 
@@ -44,5 +52,4 @@ int	main(int ac, char *av[], char *env[])
 	}
 	data.status = WEXITSTATUS(data.status);
 	return (data.status);
-	
 }
