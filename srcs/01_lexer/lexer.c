@@ -6,12 +6,22 @@
 /*   By: lletourn <lletourn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 14:57:51 by maaliber          #+#    #+#             */
-/*   Updated: 2023/05/04 13:34:24 by lletourn         ###   ########.fr       */
+/*   Updated: 2023/05/04 13:51:07 by lletourn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+/*
+Checks if the string corresponds to any special character and returns the
+matching value:
+• <:  returns RD_IN
+• <<: returns HERE
+• >:  returns RD_OUT
+• >>: returns APPEND
+• |:  returns PIPE
+• returns 0 otherwise
+*/
 int	is_special(char *str)
 {
 	int		l;

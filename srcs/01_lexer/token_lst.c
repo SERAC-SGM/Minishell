@@ -3,15 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   token_lst.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maaliber <maaliber@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lletourn <lletourn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 11:59:08 by maaliber          #+#    #+#             */
-/*   Updated: 2023/05/04 11:56:45 by maaliber         ###   ########.fr       */
+/*   Updated: 2023/05/04 13:50:45 by lletourn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+/*
+Allocates (with malloc) a new token list.
+• content: string
+• type:    
+*/
 t_tkn_lst	*new_token(char	*str, int type)
 {
 	t_tkn_lst	*token;

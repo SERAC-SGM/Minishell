@@ -6,13 +6,13 @@
 /*   By: lletourn <lletourn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/27 12:43:55 by maaliber          #+#    #+#             */
-/*   Updated: 2023/05/04 13:31:52 by lletourn         ###   ########.fr       */
+/*   Updated: 2023/05/04 13:36:26 by lletourn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PARSER_H
 # define PARSER_H
 
-t_data parser(t_data *data, t_tkn_lst cmd_line);
+t_data	parser(t_data *data, t_tkn_lst cmd_line);
 
 #endif
