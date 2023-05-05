@@ -6,7 +6,7 @@
 /*   By: maaliber <maaliber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 15:01:58 by maaliber          #+#    #+#             */
-/*   Updated: 2023/05/05 14:19:29 by maaliber         ###   ########.fr       */
+/*   Updated: 2023/05/05 16:40:41 by maaliber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,9 @@
 # include <sys/types.h>
 # include <sys/uio.h>
 # include <sys/wait.h>
+# include <sys/stat.h>
+# include <fcntl.h>
+# include <unistd.h>
 # include <string.h>
 # include <stdio.h>
 # include "libft.h"

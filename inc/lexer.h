@@ -6,7 +6,7 @@
 /*   By: maaliber <maaliber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/27 12:43:34 by maaliber          #+#    #+#             */
-/*   Updated: 2023/05/05 13:53:49 by maaliber         ###   ########.fr       */
+/*   Updated: 2023/05/05 16:39:50 by maaliber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,11 @@
 /*
 If content is NULL pointer the token is a special character
 •type:
-.RD_IN
-.HERE
-.RD_OUT
-.APPEND
-.PIPE
+.    RD_IN
+.    HERE
+.    RD_OUT
+.    APPEND
+.    PIPE
 */	
 
 int	is_special(char *str);
