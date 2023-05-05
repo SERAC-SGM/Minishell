@@ -6,8 +6,13 @@
 /*   By: maaliber <maaliber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 14:31:16 by maaliber          #+#    #+#             */
-/*   Updated: 2023/05/03 14:32:24 by maaliber         ###   ########.fr       */
+/*   Updated: 2023/05/05 13:46:20 by maaliber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <readline/history.h>
+#ifndef HISTORY_H
+# define HISTORY_H
+
+# include "mshell_types.h"
+
+#endif

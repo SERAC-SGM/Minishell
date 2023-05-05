@@ -68,6 +68,14 @@ INCLUDES += -I $(LIB_DIR)/inc
 ############################### Headers ########################################
 #‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾#
 
+HEADER += mshell_types.h
+HEADER += lexer.h
+HEADER += expander.h
+HEADER += parser.h
+HEADER += executor.h
+HEADER += builtins.h
+HEADER += signal.h
+HEADER += history.h
 HEADER += minishell.h
 
 vpath %.h $(INC_DIR)
@@ -77,27 +85,42 @@ vpath %.h $(INC_DIR)
 #‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾#
 
 SRCS_DIR = ./srcs
+PATH_SRCS_CORE = $(SRCS_DIR)/00_core
 PATH_SRCS_LEXER = $(SRCS_DIR)/01_lexer
 PATH_SRCS_PARSER = $(SRCS_DIR)/02_parser
 PATH_SRCS_EXPAND = $(SRCS_DIR)/03_expander
 PATH_SRCS_EXEC = $(SRCS_DIR)/04_executor
 PATH_SRCS_BUILTIN = $(SRCS_DIR)/05_builtins
+PATH_SRCS_HIST = $(SRCS_DIR)/06_history
+PATH_SRCS_UTIL = $(SRCS_DIR)/10_utils
+PATH_SRCS_TEST = $(SRCS_DIR)/99_tests
 
 #______________________________________________________________________________#
 ############################### Sources ########################################
 #‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾#
 
-SRCS += 
+SRCS += lexer_test.c
+SRCS += lexer.c
+SRCS += token_lst.c
+SRCS += token.c
+SRCS += list_ft.c
+SRCS += util.c
+
+
 
 #______________________________________________________________________________#
 ############################### Attribution ####################################
 #‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾#
 
+vpath %.c $(PATH_SRCS_CORE)
 vpath %.c $(PATH_SRCS_LEXER)
 vpath %.c $(PATH_SRCS_PARSER)
 vpath %.c $(PATH_SRCS_EXPAND)
 vpath %.c $(PATH_SRCS_EXEC)
 vpath %.c $(PATH_SRCS_BUILTIN)
+vpath %.c $(PATH_SRCS_HIST)
+vpath %.c $(PATH_SRCS_UTIL)
+vpath %.c $(PATH_SRCS_TEST)
 
 #______________________________________________________________________________#
 ############################### Objects ########################################

@@ -6,7 +6,7 @@
 /*   By: maaliber <maaliber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 11:59:08 by maaliber          #+#    #+#             */
-/*   Updated: 2023/05/04 14:38:31 by maaliber         ###   ########.fr       */
+/*   Updated: 2023/05/05 13:52:16 by maaliber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ void	add_back_token(t_tkn_lst **tk_list, t_tkn_lst *token)
 		(*tk_list) = token;
 		return ;
 	}
-	tkn_last = ft_lstlast_arg(*tk_list);
+	tkn_last = last_token(*tk_list);
 	tkn_last->next = token;
 }
 

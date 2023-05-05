@@ -6,7 +6,13 @@
 /*   By: maaliber <maaliber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 14:15:33 by maaliber          #+#    #+#             */
-/*   Updated: 2023/05/03 14:15:33 by maaliber         ###   ########.fr       */
+/*   Updated: 2023/05/05 13:42:59 by maaliber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#ifndef SIGNAL_H
+# define SIGNAL_H
+
+# include "mshell_types.h"
+
+#endif

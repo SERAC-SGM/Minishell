@@ -3,21 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lletourn <lletourn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: maaliber <maaliber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/27 12:43:34 by maaliber          #+#    #+#             */
-/*   Updated: 2023/05/04 17:31:39 by lletourn         ###   ########.fr       */
+/*   Updated: 2023/05/05 13:53:49 by maaliber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LEXER_H
 # define LEXER_H
 
-# define RD_IN 11
-# define HERE 12
-# define RD_OUT 21
-# define APPEND 22
-# define PIPE 30
+# include "mshell_types.h"
 
 /*
 If content is NULL pointer the token is a special character
@@ -28,13 +24,8 @@ If content is NULL pointer the token is a special character
 .APPEND
 .PIPE
 */	
-typedef struct s_tkn_lst
-{
-	char		*content;
-	int			type;
-	t_tkn_lst	*next;
-}	t_tkn_lst;
 
+int	is_special(char *str);
 t_tkn_lst	*new_token(char	*str, int type);
 t_tkn_lst	*last_token(t_tkn_lst *tk_list);
 void		add_back_token(t_tkn_lst **tk_list, t_tkn_lst *token);

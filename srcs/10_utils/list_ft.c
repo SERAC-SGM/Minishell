@@ -6,7 +6,7 @@
 /*   By: maaliber <maaliber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 12:39:31 by maaliber          #+#    #+#             */
-/*   Updated: 2023/05/04 12:46:56 by maaliber         ###   ########.fr       */
+/*   Updated: 2023/05/05 14:18:55 by maaliber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,24 +48,24 @@ void	ft_lstadd_back(t_list **lst, t_list *new)
 	nlast->next = new;
 }
 
-void	ft_lstdelone(t_list *lst, void (*del)(void *))
+void	ft_lstdelone(t_list *lst)
 {
-	if (!lst || !del)
+	if (!lst)
 		return ;
-	(*del)(lst->line);
+	free(lst->line);
 	free(lst);
 }
 
-void	ft_lstclear(t_list **lst, void (*del)(void *))
+void	ft_lstclear(t_list **lst)
 {
 	t_list	*nnext;
 
-	if (!lst || !del)
+	if (!lst)
 		return ;
 	while (*lst)
 	{
 		nnext = (*lst)->next;
-		ft_lstdelone(*lst, del);
+		ft_lstdelone(*lst);
 		*lst = nnext;
 	}
 }

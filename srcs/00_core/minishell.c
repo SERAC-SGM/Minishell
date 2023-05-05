@@ -6,13 +6,13 @@
 /*   By: maaliber <maaliber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 14:58:49 by maaliber          #+#    #+#             */
-/*   Updated: 2023/05/04 12:48:47 by maaliber         ###   ########.fr       */
+/*   Updated: 2023/05/05 14:17:23 by maaliber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	reset_cmd(t_data *data)
+/*void	reset_cmd(t_data *data)
 {
 	
 }
@@ -32,22 +32,24 @@ void	exec_cmd_line(t_data *data)
 		expander(data);
 		executor(data);
 	}
-}
+}*/
 
 void	init_env(t_data *data, char *env[])
 {
+	t_list	*env_list;
 	t_list	*node;
 	int		i;
 
 	i = 0;
 	if (!env)
 		return ;
+	env_list = NULL;
 	while (env[i])
 	{
 		node = ft_lstnew(ft_strdup(env[i]));
 		if (!node)
-			ft_lstclear(&data->env);
-		ft_lstadd_back(&data->env, node);
+			ft_lstclear(&env_list);
+		ft_lstadd_back(&env_list, node);
 	}
 	return ;
 }

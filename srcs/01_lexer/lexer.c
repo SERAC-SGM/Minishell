@@ -6,7 +6,7 @@
 /*   By: maaliber <maaliber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 14:57:51 by maaliber          #+#    #+#             */
-/*   Updated: 2023/05/04 15:31:58 by maaliber         ###   ########.fr       */
+/*   Updated: 2023/05/05 14:38:17 by maaliber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,21 @@ int	is_special(char *str)
 }
 
 /*
+Set mode - return value of mode used for generating token
+• 1 if the first character is ' and ' is not unclosed
+• 2 if the first character is " and " is not unclosed
+• 0 otherwise
+*/
+int	set_mode(char *cmd_l)
+{
+	if (*cmd_l == '\'' && ft_strchr(cmd_l + 1, '\''))
+		return (1);
+	if (*cmd_l == '\"' && ft_strchr(cmd_l + 1, '\"'))
+		return (2);
+	return (0);
+}
+
+/*
 Create token list from command line passed as argument
 Identifies special characters (|, ', ", <, <<, >, >>)
 Mode :
@@ -58,11 +73,17 @@ t_tkn_lst	*lexer(t_data *data)
 	tkn_lst = NULL;
 	mode = 0;
 	cmd_l = data->cmd_line;
-	while (cmd_l)
+	while (*cmd_l)
 	{
+		//printf("cmd_l:%s\n", cmd_l);
+		while (*cmd_l && ft_isspace(*cmd_l))
+			cmd_l++;
+		mode = set_mode(cmd_l);
+		//printf("%s", cmd_l);
 		token = generate_token(&cmd_l, mode, data->env);
 		if (!token)
-			return (clear_token_list(tkn_lst), 0);
-		add_back_token(tkn_lst, token);	
+			return (clear_token_list(&tkn_lst), NULL);
+		add_back_token(&tkn_lst, token);
 	}
+	return (tkn_lst);
 }

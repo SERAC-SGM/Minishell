@@ -86,10 +86,6 @@ int			ft_ischarset(char c, char const *set);
 #  define OPEN_MAX 1024
 # endif
 
-# define EOF (-1)
-# define NEWLINE 1
-# define RDERR 0
-
 size_t		ft_linelen(char *text);
 char		*ft_strjoin_gnl(char *txt, char *add);
 char		*getline_and_store(char *store, char *text);
