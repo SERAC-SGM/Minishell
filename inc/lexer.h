@@ -6,7 +6,7 @@
 /*   By: lletourn <lletourn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/27 12:43:34 by maaliber          #+#    #+#             */
-/*   Updated: 2023/05/04 17:31:39 by lletourn         ###   ########.fr       */
+/*   Updated: 2023/05/05 12:11:04 by lletourn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,11 @@
 /*
 If content is NULL pointer the token is a special character
 •type:
-.RD_IN
-.HERE
-.RD_OUT
-.APPEND
-.PIPE
+.    RD_IN
+.    HERE
+.    RD_OUT
+.    APPEND
+.    PIPE
 */	
 typedef struct s_tkn_lst
 {

@@ -3,10 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   signal.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maaliber <maaliber@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lletourn <lletourn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 14:15:33 by maaliber          #+#    #+#             */
-/*   Updated: 2023/05/03 14:15:33 by maaliber         ###   ########.fr       */
+/*   Updated: 2023/05/05 13:04:00 by lletourn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#ifndef SIGNAL_H
+# define SIGNAL_H
+
+#endif

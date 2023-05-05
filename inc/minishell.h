@@ -6,17 +6,20 @@
 /*   By: lletourn <lletourn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 15:01:58 by maaliber          #+#    #+#             */
-/*   Updated: 2023/05/04 16:35:38 by lletourn         ###   ########.fr       */
+/*   Updated: 2023/05/05 16:04:23 by lletourn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
-# define MINISHEL_H
+# define MINISHELL_H
 
 # include <errno.h>
 # include <sys/types.h>
 # include <sys/uio.h>
 # include <sys/wait.h>
+# include <sys/stat.h>
+# include <fcntl.h>
+# include <unistd.h>
 # include <string.h>
 # include <stdio.h>
 # include <readline/readline.h>
@@ -28,8 +31,8 @@
 # include "executor.h"
 # include "builtins.h"
 
-# define OPEN_MAX 4096
-# define CMD_MAX 4097
+# define OPEN_MAX 1000
+# define CMD_MAX 1000
 
 enum e_config_error
 {
@@ -47,15 +50,18 @@ enum e_config_error
 };
 typedef enum e_config_error	t_config_error;
 
-/*Stack structure - Linked list with index and run number*/
+/*
+Defines a command, its 
+*/
 typedef struct s_cmd
 {
-	int				cmd_count;
+	int				proc_idx;
+	int				arg_count;
 	int				pid;
 	char			**cmd;
 	int				return_value;
-	int				in;
-	int				out;
+	int				in;//last in
+	int				out;//last out
 }	t_cmd;
 
 /*
@@ -88,13 +94,13 @@ typedef struct s_data
 	t_list			*env;
 	HIST_ENTRY		**hist;
 	char			*cmd_line;
-	int				cmd_nbr; //
-	struct s_cmd	command_list[CMD_MAX];//
-	int				fd[OPEN_MAX];//?
-	char			*infile;//
-	int				fd_infile;//?
-	char			*outfile;//
-	int				fd_outfile;//?
+	int				cmd_count;
+	struct s_cmd	command_list[CMD_MAX];
+	int				fd[OPEN_MAX];
+	char			*infile;
+	int				fd_infile;
+	char			*outfile;
+	int				fd_outfile;
 	int				outfile_mode;
 	int				here_doc;
 	int				status;
