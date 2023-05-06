@@ -6,7 +6,7 @@
 /*   By: lletourn <lletourn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 13:38:57 by maaliber          #+#    #+#             */
-/*   Updated: 2023/05/06 12:23:40 by lletourn         ###   ########.fr       */
+/*   Updated: 2023/05/06 12:50:36 by lletourn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,14 +49,15 @@ typedef enum e_config_error	t_config_error;
 /*Stack structure - Linked list with index and run number*/
 typedef struct s_cmd
 {
-	int				process_index;
-	int				arg_count;
-	int				pid;
-	char			**cmd;
-	int				return_value;
-	int				in;
-	int				out;
-}	t_cmd;
+	int		process_index;
+	int		arg_count;
+	int		pid;
+	char	**cmd;
+	char	*infile;
+	int		fd_infile;
+	char	*outfile;
+	int		fd_outfile;
+}			t_cmd;
 
 /*
 • *filepath: NULL if pipe, input, output or error
@@ -99,10 +100,6 @@ typedef struct s_data
 	int				cmd_count;
 	struct s_cmd	command_list[CMD_MAX];
 	int				fd[OPEN_MAX];
-	char			*infile;
-	int				fd_infile;
-	char			*outfile;
-	int				fd_outfile;
 	char			*delimiter;
 	int				status;
 	int				exit;
