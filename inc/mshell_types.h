@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mshell_types.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maaliber <maaliber@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lletourn <lletourn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 13:38:57 by maaliber          #+#    #+#             */
-/*   Updated: 2023/05/05 13:46:23 by maaliber         ###   ########.fr       */
+/*   Updated: 2023/05/06 12:22:19 by lletourn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,8 @@ typedef enum e_config_error	t_config_error;
 /*Stack structure - Linked list with index and run number*/
 typedef struct s_cmd
 {
-	int				cmd_count;
+	int				process_index;
+	int				arg_count;
 	int				pid;
 	char			**cmd;
 	int				return_value;
@@ -68,8 +69,8 @@ typedef struct s_cmd
 
 typedef struct s_tkn_lst
 {
-	char		*content;
-	int			type;
+	char				*content;
+	int					type;
 	struct s_tkn_lst	*next;
 }	t_tkn_lst;
 
@@ -82,7 +83,7 @@ typedef struct s_file
 
 typedef struct s_list
 {
-	char	*line;
+	char			*line;
 	struct s_list	*next;
 }	t_list;
 
@@ -95,15 +96,14 @@ typedef struct s_data
 	t_list			*env;
 	HIST_ENTRY		**hist;
 	char			*cmd_line;
-	int				cmd_nbr; //
+	int				cmd_count; //
 	struct s_cmd	command_list[CMD_MAX];//
 	int				fd[OPEN_MAX];//?
 	char			*infile;//
 	int				fd_infile;//?
 	char			*outfile;//
 	int				fd_outfile;//?
-	int				outfile_mode;
-	int				here_doc;
+	char			*delimiter;
 	int				status;
 	int				exit;
 }	t_data;

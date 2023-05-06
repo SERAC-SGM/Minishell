@@ -6,7 +6,7 @@
 /*   By: lletourn <lletourn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/06 12:02:59 by lletourn          #+#    #+#             */
-/*   Updated: 2023/05/06 12:04:08 by lletourn         ###   ########.fr       */
+/*   Updated: 2023/05/06 12:21:21 by lletourn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,6 @@ typedef struct s_data
 	char			*outfile;
 	int				fd_outfile;
 	int				outfile_mode;
-	int				here_doc;
 	char			*delimiter;
 	int				status;
 	int				exit;
