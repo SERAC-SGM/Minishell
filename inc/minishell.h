@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maaliber <maaliber@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lletourn <lletourn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 15:01:58 by maaliber          #+#    #+#             */
-/*   Updated: 2023/05/05 16:40:41 by maaliber         ###   ########.fr       */
+/*   Updated: 2023/05/06 12:20:14 by lletourn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	ft_lstdelone(t_list *lst);
 void	ft_lstclear(t_list **lst);
 
 /*
-Trim character of str at the start and end of the string
+Trims character of str at the start and end of the string
 */
 void	trim_char(char **str, char c);
 void	init_env(t_data *data, char *env[]);

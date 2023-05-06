@@ -6,7 +6,7 @@
 /*   By: maaliber <maaliber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 13:38:57 by maaliber          #+#    #+#             */
-/*   Updated: 2023/05/06 12:41:30 by maaliber         ###   ########.fr       */
+/*   Updated: 2023/05/06 17:56:29 by maaliber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,8 @@
 # define APPEND 22
 # define PIPE 30
 # define END 127
-# define OPEN_MAX 4096
-# define CMD_MAX 4097
+# define OPEN_MAX 1000
+# define CMD_MAX 1000
 
 enum e_config_error
 {
@@ -50,13 +50,16 @@ typedef enum e_config_error	t_config_error;
 /*Stack structure - Linked list with index and run number*/
 typedef struct s_cmd
 {
-	int				cmd_count;
-	int				pid;
-	char			**cmd;
-	int				return_value;
-	int				in;
-	int				out;
-}	t_cmd;
+	int		process_index;
+	int		arg_count;
+	int		pid;
+	char	**cmd;
+	char	*infile;
+	int		fd_infile;
+	char	*outfile;
+	int		fd_outfile;
+	char	*delimiter;
+}			t_cmd;
 
 /*
 • *filepath: NULL if pipe, input, output or error
@@ -69,8 +72,8 @@ typedef struct s_cmd
 
 typedef struct s_tkn_lst
 {
-	char		*content;
-	int			type;
+	char				*content;
+	int					type;
 	struct s_tkn_lst	*next;
 }	t_tkn_lst;
 
@@ -83,7 +86,7 @@ typedef struct s_file
 
 typedef struct s_list
 {
-	char	*line;
+	char			*line;
 	struct s_list	*next;
 }	t_list;
 
@@ -99,12 +102,6 @@ typedef struct s_data
 	int				cmd_count;
 	struct s_cmd	command_list[CMD_MAX];
 	int				fd[OPEN_MAX];
-	char			*infile;
-	int				fd_infile;
-	char			*outfile;
-	int				fd_outfile;
-	int				outfile_mode;
-	int				here_doc;
 	int				status;
 	int				exit;
 }	t_data;
