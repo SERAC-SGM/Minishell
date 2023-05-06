@@ -6,7 +6,7 @@
 /*   By: lletourn <lletourn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 13:38:57 by maaliber          #+#    #+#             */
-/*   Updated: 2023/05/06 12:22:19 by lletourn         ###   ########.fr       */
+/*   Updated: 2023/05/06 12:23:40 by lletourn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,8 @@
 # define RD_OUT 21
 # define APPEND 22
 # define PIPE 30
-# define OPEN_MAX 4096
-# define CMD_MAX 4097
+# define OPEN_MAX 1000
+# define CMD_MAX 1000
 
 enum e_config_error
 {
@@ -96,13 +96,13 @@ typedef struct s_data
 	t_list			*env;
 	HIST_ENTRY		**hist;
 	char			*cmd_line;
-	int				cmd_count; //
-	struct s_cmd	command_list[CMD_MAX];//
-	int				fd[OPEN_MAX];//?
-	char			*infile;//
-	int				fd_infile;//?
-	char			*outfile;//
-	int				fd_outfile;//?
+	int				cmd_count;
+	struct s_cmd	command_list[CMD_MAX];
+	int				fd[OPEN_MAX];
+	char			*infile;
+	int				fd_infile;
+	char			*outfile;
+	int				fd_outfile;
 	char			*delimiter;
 	int				status;
 	int				exit;
