@@ -6,7 +6,7 @@
 /*   By: maaliber <maaliber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 16:54:54 by maaliber          #+#    #+#             */
-/*   Updated: 2023/05/05 14:52:21 by maaliber         ###   ########.fr       */
+/*   Updated: 2023/05/06 17:17:44 by maaliber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,15 +29,20 @@ t_tkn_lst	*standard_token(char **str, t_list *env)
 	ex = 0;
 	i = 0;
 	while ((*str)[i] && !ft_isspace((*str)[i]) && !is_special((*str) + i)
-			&& (*str)[i] != '\'' && (*str)[i] != '\"')
+			&& !((*str)[i] == '\'' && ft_strchr((*str) + i + 1, '\''))
+			&& !((*str)[i] == '\"' && ft_strchr((*str) + i + 1, '\"')))
 	{
 		if ((*str)[i] == '$')
 			ex = 1;
 		i++;
-	}	
+	}
+	if (!ft_isspace((*str)[i])
+			&& !((*str)[i] == '\'' && ft_strchr((*str) + i + 1, '\''))
+			&& !((*str)[i] == '\"' && ft_strchr((*str) + i + 1, '\"')))
+		i++;
 	token = new_token(ft_substr(*str, 0, i), 0);
 	/*if (ex)
-		token = expander(token, env);*/
+		expand_tokenize(token, env);*/
 	*str += i;
 	return (token);
 }
@@ -54,7 +59,7 @@ t_tkn_lst	*single_quote_token(char **str)
 	t_tkn_lst	*token;
 	int			i;
 
-	i = 0;
+	i = 1;
 	while ((*str)[i] && (*str)[i] != '\'')
 		i++;
 	token = new_token(ft_substr(*str, 0, i), 1);
@@ -78,17 +83,18 @@ t_tkn_lst	*double_quote_token(char **str, t_list *env)
 
 	(void)env;
 	ex = 0;
-	i = 0;
+	i = 1;
 	while ((*str)[i] && (*str)[i] != '\"')
 	{
 		if ((*str)[i] == '$')
 			ex = 1;
 		i++;
 	}
+	printf("ex=%d\n", ex);
 	token = new_token(ft_substr(*str, 0, i), 2);
 	trim_char(&token->content, '\"');
-	/*if (ex)
-		token = expander(token, env);*/
+	if (ex)
+		expand(token, env);
 	*str += i + 1;
 	return (token);
 }
@@ -103,28 +109,22 @@ Create special token with NULL content and type :
 */
 t_tkn_lst	*special_token(char **str)
 {
-	t_tkn_lst	*token;
 	int			len;
 
 	len = ft_strlen(*str);
 	if (len >= 2 && !ft_strncmp(*str, "<<", 2))
-	{
-		token = new_token(0, HERE);
-		(*str)++;
-	}
+		return (*str += 2, new_token(0, HERE));
 	if (len >= 2 && !ft_strncmp(*str, ">>", 2))
-	{
-		token = new_token(0, APPEND);
-		(*str)++;
-	}
+		return (*str += 2, new_token(0, APPEND));
 	if (**str == '<')
-		token = new_token(0, RD_IN);
+		return (*str += 1, new_token(0, RD_IN));
 	if (**str == '>')
-		token = new_token(0, RD_OUT);
+		return (*str += 1, new_token(0, RD_OUT));
 	if (**str == '|')
-		token = new_token(0, PIPE);
-	*str += 1;
-	return (0);
+		return (*str += 1, new_token(0, PIPE));
+	if (**str == '\n' || **str == '\0')
+		return (*str += 1, new_token(0, END));
+	return (NULL);
 }
 
 /*
@@ -136,20 +136,13 @@ Create token with command line with differents cases :
 */
 t_tkn_lst	*generate_token(char **cmd_line, int mode, t_list *env)
 {
-	t_tkn_lst	*token;
-
 	if (is_special(*cmd_line))
-	{	token = special_token(cmd_line);
-		printf("%s-mode [%d]\n", token->content, mode);}
+		return (special_token(cmd_line));
 	if (mode == 0)
-	{	token = standard_token(cmd_line, env);
-		printf("%s-mode [%d]\n", token->content, mode);}
+		return (standard_token(cmd_line, env));
 	if (mode == 1)
-	{	token = single_quote_token(cmd_line);
-		printf("%s-mode [%d]\n", token->content, mode);
-	}
+		return (single_quote_token(cmd_line));
 	if (mode == 2)
-	{	token = double_quote_token(cmd_line, env);
-		printf("%s-mode [%d]\n", token->content, mode);}
-	return (token);
+		return (double_quote_token(cmd_line, env));
+	return (NULL);
 }

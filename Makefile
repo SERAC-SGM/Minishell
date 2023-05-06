@@ -99,12 +99,13 @@ PATH_SRCS_TEST = $(SRCS_DIR)/99_tests
 ############################### Sources ########################################
 #‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾#
 
-SRCS += lexer_test.c
+SRCS += tester.c
 SRCS += lexer.c
 SRCS += token_lst.c
 SRCS += token.c
 SRCS += list_ft.c
 SRCS += util.c
+SRCS += expander.c
 
 
 

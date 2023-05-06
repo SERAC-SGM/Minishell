@@ -6,7 +6,7 @@
 /*   By: maaliber <maaliber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 11:59:08 by maaliber          #+#    #+#             */
-/*   Updated: 2023/05/05 13:52:16 by maaliber         ###   ########.fr       */
+/*   Updated: 2023/05/06 12:35:56 by maaliber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,6 @@ t_tkn_lst	*new_token(char	*str, int type)
 {
 	t_tkn_lst	*token;
 
-	if (!str)
-		return (NULL);
 	token = malloc(sizeof(t_tkn_lst));
 	if (!token)
 		return (NULL);

@@ -1,21 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   expander.h                                         :+:      :+:    :+:   */
+/*   ft_strstr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: maaliber <maaliber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/27 12:43:25 by maaliber          #+#    #+#             */
-/*   Updated: 2023/05/06 17:03:42 by maaliber         ###   ########.fr       */
+/*   Created: 2023/05/06 16:26:07 by maaliber          #+#    #+#             */
+/*   Updated: 2023/05/06 16:27:55 by maaliber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef EXPANDER_H
-# define EXPANDER_H
+#include "libft.h"
 
-# include "mshell_types.h"
+char	*ft_strstr(const char *s1, const char *s2)
+{
+	size_t	i;
+	size_t	j;
 
-void	expand(t_tkn_lst *token, t_list *env);
-void	expand_tokenize(t_tkn_lst *token, t_list *env);
-
-#endif
+	if (!*s2)
+		return ((char *)s1);
+	i = 0;
+	while (s1[i])
+	{
+		j = 0;
+		while (s1[j + i] == s2[j] && s2[j] && i + j < n)
+			j++;
+		if (!s2[j])
+			return ((char *)s1 + i);
+		i++;
+	}
+	return (NULL);
+}

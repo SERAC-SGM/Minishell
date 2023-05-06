@@ -6,7 +6,7 @@
 /*   By: maaliber <maaliber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 13:38:57 by maaliber          #+#    #+#             */
-/*   Updated: 2023/05/05 13:46:23 by maaliber         ###   ########.fr       */
+/*   Updated: 2023/05/06 12:41:30 by maaliber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@
 # define RD_OUT 21
 # define APPEND 22
 # define PIPE 30
+# define END 127
 # define OPEN_MAX 4096
 # define CMD_MAX 4097
 
@@ -95,13 +96,13 @@ typedef struct s_data
 	t_list			*env;
 	HIST_ENTRY		**hist;
 	char			*cmd_line;
-	int				cmd_nbr; //
-	struct s_cmd	command_list[CMD_MAX];//
-	int				fd[OPEN_MAX];//?
-	char			*infile;//
-	int				fd_infile;//?
-	char			*outfile;//
-	int				fd_outfile;//?
+	int				cmd_count;
+	struct s_cmd	command_list[CMD_MAX];
+	int				fd[OPEN_MAX];
+	char			*infile;
+	int				fd_infile;
+	char			*outfile;
+	int				fd_outfile;
 	int				outfile_mode;
 	int				here_doc;
 	int				status;
