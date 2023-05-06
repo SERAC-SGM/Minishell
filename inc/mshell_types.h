@@ -6,7 +6,7 @@
 /*   By: lletourn <lletourn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 13:38:57 by maaliber          #+#    #+#             */
-/*   Updated: 2023/05/06 12:50:36 by lletourn         ###   ########.fr       */
+/*   Updated: 2023/05/06 13:14:37 by lletourn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ typedef struct s_cmd
 	int		fd_infile;
 	char	*outfile;
 	int		fd_outfile;
+	char	*delimiter;
 }			t_cmd;
 
 /*
@@ -100,7 +101,6 @@ typedef struct s_data
 	int				cmd_count;
 	struct s_cmd	command_list[CMD_MAX];
 	int				fd[OPEN_MAX];
-	char			*delimiter;
 	int				status;
 	int				exit;
 }	t_data;

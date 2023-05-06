@@ -6,7 +6,7 @@
 /*   By: lletourn <lletourn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/27 12:43:55 by maaliber          #+#    #+#             */
-/*   Updated: 2023/05/06 12:18:29 by lletourn         ###   ########.fr       */
+/*   Updated: 2023/05/06 14:36:55 by lletourn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,11 @@
 /*
 Creates a temporary .here_doc file and writes the user input.
 */
-void		write_tmp(t_data *data);
+//void	write_tmp(t_cmd *cmd)
 /*
 Checks that the previous file is not a standard stream and closes it.
 */
-void		close_previous_file(t_data *data, t_tkn_lst *token);
+//void		close_previous_file(t_data *data, t_tkn_lst *token);
 /*
 When encountering a file-related token (< << > >>), creates or overwrite the
 corresponding infile or outfile. If the previous file is not a standard stream, 
@@ -34,7 +34,7 @@ Returns the next special token.
 If no non-special token is found, returns an error (except for <<, where this is
 the opposite).
 */
-t_tkn_lst	*handle_files(t_tkn_lst *token, t_data *data);
+t_tkn_lst	*handle_files(t_tkn_lst *token, t_data *data, t_cmd cmd);
 
 //////////////
 // parser.c //
