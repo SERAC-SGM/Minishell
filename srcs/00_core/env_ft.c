@@ -6,22 +6,22 @@
 /*   By: maaliber <maaliber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 12:18:00 by maaliber          #+#    #+#             */
-/*   Updated: 2023/05/09 12:27:54 by maaliber         ###   ########.fr       */
+/*   Updated: 2023/05/09 12:51:54 by maaliber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char	*get_var_value(char *to_find, t_list *env)
+char	*get_var_value(char *name, t_list *env)
 {
 	int		l;
 	
-	if (!env || !to_find)
+	if (!env || !name)
 		return (NULL);
-	l = ft_strlen(to_find);
+	l = ft_strlen(name);
 	while (env)
 	{
-		if (!ft_strncmp(env->line, to_find, l) && env->line[l] == '=')
+		if (!ft_strncmp(env->line, name, l) && env->line[l] == '=')
 			break ;
 		env = env->next;
 	}
@@ -30,39 +30,44 @@ char	*get_var_value(char *to_find, t_list *env)
 	return(ft_strchr(env->line, '=') + 1);
 }
 
-void	set_env_var(char *name, char *value, t_data *data)
+static void	create_env_var(char *name, char *val, t_list *env)
 {
-	
+	char	*line;
+	t_list	*entry;
+
+	if (!env || !name)
+		return (NULL);
+	line = ft_strjoin(name, "=");
+	line = ft_strjoin_free(line, val);
+	entry = ft_lstnew(line);
+	ft_lstadd_back(&env, entry);
 }
 
-void	overwrite_env_var(char *name, char *value, t_data *data)
+static void	overwrite_env_var(char *name, char *val, t_list *env)
 {
-	char	*aux;
-	int		i;
+	char	*prefix;
 
-	i = 0;
-	aux = ft_strjoin(name, "=");
-	while (g_shell->env[i])
+	if (!env || !name)
+		return (NULL);
+	prefix = ft_strjoin(name, "=");
+	while (env)
 	{
-		if (!ft_strncmp(g_shell->env[i], aux, ft_strlen(aux)))
+		if (!ft_strncmp(env->line, name, l) && env->line[l] == '=')
 			break ;
-		i++;
+		env = env->next;
 	}
-	free(g_shell->env[i]);
-	g_shell->env[i] = ft_strjoin(aux, value);
-	free_three_ptrs(name, value, aux);
+	free(env->line);
+	env->line = ft_strjoin(prefix, val);
+	free(prefix);
 }
 
-void	add_to_env(char *name, char *value, t_data *data)
+void	set_env_var(char *name, char *val, t_list *env)
 {
-	char	*prev_value;
+	char	*prev_val;
 
-	prev_value = check_env(name);
-	if (!prev_value)
-		add_to_local_env(name, value);
+	prev_val = get_var_value(name, data->env);
+	if (!prev_val)
+		create_env_var(name, val, data);
 	else
-	{
-		free(prev_value);
-		overwrite_env_value(name, value);
-	}
+		overwrite_env_var(name, val, data);
 }

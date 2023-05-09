@@ -6,12 +6,20 @@
 /*   By: maaliber <maaliber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 12:39:31 by maaliber          #+#    #+#             */
-/*   Updated: 2023/05/05 14:18:55 by maaliber         ###   ########.fr       */
+/*   Updated: 2023/05/09 13:06:17 by maaliber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+/*
+Basic fonctions for list
+• Create node
+• Get last node
+• Add element at the end of list
+• Delete one element
+• Clear list
+*/
 t_list	*ft_lstnew(void *content)
 {
 	t_list	*node;
