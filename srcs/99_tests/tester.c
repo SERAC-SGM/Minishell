@@ -6,7 +6,7 @@
 /*   By: maaliber <maaliber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 13:35:39 by maaliber          #+#    #+#             */
-/*   Updated: 2023/05/06 17:53:38 by maaliber         ###   ########.fr       */
+/*   Updated: 2023/05/09 17:05:36 by maaliber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,5 +71,7 @@ int	main(int ac, char *av[], char *env[])
 	//print_env(data.env);
 	lex = lexer(&data);
 	print_lexer(lex);
+	clear_token_list(&lex);
+	ft_lstclear(&data.env);
 	free(data.cmd_line);
 }

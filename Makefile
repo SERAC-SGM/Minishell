@@ -69,6 +69,7 @@ INCLUDES += -I $(LIB_DIR)/inc
 #‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾#
 
 HEADER += mshell_types.h
+HEADER += environment.h
 HEADER += lexer.h
 HEADER += expander.h
 HEADER += parser.h
@@ -101,13 +102,13 @@ PATH_SRCS_TEST = $(SRCS_DIR)/99_tests
 
 SRCS += tester.c
 SRCS += lexer.c
+SRCS += lexer_util.c
 SRCS += token_lst.c
 SRCS += token.c
 SRCS += list_ft.c
 SRCS += util.c
 SRCS += expander.c
-
-
+SRCS += env_ft.c
 
 #______________________________________________________________________________#
 ############################### Attribution ####################################

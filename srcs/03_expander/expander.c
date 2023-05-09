@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expander.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lletourn <lletourn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: maaliber <maaliber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 14:19:34 by maaliber          #+#    #+#             */
-/*   Updated: 2023/05/09 14:27:55 by lletourn         ###   ########.fr       */
+/*   Updated: 2023/05/09 18:19:55 by maaliber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ char	*cpy_word(char *str)
 	return (word);
 }
 
-int	replace_content(t_tkn_lst *token, char *sub, int pos)
+int	replace_content(char **content, char *sub, int pos)
 {
 	int		offset;
 	int		l;
@@ -45,19 +45,22 @@ int	replace_content(t_tkn_lst *token, char *sub, int pos)
 	int		sub_l;
 	char	*new;
 
-	l = ft_strlen(token->content);
-	var_l = word_len(&token->content[pos]);
+	if (!*content)
+		return (0);
+	l = ft_strlen(*content);
+	var_l = word_len(&(*content)[pos]);
 	sub_l = ft_strlen(sub);
 	offset = sub_l - var_l;
 	new = malloc(l + offset + 1);
 	if (!new)
 		return (0);
-	ft_memcpy(new, token->content, pos);
+	ft_memcpy(new, *content, pos);
 	ft_memcpy(new + pos, sub, sub_l);
-	ft_memcpy(new + pos + sub_l, token->content + pos + var_l, l - pos - var_l);
+	ft_memcpy(new + pos + sub_l, *content + pos + var_l, l - pos - var_l);
 	new[l + offset] = '\0';
-	free(token->content);
-	token->content = new;
+	printf("offset:%d\n", offset);
+	free(*content);
+	*content = new;
 	return (offset);
 }
 
@@ -65,28 +68,27 @@ int	replace_content(t_tkn_lst *token, char *sub, int pos)
 Expand variable followed by $ in format by the corresponding value in env
 • $ is not iterpreted when into single quote
 */
-void	expand(t_tkn_lst *token, t_list *env)
+void	expand(char **content, t_list *env)
 {
 	char	*to_find;
 	char	*val;
 	int		i;
 
-	if (!token)
+	if (!*content)
 		return ;
 	i = 0;
-	while (i >= 0)
+	printf("content:%s\n", *content);
+	while ((*content)[i])
 	{
-		if (token->content[i] == '$')
+		if ((*content)[i] == '$')
 		{
-			to_find = cpy_word(&token->content[i + 1]);
-			val = search_val(to_find, env);
-			replace_content(token, val, i);
+			to_find = cpy_word(*content + i + 1);
+			val = get_var_value(to_find, env);
+			i += replace_content(content, val, i);
 			free(to_find);
 		}
 		else
 			i++;
-		if (token->content[i] == '\0')
-			i = -1;
 	}
 	return ;
 }

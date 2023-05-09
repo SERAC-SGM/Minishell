@@ -6,7 +6,7 @@
 /*   By: maaliber <maaliber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 12:18:00 by maaliber          #+#    #+#             */
-/*   Updated: 2023/05/09 14:50:36 by maaliber         ###   ########.fr       */
+/*   Updated: 2023/05/09 15:45:07 by maaliber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ static void	create_env_var(char *name, char *val, t_list *env)
 	t_list	*entry;
 
 	if (!env || !name)
-		return (NULL);
+		return ;
 	line = ft_strjoin(name, "=");
 	line = ft_strjoin_free(line, val);
 	entry = ft_lstnew(line);
@@ -49,10 +49,12 @@ static void	create_env_var(char *name, char *val, t_list *env)
 static void	overwrite_env_var(char *name, char *val, t_list *env)
 {
 	char	*prefix;
+	int		l;
 
 	if (!env || !name)
-		return (NULL);
+		return ;
 	prefix = ft_strjoin(name, "=");
+	l = ft_strlen(name);
 	while (env)
 	{
 		if (!ft_strncmp(env->line, name, l) && env->line[l] == '=')
@@ -73,9 +75,9 @@ void	set_env_var(char *name, char *val, t_list *env)
 {
 	char	*prev_val;
 
-	prev_val = get_var_value(name, data->env);
+	prev_val = get_var_value(name, env);
 	if (!prev_val)
-		create_env_var(name, val, data);
+		create_env_var(name, val, env);
 	else
-		overwrite_env_var(name, val, data);
+		overwrite_env_var(name, val, env);
 }

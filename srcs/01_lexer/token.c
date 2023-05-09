@@ -6,98 +6,9 @@
 /*   By: maaliber <maaliber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 16:54:54 by maaliber          #+#    #+#             */
-/*   Updated: 2023/05/06 17:17:44 by maaliber         ###   ########.fr       */
+/*   Updated: 2023/05/09 19:16:12 by maaliber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-#include "minishell.h"
-
-/*
-Create standard token :
-• if start with a special character : |, <, <<, >, >>
-• if is a standard entry : mode 0 
-• if is in between single quote ['] : mode 1 
-• if is in between double quote ["] : mode 2
-*/
-t_tkn_lst	*standard_token(char **str, t_list *env)
-{
-	t_tkn_lst	*token;
-	int			ex;
-	int			i;
-
-	(void)env;
-	ex = 0;
-	i = 0;
-	while ((*str)[i] && !ft_isspace((*str)[i]) && !is_special((*str) + i)
-			&& !((*str)[i] == '\'' && ft_strchr((*str) + i + 1, '\''))
-			&& !((*str)[i] == '\"' && ft_strchr((*str) + i + 1, '\"')))
-	{
-		if ((*str)[i] == '$')
-			ex = 1;
-		i++;
-	}
-	if (!ft_isspace((*str)[i])
-			&& !((*str)[i] == '\'' && ft_strchr((*str) + i + 1, '\''))
-			&& !((*str)[i] == '\"' && ft_strchr((*str) + i + 1, '\"')))
-		i++;
-	token = new_token(ft_substr(*str, 0, i), 0);
-	/*if (ex)
-		expand_tokenize(token, env);*/
-	*str += i;
-	return (token);
-}
-
-/*
-Create single quote token :
-• if start with a special character : |, <, <<, >, >>
-• if is a standard entry : mode 0 
-• if is in between single quote ['] : mode 1 
-• if is in between double quote ["] : mode 2
-*/
-t_tkn_lst	*single_quote_token(char **str)
-{
-	t_tkn_lst	*token;
-	int			i;
-
-	i = 1;
-	while ((*str)[i] && (*str)[i] != '\'')
-		i++;
-	token = new_token(ft_substr(*str, 0, i), 1);
-	trim_char(&token->content, '\'');
-	*str += i + 1;
-	return (token);
-}
-
-/*
-Create double quote token :
-• if start with a special character : |, <, <<, >, >>
-• if is a standard entry : mode 0 
-• if is in between single quote ['] : mode 1 
-• if is in between double quote ["] : mode 2
-*/
-t_tkn_lst	*double_quote_token(char **str, t_list *env)
-{
-	t_tkn_lst	*token;
-	int			ex;
-	int			i;
-
-	(void)env;
-	ex = 0;
-	i = 1;
-	while ((*str)[i] && (*str)[i] != '\"')
-	{
-		if ((*str)[i] == '$')
-			ex = 1;
-		i++;
-	}
-	printf("ex=%d\n", ex);
-	token = new_token(ft_substr(*str, 0, i), 2);
-	trim_char(&token->content, '\"');
-	if (ex)
-		expand(token, env);
-	*str += i + 1;
-	return (token);
-}
 
 /*
 Create special token with NULL content and type :
@@ -127,6 +38,11 @@ t_tkn_lst	*special_token(char **str)
 	return (NULL);
 }
 
+t_tkn_lst	*split_input(char **prev, char **next)
+{
+	
+}
+
 /*
 Create token with command line with differents cases :
 • if start with a special character : |, <, <<, >, >>
@@ -134,15 +50,33 @@ Create token with command line with differents cases :
 • if is in between single quote ['] : mode 1 
 • if is in between double quote ["] : mode 2
 */
-t_tkn_lst	*generate_token(char **cmd_line, int mode, t_list *env)
+t_tkn_lst	*tokenize(char **cmd_line, t_list *env)
 {
+	t_tkn_lst	*tkn_list;
+	t_tkn_lst	*sub_list;
+	char		*add;
+	char		*store;
+	int			mode;
+	
 	if (is_special(*cmd_line))
 		return (special_token(cmd_line));
-	if (mode == 0)
-		return (standard_token(cmd_line, env));
-	if (mode == 1)
-		return (single_quote_token(cmd_line));
-	if (mode == 2)
-		return (double_quote_token(cmd_line, env));
-	return (NULL);
+	tkn_list = NULL;
+	store = NULL;
+	while (!ft_isspace(**cmd_line) && !is_special(*cmd_line))
+	{
+		mode = set_mode(*cmd_line);
+		if (mode == 0)
+		{
+			add = standard_mode(cmd_line, env);
+			sub_list = split_input(&add, &store);
+		}
+		if (mode == 1)
+			store = ft_strjoin_free(store, single_quote_mode(cmd_line));
+		if (mode == 2)
+			store = ft_strjoin_free(store, double_quote_mode(cmd_line, env));
+		if (sub_list)
+			add_back_token(&tkn_list, sub_list);
+	}
+	add_back_token(&tkn_list, new_token(store, 0));
+	return (tkn_list);
 }
