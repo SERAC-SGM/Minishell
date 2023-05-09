@@ -1,3 +1,9 @@
 .vscode/
-test.c
-main-test.c
+build/
+libft/build/
+libft/libft.a
+libft/objs
+libft/objs/
+objs/
+srcs/02_parser/main-test.c
+srcs/test.c
