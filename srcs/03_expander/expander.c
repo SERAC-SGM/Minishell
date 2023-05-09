@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expander.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maaliber <maaliber@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lletourn <lletourn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 14:19:34 by maaliber          #+#    #+#             */
-/*   Updated: 2023/05/09 12:17:54 by maaliber         ###   ########.fr       */
+/*   Updated: 2023/05/09 14:27:55 by lletourn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ char	*cpy_word(char *str)
 {
 	char	*word;
 	int		l;
-	
+
 	l = word_len(str);
 	word = malloc((l + 1) * sizeof(char));
 	if (!word)
@@ -44,14 +44,14 @@ int	replace_content(t_tkn_lst *token, char *sub, int pos)
 	int		var_l;
 	int		sub_l;
 	char	*new;
-	
+
 	l = ft_strlen(token->content);
 	var_l = word_len(&token->content[pos]);
 	sub_l = ft_strlen(sub);
 	offset = sub_l - var_l;
 	new = malloc(l + offset + 1);
 	if (!new)
-		return(0);
+		return (0);
 	ft_memcpy(new, token->content, pos);
 	ft_memcpy(new + pos, sub, sub_l);
 	ft_memcpy(new + pos + sub_l, token->content + pos + var_l, l - pos - var_l);

@@ -6,7 +6,7 @@
 /*   By: maaliber <maaliber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 12:18:00 by maaliber          #+#    #+#             */
-/*   Updated: 2023/05/09 12:51:54 by maaliber         ###   ########.fr       */
+/*   Updated: 2023/05/09 14:44:05 by maaliber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ char	*get_var_value(char *name, t_list *env)
 	}
 	if (!env)
 		return (NULL);
-	return(ft_strchr(env->line, '=') + 1);
+	return (ft_strchr(env->line, '=') + 1);
 }
 
 static void	create_env_var(char *name, char *val, t_list *env)
@@ -71,3 +71,4 @@ void	set_env_var(char *name, char *val, t_list *env)
 	else
 		overwrite_env_var(name, val, data);
 }
+

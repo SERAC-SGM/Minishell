@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maaliber <maaliber@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lletourn <lletourn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 14:58:49 by maaliber          #+#    #+#             */
-/*   Updated: 2023/05/05 14:17:23 by maaliber         ###   ########.fr       */
+/*   Updated: 2023/05/09 14:26:53 by lletourn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ void	init_env(t_data *data, char *env[])
 int	main(int ac, char *av[], char *env[])
 {
 	t_data	data;
-	
+
 	(void)ac;
 	(void)av;
 	ft_bzero(&data, sizeof(t_data));
@@ -67,7 +67,7 @@ int	main(int ac, char *av[], char *env[])
 		reset_cmd(&data);
 		exec_cmd_line(&data);
 		waitpid(-1, &data.status, NULL);
-		if (data.exit = -1)
+		if (data.exit == -1)
 			break ;
 	}
 	data.status = WEXITSTATUS(data.status);
