@@ -6,12 +6,15 @@
 /*   By: maaliber <maaliber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 12:18:00 by maaliber          #+#    #+#             */
-/*   Updated: 2023/05/09 14:44:05 by maaliber         ###   ########.fr       */
+/*   Updated: 2023/05/09 14:50:36 by maaliber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+/*
+Get environment vaiable value
+*/
 char	*get_var_value(char *name, t_list *env)
 {
 	int		l;
@@ -61,6 +64,11 @@ static void	overwrite_env_var(char *name, char *val, t_list *env)
 	free(prefix);
 }
 
+/*
+Set environment variable by:
+• Creating a new line at the end of env if var doesn't exist
+• Overwriting an existing line if var_name exist 
+*/
 void	set_env_var(char *name, char *val, t_list *env)
 {
 	char	*prev_val;
@@ -71,4 +79,3 @@ void	set_env_var(char *name, char *val, t_list *env)
 	else
 		overwrite_env_var(name, val, data);
 }
-
