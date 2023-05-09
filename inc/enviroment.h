@@ -1,23 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isprint.c                                       :+:      :+:    :+:   */
+/*   enviroment.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: carce-bo <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: maaliber <maaliber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/09/20 15:12:28 by carce-bo          #+#    #+#             */
-/*   Updated: 2021/09/20 15:14:14 by carce-bo         ###   ########.fr       */
+/*   Created: 2023/05/09 12:24:07 by maaliber          #+#    #+#             */
+/*   Updated: 2023/05/09 12:24:28 by maaliber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
 
-int	ft_isprint(int c)
-{
-	int	boolean;
+#ifndef ENVIRONMENT_H
+# define ENVIRONMENT_H
 
-	boolean = 1;
-	if (c < ' ' || c >= 127)
-		boolean = 0;
-	return (boolean);
-}
+# include "mshell_types.h"
+
+#endif

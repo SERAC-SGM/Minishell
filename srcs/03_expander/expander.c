@@ -6,7 +6,7 @@
 /*   By: maaliber <maaliber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 14:19:34 by maaliber          #+#    #+#             */
-/*   Updated: 2023/05/06 17:53:54 by maaliber         ###   ########.fr       */
+/*   Updated: 2023/05/09 12:17:54 by maaliber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,24 +35,6 @@ char	*cpy_word(char *str)
 		return (NULL);
 	ft_strlcpy(word, str, l + 1);
 	return (word);
-}
-
-char	*search_val(char *to_find, t_list *env)
-{
-	int		l;
-	
-	if (!env || !to_find)
-		return (NULL);
-	l = ft_strlen(to_find);
-	while (env)
-	{
-		if (!ft_strncmp(env->line, to_find, l) && env->line[l] == '=')
-			break ;
-		env = env->next;
-	}
-	if (!env)
-		return (NULL);
-	return(ft_strchr(env->line, '=') + 1);
 }
 
 int	replace_content(t_tkn_lst *token, char *sub, int pos)
