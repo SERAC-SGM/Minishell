@@ -6,7 +6,7 @@
 /*   By: lletourn <lletourn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/06 12:07:41 by lletourn          #+#    #+#             */
-/*   Updated: 2023/05/10 13:02:35 by lletourn         ###   ########.fr       */
+/*   Updated: 2023/05/10 14:34:28 by lletourn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,5 +84,21 @@ void	open_files(t_cmd *cmd, t_data *data)
 			data->fd_outfile = open(data->outfile,
 					O_WRONLY | O_APPEND | O_CREAT, 644);
 		check_open_error(data->fd_outfile, data);
+	}
+}
+
+void	close_files(t_cmd *cmd, t_data *data)
+{
+	if (cmd->infile || cmd->here_doc)
+	{
+		close(cmd->fd_infile);
+		cmd->infile = NULL;
+		if (cmd->here_doc)
+			unlink(".here_doc");
+	}
+	if (cmd->outfile)
+	{
+		close(cmd->fd_outfile);
+		cmd->outfile = NULL;
 	}
 }
