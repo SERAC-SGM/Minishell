@@ -6,7 +6,7 @@
 /*   By: maaliber <maaliber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 13:38:57 by maaliber          #+#    #+#             */
-/*   Updated: 2023/05/10 16:21:03 by maaliber         ###   ########.fr       */
+/*   Updated: 2023/05/10 17:57:40 by maaliber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,7 @@ typedef struct s_cmd
 	int		fd_infile;
 	char	*outfile;
 	int		fd_outfile;
+	int		outfile_mode;
 	int		here_doc;
 	char	*delimiter;
 }			t_cmd;
@@ -98,7 +99,7 @@ typedef struct s_list
 }	t_list;
 
 /*
-Stack structure - Linked list with index and run number
+Data structure.
 */
 typedef struct s_data
 {

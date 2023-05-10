@@ -6,7 +6,7 @@
 /*   By: lletourn <lletourn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 14:19:32 by maaliber          #+#    #+#             */
-/*   Updated: 2023/05/09 16:42:10 by lletourn         ###   ########.fr       */
+/*   Updated: 2023/05/10 12:39:43 by lletourn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ static int	get_cmd_size(t_tkn_lst *token)
 	size = 0;
 	while (token && token->content)
 	{
-		//printf();
 		size++;
 		token = token->next;
 	}
@@ -40,8 +39,8 @@ static t_tkn_lst	*add_command(t_tkn_lst *token, t_data *data)
 
 	data->command_list[data->cmd_count].cmd
 		= malloc(sizeof(char *) * (get_cmd_size(token) + 1));
-	// if (!data->command_list)
-	// 	exit_error("malloc_error");
+	if (!data->command_list)
+		exit_error("malloc_error");
 	data->command_list[data->cmd_count].cmd[0] = token->content;
 	token = token->next;
 	i = 0;
@@ -56,6 +55,9 @@ static t_tkn_lst	*add_command(t_tkn_lst *token, t_data *data)
 	return (token);
 }
 
+/*
+Initializes a command structure.
+*/
 void	init_cmd(t_cmd *cmd)
 {
 	cmd->process_index = 0;
@@ -72,15 +74,15 @@ void	init_cmd(t_cmd *cmd)
 
 void	parser(t_tkn_lst *token, t_data *data)
 {
-	//if (token->type == PIPE)
-	//	printf("syntax error near unexpected token `XXX'\n");
+	if (token->type == PIPE)
+		exit_error("syntax error near unexpected token `XXX'\n");
 	init_cmd(&data->command_list[data->cmd_count]);
 	while (token->type != END)
 	{
 		if (token->type == PIPE)
 		{
-			//if (!token->next->content)
-				//exit_error("syntax error near unexpected token `XXX'\n");
+			if (!token->next->content)
+				exit_error("syntax error near unexpected token `XXX'\n");
 			token = token->next;
 			data->cmd_count++;
 			init_cmd(&data->command_list[data->cmd_count]);
@@ -91,20 +93,3 @@ void	parser(t_tkn_lst *token, t_data *data)
 			token = handle_files(token, &data->command_list[data->cmd_count]);
 	}
 }
-
-// void	parser(t_tkn_lst *token, t_data *data)
-// {
-// 	//if (token->type == PIPE)
-// 	//	printf("syntax error near unexpected token `XXX'\n");
-// 	while (token)
-// 	{
-// 		if (token && token->content)
-// 			token = add_command(token, data);
-// 		else if (token && token->type == PIPE)
-// 			token = add_command(token->next, data);
-// 		else if (token && !token->content)
-// 			token = handle_files(token, data);
-// 		else if (token)
-// 			token = token->next;
-// 	}
-//}

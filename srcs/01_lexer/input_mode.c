@@ -6,7 +6,7 @@
 /*   By: maaliber <maaliber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 19:04:17 by maaliber          #+#    #+#             */
-/*   Updated: 2023/05/10 15:20:35 by maaliber         ###   ########.fr       */
+/*   Updated: 2023/05/10 17:57:05 by maaliber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,10 @@ int	set_mode(char *cmd_l)
 
 /*
 Create standard token :
-• if start with a special character : |, <, <<, >, >>
-• if is a standard entry : mode 0 
-• if is in between single quote ['] : mode 1 
-• if is in between double quote ["] : mode 2
+• if it starts with a special character : |, <, <<, >, >>
+• if it's a standard entry : mode 0
+• if it's in between single quote ['] : mode 1
+• if it's in between double quote ["] : mode 2
 */
 char	*standard_mode(char **str, t_list *env)
 {
