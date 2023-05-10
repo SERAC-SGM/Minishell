@@ -6,7 +6,7 @@
 /*   By: lletourn <lletourn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 13:38:57 by maaliber          #+#    #+#             */
-/*   Updated: 2023/05/09 16:25:39 by lletourn         ###   ########.fr       */
+/*   Updated: 2023/05/10 12:57:32 by lletourn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,7 @@ typedef struct s_cmd
 	int		fd_infile;
 	char	*outfile;
 	int		fd_outfile;
+	int		outfile_mode;
 	int		here_doc;
 	char	*delimiter;
 }			t_cmd;

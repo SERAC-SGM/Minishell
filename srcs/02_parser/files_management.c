@@ -6,7 +6,7 @@
 /*   By: lletourn <lletourn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/06 12:07:41 by lletourn          #+#    #+#             */
-/*   Updated: 2023/05/10 12:39:09 by lletourn         ###   ########.fr       */
+/*   Updated: 2023/05/10 13:02:35 by lletourn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,26 +17,14 @@ t_tkn_lst	*handle_files(t_tkn_lst *token, t_cmd *cmd)
 	if ((!token->next->content))
 		exit_error("syntax error near unexpected token `XXX'\n");
 	if (token->type == RD_IN)
-	{
 		cmd->infile = token->next->content;
-		//data->fd_infile = open(data->infile, O_RDONLY, 644);//error open
-	}
 	else if (token->type == HERE)
-	{
-		//write_tmp(data);
-		//data->fd_infile = open(".here_doc", O_RDONLY, 644);
 		cmd->delimiter = token->next->content;
-	}
 	else if (token->type == RD_OUT || token->type == APPEND)
 	{
 		cmd->outfile = token->next->content;
-		//if (token->type == RD_OUT)	q 
-			//data->fd_outfile = open(data->outfile,
-			//		O_WRONLY | O_TRUNC | O_CREAT, 644);
-		//else
-			//data->fd_outfile = open(data->outfile,
-			//		O_WRONLY | O_APPEND | O_CREAT, 644);
-	}
+		cmd->outfile_mode = token->type;
+	}	
 	return (token->next->next);
 }
 
@@ -69,7 +57,32 @@ void	write_heredoc(t_cmd *cmd)
 	}
 }
 
-void	open_files(t_cmd *cmd)
+void	check_open_error(int fd, t_data *data)
 {
-	
+	if (fd == -1)
+		exit_error("Open");
+}
+
+void	open_files(t_cmd *cmd, t_data *data)
+{
+	if (cmd->infile)
+	{
+		data->fd_infile = open(data->infile, O_RDONLY, 644);
+		check_open_error(data->fd_infile, data);
+	}
+	else if (cmd->here_doc)
+	{
+		write_heredoc(cmd);
+		data->fd_infile = open(".here_doc", O_RDONLY | O_CREAT | O_EXCL, 644);
+	}
+	if (cmd->outfile)
+	{
+		if (cmd->type == RD_IN)
+		data->fd_outfile = open(data->outfile,
+					O_WRONLY | O_TRUNC | O_CREAT, 644);
+		else
+			data->fd_outfile = open(data->outfile,
+					O_WRONLY | O_APPEND | O_CREAT, 644);
+		check_open_error(data->fd_outfile, data);
+	}
 }
