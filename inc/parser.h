@@ -6,7 +6,7 @@
 /*   By: lletourn <lletourn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/27 12:43:55 by maaliber          #+#    #+#             */
-/*   Updated: 2023/05/06 14:36:55 by lletourn         ###   ########.fr       */
+/*   Updated: 2023/05/09 16:30:51 by lletourn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,9 @@ When encountering a file-related token (< << > >>), creates or overwrite the
 corresponding infile or outfile. If the previous file is not a standard stream, 
 it's closed before assigning the new file.
 Returns the next special token.
-If no non-special token is found, returns an error (except for <<, where this is
-the opposite).
+If no non-special token is found, returns an error.
 */
-t_tkn_lst	*handle_files(t_tkn_lst *token, t_data *data, t_cmd cmd);
+t_tkn_lst	*handle_files(t_tkn_lst *token, t_cmd *cmd);
 
 //////////////
 // parser.c //

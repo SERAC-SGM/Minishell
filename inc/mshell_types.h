@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mshell_types.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maaliber <maaliber@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lletourn <lletourn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 13:38:57 by maaliber          #+#    #+#             */
-/*   Updated: 2023/05/06 17:56:29 by maaliber         ###   ########.fr       */
+/*   Updated: 2023/05/09 16:25:39 by lletourn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@
 # define APPEND 22
 # define PIPE 30
 # define END 127
-# define OPEN_MAX 1000
+# define OPEN_MAX 1000 //ALREADY DEFINED IN LIBFT.H
 # define CMD_MAX 1000
 
 enum e_config_error
@@ -47,42 +47,48 @@ enum e_config_error
 };
 typedef enum e_config_error	t_config_error;
 
-/*Stack structure - Linked list with index and run number*/
+/*
+Everything required to run a command.
+• process_index: index of the current process.
+• pid: PID of the current process.
+• arg_count: number of arguments.
+• *cmd[args] : 2-dimensional array containing each command and its
+arguments (cmd[i][0] : path of the command, cmd[i][j] : optional arguments).
+• infile: name of the infile.
+• fd_infile: fd of the infile.
+• outfile: name of the outfile.
+• fd_outfile: fd of the outfile.
+• here_doc: indicates the presence of a here_document.
+• delimiter: delimiter in case of here_document.
+*/
 typedef struct s_cmd
 {
 	int		process_index;
-	int		arg_count;
 	int		pid;
+	int		arg_count;
 	char	**cmd;
 	char	*infile;
 	int		fd_infile;
 	char	*outfile;
 	int		fd_outfile;
+	int		here_doc;
 	char	*delimiter;
 }			t_cmd;
 
 /*
-• *filepath: NULL if pipe, input, output or error
+Token structure.
 • type:
 .   <:    0 (read from)
 .   <<:   1 (here_doc)
 .   >:    2 (overwrite - O_TRUNC)
 .   >>:   3 (append - O_APPEND)
 */
-
 typedef struct s_tkn_lst
 {
 	char				*content;
 	int					type;
 	struct s_tkn_lst	*next;
 }	t_tkn_lst;
-
-typedef struct s_file
-{
-	char	*filepath;
-	int		fd;
-	int		type;
-}	t_file;
 
 typedef struct s_list
 {

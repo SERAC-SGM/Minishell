@@ -199,6 +199,9 @@ $(DEPS_DIR):
 
 bonus: all
 
+niquelabac:
+	gcc -Wall -Wextra -Werror -g srcs/02_parser/main-test.c srcs/02_parser/parser.c srcs/02_parser/files_management.c -MMD $(INCLUDES)
+
 #_____Clean_____#
 clean: lclean where_c
 	@rm -rf $(OBJS_DIR)

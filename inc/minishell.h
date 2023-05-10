@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maaliber <maaliber@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lletourn <lletourn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 15:01:58 by maaliber          #+#    #+#             */
-/*   Updated: 2023/05/09 15:42:46 by maaliber         ###   ########.fr       */
+/*   Updated: 2023/05/10 11:45:14 by lletourn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,8 @@
 # include <unistd.h>
 # include <string.h>
 # include <stdio.h>
-# include "libft.h"
+# include <stdlib.h>
+//# include "libft.h"
 # include "mshell_types.h"
 # include "lexer.h"
 # include "parser.h"

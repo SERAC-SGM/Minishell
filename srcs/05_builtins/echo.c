@@ -6,9 +6,11 @@
 /*   By: lletourn <lletourn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 11:10:57 by lletourn          #+#    #+#             */
-/*   Updated: 2023/05/02 14:57:29 by lletourn         ###   ########.fr       */
+/*   Updated: 2023/05/09 15:30:33 by lletourn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "minishell.h"
 
 int	echo(char **args)
 {

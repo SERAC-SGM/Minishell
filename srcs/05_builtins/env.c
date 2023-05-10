@@ -1,20 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cd.c                                               :+:      :+:    :+:   */
+/*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lletourn <lletourn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/02 11:49:12 by lletourn          #+#    #+#             */
-/*   Updated: 2023/05/09 15:30:43 by lletourn         ###   ########.fr       */
+/*   Created: 2023/05/09 15:30:05 by lletourn          #+#    #+#             */
+/*   Updated: 2023/05/09 15:30:15 by lletourn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	cd(char *str)
+void	print_env(t_list *env)
 {
-	if (chdir(str) == -1)
-		return (perror("cd"), -1);
-	return (0);
+	while (env)
+	{
+		printf("%s\n", env->line);
+		env = env->next;
+	}
 }

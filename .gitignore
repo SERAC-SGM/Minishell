@@ -7,3 +7,7 @@ libft/objs/
 objs/
 srcs/02_parser/main-test.c
 srcs/test.c
+a.out
+files_management.d
+main-test.d
+parser.d
