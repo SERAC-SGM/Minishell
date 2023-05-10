@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_ft.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maaliber <maaliber@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lletourn <lletourn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 12:18:00 by maaliber          #+#    #+#             */
-/*   Updated: 2023/05/09 15:45:07 by maaliber         ###   ########.fr       */
+/*   Updated: 2023/05/10 12:31:47 by lletourn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ Get environment vaiable value
 char	*get_var_value(char *name, t_list *env)
 {
 	int		l;
-	
+
 	if (!env || !name)
 		return (NULL);
 	l = ft_strlen(name);
@@ -67,7 +67,7 @@ static void	overwrite_env_var(char *name, char *val, t_list *env)
 }
 
 /*
-Set environment variable by:
+Sets environment variable by:
 • Creating a new line at the end of env if var doesn't exist
 • Overwriting an existing line if var_name exist 
 */

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   input_mode.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maaliber <maaliber@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lletourn <lletourn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 19:04:17 by maaliber          #+#    #+#             */
-/*   Updated: 2023/05/09 19:05:27 by maaliber         ###   ########.fr       */
+/*   Updated: 2023/05/10 12:34:56 by lletourn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 
 /*
 Create standard token :
-• if start with a special character : |, <, <<, >, >>
-• if is a standard entry : mode 0 
-• if is in between single quote ['] : mode 1 
-• if is in between double quote ["] : mode 2
+• if it starts with a special character : |, <, <<, >, >>
+• if it's a standard entry : mode 0
+• if it's in between single quote ['] : mode 1
+• if it's in between double quote ["] : mode 2
 */
 char	*standard_mode(char **str, t_list *env)
 {

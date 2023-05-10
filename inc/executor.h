@@ -3,15 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   executor.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maaliber <maaliber@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lletourn <lletourn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/27 12:43:30 by maaliber          #+#    #+#             */
-/*   Updated: 2023/05/05 16:38:47 by maaliber         ###   ########.fr       */
+/*   Updated: 2023/05/10 12:38:14 by lletourn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef EXEC_H
-# define EXEC_H
+#ifndef EXECUTOR_H
+# define EXECUTOR_H
 
 # include "mshell_types.h"
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   token.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maaliber <maaliber@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lletourn <lletourn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 16:54:54 by maaliber          #+#    #+#             */
-/*   Updated: 2023/05/09 19:16:12 by maaliber         ###   ########.fr       */
+/*   Updated: 2023/05/10 12:38:55 by lletourn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ t_tkn_lst	*tokenize(char **cmd_line, t_list *env)
 	char		*add;
 	char		*store;
 	int			mode;
-	
+
 	if (is_special(*cmd_line))
 		return (special_token(cmd_line));
 	tkn_list = NULL;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tester.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maaliber <maaliber@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lletourn <lletourn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 13:35:39 by maaliber          #+#    #+#             */
-/*   Updated: 2023/05/09 17:05:36 by maaliber         ###   ########.fr       */
+/*   Updated: 2023/05/10 12:40:28 by lletourn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ void	print_env(t_list *env)
 		env = env->next;
 	}
 }
-
 
 void	init_env(t_data *data, char *env[])
 {
