@@ -6,16 +6,19 @@
 /*   By: maaliber <maaliber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 14:58:49 by maaliber          #+#    #+#             */
-/*   Updated: 2023/05/10 17:50:16 by maaliber         ###   ########.fr       */
+/*   Updated: 2023/05/10 18:14:27 by maaliber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-/*void	reset_cmd(t_data *data)
+static char	*prompt(void)
 {
-	
-}*/
+	char	*prompt;
+
+
+	return (pmt);
+}
 
 void	exec_cmd_line(t_data *data)
 {
@@ -63,7 +66,8 @@ int	main(int ac, char *av[], char *env[])
 	while (1)
 	{
 		enable_signal();
-		reset_cmd(&data);
+		//reset_cmd(&data);
+		data.cmd_line = readline(prompt());
 		exec_cmd_line(&data);
 		waitpid(-1, &data.status, NULL);
 		if (data.exit == -1)
