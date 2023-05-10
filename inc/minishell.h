@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lletourn <lletourn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: maaliber <maaliber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 15:01:58 by maaliber          #+#    #+#             */
-/*   Updated: 2023/05/10 11:45:14 by lletourn         ###   ########.fr       */
+/*   Updated: 2023/05/10 16:24:50 by maaliber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 # include <string.h>
 # include <stdio.h>
 # include <stdlib.h>
-//# include "libft.h"
+# include "libft.h"
 # include "mshell_types.h"
 # include "lexer.h"
 # include "parser.h"
@@ -43,6 +43,7 @@ void	ft_lstclear(t_list **lst);
 Trims character of str at the start and end of the string
 */
 void	trim_char(char **str, char c);
+char	*ft_strjoin_dup1(char *s1, char *s2);
 void	init_env(t_data *data, char *env[]);
 
 #endif

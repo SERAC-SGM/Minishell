@@ -6,7 +6,7 @@
 /*   By: maaliber <maaliber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 14:58:47 by maaliber          #+#    #+#             */
-/*   Updated: 2023/05/09 14:59:10 by maaliber         ###   ########.fr       */
+/*   Updated: 2023/05/10 15:20:41 by maaliber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,20 +40,5 @@ int	is_special(char *str)
 		return (PIPE);
 	if (*str == '\0' || *str == '\n')
 		return (END);
-	return (0);
-}
-
-/*
-Set mode - return value of mode used for generating token
-• 1 if the first character is ' and ' is not unclosed
-• 2 if the first character is " and " is not unclosed
-• 0 otherwise
-*/
-int	set_mode(char *cmd_l)
-{
-	if (*cmd_l == '\'' && ft_strchr(cmd_l + 1, '\''))
-		return (1);
-	if (*cmd_l == '\"' && ft_strchr(cmd_l + 1, '\"'))
-		return (2);
 	return (0);
 }

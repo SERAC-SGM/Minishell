@@ -6,9 +6,11 @@
 /*   By: maaliber <maaliber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 16:54:54 by maaliber          #+#    #+#             */
-/*   Updated: 2023/05/09 19:16:12 by maaliber         ###   ########.fr       */
+/*   Updated: 2023/05/10 15:30:44 by maaliber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "minishell.h"
 
 /*
 Create special token with NULL content and type :
@@ -18,7 +20,7 @@ Create special token with NULL content and type :
 • APPEND
 • PIPE
 */
-t_tkn_lst	*special_token(char **str)
+static t_tkn_lst	*special_token(char **str)
 {
 	int			len;
 
@@ -38,9 +40,37 @@ t_tkn_lst	*special_token(char **str)
 	return (NULL);
 }
 
-t_tkn_lst	*split_input(char **prev, char **next)
+/*
+Split string into token with in standard mode input [0]
+• concatenate previous [store] input with current input
+• create a token if one or several spaces are identified after expanding content
+• change stored input with the rest of the input
+*/
+static t_tkn_lst	*split_input(char **store, char *add)
 {
-	
+	t_tkn_lst	*tkn_list;
+	char		*content;
+	int			wrd_l;
+
+	tkn_list = NULL;
+	while (*add)
+	{
+		wrd_l = word_len(add);
+		if ((size_t)wrd_l == ft_strlen(add))
+			return (*store = ft_strjoin_dup1(*store, add), tkn_list);
+		content = ft_calloc(ft_strlen(*store) + wrd_l + 1, sizeof(char));
+		if (!content)
+			return (tkn_list);
+		ft_memcpy(content, *store, ft_strlen(*store));
+		ft_memcpy(content + ft_strlen(*store), add, wrd_l);
+		free(*store);
+		*store = NULL;
+		add_back_token(&tkn_list, new_token(content, 0));
+		add += wrd_l;
+		while (ft_isspace(*add))
+			add++;
+	}
+	return (tkn_list);
 }
 
 /*
@@ -53,30 +83,27 @@ Create token with command line with differents cases :
 t_tkn_lst	*tokenize(char **cmd_line, t_list *env)
 {
 	t_tkn_lst	*tkn_list;
-	t_tkn_lst	*sub_list;
 	char		*add;
 	char		*store;
-	int			mode;
-	
+
 	if (is_special(*cmd_line))
 		return (special_token(cmd_line));
 	tkn_list = NULL;
 	store = NULL;
 	while (!ft_isspace(**cmd_line) && !is_special(*cmd_line))
 	{
-		mode = set_mode(*cmd_line);
-		if (mode == 0)
+		if (set_mode(*cmd_line) == 0)
 		{
 			add = standard_mode(cmd_line, env);
-			sub_list = split_input(&add, &store);
+			add_back_token(&tkn_list, split_input(&store, add));
+			free(add);
 		}
-		if (mode == 1)
+		else if (set_mode(*cmd_line) == 1)
 			store = ft_strjoin_free(store, single_quote_mode(cmd_line));
-		if (mode == 2)
+		else if (set_mode(*cmd_line) == 2)
 			store = ft_strjoin_free(store, double_quote_mode(cmd_line, env));
-		if (sub_list)
-			add_back_token(&tkn_list, sub_list);
 	}
-	add_back_token(&tkn_list, new_token(store, 0));
+	if (store)
+		add_back_token(&tkn_list, new_token(store, 0));
 	return (tkn_list);
 }

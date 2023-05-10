@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mshell_types.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lletourn <lletourn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: maaliber <maaliber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 13:38:57 by maaliber          #+#    #+#             */
-/*   Updated: 2023/05/09 16:25:39 by lletourn         ###   ########.fr       */
+/*   Updated: 2023/05/10 16:21:03 by maaliber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # include <sys/wait.h>
 # include <string.h>
 # include <stdio.h>
+# include <signal.h>
 # include <readline/readline.h>
 # include <readline/history.h>
 
@@ -98,7 +99,6 @@ typedef struct s_list
 
 /*
 Stack structure - Linked list with index and run number
-
 */
 typedef struct s_data
 {
@@ -111,5 +111,16 @@ typedef struct s_data
 	int				status;
 	int				exit;
 }	t_data;
+
+/*
+Global signal structure
+*/
+typedef struct	s_sig
+{
+	int				sig_int;
+	int				sig_quit;
+	int				exit_status;
+	pid_t			pid;
+}	t_sig;
 
 #endif

@@ -6,11 +6,26 @@
 /*   By: maaliber <maaliber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 19:04:17 by maaliber          #+#    #+#             */
-/*   Updated: 2023/05/09 19:05:27 by maaliber         ###   ########.fr       */
+/*   Updated: 2023/05/10 15:20:35 by maaliber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+/*
+Set mode - return value of mode used for generating token
+• 1 if the first character is ' and ' is not unclosed
+• 2 if the first character is " and " is not unclosed
+• 0 otherwise
+*/
+int	set_mode(char *cmd_l)
+{
+	if (*cmd_l == '\'' && ft_strchr(cmd_l + 1, '\''))
+		return (1);
+	if (*cmd_l == '\"' && ft_strchr(cmd_l + 1, '\"'))
+		return (2);
+	return (0);
+}
 
 /*
 Create standard token :

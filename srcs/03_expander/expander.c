@@ -6,7 +6,7 @@
 /*   By: maaliber <maaliber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 14:19:34 by maaliber          #+#    #+#             */
-/*   Updated: 2023/05/09 18:19:55 by maaliber         ###   ########.fr       */
+/*   Updated: 2023/05/10 14:14:51 by maaliber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,14 +51,12 @@ int	replace_content(char **content, char *sub, int pos)
 	var_l = word_len(&(*content)[pos]);
 	sub_l = ft_strlen(sub);
 	offset = sub_l - var_l;
-	new = malloc(l + offset + 1);
+	new = ft_calloc(l + offset + 1, sizeof(char));
 	if (!new)
 		return (0);
 	ft_memcpy(new, *content, pos);
 	ft_memcpy(new + pos, sub, sub_l);
 	ft_memcpy(new + pos + sub_l, *content + pos + var_l, l - pos - var_l);
-	new[l + offset] = '\0';
-	printf("offset:%d\n", offset);
 	free(*content);
 	*content = new;
 	return (offset);
@@ -77,7 +75,6 @@ void	expand(char **content, t_list *env)
 	if (!*content)
 		return ;
 	i = 0;
-	printf("content:%s\n", *content);
 	while ((*content)[i])
 	{
 		if ((*content)[i] == '$')

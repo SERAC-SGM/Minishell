@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strstr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lletourn <lletourn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: maaliber <maaliber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/06 16:26:07 by maaliber          #+#    #+#             */
-/*   Updated: 2023/05/09 14:25:26 by lletourn         ###   ########.fr       */
+/*   Updated: 2023/05/10 15:27:13 by maaliber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ char	*ft_strstr(const char *s1, const char *s2)
 	while (s1[i])
 	{
 		j = 0;
-		while (s1[j + i] == s2[j] && s2[j]) // && i + j < n)
+		while (s1[j + i] == s2[j] && s2[j])
 			j++;
 		if (!s2[j])
 			return ((char *)s1 + i);

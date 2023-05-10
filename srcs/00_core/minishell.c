@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lletourn <lletourn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: maaliber <maaliber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 14:58:49 by maaliber          #+#    #+#             */
-/*   Updated: 2023/05/09 14:26:53 by lletourn         ###   ########.fr       */
+/*   Updated: 2023/05/10 17:50:16 by maaliber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 /*void	reset_cmd(t_data *data)
 {
 	
-}
+}*/
 
 void	exec_cmd_line(t_data *data)
 {
@@ -24,15 +24,13 @@ void	exec_cmd_line(t_data *data)
 	while (get_next_line(0, &line) > 0)
 	{
 		data->cmd_line = get_next_line(0);
-		data->cmd_line = free_strtrim(data->cmd_line, "\v\t ");
 		if (!data->cmd_line)
 			exit_error(E_MEM, data);
 		lex = lexer(data);
 		parser(data, lex);
-		expander(data);
 		executor(data);
 	}
-}*/
+}
 
 void	init_env(t_data *data, char *env[])
 {
@@ -64,6 +62,7 @@ int	main(int ac, char *av[], char *env[])
 	init_env(&data, env);
 	while (1)
 	{
+		enable_signal();
 		reset_cmd(&data);
 		exec_cmd_line(&data);
 		waitpid(-1, &data.status, NULL);

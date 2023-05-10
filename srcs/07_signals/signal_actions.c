@@ -1,27 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memcpy.c                                        :+:      :+:    :+:   */
+/*   signal_actions.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: maaliber <maaliber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/10 16:01:43 by maaliber          #+#    #+#             */
-/*   Updated: 2023/05/10 13:53:38 by maaliber         ###   ########.fr       */
+/*   Created: 2023/05/10 15:40:53 by maaliber          #+#    #+#             */
+/*   Updated: 2023/05/10 17:46:12 by maaliber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "minishell.h"
 
-void	*ft_memcpy(void *dst, const void *src, size_t n)
+void	sig_int(void)
 {
-	size_t	i;
+	if (g_sig.pid == 0) //parent_process
+	{
+		//to be completed
+	}
+	else //child_process
+	{
+		//to be completed
+	}
+	g_sig.sig_int = 1;
+}
 
-	i = 0;
-	if (!dst || !src) 
-		return (NULL);
-	if (dst == src)
-		return (dst);
-	while (n-- > 0)
-		((unsigned char *)dst)[i++] = *(unsigned char *)src++;
-	return (dst);
+void	sig_quit(void)
+{
+	if (g_sig.pid == 0) //parent_process
+	{
+		//to be completed
+	}
+	else //child_process
+	{
+		//to be completed
+	}
+	g_sig.sig_quit = 1;
 }
