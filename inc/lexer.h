@@ -6,7 +6,7 @@
 /*   By: maaliber <maaliber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/27 12:43:34 by maaliber          #+#    #+#             */
-/*   Updated: 2023/05/10 12:34:03 by maaliber         ###   ########.fr       */
+/*   Updated: 2023/05/11 15:51:48 by maaliber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ If content is NULL pointer the token is a special character
 .    APPEND
 .    PIPE
 */	
-
 int			is_special(char *str);
 int			set_mode(char *cmd_l);
 t_tkn_lst	*new_token(char	*str, int type);
@@ -35,7 +34,6 @@ void		clear_token_list(t_tkn_lst **tk_list);
 char		*standard_mode(char **str, t_list *env);
 char		*single_quote_mode(char **str);
 char		*double_quote_mode(char **str, t_list *env);
-t_tkn_lst	*special_token(char **str);
 
 t_tkn_lst	*tokenize(char **cmd_line, t_list *env);
 t_tkn_lst	*lexer(t_data *data);

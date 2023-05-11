@@ -6,7 +6,7 @@
 /*   By: maaliber <maaliber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 13:38:57 by maaliber          #+#    #+#             */
-/*   Updated: 2023/05/10 17:57:40 by maaliber         ###   ########.fr       */
+/*   Updated: 2023/05/11 15:34:19 by maaliber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,14 @@
 # define MSHELL_TYPES_H
 
 # include <errno.h>
+# include <fcntl.h>
+# include <unistd.h>
+# include <stdlib.h>
+# include <errno.h>
 # include <sys/types.h>
 # include <sys/uio.h>
 # include <sys/wait.h>
+# include <sys/stat.h>
 # include <string.h>
 # include <stdio.h>
 # include <signal.h>
@@ -29,8 +34,8 @@
 # define APPEND 22
 # define PIPE 30
 # define END 127
-# define OPEN_MAX 1000 //ALREADY DEFINED IN LIBFT.H
-# define CMD_MAX 1000
+//# define OPEN_MAX 1024 //ALREADY DEFINED IN LIBFT.H
+# define CMD_MAX 1024
 
 enum e_config_error
 {

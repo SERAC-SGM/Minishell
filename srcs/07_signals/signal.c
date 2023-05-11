@@ -6,11 +6,13 @@
 /*   By: maaliber <maaliber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 15:57:15 by maaliber          #+#    #+#             */
-/*   Updated: 2023/05/10 17:47:43 by maaliber         ###   ########.fr       */
+/*   Updated: 2023/05/11 15:33:10 by maaliber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+extern t_sig	g_sig;
 
 void handler(int signo)
 {

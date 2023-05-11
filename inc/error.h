@@ -1,13 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   executor.c                                         :+:      :+:    :+:   */
+/*   error.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lletourn <lletourn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: maaliber <maaliber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/03 14:19:37 by maaliber          #+#    #+#             */
-/*   Updated: 2023/05/10 12:40:04 by lletourn         ###   ########.fr       */
+/*   Created: 2023/05/09 12:24:07 by maaliber          #+#    #+#             */
+/*   Updated: 2023/05/11 14:55:31 by maaliber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#ifndef ERROR_H
+# define ERROR_H
+
+# include "mshell_types.h"
+
+#endif

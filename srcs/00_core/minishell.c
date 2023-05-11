@@ -6,7 +6,7 @@
 /*   By: maaliber <maaliber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 14:58:49 by maaliber          #+#    #+#             */
-/*   Updated: 2023/05/10 18:14:27 by maaliber         ###   ########.fr       */
+/*   Updated: 2023/05/11 14:52:16 by maaliber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static char	*prompt(void)
 {
 	char	*prompt;
 
-
+	
 	return (pmt);
 }
 
@@ -24,35 +24,11 @@ void	exec_cmd_line(t_data *data)
 {
 	t_tkn_lst	*lex;
 
-	while (get_next_line(0, &line) > 0)
-	{
-		data->cmd_line = get_next_line(0);
-		if (!data->cmd_line)
-			exit_error(E_MEM, data);
-		lex = lexer(data);
-		parser(data, lex);
-		executor(data);
-	}
-}
-
-void	init_env(t_data *data, char *env[])
-{
-	t_list	*env_list;
-	t_list	*node;
-	int		i;
-
-	i = 0;
-	if (!env)
-		return ;
-	env_list = NULL;
-	while (env[i])
-	{
-		node = ft_lstnew(ft_strdup(env[i]));
-		if (!node)
-			ft_lstclear(&env_list);
-		ft_lstadd_back(&env_list, node);
-	}
-	return ;
+	lex = lexer(data->cmd_line);
+	print_lexer(lex);
+	parser(data, lex);
+	clear_token_list(&lex);
+	free(data->cmd_line);
 }
 
 int	main(int ac, char *av[], char *env[])
@@ -61,8 +37,7 @@ int	main(int ac, char *av[], char *env[])
 
 	(void)ac;
 	(void)av;
-	ft_bzero(&data, sizeof(t_data));
-	init_env(&data, env);
+	init_data(&data, env);
 	while (1)
 	{
 		enable_signal();
@@ -73,6 +48,7 @@ int	main(int ac, char *av[], char *env[])
 		if (data.exit == -1)
 			break ;
 	}
+	ft_lstclear(&data.env);
 	data.status = WEXITSTATUS(data.status);
 	return (data.status);
 }

@@ -1,17 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tester.c                                           :+:      :+:    :+:   */
+/*   init_ft.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: maaliber <maaliber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/05 13:35:39 by maaliber          #+#    #+#             */
-/*   Updated: 2023/05/11 14:57:01 by maaliber         ###   ########.fr       */
+/*   Created: 2023/05/11 14:51:50 by maaliber          #+#    #+#             */
+/*   Updated: 2023/05/11 14:53:48 by maaliber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+/*
+Initializes a environment list.
+*/
 void	init_env(t_data *data, char *env[])
 {
 	t_list	*env_list;
@@ -37,22 +40,29 @@ void	init_env(t_data *data, char *env[])
 	return ;
 }
 
-int	main(int ac, char *av[], char *env[])
+/*
+Initializes a data structure.
+*/
+void	init_data(t_data *data, char *env[])
 {
-	t_data		data;
-	t_tkn_lst	*lex;
-	(void)ac;
-	(void)av;
-	(void)env;
+	ft_bzero(data, sizeof(t_data));
+	init_env(data, env);
+	return ;
+}
 
-	ft_bzero(&data, sizeof(t_data));
-	init_env(&data, env);
-	data.cmd_line = get_next_line(0);
-	//printf("Command line : ->%s", data.cmd_line);
-	//print_env(data.env);
-	lex = lexer(&data);
-	print_lexer(lex);
-	clear_token_list(&lex);
-	ft_lstclear(&data.env);
-	free(data.cmd_line);
+/*
+Initializes a command structure.
+*/
+void	init_cmd(t_cmd *cmd)
+{
+	cmd->process_index = 0;
+	cmd->pid = 0;
+	cmd->arg_count = 0;
+	cmd->cmd = NULL;
+	cmd->infile = NULL;
+	cmd->fd_infile = 0;
+	cmd->outfile = NULL;
+	cmd->fd_outfile = 1;
+	cmd->here_doc = 0;
+	cmd->delimiter = NULL;
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lletourn <lletourn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: maaliber <maaliber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 14:19:32 by maaliber          #+#    #+#             */
-/*   Updated: 2023/05/10 12:39:43 by lletourn         ###   ########.fr       */
+/*   Updated: 2023/05/11 14:54:49 by maaliber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,23 +53,6 @@ static t_tkn_lst	*add_command(t_tkn_lst *token, t_data *data)
 	data->command_list[data->cmd_count].cmd[++i] = NULL;
 	data->command_list[data->cmd_count].process_index = data->cmd_count;
 	return (token);
-}
-
-/*
-Initializes a command structure.
-*/
-void	init_cmd(t_cmd *cmd)
-{
-	cmd->process_index = 0;
-	cmd->pid = 0;
-	cmd->arg_count = 0;
-	cmd->cmd = NULL;
-	cmd->infile = NULL;
-	cmd->fd_infile = 0;
-	cmd->outfile = NULL;
-	cmd->fd_outfile = 1;
-	cmd->here_doc = 0;
-	cmd->delimiter = NULL;
 }
 
 void	parser(t_tkn_lst *token, t_data *data)

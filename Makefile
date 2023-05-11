@@ -77,6 +77,8 @@ HEADER += executor.h
 HEADER += builtins.h
 HEADER += signal.h
 HEADER += history.h
+HEADER += error.h
+HEADER += utils.h
 HEADER += minishell.h
 
 vpath %.h $(INC_DIR)
@@ -88,11 +90,13 @@ vpath %.h $(INC_DIR)
 SRCS_DIR = ./srcs
 PATH_SRCS_CORE = $(SRCS_DIR)/00_core
 PATH_SRCS_LEXER = $(SRCS_DIR)/01_lexer
-PATH_SRCS_PARSER = $(SRCS_DIR)/02_parser
-PATH_SRCS_EXPAND = $(SRCS_DIR)/03_expander
+PATH_SRCS_EXPAND = $(SRCS_DIR)/02_expander
+PATH_SRCS_PARSER = $(SRCS_DIR)/03_parser
 PATH_SRCS_EXEC = $(SRCS_DIR)/04_executor
 PATH_SRCS_BUILTIN = $(SRCS_DIR)/05_builtins
 PATH_SRCS_HIST = $(SRCS_DIR)/06_history
+PATH_SRCS_SIG = $(SRCS_DIR)/07_signals
+PATH_SRCS_ERR = $(SRCS_DIR)/08_error_management
 PATH_SRCS_UTIL = $(SRCS_DIR)/10_utils
 PATH_SRCS_TEST = $(SRCS_DIR)/99_tests
 
@@ -100,16 +104,39 @@ PATH_SRCS_TEST = $(SRCS_DIR)/99_tests
 ############################### Sources ########################################
 #‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾#
 
-SRCS += tester.c
-SRCS += lexer.c
+#00_core
+SRCS += env_ft.c
+SRCS += free_ft.c
+SRCS += init_ft.c
+#SRCS += minishell.c
+
+#01_lexer
 SRCS += lexer_util.c
+SRCS += input_mode.c
 SRCS += token_lst.c
 SRCS += token.c
-SRCS += list_ft.c
-SRCS += util.c
+SRCS += lexer.c
+
+#02_expander
 SRCS += expander.c
-SRCS += env_ft.c
-SRCS += input_mode.c
+
+#03_parser
+SRCS += files_management.c
+SRCS += parser.c
+
+#04_executor
+SRCS += exec.c
+SRCS += pipe_ft.c
+
+#05_lexer
+
+#08_error
+SRCS += error.c
+
+#10_utils
+SRCS += util.c
+SRCS += list_ft.c
+SRCS += print_struct.c
 
 #______________________________________________________________________________#
 ############################### Attribution ####################################
@@ -122,6 +149,8 @@ vpath %.c $(PATH_SRCS_EXPAND)
 vpath %.c $(PATH_SRCS_EXEC)
 vpath %.c $(PATH_SRCS_BUILTIN)
 vpath %.c $(PATH_SRCS_HIST)
+vpath %.c $(PATH_SRCS_SIG)
+vpath %.c $(PATH_SRCS_ERR)
 vpath %.c $(PATH_SRCS_UTIL)
 vpath %.c $(PATH_SRCS_TEST)
 
