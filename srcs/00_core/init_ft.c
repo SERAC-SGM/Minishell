@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_ft.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maaliber <maaliber@student.42.fr>          +#+  +:+       +#+        */
+/*   By: matnam <matnam@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 14:51:50 by maaliber          #+#    #+#             */
-/*   Updated: 2023/05/11 14:53:48 by maaliber         ###   ########.fr       */
+/*   Updated: 2023/05/13 18:56:08 by matnam           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,24 @@ void	init_env(t_data *data, char *env[])
 }
 
 /*
+Initializes a command structure.
+*/
+void	init_cmd(t_cmd *cmd)
+{
+	cmd->process_index = 0;
+	cmd->pid = 0;
+	cmd->arg_count = 0;
+	cmd->cmd = NULL;
+	cmd->infile = NULL;
+	cmd->fd_in = STDIN_FILENO;
+	cmd->here_doc = 0;
+	cmd->outfile = NULL;
+	cmd->fd_out = STDOUT_FILENO;
+	cmd->append = 0;
+	cmd->delimiter = NULL;
+}
+
+/*
 Initializes a data structure.
 */
 void	init_data(t_data *data, char *env[])
@@ -51,18 +69,22 @@ void	init_data(t_data *data, char *env[])
 }
 
 /*
-Initializes a command structure.
+Reset data structure to receive new command input :
+Free all allocated memory related to command input
+Keep environment variables.
 */
-void	init_cmd(t_cmd *cmd)
+void	reset_data(t_data *data)
 {
-	cmd->process_index = 0;
-	cmd->pid = 0;
-	cmd->arg_count = 0;
-	cmd->cmd = NULL;
-	cmd->infile = NULL;
-	cmd->fd_infile = 0;
-	cmd->outfile = NULL;
-	cmd->fd_outfile = 1;
-	cmd->here_doc = 0;
-	cmd->delimiter = NULL;
+	int	i;
+
+	i = 0;
+	free(data->cmd_line);
+	data->cmd_line = NULL;
+	clear_token_list(&data->token_list);
+	while (data->cmd_list[i].cmd)
+	{
+		free(data->cmd_list[i].cmd);
+		init_cmd(data->cmd_list[i]);
+		i++;
+	}
 }

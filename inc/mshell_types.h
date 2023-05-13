@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mshell_types.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maaliber <maaliber@student.42.fr>          +#+  +:+       +#+        */
+/*   By: matnam <matnam@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 13:38:57 by maaliber          #+#    #+#             */
-/*   Updated: 2023/05/11 15:34:19 by maaliber         ###   ########.fr       */
+/*   Updated: 2023/05/13 17:44:51 by matnam           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,11 +74,11 @@ typedef struct s_cmd
 	int		arg_count;
 	char	**cmd;
 	char	*infile;
-	int		fd_infile;
-	char	*outfile;
-	int		fd_outfile;
-	int		outfile_mode;
+	int		fd_in;
 	int		here_doc;
+	char	*outfile;
+	int		fd_out;
+	int		append;
 	char	*delimiter;
 }			t_cmd;
 
@@ -109,10 +109,12 @@ Data structure.
 typedef struct s_data
 {
 	t_list			*env;
+	t_tkn_lst		*token_list;
+	t_list			*set;
 	HIST_ENTRY		**hist;
 	char			*cmd_line;
 	int				cmd_count;
-	struct s_cmd	command_list[CMD_MAX];
+	struct s_cmd	cmd_list[CMD_MAX];
 	int				fd[OPEN_MAX];
 	int				status;
 	int				exit;

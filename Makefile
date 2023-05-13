@@ -128,7 +128,17 @@ SRCS += parser.c
 SRCS += exec.c
 SRCS += pipe_ft.c
 
-#05_lexer
+#05_buildins
+SRCS += cd.c
+SRCS += echo.c
+SRCS += env.c
+SRCS += pwd.c
+
+#06_history
+
+#07_signals
+SRCS += signal_actions.c
+SRCS += signal.c
 
 #08_error
 SRCS += error.c

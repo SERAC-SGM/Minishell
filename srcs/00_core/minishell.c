@@ -38,10 +38,10 @@ int	main(int ac, char *av[], char *env[])
 	(void)ac;
 	(void)av;
 	init_data(&data, env);
+	enable_signal();
 	while (1)
 	{
-		enable_signal();
-		//reset_cmd(&data);
+		reset_cmd(&data);
 		data.cmd_line = readline(prompt());
 		exec_cmd_line(&data);
 		waitpid(-1, &data.status, NULL);

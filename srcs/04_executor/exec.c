@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maaliber <maaliber@student.42.fr>          +#+  +:+       +#+        */
+/*   By: maaliber <maaliber@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/08 16:09:28 by maaliber          #+#    #+#             */
-/*   Updated: 2023/05/11 16:19:43 by maaliber         ###   ########.fr       */
+/*   Created: 2023/05/13 17:38:47 by maaliber            #+#    #+#             */
+/*   Updated: 2023/05/13 17:39:01 by matnam           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
 
 char	**get_envpath(char **env)
 {
@@ -28,7 +29,7 @@ char	**get_envpath(char **env)
 	return (path);
 }
 
-int	set_cmd(int p_no, t_ppx *info)
+int	set_cmd(int p_no, t_data *data)
 {
 	char	*tmp;
 	int		i;
@@ -55,7 +56,7 @@ int	set_cmd(int p_no, t_ppx *info)
 	return (0);
 }
 
-void	process(int p_no, t_ppx *info, char **env)
+void	process(int p_no, t_data *data, char **env)
 {	
 	set_cmd(p_no, info);
 	if (p_no == 0)
@@ -73,17 +74,10 @@ void	process(int p_no, t_ppx *info, char **env)
 
 int	exec(t_data *data)
 {
-	t_ppx	*info;
-	int		status;
-	pid_t	p_id;
 	int		p_no;
 
-	p_no = 0;
-	if (ac < 5 || (ft_strncmp(av[1], "here_doc", 9) == 0 && ac < 6))
-		exit_error(E_ARG, 0, 0);
-	info = parse_arg(ac, av, env);
-	open_pipe(info);
-	while (p_no < info->nb_process)
+	open_pipe(data);
+	while (p_no < data->nb_process)
 	{
 		p_id = fork();
 		if (p_id == -1)

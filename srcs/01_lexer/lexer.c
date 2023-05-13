@@ -25,10 +25,8 @@ t_tkn_lst	*lexer(t_data *data)
 	t_tkn_lst	*tkn_lst;
 	t_tkn_lst	*token;
 	char		*cmd_l;
-	int			mode;
 
 	tkn_lst = NULL;
-	mode = 0;
 	if (!data->cmd_line)
 		return (NULL);
 	cmd_l = data->cmd_line;

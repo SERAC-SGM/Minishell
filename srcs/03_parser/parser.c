@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maaliber <maaliber@student.42.fr>          +#+  +:+       +#+        */
+/*   By: matnam <matnam@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 14:19:32 by maaliber          #+#    #+#             */
-/*   Updated: 2023/05/11 14:54:49 by maaliber         ###   ########.fr       */
+/*   Updated: 2023/05/13 17:45:41 by matnam           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,21 +37,21 @@ static t_tkn_lst	*add_command(t_tkn_lst *token, t_data *data)
 {
 	int	i;
 
-	data->command_list[data->cmd_count].cmd
+	data->cmd_list[data->cmd_count].cmd
 		= malloc(sizeof(char *) * (get_cmd_size(token) + 1));
-	if (!data->command_list)
+	if (!data->cmd_list)
 		exit_error("malloc_error");
-	data->command_list[data->cmd_count].cmd[0] = token->content;
+	data->cmd_list[data->cmd_count].cmd[0] = token->content;
 	token = token->next;
 	i = 0;
 	while (token->type != END && token->content)
 	{
-		data->command_list[data->cmd_count].cmd[++i] = token->content;
+		data->cmd_list[data->cmd_count].cmd[++i] = token->content;
 		token = token->next;
 	}
-	data->command_list[data->cmd_count].arg_count = i;
-	data->command_list[data->cmd_count].cmd[++i] = NULL;
-	data->command_list[data->cmd_count].process_index = data->cmd_count;
+	data->cmd_list[data->cmd_count].arg_count = i;
+	data->cmd_list[data->cmd_count].cmd[++i] = NULL;
+	data->cmd_list[data->cmd_count].process_index = data->cmd_count;
 	return (token);
 }
 
@@ -59,7 +59,7 @@ void	parser(t_tkn_lst *token, t_data *data)
 {
 	if (token->type == PIPE)
 		exit_error("syntax error near unexpected token `XXX'\n");
-	init_cmd(&data->command_list[data->cmd_count]);
+	init_cmd(&data->cmd_list[data->cmd_count]);
 	while (token->type != END)
 	{
 		if (token->type == PIPE)
@@ -68,11 +68,11 @@ void	parser(t_tkn_lst *token, t_data *data)
 				exit_error("syntax error near unexpected token `XXX'\n");
 			token = token->next;
 			data->cmd_count++;
-			init_cmd(&data->command_list[data->cmd_count]);
+			init_cmd(&data->cmd_list[data->cmd_count]);
 		}
 		if (token->type != END && token->content)
 			token = add_command(token, data);
 		else if (token->type != END && !token->content && token->type != PIPE)
-			token = handle_files(token, &data->command_list[data->cmd_count]);
+			token = handle_files(token, &data->cmd_list[data->cmd_count]);
 	}
 }

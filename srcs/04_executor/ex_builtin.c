@@ -1,21 +1,14 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free_ft.c                                          :+:      :+:    :+:   */
+/*   ex_builtin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: matnam <matnam@student.42.fr>              +#+  +:+       +#+        */
+/*   By: maaliber <maaliber@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/02 15:57:15 by maaliber          #+#    #+#             */
-/*   Updated: 2023/05/13 18:53:38 by matnam           ###   ########.fr       */
+/*   Created: 2023/05/13 17:38:09 by maaliber            #+#    #+#             */
+/*   Updated: 2023/05/13 17:38:10 by maaliber           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	free_data(t_data *data)
-{
-	reset_cmd(data);
-	
-	ft_lstclear(&data->env);
-	ft_lstclear(&data->set);
-}

@@ -44,7 +44,7 @@ void	msg_error(int err_id, char *item)
 	free(err_msg);
 }
 
-void	exit_error(int err_id, char *item, t_ppx *info)
+void	exit_error(int err_id, char *item, t_data *data)
 {
 	char	*err_msg;
 
@@ -61,6 +61,6 @@ void	exit_error(int err_id, char *item, t_ppx *info)
 		ft_putstr_fd(err_msg, 2);
 		free(err_msg);
 	}
-	free_ppx(info);
+	free_data(data);
 	exit(1);
 }

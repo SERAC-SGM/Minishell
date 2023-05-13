@@ -15,4 +15,6 @@
 
 # include "mshell_types.h"
 
+void	exit_error(int err_id, char *item, t_data *data);
+
 #endif
