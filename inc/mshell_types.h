@@ -6,7 +6,7 @@
 /*   By: matnam <matnam@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 13:38:57 by maaliber          #+#    #+#             */
-/*   Updated: 2023/05/13 17:44:51 by matnam           ###   ########.fr       */
+/*   Updated: 2023/05/13 23:48:27 by matnam           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,8 @@ typedef struct s_cmd
 	int		process_index;
 	int		pid;
 	int		arg_count;
-	char	**cmd;
+	char	**attr;
+	char	**env_path;
 	char	*infile;
 	int		fd_in;
 	int		here_doc;
@@ -113,8 +114,8 @@ typedef struct s_data
 	t_list			*set;
 	HIST_ENTRY		**hist;
 	char			*cmd_line;
-	int				cmd_count;
-	struct s_cmd	cmd_list[CMD_MAX];
+	int				process_nb;
+	struct s_cmd	cmds_tab[CMD_MAX];
 	int				fd[OPEN_MAX];
 	int				status;
 	int				exit;

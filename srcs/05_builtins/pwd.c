@@ -3,18 +3,24 @@
 /*                                                        :::      ::::::::   */
 /*   pwd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lletourn <lletourn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: matnam <matnam@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 12:55:27 by lletourn          #+#    #+#             */
-/*   Updated: 2023/05/03 13:02:05 by lletourn         ###   ########.fr       */
+/*   Updated: 2023/05/14 00:08:12 by matnam           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-void	pwd(void)
-{
-	char	*cwd;
+#include "minishell.h"
 
-	cwd = getcwd(NULL, 0);
-	printf("%s\n", cwd);
-	free(cwd);
+int		pwd(void)
+{
+	char	cwd[BUFFER_SIZE];
+
+	if (getcwd(cwd, BUFFER_SIZE))
+	{
+		ft_putendl_fd(cwd, 1);
+		return (SUCCESS);
+	}
+	else
+		return (ERROR);
 }

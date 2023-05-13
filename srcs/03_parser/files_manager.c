@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   files_management.c                                 :+:      :+:    :+:   */
+/*   files_managemer.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: matnam <matnam@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/06 12:07:41 by lletourn          #+#    #+#             */
-/*   Updated: 2023/05/13 17:50:06 by matnam           ###   ########.fr       */
+/*   Updated: 2023/05/13 23:57:49 by matnam           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_tkn_lst	*handle_files(t_tkn_lst *token, t_cmd *cmd)
+t_tkn_lst	*redirection(t_tkn_lst *token, t_cmd *cmd)
 {
 	if ((!token->next->content))
 		exit_error("syntax error near unexpected token `XXX'\n");

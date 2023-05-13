@@ -6,7 +6,7 @@
 /*   By: matnam <matnam@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 17:24:22 by maaliber          #+#    #+#             */
-/*   Updated: 2023/05/13 17:42:41 by matnam           ###   ########.fr       */
+/*   Updated: 2023/05/13 23:19:04 by matnam           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	open_pipe(t_data *data)
 	int	i;
 
 	i = 0;
-	while (i < data->nb_process - 1)
+	while (i < data->process_nb - 1)
 	{
 		if (pipe(&data->fd[2 * i]) == -1)
 			exit_error(E_PIPE, 0, data);
@@ -36,7 +36,7 @@ void	close_pipe(t_data *data)
 	int	i;
 
 	i = 0;
-	while (i < data->nb_process - 1)
+	while (i < data->process_nb - 1)
 	{
 		close(data->fd[2 * i]);
 		close(data->fd[2 * i + 1]);

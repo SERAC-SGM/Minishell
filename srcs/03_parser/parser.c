@@ -6,11 +6,30 @@
 /*   By: matnam <matnam@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 14:19:32 by maaliber          #+#    #+#             */
-/*   Updated: 2023/05/13 17:45:41 by matnam           ###   ########.fr       */
+/*   Updated: 2023/05/13 23:57:10 by matnam           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+/*
+Returns the size of the command (name + optional arguments).
+*/
+char	**get_envpath(t_list *env)
+{
+	char	**path;
+	int		i;
+
+	i = 0;
+	while (env)
+	{
+		if (!ft_strncmp("PATH", env[i], 4))
+			break ;
+		env = env->next;
+	}
+	path = ft_split(env[i] + 5, ':');
+	return (path);
+}
 
 /*
 Returns the size of the command (name + optional arguments).
@@ -37,21 +56,21 @@ static t_tkn_lst	*add_command(t_tkn_lst *token, t_data *data)
 {
 	int	i;
 
-	data->cmd_list[data->cmd_count].cmd
+	data->cmds_tab[data->process_nb].attr
 		= malloc(sizeof(char *) * (get_cmd_size(token) + 1));
-	if (!data->cmd_list)
+	if (!data->cmds_tab)
 		exit_error("malloc_error");
-	data->cmd_list[data->cmd_count].cmd[0] = token->content;
+	data->cmds_tab[data->process_nb].attr[0] = token->content;
 	token = token->next;
 	i = 0;
 	while (token->type != END && token->content)
 	{
-		data->cmd_list[data->cmd_count].cmd[++i] = token->content;
+		data->cmds_tab[data->process_nb].attr[++i] = token->content;
 		token = token->next;
 	}
-	data->cmd_list[data->cmd_count].arg_count = i;
-	data->cmd_list[data->cmd_count].cmd[++i] = NULL;
-	data->cmd_list[data->cmd_count].process_index = data->cmd_count;
+	data->cmds_tab[data->process_nb].arg_count = i;
+	data->cmds_tab[data->process_nb].attr[++i] = NULL;
+	data->cmds_tab[data->process_nb].process_index = data->process_nb;
 	return (token);
 }
 
@@ -59,7 +78,8 @@ void	parser(t_tkn_lst *token, t_data *data)
 {
 	if (token->type == PIPE)
 		exit_error("syntax error near unexpected token `XXX'\n");
-	init_cmd(&data->cmd_list[data->cmd_count]);
+	data->env_path = get_envpath(data->env);
+	init_cmd(&data->cmds_tab[data->process_nb]);
 	while (token->type != END)
 	{
 		if (token->type == PIPE)
@@ -67,12 +87,12 @@ void	parser(t_tkn_lst *token, t_data *data)
 			if (!token->next->content)
 				exit_error("syntax error near unexpected token `XXX'\n");
 			token = token->next;
-			data->cmd_count++;
-			init_cmd(&data->cmd_list[data->cmd_count]);
+			data->process_nb++;
+			init_cmd(&data->cmds_tab[data->process_nb]);
 		}
 		if (token->type != END && token->content)
 			token = add_command(token, data);
 		else if (token->type != END && !token->content && token->type != PIPE)
-			token = handle_files(token, &data->cmd_list[data->cmd_count]);
+			token = redirection(token, &data->cmds_tab[data->process_nb]);
 	}
 }

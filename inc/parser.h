@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lletourn <lletourn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: matnam <matnam@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/27 12:43:55 by maaliber          #+#    #+#             */
-/*   Updated: 2023/05/10 14:25:22 by lletourn         ###   ########.fr       */
+/*   Updated: 2023/05/13 23:57:57 by matnam           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,17 +16,17 @@
 # include "mshell_types.h"
 
 ///////////////////////
-// files-managment.c //
+// files-manager.c //
 ///////////////////////
 
 /*
-When encountering a file-related token (< << > >>), assings the correct
+When encountering a redirection token (< << > >>), assings the correct
 following filename to the command structure.
 Returns the next token after the filename.
 If no filemame or no non-special after the filename token is found,
 returns an error.
 */
-t_tkn_lst	*handle_files(t_tkn_lst *token, t_cmd *cmd);
+t_tkn_lst	*redirection(t_tkn_lst *token, t_cmd *cmd);
 /*
 Creates a temporary .here_doc file and writes the user input.
 */

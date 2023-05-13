@@ -121,7 +121,7 @@ SRCS += lexer.c
 SRCS += expander.c
 
 #03_parser
-SRCS += files_management.c
+SRCS += files_manager.c
 SRCS += parser.c
 
 #04_executor
