@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   list_ft.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maaliber <maaliber@student.42.fr>          +#+  +:+       +#+        */
+/*   By: matnam <matnam@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 12:39:31 by maaliber          #+#    #+#             */
-/*   Updated: 2023/05/09 13:06:17 by maaliber         ###   ########.fr       */
+/*   Updated: 2023/05/14 14:11:01 by matnam           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,7 @@
 Basic fonctions for list
 • Create node
 • Get last node
-• Add element at the end of list
-• Delete one element
-• Clear list
+• Get list size
 */
 t_list	*ft_lstnew(void *content)
 {
@@ -41,39 +39,15 @@ t_list	*ft_lstlast(t_list *lst)
 	return (lst);
 }
 
-void	ft_lstadd_back(t_list **lst, t_list *new)
+int	*ft_lstsize(t_list *lst)
 {
-	t_list	*nlast;
+	int	i;
 
-	if (!lst || !new)
-		return ;
-	if (!(*lst))
+	i = 0;
+	while (lst)
 	{
-		(*lst) = new;
-		return ;
+		i++;
+		lst = lst->next;
 	}
-	nlast = ft_lstlast(*lst);
-	nlast->next = new;
-}
-
-void	ft_lstdelone(t_list *lst)
-{
-	if (!lst)
-		return ;
-	free(lst->line);
-	free(lst);
-}
-
-void	ft_lstclear(t_list **lst)
-{
-	t_list	*nnext;
-
-	if (!lst)
-		return ;
-	while (*lst)
-	{
-		nnext = (*lst)->next;
-		ft_lstdelone(*lst);
-		*lst = nnext;
-	}
+	return (i);
 }

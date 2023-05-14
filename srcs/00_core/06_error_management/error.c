@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maaliber <maaliber@student.42.fr>          +#+  +:+       +#+        */
+/*   By: matnam <matnam@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 14:57:22 by maaliber          #+#    #+#             */
-/*   Updated: 2023/05/11 14:58:27 by maaliber         ###   ########.fr       */
+/*   Updated: 2023/05/14 12:57:46 by matnam           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ struct s_errdesc
 	{E_HEREDOC, "here_doc\n"},
 };
 
-void	msg_error(int err_id, char *item)
+void	error_msg(int err_id, char *item)
 {
 	char	*err_msg;
 

@@ -88,16 +88,28 @@ vpath %.h $(INC_DIR)
 #‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾#
 
 SRCS_DIR = ./srcs
+#Core Main directory
 PATH_SRCS_CORE = $(SRCS_DIR)/00_core
-PATH_SRCS_LEXER = $(SRCS_DIR)/01_lexer
-PATH_SRCS_EXPAND = $(SRCS_DIR)/02_expander
-PATH_SRCS_PARSER = $(SRCS_DIR)/03_parser
-PATH_SRCS_EXEC = $(SRCS_DIR)/04_executor
-PATH_SRCS_BUILTIN = $(SRCS_DIR)/05_builtins
-PATH_SRCS_HIST = $(SRCS_DIR)/06_history
-PATH_SRCS_SIG = $(SRCS_DIR)/07_signals
-PATH_SRCS_ERR = $(SRCS_DIR)/08_error_management
-PATH_SRCS_UTIL = $(SRCS_DIR)/10_utils
+#Core Sub-directories
+PATH_SRCS_INIT = $(SRCS_DIR)/00_core/01_init
+PATH_SRCS_ENV = $(SRCS_DIR)/00_core/02_environment
+PATH_SRCS_PROMPT = $(SRCS_DIR)/00_core/03_prompt
+PATH_SRCS_SIG = $(SRCS_DIR)/00_core/04_signals
+PATH_SRCS_HIST = $(SRCS_DIR)/00_core/05_history
+PATH_SRCS_ERR = $(SRCS_DIR)/00_core/06_error_management
+PATH_SRCS_FREE = $(SRCS_DIR)/00_core/07_free
+PATH_SRCS_UTIL = $(SRCS_DIR)/00_core/09_utils
+#Lexer directory
+PATH_SRCS_LEXER = $(SRCS_DIR)/10_lexer
+#Expander directory
+PATH_SRCS_EXPAND = $(SRCS_DIR)/20_expander
+#Parser directory
+PATH_SRCS_PARSER = $(SRCS_DIR)/30_parser
+#Executor directory
+PATH_SRCS_EXEC = $(SRCS_DIR)/40_executor
+#Builtins directory
+PATH_SRCS_BUILTIN = $(SRCS_DIR)/50_builtins
+#Tests directory
 PATH_SRCS_TEST = $(SRCS_DIR)/99_tests
 
 #______________________________________________________________________________#
@@ -110,25 +122,25 @@ SRCS += free_ft.c
 SRCS += init_ft.c
 #SRCS += minishell.c
 
-#01_lexer
+#10_lexer
 SRCS += lexer_util.c
 SRCS += input_mode.c
 SRCS += token_lst.c
 SRCS += token.c
 SRCS += lexer.c
 
-#02_expander
+#20_expander
 SRCS += expander.c
 
-#03_parser
+#30_parser
 SRCS += files_manager.c
 SRCS += parser.c
 
-#04_executor
+#40_executor
 SRCS += exec.c
 SRCS += pipe_ft.c
 
-#05_buildins
+#50_buildins
 SRCS += cd.c
 SRCS += echo.c
 SRCS += env.c
@@ -153,15 +165,19 @@ SRCS += print_struct.c
 #‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾#
 
 vpath %.c $(PATH_SRCS_CORE)
+vpath %.c $(PATH_SRCS_INIT)
+vpath %.c $(PATH_SRCS_ENV)
+vpath %.c $(PATH_SRCS_PROMPT)
+vpath %.c $(PATH_SRCS_SIG)
+vpath %.c $(PATH_SRCS_HIST)
+vpath %.c $(PATH_SRCS_ERR)
+vpath %.c $(PATH_SRCS_FREE)
+vpath %.c $(PATH_SRCS_UTIL)
 vpath %.c $(PATH_SRCS_LEXER)
 vpath %.c $(PATH_SRCS_PARSER)
 vpath %.c $(PATH_SRCS_EXPAND)
 vpath %.c $(PATH_SRCS_EXEC)
 vpath %.c $(PATH_SRCS_BUILTIN)
-vpath %.c $(PATH_SRCS_HIST)
-vpath %.c $(PATH_SRCS_SIG)
-vpath %.c $(PATH_SRCS_ERR)
-vpath %.c $(PATH_SRCS_UTIL)
 vpath %.c $(PATH_SRCS_TEST)
 
 #______________________________________________________________________________#

@@ -39,21 +39,13 @@ int	set_cmd(t_data *data, int proc_idx)
 	return (0);
 }
 
-void	process(t_data *data, int proc_idx)
+void	exec_native(t_data *data, int proc_idx, char **env)
 {	
-	char	**env;
-
-	set_cmd(proc_idx, info);
-	if (proc_idx == 0)
-		dup_in_out(info->fd_in, info->fd[1]);
-	else if (proc_idx == info->nb_process - 1)
-		dup_in_out(info->fd[2 * (proc_idx - 1)], info->fd_out);
-	else
-		dup_in_out(info->fd[2 * (proc_idx - 1)], info->fd[2 * proc_idx + 1]);
-	close_pipe(info);
-	if ((proc_idx == 0 && info->fd_in < 0)
-		|| (proc_idx == info->nb_process - 1 && info->fd_out < 0))
-		exit_error(E_NOMSG, 0, info);
-	env = env_to_tab(data->env);
-	execve(info->cmds[proc_idx]->data[0], info->cmds[proc_idx]->data, env);
+	set_cmd(proc_idx, data);
+	if (data->nb_process != 1)
+		close_pipe(data);
+	if ((proc_idx == 0 && data->fd_in < 0)
+		|| (proc_idx == data->nb_process - 1 && data->fd_out < 0))
+		exit_error(E_NOMSG, 0, data);
+	execve(data->cmds[proc_idx]->data[0], data->cmds[proc_idx]->data, env);
 }

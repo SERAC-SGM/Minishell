@@ -1,45 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipe_ft.c                                          :+:      :+:    :+:   */
+/*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: matnam <matnam@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/16 17:24:22 by maaliber          #+#    #+#             */
-/*   Updated: 2023/05/13 23:19:04 by matnam           ###   ########.fr       */
+/*   Created: 2023/05/02 11:10:57 by lletourn          #+#    #+#             */
+/*   Updated: 2023/05/14 13:29:48 by matnam           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	open_pipe(t_data *data)
+int	echo(char **args)
 {
+	int	n_option;
 	int	i;
 
+	n_option = 1;
+	if (!args[1])
+		return (0);
 	i = 0;
-	while (i < data->process_nb - 1)
+	while (args[i] && ft_strlen(args[i]) == ft_strlen("-n")
+		&& !ft_strncmp("-n", args[i], ft_strlen("-n")))
 	{
-		if (pipe(&data->fd[2 * i]) == -1)
-			exit_error(E_PIPE, 0, data);
+		n_option = 0;
 		i++;
 	}
-}
-
-void	dup_in_out(int fd_in, int fd_out)
-{
-	dup2(fd_in, STDIN_FILENO);
-	dup2(fd_out, STDOUT_FILENO);
-}
-
-void	close_pipe(t_data *data)
-{
-	int	i;
-
-	i = 0;
-	while (i < data->process_nb - 1)
-	{
-		close(data->fd[2 * i]);
-		close(data->fd[2 * i + 1]);
-		i++;
-	}
+	while (args[i])
+		ft_putstr(args[i++]);
+	if (n_option)
+		ft_putstr("\n");
+	return (0);
 }
