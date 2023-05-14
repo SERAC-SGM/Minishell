@@ -1,24 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   export.c                                           :+:      :+:    :+:   */
+/*   ft_strcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: matnam <matnam@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/14 13:03:56 by matnam            #+#    #+#             */
-/*   Updated: 2023/05/14 19:45:47 by matnam           ###   ########.fr       */
+/*   Created: 2022/11/10 16:02:57 by maaliber          #+#    #+#             */
+/*   Updated: 2023/05/14 18:09:52 by matnam           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "libft.h"
 
-void	export(char	**args, t_list *env, t_list *set)
+int	ft_strcmp(const char *s1, const char *s2)
 {
-	(void)args;
-	(void)set;
-	while (env)
-	{
-		printf("%s\n", env->line);
-		env = env->next;
+	while (*s1 || *s2)
+	{	
+		if (*s1 != *s2)
+			return ((unsigned char)*s1 - (unsigned char)*s2);
+		s1++;
+		s2++;
 	}
+	return (0);
 }

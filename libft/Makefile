@@ -109,6 +109,7 @@ SRCS += ft_strlcat.c
 SRCS += ft_strlcpy.c
 SRCS += ft_strlen.c
 SRCS += ft_strmapi.c
+SRCS += ft_strcmp.c
 SRCS += ft_strncmp.c
 SRCS += ft_strstr.c
 SRCS += ft_strnstr.c

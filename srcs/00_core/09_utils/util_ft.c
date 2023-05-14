@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   util.c                                             :+:      :+:    :+:   */
+/*   util_ft.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maaliber <maaliber@student.42.fr>          +#+  +:+       +#+        */
+/*   By: matnam <matnam@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 14:18:43 by maaliber          #+#    #+#             */
-/*   Updated: 2023/05/10 15:14:53 by maaliber         ###   ########.fr       */
+/*   Updated: 2023/05/14 19:28:28 by matnam           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,4 +44,16 @@ char	*ft_strjoin_dup1(char *s1, char *s2)
 		return (s1);
 	rst = ft_strjoin(s1, s2);
 	return (free(s1), rst);
+}
+
+int	tab_size(char **tab)
+{
+	int	i;
+	
+	i = 0;
+	if (!tab)
+		return (0);
+	while (tab[i++])
+		;
+	return (i);
 }

@@ -6,7 +6,7 @@
 /*   By: matnam <matnam@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 13:38:57 by maaliber          #+#    #+#             */
-/*   Updated: 2023/05/14 14:40:15 by matnam           ###   ########.fr       */
+/*   Updated: 2023/05/14 19:39:29 by matnam           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,9 +42,13 @@ enum e_config_error
 	E_SUCCESS = 0,
 	E_STD,
 	E_NOMSG,
+	E_MEM,
+	E_TOKEN,
 	E_FILE,
 	E_PERM,
 	E_ARG,
+	E_TOO_FEW_ARG,
+	E_TOO_MANY_ARG,
 	E_PIPE,
 	E_FORK,
 	E_ENV,
@@ -70,10 +74,8 @@ arguments (cmd[i][0] : path of the command, cmd[i][j] : optional arguments).
 typedef struct s_cmd
 {
 	int		process_index;
-	int		pid;
 	int		arg_count;
 	char	**attr;
-	char	**env_path;
 	char	*infile;
 	int		fd_in;
 	int		here_doc;
@@ -112,6 +114,7 @@ typedef struct s_data
 	t_list			*env;
 	t_tkn_lst		*token_list;
 	t_list			*set;
+	char			**env_path;
 	HIST_ENTRY		**hist;
 	char			*cmd_line;
 	int				process_nb;

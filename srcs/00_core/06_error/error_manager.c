@@ -6,7 +6,7 @@
 /*   By: matnam <matnam@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 14:57:22 by maaliber          #+#    #+#             */
-/*   Updated: 2023/05/14 15:34:02 by matnam           ###   ########.fr       */
+/*   Updated: 2023/05/14 19:39:53 by matnam           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,13 @@ struct s_errdesc
 	{E_SUCCESS, "No error"},
 	{E_STD, 0},
 	{E_NOMSG, 0},
+	{E_MEM, "memory allocation error\n"},
+	{E_TOKEN, "syntax error near unexpected token\n"},
 	{E_FILE, ": no such file or directory\n"},
 	{E_PERM, ": permission denied\n"},
 	{E_ARG, "invalid number of arguments\n"},
+	{E_TOO_FEW_ARG, "invalid number of arguments\n"},
+	{E_TOO_MANY_ARG, "invalid number of arguments\n"},
 	{E_PIPE, "pipe\n"},
 	{E_FORK, "fork\n"},
 	{E_ENV, "environment\n"},
@@ -30,10 +34,11 @@ struct s_errdesc
 	{E_HEREDOC, "here_doc\n"},
 };
 
-void	error_msg(int err_id, char *item)
+void	error_msg(int err_id, char *item, t_data *data)
 {
 	char	*err_msg;
 
+	(void)data;
 	if (item)
 		err_msg = ft_strjoin(item, errdesc[err_id].msg);
 	else

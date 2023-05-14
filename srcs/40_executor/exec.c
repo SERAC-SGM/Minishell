@@ -17,19 +17,20 @@ static char	**env_to_tab(t_list	*env)
 	char	**env_tab;
 	int		i;
 
-	env_tab = malloc(ft_lstsize(data->env) + 1)
+	env_tab = malloc(ft_lstsize(env) + 1);
 	if (!env_tab)
-		return (error_msg(E_STD, ), NULL);
+		return (error_msg(E_MEM, NULL, NULL), NULL);
 	i = 0;
 	while (env)
 	{
 		env_tab[i++] = env->line;
 		env = env->next;
 	}
+	env_tab[i] = NULL;
 	return (env_tab);
 }
 
-static int		is_builtin(char *name, int proc_idx)
+static int		is_builtin(char *name)
 {
 	if (ft_strcmp(name, "echo") == 0)
 		return (1);
@@ -44,7 +45,7 @@ static int		is_builtin(char *name, int proc_idx)
 	return (0);
 }
 
-static int	exec_cmd(t_data *data, int proc_idx, char **env)
+static void	exec_cmd(t_data *data, int proc_idx, char **env)
 {
 	if (is_builtin(data->cmds_tab[proc_idx].attr[0]))
 		exec_builtin(data, proc_idx);
@@ -52,11 +53,11 @@ static int	exec_cmd(t_data *data, int proc_idx, char **env)
 	{
 		if (data->process_nb  == 1)
 		{	
-			data->pid = fork();
-			if (data->pid == -1)
+			g_sig.pid = fork();
+			if (g_sig.pid == -1)
 				exit_error(E_FORK, 0, data);
 		}
-		if (data->pid == 0)
+		if (g_sig.pid == 0)
 			exec_native(data, proc_idx, env);
 	}
 	close_pipe(data);
@@ -66,6 +67,7 @@ int	exec_cmd_line(t_data *data)
 {
 	char	**env;
 	int		proc_idx;
+	int		status;
 	
 	env = env_to_tab(data->env);
 	proc_idx = 0;
@@ -73,14 +75,14 @@ int	exec_cmd_line(t_data *data)
 	{
 		if (data->process_nb  == 1)
 			exec_cmd(data, proc_idx, env);
-		else (data->process_nb > 1)
+		else
 		{
 			open_pipe(data);
-			dup_pipe(data, proc_idx);
-			data->pid = fork();
-			if (data->pid == -1)
+			dup_fds(data, proc_idx);
+			g_sig.pid = fork();
+			if (g_sig.pid == -1)
 				exit_error(E_FORK, 0, data);
-			if (data->pid == 0)
+			if (g_sig.pid == 0)
 				exec_cmd(data, proc_idx, env);
 		}
 		proc_idx++;

@@ -14,18 +14,18 @@
 
 int		exec_builtin(t_data *data, int proc_idx)
 {
-	int		result;
+	int		ret;
 
-	result = 0;
+	ret = 0;
 	if (ft_strcmp(data->cmds_tab[proc_idx].attr[0], "echo") == 0)
-		result = echo(&data->cmds_tab[proc_idx].attr[1]);
+		ret = echo(data->cmds_tab[proc_idx].attr);
 	if (ft_strcmp(data->cmds_tab[proc_idx].attr[0], "cd") == 0)
-		result = cd(&data->cmds_tab[proc_idx].attr[1]);
+		ret = cd(data->cmds_tab[proc_idx].attr);
 	if (ft_strcmp(data->cmds_tab[proc_idx].attr[0], "pwd") == 0)
-		result = pwd();
+		ret = pwd();
 	if (ft_strcmp(data->cmds_tab[proc_idx].attr[0], "env") == 0)
-		env(data->env);
+		env(data->env, data->cmds_tab[proc_idx].attr);
 	if (ft_strcmp(data->cmds_tab[proc_idx].attr[0], "export") == 0)
-		export(args, data->env, data->set);
-	return (result);
+		export(data->cmds_tab[proc_idx].attr, data->env, data->set);
+	return (ret);
 }

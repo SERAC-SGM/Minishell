@@ -6,7 +6,7 @@
 /*   By: matnam <matnam@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/06 12:07:41 by lletourn          #+#    #+#             */
-/*   Updated: 2023/05/14 15:35:02 by matnam           ###   ########.fr       */
+/*   Updated: 2023/05/14 17:58:13 by matnam           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 t_tkn_lst	*redirection(t_tkn_lst *token, t_cmd *cmd)
 {
 	if ((!token->next->content))
-		error_msg(E_STD, "syntax error near unexpected token `XXX'\n");
+		error_msg(E_TOKEN, NULL, NULL);
 	if (token->type == RD_IN)
 		cmd->infile = token->next->content;
 	else if (token->type == HERE)
@@ -35,7 +35,7 @@ void	write_heredoc(t_cmd *cmd)
 
 	cmd->fd_in = open(".here_doc", O_WRONLY | O_CREAT | O_EXCL, 0644);
 	if (cmd->fd_in == -1)
-		error_msg(E_STD, NULL);
+		error_msg(E_PERM, ".here_doc", NULL);
 	line = "";
 	ft_printf("heredoc> ", 1);
 	while (1)
@@ -62,7 +62,7 @@ void	check_open_error(int fd, t_data *data)
 {
 	(void)data;
 	if (fd == -1)
-		error_msg(E_STD, "Open");
+		error_msg(E_PERM, ".here_doc", NULL);
 }
 
 void	open_files(t_cmd *cmd, t_data *data)

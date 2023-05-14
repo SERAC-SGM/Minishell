@@ -23,7 +23,7 @@ CFLAGS = -Wall -Wextra -Werror
 # Libft
 LIB_DIR		= ./libft
 LIBFT		= $(LIB_DIR)/libft.a
-LDFLAGS 	= -L $(LIB_DIR) -lft
+LDFLAGS 	= -L $(LIB_DIR) -lft -lreadline
 
 #______________________________________________________________________________#
 ############################### Print Variables ################################
@@ -158,7 +158,7 @@ SRCS += files_manager.c
 SRCS += parser.c
 
 #40_executor
-SRCS += pipe_ft.c
+SRCS += pipe_dup.c
 SRCS += exec_native.c
 SRCS += exec_builtin.c
 SRCS += exec.c

@@ -6,7 +6,7 @@
 /*   By: matnam <matnam@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 14:51:50 by maaliber          #+#    #+#             */
-/*   Updated: 2023/05/13 23:38:59 by matnam           ###   ########.fr       */
+/*   Updated: 2023/05/14 19:25:18 by matnam           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,6 @@ Initializes a command structure.
 void	init_cmd(t_cmd *cmd)
 {
 	cmd->process_index = 0;
-	cmd->pid = 0;
 	cmd->arg_count = 0;
 	cmd->attr = NULL;
 	cmd->infile = NULL;

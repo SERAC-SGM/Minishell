@@ -6,7 +6,7 @@
 /*   By: matnam <matnam@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 14:48:27 by matnam            #+#    #+#             */
-/*   Updated: 2023/05/14 15:17:28 by matnam           ###   ########.fr       */
+/*   Updated: 2023/05/14 19:59:39 by matnam           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,8 @@ void	sig_int(void);
 void	sig_quit(void);
 
 //signal.c
+// t_sig	init_sig(void);
 void	handler(int signo);
-void	init_sig(void);
 void	enable_signal(void);
 
 ////////////////
@@ -54,7 +54,7 @@ void	enable_signal(void);
 //////////////
 // 06_error //
 //////////////
-void	error_msg(int err_id, char *item);
+void	error_msg(int err_id, char *item, t_data *data);
 void	exit_error(int err_id, char *item, t_data *data);
 
 /////////////
@@ -80,5 +80,6 @@ void	print_env(t_list *env);
 //util.c
 void	trim_char(char **str, char c);
 char	*ft_strjoin_dup1(char *s1, char *s2);
+int		tab_size(char **tab);
 
 #endif

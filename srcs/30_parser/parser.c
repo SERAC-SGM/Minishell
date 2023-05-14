@@ -6,7 +6,7 @@
 /*   By: matnam <matnam@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 14:19:32 by maaliber          #+#    #+#             */
-/*   Updated: 2023/05/14 15:39:05 by matnam           ###   ########.fr       */
+/*   Updated: 2023/05/14 17:53:40 by matnam           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ static t_tkn_lst	*add_command(t_tkn_lst *token, t_data *data)
 	data->cmds_tab[data->process_nb].attr
 		= malloc(sizeof(char *) * (get_cmd_size(token) + 1));
 	if (!data->cmds_tab)
-		exit_error("malloc_error");
+		error_msg(E_MEM, NULL, data);
 	data->cmds_tab[data->process_nb].attr[0] = token->content;
 	token = token->next;
 	i = 0;
@@ -75,7 +75,7 @@ static t_tkn_lst	*add_command(t_tkn_lst *token, t_data *data)
 void	parser(t_tkn_lst *token, t_data *data)
 {
 	if (token->type == PIPE)
-		exit_error("syntax error near unexpected token `XXX'\n");
+		error_msg(E_TOKEN, NULL, data);
 	data->env_path = get_envpath(data->env);
 	init_cmd(&data->cmds_tab[data->process_nb]);
 	while (token->type != END)
@@ -83,7 +83,7 @@ void	parser(t_tkn_lst *token, t_data *data)
 		if (token->type == PIPE)
 		{
 			if (!token->next->content)
-				exit_error("syntax error near unexpected token `XXX'\n");
+				error_msg(E_TOKEN, NULL, data);
 			token = token->next;
 			data->process_nb++;
 			init_cmd(&data->cmds_tab[data->process_nb]);
