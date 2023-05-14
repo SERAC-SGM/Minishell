@@ -6,7 +6,7 @@
 /*   By: matnam <matnam@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 14:19:32 by maaliber          #+#    #+#             */
-/*   Updated: 2023/05/13 23:57:10 by matnam           ###   ########.fr       */
+/*   Updated: 2023/05/14 15:39:05 by matnam           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,16 +18,14 @@ Returns the size of the command (name + optional arguments).
 char	**get_envpath(t_list *env)
 {
 	char	**path;
-	int		i;
 
-	i = 0;
 	while (env)
 	{
-		if (!ft_strncmp("PATH", env[i], 4))
+		if (!ft_strncmp("PATH", env->line, 4))
 			break ;
 		env = env->next;
 	}
-	path = ft_split(env[i] + 5, ':');
+	path = ft_split(env->line + 5, ':');
 	return (path);
 }
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expander.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maaliber <maaliber@student.42.fr>          +#+  +:+       +#+        */
+/*   By: matnam <matnam@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 14:19:34 by maaliber          #+#    #+#             */
-/*   Updated: 2023/05/10 14:14:51 by maaliber         ###   ########.fr       */
+/*   Updated: 2023/05/14 15:08:33 by matnam           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,17 +89,3 @@ void	expand(char **content, t_list *env)
 	}
 	return ;
 }
-
-/*
-Expand variable followed by $ in format by the corresponding value in env
-• $ is not iterpreted when into single quote
-*/
-/*void	expand_tokenize(t_tkn_lst *token, t_list *env)
-{
-	if (!token)
-		return ;
-	expand(token, env);
-	
-	return ;
-}
-*/

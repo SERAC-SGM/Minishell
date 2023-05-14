@@ -69,16 +69,12 @@ INCLUDES += -I $(LIB_DIR)/inc
 #‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾#
 
 HEADER += mshell_types.h
-HEADER += environment.h
+HEADER += core.h
 HEADER += lexer.h
 HEADER += expander.h
 HEADER += parser.h
 HEADER += executor.h
 HEADER += builtins.h
-HEADER += signal.h
-HEADER += history.h
-HEADER += error.h
-HEADER += utils.h
 HEADER += minishell.h
 
 vpath %.h $(INC_DIR)
@@ -96,7 +92,7 @@ PATH_SRCS_ENV = $(SRCS_DIR)/00_core/02_environment
 PATH_SRCS_PROMPT = $(SRCS_DIR)/00_core/03_prompt
 PATH_SRCS_SIG = $(SRCS_DIR)/00_core/04_signals
 PATH_SRCS_HIST = $(SRCS_DIR)/00_core/05_history
-PATH_SRCS_ERR = $(SRCS_DIR)/00_core/06_error_management
+PATH_SRCS_ERR = $(SRCS_DIR)/00_core/06_error
 PATH_SRCS_FREE = $(SRCS_DIR)/00_core/07_free
 PATH_SRCS_UTIL = $(SRCS_DIR)/00_core/09_utils
 #Lexer directory
@@ -117,10 +113,35 @@ PATH_SRCS_TEST = $(SRCS_DIR)/99_tests
 #‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾#
 
 #00_core
-SRCS += env_ft.c
-SRCS += free_ft.c
+SRCS += minishell.c
+
+#01_init
 SRCS += init_ft.c
-#SRCS += minishell.c
+
+#02_environment
+SRCS += env_ft.c
+
+#03_prompt
+SRCS += prompt.c
+
+#04_signals
+SRCS += signal_actions.c
+SRCS += signal.c
+
+#05_history
+SRCS += history.c
+
+#06_error
+SRCS += error_manager.c
+
+#07_free
+SRCS += free_ft.c
+
+#09_utils
+SRCS += util_ft.c
+SRCS += list_ft.c
+SRCS += list_ft2.c
+SRCS += print_struct.c
 
 #10_lexer
 SRCS += lexer_util.c
@@ -137,28 +158,18 @@ SRCS += files_manager.c
 SRCS += parser.c
 
 #40_executor
-SRCS += exec.c
 SRCS += pipe_ft.c
+SRCS += exec_native.c
+SRCS += exec_builtin.c
+SRCS += exec.c
 
 #50_buildins
 SRCS += cd.c
 SRCS += echo.c
 SRCS += env.c
 SRCS += pwd.c
+SRCS += export.c
 
-#06_history
-
-#07_signals
-SRCS += signal_actions.c
-SRCS += signal.c
-
-#08_error
-SRCS += error.c
-
-#10_utils
-SRCS += util.c
-SRCS += list_ft.c
-SRCS += print_struct.c
 
 #______________________________________________________________________________#
 ############################### Attribution ####################################

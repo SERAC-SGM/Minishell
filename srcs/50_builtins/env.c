@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lletourn <lletourn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: matnam <matnam@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 15:30:05 by lletourn          #+#    #+#             */
-/*   Updated: 2023/05/09 15:30:15 by lletourn         ###   ########.fr       */
+/*   Updated: 2023/05/14 14:43:50 by matnam           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	print_env(t_list *env)
+void	env(t_list *env)
 {
 	while (env)
 	{

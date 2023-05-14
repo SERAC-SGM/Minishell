@@ -6,7 +6,7 @@
 /*   By: matnam <matnam@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/27 12:43:55 by maaliber          #+#    #+#             */
-/*   Updated: 2023/05/13 23:57:57 by matnam           ###   ########.fr       */
+/*   Updated: 2023/05/14 14:50:40 by matnam           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,9 @@
 
 # include "mshell_types.h"
 
-///////////////////////
+/////////////////////
 // files-manager.c //
-///////////////////////
+/////////////////////
 
 /*
 When encountering a redirection token (< << > >>), assings the correct

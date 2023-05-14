@@ -1,21 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   environment.h                                      :+:      :+:    :+:   */
+/*   prompt.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lletourn <lletourn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: matnam <matnam@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/09 12:24:07 by maaliber          #+#    #+#             */
-/*   Updated: 2023/05/10 12:38:07 by lletourn         ###   ########.fr       */
+/*   Created: 2023/05/14 14:42:59 by matnam            #+#    #+#             */
+/*   Updated: 2023/05/14 15:15:39 by matnam           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ENVIRONMENT_H
-# define ENVIRONMENT_H
+#include "minishell.h"
 
-# include "mshell_types.h"
+char	*prompt(void)
+{
+	char	*prompt;
 
-char	*get_var_value(char *name, t_list *env);
-void	set_env_var(char *name, char *val, t_list *env);
-
-#endif
+	(void)prompt;
+	return (NULL);
+}

@@ -6,7 +6,7 @@
 /*   By: matnam <matnam@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 12:39:31 by maaliber          #+#    #+#             */
-/*   Updated: 2023/05/14 14:11:01 by matnam           ###   ########.fr       */
+/*   Updated: 2023/05/14 15:17:17 by matnam           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ t_list	*ft_lstlast(t_list *lst)
 	return (lst);
 }
 
-int	*ft_lstsize(t_list *lst)
+int	ft_lstsize(t_list *lst)
 {
 	int	i;
 

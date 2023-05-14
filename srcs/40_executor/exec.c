@@ -12,14 +12,14 @@
 
 #include "minishell.h"
 
-char	**env_to_tab(t_list	*env)
+static char	**env_to_tab(t_list	*env)
 {
 	char	**env_tab;
 	int		i;
 
 	env_tab = malloc(ft_lstsize(data->env) + 1)
 	if (!env_tab)
-		return (error_msg(), NULL);
+		return (error_msg(E_STD, ), NULL);
 	i = 0;
 	while (env)
 	{
@@ -29,7 +29,7 @@ char	**env_to_tab(t_list	*env)
 	return (env_tab);
 }
 
-int		is_builtin(char *name, int proc_idx)
+static int		is_builtin(char *name, int proc_idx)
 {
 	if (ft_strcmp(name, "echo") == 0)
 		return (1);
@@ -44,7 +44,7 @@ int		is_builtin(char *name, int proc_idx)
 	return (0);
 }
 
-int	exec_cmd(t_data *data, int proc_idx, char **env)
+static int	exec_cmd(t_data *data, int proc_idx, char **env)
 {
 	if (is_builtin(data->cmds_tab[proc_idx].attr[0]))
 		exec_builtin(data, proc_idx);

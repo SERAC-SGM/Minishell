@@ -3,16 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   signal.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maaliber <maaliber@student.42.fr>          +#+  +:+       +#+        */
+/*   By: matnam <matnam@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 15:57:15 by maaliber          #+#    #+#             */
-/*   Updated: 2023/05/11 15:33:10 by maaliber         ###   ########.fr       */
+/*   Updated: 2023/05/14 15:07:05 by matnam           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-extern t_sig	g_sig;
 
 void handler(int signo)
 {
@@ -33,7 +31,7 @@ void	init_sig(void)
 /*
 
 */
-void	enable_signal(t_data *data)
+void	enable_signal(void)
 {
 	struct sigaction	act;
 

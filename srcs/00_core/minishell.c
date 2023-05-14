@@ -6,21 +6,13 @@
 /*   By: matnam <matnam@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 14:58:49 by maaliber          #+#    #+#             */
-/*   Updated: 2023/05/13 23:54:55 by matnam           ###   ########.fr       */
+/*   Updated: 2023/05/14 15:14:32 by matnam           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static char	*prompt(void)
-{
-	char	*prompt;
-
-	
-	return (pmt);
-}
-
-void	exec_cmd_line(t_data *data)
+/*void	exec_cmd_line(t_data *data)
 {
 	t_tkn_lst	*lex;
 
@@ -29,7 +21,7 @@ void	exec_cmd_line(t_data *data)
 	parser(data, lex);
 	clear_token_list(&lex);
 	free(data->cmd_line);
-}
+}*/
 
 int	main(int ac, char *av[], char *env[])
 {
@@ -41,10 +33,10 @@ int	main(int ac, char *av[], char *env[])
 	enable_signal();
 	while (1)
 	{
-		reset_cmd(&data);
+		reset_data(&data);
 		data.cmd_line = readline(prompt());
 		exec_cmd_line(&data);
-		waitpid(-1, &data.status, NULL);
+		waitpid(-1, &data.status, 0);
 		if (data.exit == -1)
 			break ;
 	}

@@ -6,7 +6,7 @@
 /*   By: matnam <matnam@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 17:24:22 by maaliber          #+#    #+#             */
-/*   Updated: 2023/05/14 13:21:35 by matnam           ###   ########.fr       */
+/*   Updated: 2023/05/14 15:11:33 by matnam           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,19 @@ void	open_pipe(t_data *data)
 	}
 }
 
+void	close_pipe(t_data *data)
+{
+	int	i;
+
+	i = 0;
+	while (i < data->nb_process - 1)
+	{
+			close(data->fd[2 * i]);
+			close(data->fd[2 * i + 1]);
+		i++;
+	}
+}
+
 void	dup_in_out(int fd_in, int fd_out)
 {
 	dup2(fd_in, STDIN_FILENO);
@@ -39,17 +52,4 @@ void	dup_pipe(t_data *data, int proc_idx)
 		dup_in_out(data->fd[2 * (proc_idx - 1)], data->fd_out);
 	else
 		dup_in_out(data->fd[2 * (proc_idx - 1)], data->fd[2 * proc_idx + 1]);
-}
-
-void	close_pipe(t_data *data)
-{
-	int	i;
-
-	i = 0;
-	while (i < data->nb_process - 1)
-	{
-			close(data->fd[2 * i]);
-			close(data->fd[2 * i + 1]);
-		i++;
-	}
 }

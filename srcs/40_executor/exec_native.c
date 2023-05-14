@@ -12,7 +12,7 @@
 
 #include "minishell.h"
 
-int	set_cmd(t_data *data, int proc_idx)
+static int	set_cmd(t_data *data, int proc_idx)
 {
 	char	*tmp;
 	int		i;
