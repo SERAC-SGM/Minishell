@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   util_ft.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: matnam <matnam@student.42.fr>              +#+  +:+       +#+        */
+/*   By: maaliber <maaliber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 14:18:43 by maaliber          #+#    #+#             */
-/*   Updated: 2023/05/14 19:28:28 by matnam           ###   ########.fr       */
+/*   Updated: 2023/05/15 16:22:12 by maaliber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ int	tab_size(char **tab)
 	i = 0;
 	if (!tab)
 		return (0);
-	while (tab[i++])
-		;
+	while (tab[i])
+		i++;
 	return (i);
 }

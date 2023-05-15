@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: matnam <matnam@student.42.fr>              +#+  +:+       +#+        */
+/*   By: maaliber <maaliber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 14:58:49 by maaliber          #+#    #+#             */
-/*   Updated: 2023/05/14 19:53:14 by matnam           ###   ########.fr       */
+/*   Updated: 2023/05/15 16:38:29 by maaliber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,12 +34,18 @@ int	main(int ac, char *av[], char *env[])
 	while (1)
 	{
 		reset_data(&data);
-		data.cmd_line = readline(prompt());
-		exec_cmd_line(&data);
-		waitpid(-1, &data.status, 0);
-		if (data.exit == -1)
-			break ;
+		data.cmd_line = readline("42mini>");
+		data.token_list = lexer(&data);
+		print_lexer(data.token_list);
+		//parser(data.token_list, &data);
+		//print_cmds(&data);
+		//exec_cmd_line(&data);
+		clear_token_list(&data.token_list);
+		//waitpid(-1, &data.status, 0);
+		//if (data.exit == -1)
+		//	break ;
 	}
+	ft_lstclear(&data.set);
 	ft_lstclear(&data.env);
 	data.status = WEXITSTATUS(data.status);
 	return (data.status);

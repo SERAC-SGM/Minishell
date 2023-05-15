@@ -3,27 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   signal.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: matnam <matnam@student.42.fr>              +#+  +:+       +#+        */
+/*   By: maaliber <maaliber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 15:57:15 by maaliber          #+#    #+#             */
-/*   Updated: 2023/05/14 19:59:48 by matnam           ###   ########.fr       */
+/*   Updated: 2023/05/15 13:33:22 by maaliber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 t_sig	g_sig = { 0, 0, 0, 0 };
-
-// t_sig	init_sig(void)
-// {
-// 	t_sig sig;
-	
-// 	sig.sig_int = 0;
-// 	sig.sig_quit = 0;
-// 	sig.pid = 0;
-// 	sig.exit_status = 0;
-// 	return (sig);
-// }
 
 void handler(int signo)
 {

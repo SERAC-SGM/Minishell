@@ -6,7 +6,7 @@
 /*   By: maaliber <maaliber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 16:54:54 by maaliber          #+#    #+#             */
-/*   Updated: 2023/05/10 17:58:32 by maaliber         ###   ########.fr       */
+/*   Updated: 2023/05/15 14:10:29 by maaliber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ Split string into token with in standard mode input [0]
 • create a token if one or several spaces are identified after expanding content
 • change stored input with the rest of the input
 */
-static t_tkn_lst	*split_input(char **store, char *add)
+t_tkn_lst	*split_input(char **store, char *add)
 {
 	t_tkn_lst	*tkn_list;
 	char		*content;
@@ -86,6 +86,8 @@ t_tkn_lst	*tokenize(char **cmd_line, t_list *env)
 	char		*add;
 	char		*store;
 
+	if (!*cmd_line)
+		return (NULL);
 	if (is_special(*cmd_line))
 		return (special_token(cmd_line));
 	tkn_list = NULL;

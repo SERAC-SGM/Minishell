@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expander.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: matnam <matnam@student.42.fr>              +#+  +:+       +#+        */
+/*   By: maaliber <maaliber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 14:19:34 by maaliber          #+#    #+#             */
-/*   Updated: 2023/05/14 15:08:33 by matnam           ###   ########.fr       */
+/*   Updated: 2023/05/15 16:37:08 by maaliber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,29 +37,28 @@ char	*cpy_word(char *str)
 	return (word);
 }
 
-int	replace_content(char **content, char *sub, int pos)
+void	replace_content(char **content, char *sub, int pos)
 {
-	int		offset;
 	int		l;
 	int		var_l;
 	int		sub_l;
+	int		offset;
 	char	*new;
 
 	if (!*content)
-		return (0);
+		return ;
 	l = ft_strlen(*content);
 	var_l = word_len(&(*content)[pos]);
 	sub_l = ft_strlen(sub);
 	offset = sub_l - var_l;
 	new = ft_calloc(l + offset + 1, sizeof(char));
 	if (!new)
-		return (0);
+		return ;
 	ft_memcpy(new, *content, pos);
 	ft_memcpy(new + pos, sub, sub_l);
 	ft_memcpy(new + pos + sub_l, *content + pos + var_l, l - pos - var_l);
 	free(*content);
 	*content = new;
-	return (offset);
 }
 
 /*
@@ -81,7 +80,7 @@ void	expand(char **content, t_list *env)
 		{
 			to_find = cpy_word(*content + i + 1);
 			val = get_var_value(to_find, env);
-			i += replace_content(content, val, i);
+			replace_content(content, val, i);
 			free(to_find);
 		}
 		else

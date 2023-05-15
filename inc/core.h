@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   core.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: matnam <matnam@student.42.fr>              +#+  +:+       +#+        */
+/*   By: maaliber <maaliber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 14:48:27 by matnam            #+#    #+#             */
-/*   Updated: 2023/05/14 19:59:39 by matnam           ###   ########.fr       */
+/*   Updated: 2023/05/15 14:29:53 by maaliber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,9 @@ void	ft_lstclear(t_list **lst);
 //print_struct.c
 void	print_lexer(t_tkn_lst *lex);
 void	print_env(t_list *env);
+void	print_tab(char **tab);
+void	print_cmd(t_cmd *cmd);
+void	print_cmds(t_data *data);
 //util.c
 void	trim_char(char **str, char c);
 char	*ft_strjoin_dup1(char *s1, char *s2);

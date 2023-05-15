@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mshell_types.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: matnam <matnam@student.42.fr>              +#+  +:+       +#+        */
+/*   By: maaliber <maaliber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 13:38:57 by maaliber          #+#    #+#             */
-/*   Updated: 2023/05/14 19:39:29 by matnam           ###   ########.fr       */
+/*   Updated: 2023/05/15 14:27:46 by maaliber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,10 +79,10 @@ typedef struct s_cmd
 	char	*infile;
 	int		fd_in;
 	int		here_doc;
+	char	*delimiter;
 	char	*outfile;
 	int		fd_out;
 	int		append;
-	char	*delimiter;
 }			t_cmd;
 
 /*

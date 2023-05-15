@@ -6,7 +6,7 @@
 /*   By: maaliber <maaliber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 19:04:17 by maaliber          #+#    #+#             */
-/*   Updated: 2023/05/10 17:57:05 by maaliber         ###   ########.fr       */
+/*   Updated: 2023/05/15 14:08:30 by maaliber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ char	*standard_mode(char **str, t_list *env)
 			ex = 1;
 		i++;
 	}
-	if (!ft_isspace((*str)[i])
+	if ((*str)[i] && !ft_isspace((*str)[i])
 			&& !((*str)[i] == '\'' && ft_strchr((*str) + i + 1, '\''))
 			&& !((*str)[i] == '\"' && ft_strchr((*str) + i + 1, '\"')))
 		i++;

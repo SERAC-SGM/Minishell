@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_ft.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: matnam <matnam@student.42.fr>              +#+  +:+       +#+        */
+/*   By: maaliber <maaliber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 14:51:50 by maaliber          #+#    #+#             */
-/*   Updated: 2023/05/14 19:25:18 by matnam           ###   ########.fr       */
+/*   Updated: 2023/05/15 15:56:52 by maaliber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,7 @@ void	init_data(t_data *data, char *env[])
 	ft_bzero(data, sizeof(t_data));
 	while (i < OPEN_MAX)
 		data->fd[i++] = - 1;
+	data->process_nb = 1;
 	init_env(data, env);
 	return ;
 }
@@ -85,7 +86,7 @@ void	reset_data(t_data *data)
 	free(data->cmd_line);
 	data->cmd_line = NULL;
 	clear_token_list(&data->token_list);
-	while (data->cmds_tab[i].attr)
+	while (data->cmds_tab[i].process_index >= 0)
 	{
 		free(data->cmds_tab[i].attr);
 		init_cmd(&data->cmds_tab[i]);
