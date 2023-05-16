@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   input_mode.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maaliber <maaliber@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lletourn <lletourn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 19:04:17 by maaliber          #+#    #+#             */
-/*   Updated: 2023/05/15 14:08:30 by maaliber         ###   ########.fr       */
+/*   Updated: 2023/05/16 14:17:06 by lletourn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@ char	*standard_mode(char **str, t_list *env)
 	int		ex;
 	int		i;
 
-	(void)env;
 	ex = 0;
 	i = 0;
 	while ((*str)[i] && !ft_isspace((*str)[i]) && !is_special((*str) + i)
