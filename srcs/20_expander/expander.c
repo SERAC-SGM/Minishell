@@ -6,7 +6,7 @@
 /*   By: lletourn <lletourn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 14:19:34 by maaliber          #+#    #+#             */
-/*   Updated: 2023/05/16 14:22:00 by lletourn         ###   ########.fr       */
+/*   Updated: 2023/05/16 16:03:20 by lletourn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,8 +80,6 @@ void	expand(char **content, t_list *env)
 		{
 			to_find = cpy_word(*content + i + 1);
 			val = get_var_value(to_find, env);
-			if (!val)
-				
 			replace_content(content, val, i);
 			free(to_find);
 		}

@@ -128,9 +128,6 @@ SRCS += prompt.c
 SRCS += signal_actions.c
 SRCS += signal.c
 
-#05_history
-SRCS += history.c
-
 #06_error
 SRCS += error_manager.c
 
