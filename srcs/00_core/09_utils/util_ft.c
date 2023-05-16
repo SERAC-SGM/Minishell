@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   util_ft.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maaliber <maaliber@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lletourn <lletourn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 14:18:43 by maaliber          #+#    #+#             */
-/*   Updated: 2023/05/15 16:22:12 by maaliber         ###   ########.fr       */
+/*   Updated: 2023/05/16 13:32:57 by lletourn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ char	*ft_strjoin_dup1(char *s1, char *s2)
 int	tab_size(char **tab)
 {
 	int	i;
-	
+
 	i = 0;
 	if (!tab)
 		return (0);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: matnam <matnam@student.42.fr>              +#+  +:+       +#+        */
+/*   By: lletourn <lletourn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 11:49:12 by lletourn          #+#    #+#             */
-/*   Updated: 2023/05/14 19:40:44 by matnam           ###   ########.fr       */
+/*   Updated: 2023/05/16 13:37:32 by lletourn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int	cd(char **attr)
 {
 	int	arg_nb;
-	
+
 	arg_nb = tab_size(attr) - 1;
 	if (arg_nb < 1)
 		return (error_msg(E_TOO_FEW_ARG, "cd", NULL), 0);

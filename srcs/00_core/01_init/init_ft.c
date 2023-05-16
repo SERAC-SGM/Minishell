@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_ft.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maaliber <maaliber@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lletourn <lletourn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 14:51:50 by maaliber          #+#    #+#             */
-/*   Updated: 2023/05/15 15:56:52 by maaliber         ###   ########.fr       */
+/*   Updated: 2023/05/16 13:31:32 by lletourn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ void	init_data(t_data *data, char *env[])
 	i = 0;
 	ft_bzero(data, sizeof(t_data));
 	while (i < OPEN_MAX)
-		data->fd[i++] = - 1;
+		data->fd[i++] = -1;
 	data->process_nb = 1;
 	init_env(data, env);
 	return ;
@@ -94,5 +94,5 @@ void	reset_data(t_data *data)
 	}
 	i = 0;
 	while (i < OPEN_MAX)
-		data->fd[i++] = - 1;
+		data->fd[i++] = -1;
 }

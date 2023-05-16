@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   token.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maaliber <maaliber@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lletourn <lletourn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 16:54:54 by maaliber          #+#    #+#             */
-/*   Updated: 2023/05/15 14:10:29 by maaliber         ###   ########.fr       */
+/*   Updated: 2023/05/16 13:36:56 by lletourn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,20 @@ t_tkn_lst	*split_input(char **store, char *add)
 	return (tkn_list);
 }
 
+void	tokenize_aux(char **cmd_line, t_list *env, char **add, char **store)
+{
+	if (set_mode(*cmd_line) == 0)
+	{
+		*add = standard_mode(cmd_line, env);
+		add_back_token(&tkn_list, split_input(&store, *add));
+		free(*add);
+	}
+	else if (set_mode(*cmd_line) == 1)
+		*store = ft_strjoin_free(store, single_quote_mode(cmd_line));
+	else if (set_mode(*cmd_line) == 2)
+		*store = ft_strjoin_free(*store, double_quote_mode(cmd_line, env));
+}
+
 /*
 Create token with command line with differents cases :
 • if start with a special character : |, <, <<, >, >>
@@ -93,18 +107,7 @@ t_tkn_lst	*tokenize(char **cmd_line, t_list *env)
 	tkn_list = NULL;
 	store = NULL;
 	while (!ft_isspace(**cmd_line) && !is_special(*cmd_line))
-	{
-		if (set_mode(*cmd_line) == 0)
-		{
-			add = standard_mode(cmd_line, env);
-			add_back_token(&tkn_list, split_input(&store, add));
-			free(add);
-		}
-		else if (set_mode(*cmd_line) == 1)
-			store = ft_strjoin_free(store, single_quote_mode(cmd_line));
-		else if (set_mode(*cmd_line) == 2)
-			store = ft_strjoin_free(store, double_quote_mode(cmd_line, env));
-	}
+		tokenize_aux(cmd_line, env, &add, &store);
 	if (store)
 		add_back_token(&tkn_list, new_token(store, 0));
 	return (tkn_list);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tester.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maaliber <maaliber@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lletourn <lletourn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 13:35:39 by maaliber          #+#    #+#             */
-/*   Updated: 2023/05/11 14:57:01 by maaliber         ###   ########.fr       */
+/*   Updated: 2023/05/16 13:37:24 by lletourn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,10 +41,10 @@ int	main(int ac, char *av[], char *env[])
 {
 	t_data		data;
 	t_tkn_lst	*lex;
+
 	(void)ac;
 	(void)av;
 	(void)env;
-
 	ft_bzero(&data, sizeof(t_data));
 	init_env(&data, env);
 	data.cmd_line = get_next_line(0);

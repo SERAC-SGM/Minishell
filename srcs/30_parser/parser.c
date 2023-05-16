@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maaliber <maaliber@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lletourn <lletourn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 14:19:32 by maaliber          #+#    #+#             */
-/*   Updated: 2023/05/15 16:41:08 by maaliber         ###   ########.fr       */
+/*   Updated: 2023/05/16 13:39:10 by lletourn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ static t_tkn_lst	*set_command(t_tkn_lst *token, t_data *data, int proc_idx)
 	{
 		data->cmds_tab[proc_idx].attr = ft_calloc(size + 1, sizeof(char *));
 		if (!data->cmds_tab[proc_idx].attr)
-			return(error_msg(E_MEM, NULL, data), NULL);
+			return (error_msg(E_MEM, NULL, data), NULL);
 	}
 	i = tab_size(data->cmds_tab[proc_idx].attr);
 	data->cmds_tab[proc_idx].attr[i] = token->content;

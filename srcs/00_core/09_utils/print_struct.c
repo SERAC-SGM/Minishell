@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print_struct.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maaliber <maaliber@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lletourn <lletourn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 14:56:50 by maaliber          #+#    #+#             */
-/*   Updated: 2023/05/15 16:00:42 by maaliber         ###   ########.fr       */
+/*   Updated: 2023/05/16 13:39:19 by lletourn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,10 @@ void	print_lexer(t_tkn_lst *lex)
 
 void	print_tab(char **tab)
 {
-	int i;
+	int	i;
 
 	printf("Name:%s\n", tab[0]);
-	i = 1;	
+	i = 1;
 	printf("Args:\n");
 	while (tab[i])
 		printf("     %s\n", tab[i++]);
@@ -47,7 +47,7 @@ void	print_cmd(t_cmd *cmd)
 
 void	print_cmds(t_data *data)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (i < data->process_nb)
