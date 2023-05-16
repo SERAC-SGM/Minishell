@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   token.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maaliber <maaliber@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lletourn <lletourn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 16:54:54 by maaliber          #+#    #+#             */
-/*   Updated: 2023/05/15 14:10:29 by maaliber         ###   ########.fr       */
+/*   Updated: 2023/05/16 14:24:30 by lletourn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ static t_tkn_lst	*special_token(char **str)
 {
 	int			len;
 
+	if (!*str || **str == '\0')
+		return (new_token(0, END));
 	len = ft_strlen(*str);
 	if (len >= 2 && !ft_strncmp(*str, "<<", 2))
 		return (*str += 2, new_token(0, HERE));
@@ -35,7 +37,7 @@ static t_tkn_lst	*special_token(char **str)
 		return (*str += 1, new_token(0, RD_OUT));
 	if (**str == '|')
 		return (*str += 1, new_token(0, PIPE));
-	if (**str == '\n' || **str == '\0')
+	if (**str == '\n')
 		return (*str += 1, new_token(0, END));
 	return (NULL);
 }
@@ -52,6 +54,8 @@ t_tkn_lst	*split_input(char **store, char *add)
 	char		*content;
 	int			wrd_l;
 
+	if (!*add)
+		return (new_token(0, END));
 	tkn_list = NULL;
 	while (*add)
 	{
@@ -74,11 +78,11 @@ t_tkn_lst	*split_input(char **store, char *add)
 }
 
 /*
-Create token with command line with differents cases :
-• if start with a special character : |, <, <<, >, >>
-• if is a standard entry : mode 0 
-• if is in between single quote ['] : mode 1 
-• if is in between double quote ["] : mode 2
+Creates token with command line with differents cases :
+• if it starts with a special character : |, <, <<, >, >>
+• if it's a standard entry : mode 0
+• if it's between single quote ['] : mode 1
+• if it's between double quote ["] : mode 2
 */
 t_tkn_lst	*tokenize(char **cmd_line, t_list *env)
 {
@@ -86,8 +90,6 @@ t_tkn_lst	*tokenize(char **cmd_line, t_list *env)
 	char		*add;
 	char		*store;
 
-	if (!*cmd_line)
-		return (NULL);
 	if (is_special(*cmd_line))
 		return (special_token(cmd_line));
 	tkn_list = NULL;

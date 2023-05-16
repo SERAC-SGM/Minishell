@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ex_native.c                                        :+:      :+:    :+:   */
+/*   exec_native.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maaliber <maaliber@student.42.fr>              +#+  +:+       +#+        */
+/*   By: lletourn <lletourn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/08 16:09:28 by maaliber          #+#    #+#             */
-/*   Updated: 2023/05/13 17:39:13 by matnam           ###   ########.fr       */
+/*   Created: 2023/05/16 13:38:11 by lletourn          #+#    #+#             */
+/*   Updated: 2023/05/16 13:38:24 by lletourn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,9 @@ void	exec_native(t_data *data, int proc_idx, char **env)
 	if (data->process_nb != 1)
 		close_pipe(data);
 	if ((proc_idx == 0 && data->cmds_tab[proc_idx].fd_in < 0)
-		|| (proc_idx == data->process_nb - 1 && data->cmds_tab[proc_idx].fd_out < 0))
+		|| (proc_idx == data->process_nb - 1 && data->cmds_tab[proc_idx].fd_out
+			< 0))
 		exit_error(E_NOMSG, 0, data);
-	execve(data->cmds_tab[proc_idx].attr[0], data->cmds_tab[proc_idx].attr, env);
+	execve(data->cmds_tab[proc_idx].attr[0], data->cmds_tab[proc_idx].attr,
+		env);
 }

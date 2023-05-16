@@ -6,7 +6,7 @@
 /*   By: maaliber <maaliber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 13:38:57 by maaliber          #+#    #+#             */
-/*   Updated: 2023/05/16 11:58:28 by maaliber         ###   ########.fr       */
+/*   Updated: 2023/05/16 15:37:59 by maaliber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,13 +127,13 @@ typedef struct s_data
 /*
 Global signal structure
 */
-typedef struct	s_sig
+typedef struct s_sig
 {
 	int				sig_int;
 	int				sig_quit;
 	int				last_exit_status;
 	int				exit;
 	pid_t			pid;
-}	t_sig;
+}					t_sig;
 
 #endif

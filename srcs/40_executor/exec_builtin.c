@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ex_builtin.c                                       :+:      :+:    :+:   */
+/*   exec_builtin.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maaliber <maaliber@student.42.fr>              +#+  +:+       +#+        */
+/*   By: lletourn <lletourn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/13 17:38:09 by maaliber            #+#    #+#             */
-/*   Updated: 2023/05/13 17:38:10 by maaliber           ###   ########.fr       */
+/*   Created: 2023/05/16 13:38:36 by lletourn          #+#    #+#             */
+/*   Updated: 2023/05/16 13:38:41 by lletourn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int		exec_builtin(t_data *data, int proc_idx)
+int	exec_builtin(t_data *data, int proc_idx)
 {
 	int		ret;
 

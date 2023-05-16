@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maaliber <maaliber@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lletourn <lletourn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 14:57:51 by maaliber          #+#    #+#             */
-/*   Updated: 2023/05/15 14:36:51 by maaliber         ###   ########.fr       */
+/*   Updated: 2023/05/16 14:28:57 by lletourn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ t_tkn_lst	*lexer(t_data *data)
 
 	tkn_lst = NULL;
 	if (!data->cmd_line)
-		return (NULL);
+		return (new_token(0, END));
 	cmd_l = data->cmd_line;
 	while (*cmd_l)
 	{
@@ -41,6 +41,7 @@ t_tkn_lst	*lexer(t_data *data)
 			return (clear_token_list(&tkn_lst), NULL);
 		add_back_token(&tkn_lst, token);
 	}
-	add_back_token(&tkn_lst, new_token(0, END));
+	if (!tkn_lst || last_token(tkn_lst)->type != END)
+		add_back_token(&tkn_lst, new_token(0, END));
 	return (tkn_lst);
 }

@@ -6,7 +6,7 @@
 /*   By: maaliber <maaliber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 14:48:27 by matnam            #+#    #+#             */
-/*   Updated: 2023/05/16 12:21:53 by maaliber         ###   ########.fr       */
+/*   Updated: 2023/05/16 15:37:27 by maaliber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 /////////////
 // 01_init //
 /////////////
+
 void	init_env(t_data *data, char *env[]);
 void	init_cmd(t_cmd *cmd);
 void	init_data(t_data *data, char *env[]);
@@ -26,12 +27,14 @@ void	reset_data(t_data *data);
 ////////////
 // 02_env //
 ////////////
+
 char	*get_var_value(char *name, t_list *env);
 void	set_env_var(char *name, char *val, t_list *env);
 
 ///////////////
 // 03_prompt //
 ///////////////
+
 char	*prompt(void);
 
 ////////////////
@@ -54,6 +57,7 @@ void	enable_signal(void);
 //////////////
 // 06_error //
 //////////////
+
 void	error_msg(int err_id, char *item, t_data *data);
 void	exit_error(int err_id, char *item, t_data *data);
 
