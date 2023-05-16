@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signal_actions.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maaliber <maaliber@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lletourn <lletourn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 15:40:53 by maaliber          #+#    #+#             */
-/*   Updated: 2023/05/16 12:27:06 by maaliber         ###   ########.fr       */
+/*   Updated: 2023/05/16 15:59:13 by lletourn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,13 @@ void	sig_int(void)
 {
 	if (g_sig.pid == 0) //parent_process
 	{
-		g_sig.exit = 1;
+		//g_sig.exit = 1;
+		exit(0);
 	}
 	else //child_process
 	{
-		g_sig.exit = 1;
+		// g_sig.exit = 1;
+		exit(0);
 	}
 	g_sig.sig_int = 1;
 }

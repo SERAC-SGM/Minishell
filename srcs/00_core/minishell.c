@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maaliber <maaliber@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lletourn <lletourn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 14:58:49 by maaliber          #+#    #+#             */
-/*   Updated: 2023/05/16 12:53:41 by maaliber         ###   ########.fr       */
+/*   Updated: 2023/05/16 15:57:11 by lletourn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,12 +33,14 @@ int	main(int ac, char *av[], char *env[])
 	i = 0;
 	init_data(&data, env);
 	enable_signal();
-	while (i++ < 3)
+	while (i++ < 8)
 	{
-		ft_putstr_fd("42mini>", 0);
 		reset_data(&data);
 		if (isatty(STDIN_FILENO))
+		{
 			data.cmd_line = readline("42mini>");
+			add_history(data.cmd_line);
+		}
 		else
 			data.cmd_line = get_next_line(STDIN_FILENO);
 		data.token_list = lexer(&data);
@@ -51,6 +53,7 @@ int	main(int ac, char *av[], char *env[])
 		if (g_sig.exit == 1)
 			break ;
 	}
+	rl_clear_history();
 	clear_data(&data);
 	data.status = WEXITSTATUS(data.status);
 	return (data.status);
