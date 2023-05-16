@@ -6,7 +6,7 @@
 /*   By: maaliber <maaliber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 14:58:49 by maaliber          #+#    #+#             */
-/*   Updated: 2023/05/16 12:53:41 by maaliber         ###   ########.fr       */
+/*   Updated: 2023/05/16 15:46:21 by maaliber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,8 @@ int	main(int ac, char *av[], char *env[])
 	i = 0;
 	init_data(&data, env);
 	enable_signal();
-	while (i++ < 3)
+	while (i++ < 1)
 	{
-		ft_putstr_fd("42mini>", 0);
 		reset_data(&data);
 		if (isatty(STDIN_FILENO))
 			data.cmd_line = readline("42mini>");

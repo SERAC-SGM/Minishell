@@ -6,7 +6,7 @@
 /*   By: maaliber <maaliber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 14:51:50 by maaliber          #+#    #+#             */
-/*   Updated: 2023/05/16 15:35:32 by maaliber         ###   ########.fr       */
+/*   Updated: 2023/05/16 15:48:34 by maaliber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,23 @@ void	init_env(t_data *data, char *env[])
 }
 
 /*
+Returns the size of the command (name + optional arguments).
+*/
+char	**get_envpath(t_list *env)
+{
+	char	**path;
+
+	while (env)
+	{
+		if (!ft_strncmp("PATH", env->line, 4))
+			break ;
+		env = env->next;
+	}
+	path = ft_split(env->line + 5, ':');
+	return (path);
+}
+
+/*
 Initializes a command structure.
 */
 void	init_cmd(t_cmd *cmd)
@@ -70,6 +87,7 @@ void	init_data(t_data *data, char *env[])
 		data->fd[i++] = -1;
 	data->process_nb = 1;
 	init_env(data, env);
+	data->env_path = get_envpath(data->env);
 	return ;
 }
 

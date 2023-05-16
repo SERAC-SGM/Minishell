@@ -3,31 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lletourn <lletourn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: maaliber <maaliber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 14:19:32 by maaliber          #+#    #+#             */
-/*   Updated: 2023/05/16 13:39:10 by lletourn         ###   ########.fr       */
+/*   Updated: 2023/05/16 15:48:20 by maaliber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-/*
-Returns the size of the command (name + optional arguments).
-*/
-char	**get_envpath(t_list *env)
-{
-	char	**path;
-
-	while (env)
-	{
-		if (!ft_strncmp("PATH", env->line, 4))
-			break ;
-		env = env->next;
-	}
-	path = ft_split(env->line + 5, ':');
-	return (path);
-}
 
 /*
 Returns the size of the command (name + optional arguments).
@@ -87,7 +70,6 @@ void	parser(t_tkn_lst *token, t_data *data)
 	proc_idx = 0;
 	if (token->type == PIPE)
 		error_msg(E_TOKEN, NULL, data);
-	data->env_path = get_envpath(data->env);
 	init_cmd(&data->cmds_tab[proc_idx]);
 	while (token->type != END)
 	{
