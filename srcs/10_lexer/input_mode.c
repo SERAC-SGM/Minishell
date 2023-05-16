@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   input_mode.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lletourn <lletourn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: maaliber <maaliber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 19:04:17 by maaliber          #+#    #+#             */
-/*   Updated: 2023/05/16 14:17:06 by lletourn         ###   ########.fr       */
+/*   Updated: 2023/05/16 17:58:23 by maaliber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ Create standard token :
 • if it's in between single quote ['] : mode 1
 • if it's in between double quote ["] : mode 2
 */
-char	*standard_mode(char **str, t_list *env)
+char	*standard_mode(char **str, t_list *env, t_list *set)
 {
 	char	*content;
 	int		ex;
@@ -56,7 +56,7 @@ char	*standard_mode(char **str, t_list *env)
 		i++;
 	content = ft_substr(*str, 0, i);
 	if (ex)
-		expand(&content, env);
+		expand(&content, env, set);
 	*str += i;
 	return (content);
 }
@@ -89,7 +89,7 @@ Create double quote token :
 • if is in between single quote ['] : mode 1 
 • if is in between double quote ["] : mode 2
 */
-char	*double_quote_mode(char **str, t_list *env)
+char	*double_quote_mode(char **str, t_list *env, t_list *set)
 {
 	char	*content;
 	int		ex;
@@ -107,7 +107,7 @@ char	*double_quote_mode(char **str, t_list *env)
 	content = ft_substr(*str, 0, i);
 	trim_char(&content, '\"');
 	if (ex)
-		expand(&content, env);
+		expand(&content, env, set);
 	*str += i + 1;
 	return (content);
 }

@@ -6,7 +6,7 @@
 /*   By: maaliber <maaliber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 14:56:50 by maaliber          #+#    #+#             */
-/*   Updated: 2023/05/16 15:42:04 by maaliber         ###   ########.fr       */
+/*   Updated: 2023/05/16 18:33:51 by maaliber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,13 +30,15 @@ void	print_tab(char **tab)
 		return (printf("No command\n"), (void)0);
 	printf("Name:%s\n", tab[0]);
 	i = 1;
-	printf("Args:");
+	printf("Args:\n");
 	while (tab[i])
-		printf("     %s\n", tab[i++]);
+		printf("  ->%s\n", tab[i++]);
 }
 
 void	print_cmd(t_cmd *cmd)
 {
+	if (!cmd)
+		return (printf("Error Parsing\n"), (void)0);
 	printf("\n-----------\nIndex:[%d]\n-----------\n", cmd->process_index);
 	printf("Args_count:%d\n", cmd->arg_count);
 	print_tab(cmd->attr);

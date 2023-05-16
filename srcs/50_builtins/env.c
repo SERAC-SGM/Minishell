@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lletourn <lletourn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: maaliber <maaliber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 15:30:05 by lletourn          #+#    #+#             */
-/*   Updated: 2023/05/16 13:37:38 by lletourn         ###   ########.fr       */
+/*   Updated: 2023/05/16 17:29:01 by maaliber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	env(t_list *env, char **attr)
 	int	arg_nb;
 
 	arg_nb = tab_size(attr) - 1;
-	if (arg_nb < 1)
+	if (arg_nb > 1)
 		return (error_msg(E_TOO_MANY_ARG, "env", NULL), (void)0);
 	while (env)
 	{

@@ -6,7 +6,7 @@
 /*   By: maaliber <maaliber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/27 12:43:34 by maaliber          #+#    #+#             */
-/*   Updated: 2023/05/11 15:51:48 by maaliber         ###   ########.fr       */
+/*   Updated: 2023/05/16 17:58:40 by maaliber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,11 +31,11 @@ t_tkn_lst	*last_token(t_tkn_lst *tk_list);
 void		add_back_token(t_tkn_lst **tk_list, t_tkn_lst *token);
 void		del1_token(t_tkn_lst *token);
 void		clear_token_list(t_tkn_lst **tk_list);
-char		*standard_mode(char **str, t_list *env);
+char		*standard_mode(char **str, t_list *env, t_list *set);
 char		*single_quote_mode(char **str);
-char		*double_quote_mode(char **str, t_list *env);
+char		*double_quote_mode(char **str, t_list *env, t_list *set);
 
-t_tkn_lst	*tokenize(char **cmd_line, t_list *env);
+t_tkn_lst	*tokenize(char **cmd_line, t_list *env, t_list *set);
 t_tkn_lst	*lexer(t_data *data);
 
 #endif

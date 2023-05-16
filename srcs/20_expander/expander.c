@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expander.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lletourn <lletourn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: maaliber <maaliber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 14:19:34 by maaliber          #+#    #+#             */
-/*   Updated: 2023/05/16 16:03:20 by lletourn         ###   ########.fr       */
+/*   Updated: 2023/05/16 17:56:28 by maaliber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ void	replace_content(char **content, char *sub, int pos)
 Expand variable followed by $ in format by the corresponding value in env
 • $ is not iterpreted when into single quote
 */
-void	expand(char **content, t_list *env)
+void	expand(char **content, t_list *env, t_list *set)
 {
 	char	*to_find;
 	char	*val;
@@ -80,6 +80,8 @@ void	expand(char **content, t_list *env)
 		{
 			to_find = cpy_word(*content + i + 1);
 			val = get_var_value(to_find, env);
+			if (!val)
+				val = get_var_value(to_find, set);
 			replace_content(content, val, i);
 			free(to_find);
 		}

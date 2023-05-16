@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   env_ft.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lletourn <lletourn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: maaliber <maaliber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 12:18:00 by maaliber          #+#    #+#             */
-/*   Updated: 2023/05/10 12:31:47 by lletourn         ###   ########.fr       */
+/*   Updated: 2023/05/16 17:49:31 by maaliber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 /*
-Get environment vaiable value
+Get environment variable value
 */
 char	*get_var_value(char *name, t_list *env)
 {

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lletourn <lletourn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: maaliber <maaliber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 13:38:49 by lletourn          #+#    #+#             */
-/*   Updated: 2023/05/16 13:39:02 by lletourn         ###   ########.fr       */
+/*   Updated: 2023/05/16 18:32:00 by maaliber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,8 @@ static int	is_builtin(char *name)
 	if (ft_strcmp(name, "env") == 0)
 		return (1);
 	if (ft_strcmp(name, "export") == 0)
+		return (1);
+	if (ft_strcmp(name, "unset") == 0)
 		return (1);
 	return (0);
 }

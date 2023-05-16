@@ -6,7 +6,7 @@
 /*   By: maaliber <maaliber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 14:51:50 by maaliber          #+#    #+#             */
-/*   Updated: 2023/05/16 15:48:34 by maaliber         ###   ########.fr       */
+/*   Updated: 2023/05/16 17:18:12 by maaliber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,6 @@ void	init_data(t_data *data, char *env[])
 		data->fd[i++] = -1;
 	data->process_nb = 1;
 	init_env(data, env);
-	data->env_path = get_envpath(data->env);
 	return ;
 }
 
@@ -103,6 +102,8 @@ void	reset_data(t_data *data)
 	i = 0;
 	free(data->cmd_line);
 	data->cmd_line = NULL;
+	free_tab(data->env_path);
+	data->env_path = get_envpath(data->env);
 	clear_token_list(&data->token_list);
 	while (data->cmds_tab[i].process_index >= 0)
 	{

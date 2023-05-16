@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   files_manager.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: matnam <matnam@student.42.fr>              +#+  +:+       +#+        */
+/*   By: maaliber <maaliber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/06 12:07:41 by lletourn          #+#    #+#             */
-/*   Updated: 2023/05/14 17:58:13 by matnam           ###   ########.fr       */
+/*   Updated: 2023/05/16 17:25:40 by maaliber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 t_tkn_lst	*redirection(t_tkn_lst *token, t_cmd *cmd)
 {
 	if ((!token->next->content))
-		error_msg(E_TOKEN, NULL, NULL);
+		return (error_msg(E_TOKEN, NULL, NULL), last_token(token));
 	if (token->type == RD_IN)
 		cmd->infile = token->next->content;
 	else if (token->type == HERE)

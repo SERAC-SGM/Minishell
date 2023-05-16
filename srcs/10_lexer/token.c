@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   token.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lletourn <lletourn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: maaliber <maaliber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 16:54:54 by maaliber          #+#    #+#             */
-/*   Updated: 2023/05/16 14:24:30 by lletourn         ###   ########.fr       */
+/*   Updated: 2023/05/16 17:56:14 by maaliber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ Creates token with command line with differents cases :
 • if it's between single quote ['] : mode 1
 • if it's between double quote ["] : mode 2
 */
-t_tkn_lst	*tokenize(char **cmd_line, t_list *env)
+t_tkn_lst	*tokenize(char **cmd_line, t_list *env, t_list *set)
 {
 	t_tkn_lst	*tkn_list;
 	char		*add;
@@ -98,14 +98,14 @@ t_tkn_lst	*tokenize(char **cmd_line, t_list *env)
 	{
 		if (set_mode(*cmd_line) == 0)
 		{
-			add = standard_mode(cmd_line, env);
+			add = standard_mode(cmd_line, env, set);
 			add_back_token(&tkn_list, split_input(&store, add));
 			free(add);
 		}
 		else if (set_mode(*cmd_line) == 1)
 			store = ft_strjoin_free(store, single_quote_mode(cmd_line));
 		else if (set_mode(*cmd_line) == 2)
-			store = ft_strjoin_free(store, double_quote_mode(cmd_line, env));
+			store = ft_strjoin_free(store, double_quote_mode(cmd_line, env, set));
 	}
 	if (store)
 		add_back_token(&tkn_list, new_token(store, 0));
