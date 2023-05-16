@@ -6,7 +6,7 @@
 /*   By: maaliber <maaliber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 14:48:27 by matnam            #+#    #+#             */
-/*   Updated: 2023/05/15 14:29:53 by maaliber         ###   ########.fr       */
+/*   Updated: 2023/05/16 12:21:53 by maaliber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ void	exit_error(int err_id, char *item, t_data *data);
 /////////////
 // 07_free //
 /////////////
-void	free_data(t_data *data);
+void	clear_data(t_data *data);
 
 //////////////
 // 09_utils //

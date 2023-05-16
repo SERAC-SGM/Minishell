@@ -20,7 +20,7 @@ int		exec_builtin(t_data *data, int proc_idx)
 	if (ft_strcmp(data->cmds_tab[proc_idx].attr[0], "echo") == 0)
 		ret = echo(data->cmds_tab[proc_idx].attr);
 	if (ft_strcmp(data->cmds_tab[proc_idx].attr[0], "cd") == 0)
-		ret = cd(data->cmds_tab[proc_idx].attr);
+		ret = cd(data->cmds_tab[proc_idx].attr, data);
 	if (ft_strcmp(data->cmds_tab[proc_idx].attr[0], "pwd") == 0)
 		ret = pwd();
 	if (ft_strcmp(data->cmds_tab[proc_idx].attr[0], "env") == 0)

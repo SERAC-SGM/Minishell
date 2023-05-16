@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error_manager.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: matnam <matnam@student.42.fr>              +#+  +:+       +#+        */
+/*   By: maaliber <maaliber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 14:57:22 by maaliber          #+#    #+#             */
-/*   Updated: 2023/05/14 19:39:53 by matnam           ###   ########.fr       */
+/*   Updated: 2023/05/16 12:22:19 by maaliber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ struct s_errdesc
 	{E_PERM, ": permission denied\n"},
 	{E_ARG, "invalid number of arguments\n"},
 	{E_TOO_FEW_ARG, "invalid number of arguments\n"},
-	{E_TOO_MANY_ARG, "invalid number of arguments\n"},
+	{E_TOO_MANY_ARG, ": too many arguments\n"},
 	{E_PIPE, "pipe\n"},
 	{E_FORK, "fork\n"},
 	{E_ENV, "environment\n"},
@@ -66,6 +66,6 @@ void	exit_error(int err_id, char *item, t_data *data)
 		ft_putstr_fd(err_msg, 2);
 		free(err_msg);
 	}
-	free_data(data);
+	clear_data(data);
 	exit(1);
 }

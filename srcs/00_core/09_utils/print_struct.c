@@ -6,7 +6,7 @@
 /*   By: maaliber <maaliber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 14:56:50 by maaliber          #+#    #+#             */
-/*   Updated: 2023/05/15 16:00:42 by maaliber         ###   ########.fr       */
+/*   Updated: 2023/05/16 11:32:17 by maaliber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	print_tab(char **tab)
 void	print_cmd(t_cmd *cmd)
 {
 	printf("\n-----------\nIndex:[%d]\n-----------\n", cmd->process_index);
-	printf("Args_count:%d\n", cmd->arg_count);
+	printf("Args_count:%d", cmd->arg_count);
 	print_tab(cmd->attr);
 	printf("Infile:%s\n", cmd->infile);
 	printf("Here_doc:%d\n", cmd->here_doc);

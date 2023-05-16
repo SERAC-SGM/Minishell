@@ -78,12 +78,14 @@ int	exec_cmd_line(t_data *data)
 		else
 		{
 			open_pipe(data);
-			dup_fds(data, proc_idx);
 			g_sig.pid = fork();
 			if (g_sig.pid == -1)
 				exit_error(E_FORK, 0, data);
 			if (g_sig.pid == 0)
+			{
+				dup_fds(data, proc_idx);
 				exec_cmd(data, proc_idx, env);
+			}
 		}
 		proc_idx++;
 	}

@@ -6,7 +6,7 @@
 /*   By: maaliber <maaliber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 14:58:49 by maaliber          #+#    #+#             */
-/*   Updated: 2023/05/15 16:38:29 by maaliber         ###   ########.fr       */
+/*   Updated: 2023/05/16 12:53:41 by maaliber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,27 +26,32 @@
 int	main(int ac, char *av[], char *env[])
 {
 	t_data	data;
+	int	i;
 
 	(void)ac;
 	(void)av;
+	i = 0;
 	init_data(&data, env);
 	enable_signal();
-	while (1)
+	while (i++ < 3)
 	{
+		ft_putstr_fd("42mini>", 0);
 		reset_data(&data);
-		data.cmd_line = readline("42mini>");
+		if (isatty(STDIN_FILENO))
+			data.cmd_line = readline("42mini>");
+		else
+			data.cmd_line = get_next_line(STDIN_FILENO);
 		data.token_list = lexer(&data);
 		print_lexer(data.token_list);
-		//parser(data.token_list, &data);
-		//print_cmds(&data);
+		parser(data.token_list, &data);
+		print_cmds(&data);
 		//exec_cmd_line(&data);
 		clear_token_list(&data.token_list);
 		//waitpid(-1, &data.status, 0);
-		//if (data.exit == -1)
-		//	break ;
+		if (g_sig.exit == 1)
+			break ;
 	}
-	ft_lstclear(&data.set);
-	ft_lstclear(&data.env);
+	clear_data(&data);
 	data.status = WEXITSTATUS(data.status);
 	return (data.status);
 }
