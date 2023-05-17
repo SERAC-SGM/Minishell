@@ -6,13 +6,13 @@
 /*   By: maaliber <maaliber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 11:49:12 by lletourn          #+#    #+#             */
-/*   Updated: 2023/05/16 15:36:39 by maaliber         ###   ########.fr       */
+/*   Updated: 2023/05/17 12:58:51 by maaliber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	cd(char **attr, t_data *data)
+int	ft_cd(char **attr, t_data *data)
 {
 	int	arg_nb;
 

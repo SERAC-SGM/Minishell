@@ -1,26 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   builtins.h                                         :+:      :+:    :+:   */
+/*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: maaliber <maaliber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/27 12:43:27 by maaliber          #+#    #+#             */
-/*   Updated: 2023/05/17 12:58:46 by maaliber         ###   ########.fr       */
+/*   Created: 2023/05/17 12:53:26 by maaliber          #+#    #+#             */
+/*   Updated: 2023/05/17 12:59:56 by maaliber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef BUILTINS_H
-# define BUILTINS_H
+#include "minishell.h"
 
-# include "mshell_types.h"
-
-int		ft_cd(char **attr, t_data *data);
-int		ft_echo(char **attr);
-void	ft_env(t_list *env, char **attr);
-int		ft_pwd(void);
-void	ft_export(char	**args, t_list *env, t_list *set);
-int		ft_unset(char **attr, t_data *data);
-void	ft_exit(void);
-
-#endif
+void	ft_exit(void)
+{
+	g_sig.exit = 1;
+	ft_putendl_fd("exit", 1);
+}

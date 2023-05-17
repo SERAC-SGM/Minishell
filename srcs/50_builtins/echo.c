@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: matnam <matnam@student.42.fr>              +#+  +:+       +#+        */
+/*   By: maaliber <maaliber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 11:10:57 by lletourn          #+#    #+#             */
-/*   Updated: 2023/05/14 19:43:15 by matnam           ###   ########.fr       */
+/*   Updated: 2023/05/17 12:58:54 by maaliber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	echo(char **attr)
+int	ft_echo(char **attr)
 {
 	int	n_option;
 	int	i;

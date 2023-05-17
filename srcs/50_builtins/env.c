@@ -6,13 +6,13 @@
 /*   By: maaliber <maaliber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 15:30:05 by lletourn          #+#    #+#             */
-/*   Updated: 2023/05/16 17:29:01 by maaliber         ###   ########.fr       */
+/*   Updated: 2023/05/17 12:59:00 by maaliber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	env(t_list *env, char **attr)
+void	ft_env(t_list *env, char **attr)
 {
 	int	arg_nb;
 

@@ -6,7 +6,7 @@
 /*   By: maaliber <maaliber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 17:32:02 by maaliber          #+#    #+#             */
-/*   Updated: 2023/05/16 18:32:19 by maaliber         ###   ########.fr       */
+/*   Updated: 2023/05/17 12:59:17 by maaliber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ static void		delete_var(char *var, t_list **env)
 	}
 }
 
-int	unset(char **attr, t_data *data)
+int	ft_unset(char **attr, t_data *data)
 {
 	int		i;
 

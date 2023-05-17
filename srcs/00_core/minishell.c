@@ -6,7 +6,7 @@
 /*   By: maaliber <maaliber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 14:58:49 by maaliber          #+#    #+#             */
-/*   Updated: 2023/05/16 18:33:35 by maaliber         ###   ########.fr       */
+/*   Updated: 2023/05/17 13:03:42 by maaliber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int	main(int ac, char *av[], char *env[])
 		//print_cmds(&data);
 		exec_cmd_line(&data);
 		clear_token_list(&data.token_list);
-		if (g_sig.exit == 1)
+		if (g_sig.exit == 1 || *data.cmd_line == EOF)
 			break ;
 	}
 	rl_clear_history();
