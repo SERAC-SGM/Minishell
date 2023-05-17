@@ -6,7 +6,7 @@
 /*   By: maaliber <maaliber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 13:38:49 by lletourn          #+#    #+#             */
-/*   Updated: 2023/05/17 12:53:17 by maaliber         ###   ########.fr       */
+/*   Updated: 2023/05/17 15:28:12 by maaliber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,12 @@ static int	is_builtin(char *name)
 
 static void	exec_cmd(t_data *data, int proc_idx, char **env)
 {
+	if (!data->cmds_tab[proc_idx].attr)
+	{
+		if (!g_sig.pid)
+			clear_exit(0);
+		return ;
+	}
 	if (is_builtin(data->cmds_tab[proc_idx].attr[0]))
 		exec_builtin(data, proc_idx);
 	else

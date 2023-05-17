@@ -6,7 +6,7 @@
 /*   By: maaliber <maaliber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 12:53:26 by maaliber          #+#    #+#             */
-/*   Updated: 2023/05/17 12:59:56 by maaliber         ###   ########.fr       */
+/*   Updated: 2023/05/17 15:21:39 by maaliber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,5 +15,4 @@
 void	ft_exit(void)
 {
 	g_sig.exit = 1;
-	ft_putendl_fd("exit", 1);
 }

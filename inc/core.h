@@ -6,7 +6,7 @@
 /*   By: maaliber <maaliber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 14:48:27 by matnam            #+#    #+#             */
-/*   Updated: 2023/05/16 15:37:27 by maaliber         ###   ########.fr       */
+/*   Updated: 2023/05/17 15:31:10 by maaliber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,21 +50,18 @@ void	sig_quit(void);
 void	handler(int signo);
 void	enable_signal(void);
 
-////////////////
-// 05_history //
-////////////////
-
 //////////////
-// 06_error //
+// 05_error //
 //////////////
 
 void	error_msg(int err_id, char *item, t_data *data);
 void	exit_error(int err_id, char *item, t_data *data);
 
 /////////////
-// 07_free //
+// 06_free //
 /////////////
 void	clear_data(t_data *data);
+void	clear_exit(t_data *data);
 
 //////////////
 // 09_utils //
