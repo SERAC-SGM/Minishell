@@ -81,6 +81,7 @@ PATH_SRCS_CTYPE = $(SRCS_DIR)/ctype
 PATH_SRCS_STR = $(SRCS_DIR)/str
 PATH_SRCS_MEM = $(SRCS_DIR)/mem
 PATH_SRCS_IO = $(SRCS_DIR)/io
+PATH_SRCS_MATH = $(SRCS_DIR)/math
 PATH_SRCS_STD = $(SRCS_DIR)/std
 PATH_SRCS_PRINTF = $(SRCS_DIR)/io/ftprintf
 PATH_SRCS_GNL = $(SRCS_DIR)/gnl
@@ -132,6 +133,9 @@ SRCS += ft_putendl_fd.c
 SRCS += ft_putnbr_fd.c
 SRCS += ft_putstr_fd.c
 
+# math
+SRCS += ft_abs.c
+
 # std
 SRCS += ft_atoi_base.c
 SRCS += ft_atoi.c
@@ -165,6 +169,7 @@ vpath %.c $(PATH_SRCS_CTYPE)
 vpath %.c $(PATH_SRCS_STR)
 vpath %.c $(PATH_SRCS_MEM)
 vpath %.c $(PATH_SRCS_IO)
+vpath %.c $(PATH_SRCS_MATH)
 vpath %.c $(PATH_SRCS_STD)
 vpath %.c $(PATH_SRCS_PRINTF)
 vpath %.c $(PATH_SRCS_GNL)

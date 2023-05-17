@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lletourn <lletourn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: matnam <matnam@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 13:03:56 by matnam            #+#    #+#             */
-/*   Updated: 2023/05/17 14:48:58 by lletourn         ###   ########.fr       */
+/*   Updated: 2023/05/17 23:31:08 by matnam           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,13 +52,20 @@ void	export_assign(char *arg, t_list *env, t_list *set)
 {
 	char	*name;
 	char	*value;
+	(void)arg;
+	(void)env;
+	(void)set;
+	(void)name;
+	(void)value;
 }
 
-void	export(char	**args, t_list *env, t_list *set)
+void	ft_export(char	**args, t_list *env, t_list *set)
 {
 	char	*name;
 	char	*value;
 
+	(void)env;
+	(void)set;
 	while (args++)
 	{
 		if (*args)
@@ -67,9 +74,8 @@ void	export(char	**args, t_list *env, t_list *set)
 			value = set_var_value(*args);
 			if (!value)
 			{
-				if ()
-					;
-			}
+				if (name)
+					return ;			}
 		}
 	}
 }

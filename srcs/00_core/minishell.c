@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maaliber <maaliber@student.42.fr>          +#+  +:+       +#+        */
+/*   By: matnam <matnam@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 14:58:49 by maaliber          #+#    #+#             */
-/*   Updated: 2023/05/17 15:46:03 by maaliber         ###   ########.fr       */
+/*   Updated: 2023/05/17 23:24:52 by matnam           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,9 @@
 int	main(int ac, char *av[], char *env[])
 {
 	t_data	data;
-	int	i;
 
 	(void)ac;
 	(void)av;
-	i = 0;
 	init_data(&data, env);
 	enable_signal();
 	while (!g_sig.exit)
