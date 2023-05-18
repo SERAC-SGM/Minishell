@@ -3,28 +3,29 @@
 /*                                                        :::      ::::::::   */
 /*   env_ft.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maaliber <maaliber@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lletourn <lletourn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 12:18:00 by maaliber          #+#    #+#             */
-/*   Updated: 2023/05/16 17:49:31 by maaliber         ###   ########.fr       */
+/*   Updated: 2023/05/18 16:54:35 by lletourn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 /*
-Get environment variable value
+Returns the value of 'name' stored in a t_list.
+Returns NULL if the variable is not found.
 */
 char	*get_var_value(char *name, t_list *env)
 {
-	int		l;
+	int	length;
 
 	if (!env || !name)
 		return (NULL);
-	l = ft_strlen(name);
+	length = ft_strlen(name);
 	while (env)
 	{
-		if (!ft_strncmp(env->line, name, l) && env->line[l] == '=')
+		if (!ft_strncmp(env->line, name, length) && env->line[length] == '=')
 			break ;
 		env = env->next;
 	}
@@ -33,6 +34,9 @@ char	*get_var_value(char *name, t_list *env)
 	return (ft_strchr(env->line, '=') + 1);
 }
 
+/*
+Creates a new environment variable by adding it at the end of env.
+*/
 static void	create_env_var(char *name, char *val, t_list *env)
 {
 	char	*line;
@@ -41,23 +45,27 @@ static void	create_env_var(char *name, char *val, t_list *env)
 	if (!env || !name)
 		return ;
 	line = ft_strjoin(name, "=");
+	free(name); // name toujours malloc ? À checker
 	line = ft_strjoin_free(line, val);
 	entry = ft_lstnew(line);
 	ft_lstadd_back(&env, entry);
 }
 
+/*
+Overwrites an existing environment variable.
+*/
 static void	overwrite_env_var(char *name, char *val, t_list *env)
 {
 	char	*prefix;
-	int		l;
+	int		length;
 
 	if (!env || !name)
 		return ;
 	prefix = ft_strjoin(name, "=");
-	l = ft_strlen(name);
+	length = ft_strlen(name);
 	while (env)
 	{
-		if (!ft_strncmp(env->line, name, l) && env->line[l] == '=')
+		if (!ft_strncmp(env->line, name, length) && env->line[length] == '=')
 			break ;
 		env = env->next;
 	}

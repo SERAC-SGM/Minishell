@@ -3,16 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: matnam <matnam@student.42.fr>              +#+  +:+       +#+        */
+/*   By: lletourn <lletourn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 13:03:56 by matnam            #+#    #+#             */
-/*   Updated: 2023/05/17 23:31:08 by matnam           ###   ########.fr       */
+/*   Updated: 2023/05/18 16:46:50 by lletourn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char	*set_var_name(char *var)
+/*
+
+*/
+static char	*set_var_name(char *var)
 {
 	char	*name;
 	size_t	length;
@@ -29,7 +32,7 @@ char	*set_var_name(char *var)
 	return (name);
 }
 
-char	*set_var_value(char *var)
+static char	*set_var_value(char *var)
 {
 	char	*value;
 	char	*value_tmp;
@@ -48,15 +51,19 @@ char	*set_var_value(char *var)
 	return (value);
 }
 
-void	export_assign(char *arg, t_list *env, t_list *set)
+
+/*
+Checks if the variable is assigned in set, and exports it. If it's unnasigned,
+does nothing.
+*/
+static void	export_unassigned(char *name, t_list *env, t_list *set)
 {
-	char	*name;
 	char	*value;
-	(void)arg;
-	(void)env;
-	(void)set;
-	(void)name;
-	(void)value;
+
+	value = get_var_value(name, set);
+	if (!value)
+		return ;
+	set_env_var(name, value, env);
 }
 
 void	ft_export(char	**args, t_list *env, t_list *set)
@@ -64,18 +71,15 @@ void	ft_export(char	**args, t_list *env, t_list *set)
 	char	*name;
 	char	*value;
 
-	(void)env;
-	(void)set;
 	while (args++)
 	{
-		if (*args)
-		{
-			name = set_var_name(*args);
-			value = set_var_value(*args);
-			if (!value)
-			{
-				if (name)
-					return ;			}
-		}
+		if (!*args)
+			return ;
+		name = set_var_name(*args);
+		value = set_var_value(*args);
+		if (!value)
+			export_unassigned(name, env, set);
+		else
+			set_env_var(name, value, env);
 	}
 }
