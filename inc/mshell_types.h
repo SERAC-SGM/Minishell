@@ -6,7 +6,7 @@
 /*   By: matnam <matnam@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 13:38:57 by maaliber          #+#    #+#             */
-/*   Updated: 2023/05/18 11:16:26 by matnam           ###   ########.fr       */
+/*   Updated: 2023/05/18 14:46:15 by matnam           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,7 +130,7 @@ Global signal structure
 */
 typedef struct s_sig
 {
-	int				exit_status;
+	int				error_status;
 	int				exit;
 	pid_t			pid;
 }					t_sig;

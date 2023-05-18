@@ -6,7 +6,7 @@
 /*   By: matnam <matnam@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 13:38:49 by lletourn          #+#    #+#             */
-/*   Updated: 2023/05/18 11:00:31 by matnam           ###   ########.fr       */
+/*   Updated: 2023/05/18 15:12:05 by matnam           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,12 +53,12 @@ static void	exec_cmd(t_data *data, int proc_idx, char **env)
 {
 	if (!data->cmds_tab[proc_idx].attr)
 	{
-		if (!g_sig.pid)
-			clear_exit(0);
-		return ;
+		if (g_sig.pid == 0)
+			clear_exit(data);
+		return (close_pipe(data), (void)0);
 	}
 	if (is_builtin(data->cmds_tab[proc_idx].attr[0]))
-		exec_builtin(data, proc_idx);
+		g_sig.error_status = exec_builtin(data, proc_idx);
 	else
 	{
 		if (data->process_nb == 1)
@@ -73,6 +73,8 @@ static void	exec_cmd(t_data *data, int proc_idx, char **env)
 			exec_native(data, proc_idx, env);
 		}
 	}
+	if (g_sig.pid == 0)
+		clear_exit(data);
 	close_pipe(data);
 }
 

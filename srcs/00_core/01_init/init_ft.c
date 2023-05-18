@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_ft.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maaliber <maaliber@student.42.fr>          +#+  +:+       +#+        */
+/*   By: matnam <matnam@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 14:51:50 by maaliber          #+#    #+#             */
-/*   Updated: 2023/05/16 17:18:12 by maaliber         ###   ########.fr       */
+/*   Updated: 2023/05/18 17:05:07 by matnam           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,8 @@ char	**get_envpath(t_list *env)
 			break ;
 		env = env->next;
 	}
+	if (!env)
+		return (NULL);
 	path = ft_split(env->line + 5, ':');
 	return (path);
 }
