@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error_manager.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maaliber <maaliber@student.42.fr>          +#+  +:+       +#+        */
+/*   By: matnam <matnam@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 14:57:22 by maaliber          #+#    #+#             */
-/*   Updated: 2023/05/16 12:22:19 by maaliber         ###   ########.fr       */
+/*   Updated: 2023/05/18 14:10:47 by matnam           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ struct s_errdesc
 	{E_NOMSG, 0},
 	{E_MEM, "memory allocation error\n"},
 	{E_TOKEN, "syntax error near unexpected token\n"},
-	{E_FILE, ": no such file or directory\n"},
+	{E_FILE, ": No such file or directory\n"},
 	{E_PERM, ": permission denied\n"},
 	{E_ARG, "invalid number of arguments\n"},
 	{E_TOO_FEW_ARG, "invalid number of arguments\n"},
@@ -30,9 +30,28 @@ struct s_errdesc
 	{E_PIPE, "pipe\n"},
 	{E_FORK, "fork\n"},
 	{E_ENV, "environment\n"},
-	{E_CMD, ": command not found\n"},
+	{E_CMD_NOT_FOUND, ": command not found\n"},
 	{E_HEREDOC, "here_doc\n"},
 };
+
+void	error_msg_cmd(int err_id, char *prefix, char *item)
+{
+	char	*err_msg;
+	char	*append;
+
+	append = NULL;
+	if (prefix && item)
+		append = ft_strjoin(prefix, item);
+	else if (item)
+		append = ft_strdup(item);
+	else if (prefix)
+		append = ft_strdup(prefix);
+	err_msg = ft_strjoin_dup1(append, errdesc[err_id].msg);
+	if (!err_msg)
+		return ;
+	ft_putstr_fd(err_msg, 2);
+	free(err_msg);
+}
 
 void	error_msg(int err_id, char *item, t_data *data)
 {

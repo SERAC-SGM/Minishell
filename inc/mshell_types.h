@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mshell_types.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maaliber <maaliber@student.42.fr>          +#+  +:+       +#+        */
+/*   By: matnam <matnam@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 13:38:57 by maaliber          #+#    #+#             */
-/*   Updated: 2023/05/17 16:04:23 by maaliber         ###   ########.fr       */
+/*   Updated: 2023/05/18 11:16:26 by matnam           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,8 @@ enum e_config_error
 	E_PIPE,
 	E_FORK,
 	E_ENV,
-	E_CMD,
+	E_CMD_NOT_FOUND,
+	E_CD,
 	E_HEREDOC
 };
 typedef enum e_config_error	t_config_error;

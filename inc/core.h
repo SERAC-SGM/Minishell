@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   core.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maaliber <maaliber@student.42.fr>          +#+  +:+       +#+        */
+/*   By: matnam <matnam@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 14:48:27 by matnam            #+#    #+#             */
-/*   Updated: 2023/05/17 15:31:10 by maaliber         ###   ########.fr       */
+/*   Updated: 2023/05/18 13:54:35 by matnam           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ void	sig_quit(void);
 //signal.c
 // t_sig	init_sig(void);
 void	handler(int signo);
+void	update_signal(void);
 void	enable_signal(void);
 
 //////////////
@@ -55,6 +56,7 @@ void	enable_signal(void);
 //////////////
 
 void	error_msg(int err_id, char *item, t_data *data);
+void	error_msg_cmd(int err_id, char *prefix, char *item);
 void	exit_error(int err_id, char *item, t_data *data);
 
 /////////////

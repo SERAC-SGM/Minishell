@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maaliber <maaliber@student.42.fr>          +#+  +:+       +#+        */
+/*   By: matnam <matnam@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 13:38:49 by lletourn          #+#    #+#             */
-/*   Updated: 2023/05/17 15:28:12 by maaliber         ###   ########.fr       */
+/*   Updated: 2023/05/18 11:00:31 by matnam           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,10 @@ static void	exec_cmd(t_data *data, int proc_idx, char **env)
 				exit_error(E_FORK, 0, data);
 		}
 		if (g_sig.pid == 0)
+		{
+			update_signal();
 			exec_native(data, proc_idx, env);
+		}
 	}
 	close_pipe(data);
 }
@@ -93,6 +96,7 @@ int	exec_cmd_line(t_data *data)
 				exit_error(E_FORK, 0, data);
 			if (g_sig.pid == 0)
 			{
+				update_signal();
 				dup_fds(data, proc_idx);
 				exec_cmd(data, proc_idx, env);
 			}

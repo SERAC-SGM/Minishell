@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signal.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maaliber <maaliber@student.42.fr>          +#+  +:+       +#+        */
+/*   By: matnam <matnam@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 15:57:15 by maaliber          #+#    #+#             */
-/*   Updated: 2023/05/17 15:49:31 by maaliber         ###   ########.fr       */
+/*   Updated: 2023/05/18 11:02:19 by matnam           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,13 +23,27 @@ void	handler(int signo)
 }
 
 /**/
-void	enable_signal(void)
+void	update_signal(void)
 {
 	struct sigaction	act;
 
 	ft_memset(&act, 0, sizeof(act));
-	act.sa_handler = handler;
-	sigaction(SIGTERM, &act, NULL);
-	sigaction(SIGQUIT, &act, NULL);
+	act.sa_handler = &handler;
 	sigaction(SIGINT, &act, NULL);
+	sigaction(SIGQUIT, &act, NULL);
+}
+
+
+/**/
+void	enable_signal(void)
+{
+	struct sigaction	act1;
+	struct sigaction	act2;
+
+	ft_memset(&act1, 0, sizeof(act1));
+	ft_memset(&act2, 0, sizeof(act2));
+	act1.sa_handler = &handler;
+	act2.sa_handler = SIG_IGN;
+	sigaction(SIGINT, &act1, NULL);
+	sigaction(SIGQUIT, &act2, NULL);
 }

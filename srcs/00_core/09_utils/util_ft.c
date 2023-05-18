@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   util_ft.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maaliber <maaliber@student.42.fr>          +#+  +:+       +#+        */
+/*   By: matnam <matnam@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 14:18:43 by maaliber          #+#    #+#             */
-/*   Updated: 2023/05/17 15:31:03 by maaliber         ###   ########.fr       */
+/*   Updated: 2023/05/18 13:59:59 by matnam           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ char	*ft_strjoin_dup1(char *s1, char *s2)
 	char	*rst;
 
 	if (!s1)
-		return (free(s1), ft_strdup(s2));
+		return (ft_strdup(s2));
 	if (!s2)
 		return (s1);
 	rst = ft_strjoin(s1, s2);
