@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maaliber <maaliber@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lletourn <lletourn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 14:19:32 by maaliber          #+#    #+#             */
-/*   Updated: 2023/05/16 15:48:20 by maaliber         ###   ########.fr       */
+/*   Updated: 2023/05/19 14:10:29 by lletourn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static int	get_cmd_size(t_tkn_lst *token)
 	{
 		if (token->type == RD_IN || token->type == HERE
 			|| token->type == RD_OUT || token->type == APPEND)
-			size--;
+			size--; // euh ? 
 		else
 			size++;
 		token = token->next;

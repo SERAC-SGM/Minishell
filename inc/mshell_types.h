@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mshell_types.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: matnam <matnam@student.42.fr>              +#+  +:+       +#+        */
+/*   By: lletourn <lletourn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 13:38:57 by maaliber          #+#    #+#             */
-/*   Updated: 2023/05/18 14:46:15 by matnam           ###   ########.fr       */
+/*   Updated: 2023/05/19 14:26:16 by lletourn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,6 @@ typedef enum e_config_error	t_config_error;
 /*
 Everything required to run a command.
 • process_index: index of the current process.
-• pid: PID of the current process.
 • arg_count: number of arguments.
 • *cmd[args] : 2-dimensional array containing each command and its
 arguments (cmd[i][0] : path of the command, cmd[i][j] : optional arguments).
