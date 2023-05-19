@@ -6,16 +6,12 @@
 /*   By: lletourn <lletourn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 12:18:00 by maaliber          #+#    #+#             */
-/*   Updated: 2023/05/18 16:54:35 by lletourn         ###   ########.fr       */
+/*   Updated: 2023/05/19 13:56:43 by lletourn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-/*
-Returns the value of 'name' stored in a t_list.
-Returns NULL if the variable is not found.
-*/
 char	*get_var_value(char *name, t_list *env)
 {
 	int	length;
@@ -45,7 +41,7 @@ static void	create_env_var(char *name, char *val, t_list *env)
 	if (!env || !name)
 		return ;
 	line = ft_strjoin(name, "=");
-	free(name); // name toujours malloc ? À checker
+	free(name);
 	line = ft_strjoin_free(line, val);
 	entry = ft_lstnew(line);
 	ft_lstadd_back(&env, entry);
@@ -74,11 +70,6 @@ static void	overwrite_env_var(char *name, char *val, t_list *env)
 	free(prefix);
 }
 
-/*
-Sets environment variable by:
-• Creating a new line at the end of env if var doesn't exist
-• Overwriting an existing line if var_name exist 
-*/
 void	set_env_var(char *name, char *val, t_list *env)
 {
 	char	*prev_val;

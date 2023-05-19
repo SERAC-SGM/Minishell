@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: matnam <matnam@student.42.fr>              +#+  +:+       +#+        */
+/*   By: lletourn <lletourn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 17:32:02 by maaliber          #+#    #+#             */
-/*   Updated: 2023/05/18 17:05:51 by matnam           ###   ########.fr       */
+/*   Updated: 2023/05/19 13:21:02 by lletourn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static void		delete_var(char *var, t_list **env)
+static void	delete_var(char *var, t_list **env)
 {
 	t_list	*curr;
 	t_list	*next;

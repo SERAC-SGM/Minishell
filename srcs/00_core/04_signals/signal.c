@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   signal.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: matnam <matnam@student.42.fr>              +#+  +:+       +#+        */
+/*   By: lletourn <lletourn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 15:57:15 by maaliber          #+#    #+#             */
-/*   Updated: 2023/05/18 11:02:19 by matnam           ###   ########.fr       */
+/*   Updated: 2023/05/19 13:59:10 by lletourn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_sig	g_sig = { 0, 0, 1 };
+t_sig	g_sig = {0, 0, 1};
 
 void	handler(int signo)
 {
@@ -22,7 +22,6 @@ void	handler(int signo)
 		sig_quit();
 }
 
-/**/
 void	update_signal(void)
 {
 	struct sigaction	act;
@@ -33,8 +32,6 @@ void	update_signal(void)
 	sigaction(SIGQUIT, &act, NULL);
 }
 
-
-/**/
 void	enable_signal(void)
 {
 	struct sigaction	act1;

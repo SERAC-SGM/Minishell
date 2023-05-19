@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: matnam <matnam@student.42.fr>              +#+  +:+       +#+        */
+/*   By: lletourn <lletourn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 13:38:49 by lletourn          #+#    #+#             */
-/*   Updated: 2023/05/18 15:12:05 by matnam           ###   ########.fr       */
+/*   Updated: 2023/05/19 13:35:25 by lletourn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ static int	is_builtin(char *name)
 	return (0);
 }
 
-static void	exec_cmd(t_data *data, int proc_idx, char **env)
+static void	exec_single_cmd(t_data *data, int proc_idx, char **env)
 {
 	if (!data->cmds_tab[proc_idx].attr)
 	{
@@ -78,6 +78,20 @@ static void	exec_cmd(t_data *data, int proc_idx, char **env)
 	close_pipe(data);
 }
 
+static void	exec_multiple_cmd(t_data *data, int proc_idx, char **env)
+{
+	open_pipe(data);
+	g_sig.pid = fork();
+	if (g_sig.pid == -1)
+		exit_error(E_FORK, 0, data);
+	if (g_sig.pid == 0)
+	{
+		update_signal();
+		dup_fds(data, proc_idx);
+		exec_single_cmd(data, proc_idx, env);
+	}
+}
+
 int	exec_cmd_line(t_data *data)
 {
 	char	**env;
@@ -89,23 +103,13 @@ int	exec_cmd_line(t_data *data)
 	while (proc_idx < data->process_nb)
 	{
 		if (data->process_nb == 1)
-			exec_cmd(data, proc_idx, env);
+			exec_single_cmd(data, proc_idx, env);
 		else
-		{
-			open_pipe(data);
-			g_sig.pid = fork();
-			if (g_sig.pid == -1)
-				exit_error(E_FORK, 0, data);
-			if (g_sig.pid == 0)
-			{
-				update_signal();
-				dup_fds(data, proc_idx);
-				exec_cmd(data, proc_idx, env);
-			}
-		}
+			exec_multiple_cmd(data, proc_idx, env);
 		proc_idx++;
 	}
 	while (waitpid(-1, &status, 0) != -1)
 		;
+	free(env);
 	return (0);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_native.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: matnam <matnam@student.42.fr>              +#+  +:+       +#+        */
+/*   By: lletourn <lletourn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 13:38:11 by lletourn          #+#    #+#             */
-/*   Updated: 2023/05/18 13:55:48 by matnam           ###   ########.fr       */
+/*   Updated: 2023/05/19 13:35:52 by lletourn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,5 +48,6 @@ void	exec_native(t_data *data, int proc_idx, char **env)
 		|| (proc_idx == data->process_nb - 1 && data->cmds_tab[proc_idx].fd_out
 			< 0))
 		exit_error(E_NOMSG, 0, data);
-	execve(data->cmds_tab[proc_idx].attr[0], data->cmds_tab[proc_idx].attr,	env);
+	execve(data->cmds_tab[proc_idx].attr[0],
+		data->cmds_tab[proc_idx].attr, env);
 }

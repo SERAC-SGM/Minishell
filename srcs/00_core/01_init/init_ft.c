@@ -3,18 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   init_ft.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: matnam <matnam@student.42.fr>              +#+  +:+       +#+        */
+/*   By: lletourn <lletourn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 14:51:50 by maaliber          #+#    #+#             */
-/*   Updated: 2023/05/18 17:05:07 by matnam           ###   ########.fr       */
+/*   Updated: 2023/05/19 13:55:51 by lletourn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-/*
-Initializes a environment list.
-*/
 void	init_env(t_data *data, char *env[])
 {
 	t_list	*env_list;
@@ -40,10 +37,38 @@ void	init_env(t_data *data, char *env[])
 	return ;
 }
 
+
+void	init_cmd(t_cmd *cmd)
+{
+	cmd->process_index = 0;
+	cmd->arg_count = 0;
+	cmd->attr = NULL;
+	cmd->infile = NULL;
+	cmd->fd_in = STDIN_FILENO;
+	cmd->here_doc = 0;
+	cmd->outfile = NULL;
+	cmd->fd_out = STDOUT_FILENO;
+	cmd->append = 0;
+	cmd->delimiter = NULL;
+}
+
+void	init_data(t_data *data, char *env[])
+{
+	int	i;
+
+	i = 0;
+	ft_bzero(data, sizeof(t_data));
+	while (i < OPEN_MAX)
+		data->fd[i++] = -1;
+	data->process_nb = 1;
+	init_env(data, env);
+	return ;
+}
+
 /*
 Returns the size of the command (name + optional arguments).
 */
-char	**get_envpath(t_list *env)
+static char	**get_envpath(t_list *env)
 {
 	char	**path;
 
@@ -59,44 +84,6 @@ char	**get_envpath(t_list *env)
 	return (path);
 }
 
-/*
-Initializes a command structure.
-*/
-void	init_cmd(t_cmd *cmd)
-{
-	cmd->process_index = 0;
-	cmd->arg_count = 0;
-	cmd->attr = NULL;
-	cmd->infile = NULL;
-	cmd->fd_in = STDIN_FILENO;
-	cmd->here_doc = 0;
-	cmd->outfile = NULL;
-	cmd->fd_out = STDOUT_FILENO;
-	cmd->append = 0;
-	cmd->delimiter = NULL;
-}
-
-/*
-Initializes a data structure.
-*/
-void	init_data(t_data *data, char *env[])
-{
-	int	i;
-
-	i = 0;
-	ft_bzero(data, sizeof(t_data));
-	while (i < OPEN_MAX)
-		data->fd[i++] = -1;
-	data->process_nb = 1;
-	init_env(data, env);
-	return ;
-}
-
-/*
-Reset data structure to receive new command input :
-Free all allocated memory related to command input
-Keep environment variables.
-*/
 void	reset_data(t_data *data)
 {
 	int	i;

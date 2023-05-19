@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signal_actions.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: matnam <matnam@student.42.fr>              +#+  +:+       +#+        */
+/*   By: lletourn <lletourn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 15:40:53 by maaliber          #+#    #+#             */
-/*   Updated: 2023/05/18 15:16:37 by matnam           ###   ########.fr       */
+/*   Updated: 2023/05/19 13:58:16 by lletourn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	sig_int(void)
 {
-	if (g_sig.pid != 0) //parent_process
+	if (g_sig.pid != 0)
 	{
 		write(2, "\n", 1);
 		rl_replace_line("", 0);
