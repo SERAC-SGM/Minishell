@@ -6,7 +6,7 @@
 /*   By: lletourn <lletourn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 14:51:50 by maaliber          #+#    #+#             */
-/*   Updated: 2023/05/22 12:43:53 by lletourn         ###   ########.fr       */
+/*   Updated: 2023/05/22 14:42:07 by lletourn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ void	init_env(t_data *data, char *env[])
 	data->env = env_list;
 	return ;
 }
-
 
 void	init_cmd(t_cmd *cmd)
 {

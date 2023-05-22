@@ -6,7 +6,7 @@
 /*   By: lletourn <lletourn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 13:38:49 by lletourn          #+#    #+#             */
-/*   Updated: 2023/05/19 13:35:25 by lletourn         ###   ########.fr       */
+/*   Updated: 2023/05/22 16:01:30 by lletourn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ static int	is_builtin(char *name)
 
 static void	exec_single_cmd(t_data *data, int proc_idx, char **env)
 {
+	dup_fds(data, proc_idx);
 	if (!data->cmds_tab[proc_idx].attr)
 	{
 		if (g_sig.pid == 0)
@@ -97,19 +98,26 @@ int	exec_cmd_line(t_data *data)
 	char	**env;
 	int		proc_idx;
 	int		status;
+	int		i;
 
 	env = env_to_tab(data->env);
-	proc_idx = 0;
-	while (proc_idx < data->process_nb)
+	i = -1;
+	while (++i < data->process_nb)
+	{
+		if (data->cmds_tab[i].here_doc)
+			write_heredoc(&data->cmds_tab[i]);
+		open_files(&data->cmds_tab[i]);
+	}
+	proc_idx = -1;
+	while (++proc_idx < data->process_nb)
 	{
 		if (data->process_nb == 1)
 			exec_single_cmd(data, proc_idx, env);
 		else
 			exec_multiple_cmd(data, proc_idx, env);
-		proc_idx++;
+		close_files(&data->cmds_tab[proc_idx]);
 	}
 	while (waitpid(-1, &status, 0) != -1)
 		;
-	free(env);
-	return (0);
+	return (free(env), 0);
 }

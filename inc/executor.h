@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executor.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: matnam <matnam@student.42.fr>              +#+  +:+       +#+        */
+/*   By: lletourn <lletourn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/27 12:43:30 by maaliber          #+#    #+#             */
-/*   Updated: 2023/05/14 17:40:08 by matnam           ###   ########.fr       */
+/*   Updated: 2023/05/22 15:42:49 by lletourn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,5 +22,18 @@ void	dup_fds(t_data *data, int proc_idx);
 int		exec_builtin(t_data *data, int proc_idx);
 void	exec_native(t_data *data, int proc_idx, char **env);
 int		exec_cmd_line(t_data *data);
+
+		//////////////
+		//here_doc.c//
+		//////////////
+
+void	write_heredoc(t_cmd *cmd);
+
+		///////////////////
+		//files_manager.c//
+		///////////////////
+
+void	open_files(t_cmd *cmd);
+void	close_files(t_cmd *cmd);
 
 #endif

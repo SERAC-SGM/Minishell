@@ -6,7 +6,7 @@
 /*   By: lletourn <lletourn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 14:19:32 by maaliber          #+#    #+#             */
-/*   Updated: 2023/05/22 12:59:07 by lletourn         ###   ########.fr       */
+/*   Updated: 2023/05/22 15:52:30 by lletourn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,44 +36,6 @@ static int	get_cmd_size(t_tkn_lst *token)
 Adds a new command in the data structure. The first token is used as the name of
 the command, and all following non-special tokens as optional arguments.
 Returns the next special token.
-
-static t_tkn_lst	*set_command(t_tkn_lst *token, t_data *data, int proc_idx)
-{
-	int	i;
-	int	size;
-
-	size = get_cmd_size(token);
-	if (!data->cmds_tab[proc_idx].attr)
-	{
-		data->cmds_tab[proc_idx].attr = ft_calloc(size + 1, sizeof(char *));
-		if (!data->cmds_tab[proc_idx].attr)
-			return (error_msg(E_MEM, NULL, data), NULL);
-	}
-	i = tab_size(data->cmds_tab[proc_idx].attr);
-	data->cmds_tab[proc_idx].attr[i] = token->content;
-	token = token->next;
-	while (token->type != END && token->content)
-	{
-		if (i == 0)
-		{
-			data->cmds_tab[proc_idx].attr[++i] = ft_strdup(token->content);
-			if (!data->cmds_tab[proc_idx].attr)
-				return (error_msg(E_MEM, NULL, data), NULL);
-		}
-		else 
-			data->cmds_tab[proc_idx].attr[++i] = token->content;
-		token = token->next;
-	}
-	data->cmds_tab[proc_idx].arg_count = i;
-	data->cmds_tab[proc_idx].attr[++i] = NULL;
-	data->cmds_tab[proc_idx].process_index = proc_idx;
-	return (token);
-}*/
-
-/*
-Adds a new command in the data structure. The first token is used as the name of
-the command, and all following non-special tokens as optional arguments.
-Returns the next special token.
 */
 static void	add_attribute(t_tkn_lst *token, t_data *data, int proc_idx)
 {
@@ -91,7 +53,6 @@ static void	add_attribute(t_tkn_lst *token, t_data *data, int proc_idx)
 	if (i == 0)
 	{
 		data->cmds_tab[proc_idx].attr[i] = ft_strdup(token->content);
-		//printf("fils de pute %s\n", data->cmds_tab[proc_idx].attr[i]);
 		if (!data->cmds_tab[proc_idx].attr[i])
 			return (error_msg(E_MEM, NULL, data), (void)0);
 	}
@@ -99,6 +60,33 @@ static void	add_attribute(t_tkn_lst *token, t_data *data, int proc_idx)
 		data->cmds_tab[proc_idx].attr[i] = token->content;
 	data->cmds_tab[proc_idx].arg_count = i;
 	data->cmds_tab[proc_idx].process_index = proc_idx;
+}
+
+/*
+When encountering a redirection token (< << > >>), assings the correct
+following filename to the command structure.
+Returns the next token after the filename.
+If no filemame or no non-special after the filename token is found,
+returns an error.
+*/
+static t_tkn_lst	*redirection(t_tkn_lst *token, t_cmd *cmd)
+{
+	if ((!token->next->content))
+		return (error_msg(E_TOKEN, NULL, NULL), last_token(token));
+	if (token->type == RD_IN)
+		cmd->infile = token->next->content;
+	else if (token->type == HERE)
+	{
+		cmd->delimiter = token->next->content;
+		cmd->here_doc = 1;
+	}
+	else if (token->type == RD_OUT || token->type == APPEND)
+	{
+		cmd->outfile = token->next->content;
+		if (token->type == APPEND)
+			cmd->append = 1;
+	}
+	return (token->next->next);
 }
 
 void	parser(t_tkn_lst *token, t_data *data)

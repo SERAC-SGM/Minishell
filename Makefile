@@ -89,7 +89,6 @@ PATH_SRCS_CORE = $(SRCS_DIR)/00_core
 #Core Sub-directories
 PATH_SRCS_INIT = $(SRCS_DIR)/00_core/01_init
 PATH_SRCS_ENV = $(SRCS_DIR)/00_core/02_environment
-PATH_SRCS_PROMPT = $(SRCS_DIR)/00_core/03_prompt
 PATH_SRCS_SIG = $(SRCS_DIR)/00_core/04_signals
 PATH_SRCS_ERR = $(SRCS_DIR)/00_core/05_error
 PATH_SRCS_FREE = $(SRCS_DIR)/00_core/06_free
@@ -104,8 +103,6 @@ PATH_SRCS_PARSER = $(SRCS_DIR)/30_parser
 PATH_SRCS_EXEC = $(SRCS_DIR)/40_executor
 #Builtins directory
 PATH_SRCS_BUILTIN = $(SRCS_DIR)/50_builtins
-#Tests directory
-PATH_SRCS_TEST = $(SRCS_DIR)/99_tests
 
 #______________________________________________________________________________#
 ############################### Sources ########################################
@@ -119,9 +116,6 @@ SRCS += init_ft.c
 
 #02_environment
 SRCS += env_ft.c
-
-#03_prompt
-SRCS += prompt.c
 
 #04_signals
 SRCS += signal_actions.c
@@ -150,11 +144,12 @@ SRCS += lexer.c
 SRCS += expander.c
 
 #30_parser
-SRCS += files_manager.c
 SRCS += parser.c
 
 #40_executor
 SRCS += pipe_dup.c
+SRCS += files_manager.c
+SRCS += here_doc.c
 SRCS += exec_native.c
 SRCS += exec_builtin.c
 SRCS += exec.c
@@ -176,7 +171,6 @@ SRCS += exit.c
 vpath %.c $(PATH_SRCS_CORE)
 vpath %.c $(PATH_SRCS_INIT)
 vpath %.c $(PATH_SRCS_ENV)
-vpath %.c $(PATH_SRCS_PROMPT)
 vpath %.c $(PATH_SRCS_SIG)
 vpath %.c $(PATH_SRCS_ERR)
 vpath %.c $(PATH_SRCS_FREE)
@@ -186,7 +180,6 @@ vpath %.c $(PATH_SRCS_PARSER)
 vpath %.c $(PATH_SRCS_EXPAND)
 vpath %.c $(PATH_SRCS_EXEC)
 vpath %.c $(PATH_SRCS_BUILTIN)
-vpath %.c $(PATH_SRCS_TEST)
 
 #______________________________________________________________________________#
 ############################### Objects ########################################
@@ -262,9 +255,6 @@ $(DEPS_DIR):
 	@mkdir $@
 
 bonus: all
-
-niquelabac:
-	gcc -Wall -Wextra -Werror -g srcs/02_parser/main-test.c srcs/02_parser/parser.c srcs/02_parser/files_management.c -MMD $(INCLUDES)
 
 #_____Clean_____#
 clean: lclean where_c
