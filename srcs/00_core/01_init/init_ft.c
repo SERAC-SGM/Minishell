@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_ft.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lletourn <lletourn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: maaliber <maaliber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 14:51:50 by maaliber          #+#    #+#             */
-/*   Updated: 2023/05/19 13:55:51 by lletourn         ###   ########.fr       */
+/*   Updated: 2023/05/22 11:27:35 by maaliber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,7 @@ void	reset_data(t_data *data)
 	clear_token_list(&data->token_list);
 	while (data->cmds_tab[i].process_index >= 0)
 	{
+		free(data->cmds_tab[i].attr[0]);
 		free(data->cmds_tab[i].attr);
 		init_cmd(&data->cmds_tab[i]);
 		i++;

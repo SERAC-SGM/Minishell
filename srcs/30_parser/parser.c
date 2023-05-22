@@ -6,7 +6,7 @@
 /*   By: maaliber <maaliber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 14:19:32 by maaliber          #+#    #+#             */
-/*   Updated: 2023/05/22 11:19:47 by maaliber         ###   ########.fr       */
+/*   Updated: 2023/05/22 11:26:28 by maaliber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static int	get_cmd_size(t_tkn_lst *token)
 	{
 		if (token->type == RD_IN || token->type == HERE
 			|| token->type == RD_OUT || token->type == APPEND)
-			size--; // euh ? 
+			size--;
 		else
 			size++;
 		token = token->next;
@@ -85,20 +85,19 @@ static void	add_attribute(t_tkn_lst *token, t_data *data, int proc_idx)
 	{
 		data->cmds_tab[proc_idx].attr = ft_calloc(size + 1, sizeof(char *));
 		if (!data->cmds_tab[proc_idx].attr)
-			return (error_msg(E_MEM, NULL, data), NULL);
+			return (error_msg(E_MEM, NULL, data), (void)0);
 	}
 	i = tab_size(data->cmds_tab[proc_idx].attr);
 	if (i == 0)
 	{
 		data->cmds_tab[proc_idx].attr[i] = ft_strdup(token->content);
-		if (!data->cmds_tab[proc_idx].attr)
-			return (error_msg(E_MEM, NULL, data), NULL);
+		if (!data->cmds_tab[proc_idx].attr[0])
+			return (error_msg(E_MEM, NULL, data), (void)0);
 	}
 	else
 		data->cmds_tab[proc_idx].attr[i] = token->content;
 	data->cmds_tab[proc_idx].arg_count = i;
 	data->cmds_tab[proc_idx].process_index = proc_idx;
-	return (token);
 }
 
 void	parser(t_tkn_lst *token, t_data *data)
