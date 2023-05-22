@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maaliber <maaliber@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lletourn <lletourn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 16:02:17 by maaliber          #+#    #+#             */
-/*   Updated: 2023/02/02 15:36:54 by maaliber         ###   ########.fr       */
+/*   Updated: 2023/05/22 12:11:09 by lletourn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,12 +44,16 @@ void	free_tab(char **tab)
 {
 	size_t	i;
 
-	i = 0;
+	i = -1;
 	if (!tab)
 		return ;
-	while (tab[i])
-		free(tab[i++]);
+	while (tab[++i])
+	{
+		free(tab[i]);
+		tab[i] = NULL;
+	}
 	free(tab);
+	tab = NULL;
 	return ;
 }
 

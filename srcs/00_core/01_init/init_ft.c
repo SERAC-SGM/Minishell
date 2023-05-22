@@ -6,7 +6,7 @@
 /*   By: lletourn <lletourn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 14:51:50 by maaliber          #+#    #+#             */
-/*   Updated: 2023/05/22 11:57:52 by lletourn         ###   ########.fr       */
+/*   Updated: 2023/05/22 12:30:58 by lletourn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,10 +94,15 @@ void	reset_data(t_data *data)
 	free_tab(data->env_path);
 	data->env_path = get_envpath(data->env);
 	clear_token_list(&data->token_list);
-	while (data->cmds_tab[i].process_index >= 0)
+	while (data->cmds_tab[i].attr)
 	{
-		free(data->cmds_tab[i].attr[0]);
+		if (data->cmds_tab[i].attr[0])
+		{
+			free(data->cmds_tab[i].attr[0]);
+			data->cmds_tab[i].attr[0] = NULL;
+		}
 		free(data->cmds_tab[i].attr);
+		data->cmds_tab[i].attr = NULL;
 		init_cmd(&data->cmds_tab[i]);
 		i++;
 	}
