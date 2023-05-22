@@ -6,11 +6,21 @@
 /*   By: maaliber <maaliber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 14:58:49 by maaliber          #+#    #+#             */
-/*   Updated: 2023/05/22 14:37:45 by maaliber         ###   ########.fr       */
+/*   Updated: 2023/05/22 15:39:01 by maaliber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+static void	wait_process(void)
+{
+	int	status;
+
+	while (waitpid(-1, &status, 0) != -1)
+		;
+	if (WIFEXITED(status))
+        g_sig.error_status = WEXITSTATUS(status);
+}
 
 int	main(int ac, char *av[], char *env[])
 {
@@ -30,6 +40,7 @@ int	main(int ac, char *av[], char *env[])
 		data.token_list = lexer(&data);
 		parser(data.token_list, &data);
 		exec_cmd_line(&data);
+		wait_process();
 		clear_token_list(&data.token_list);
 	}
 	clear_data(&data);

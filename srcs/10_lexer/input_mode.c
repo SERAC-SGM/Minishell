@@ -6,7 +6,7 @@
 /*   By: maaliber <maaliber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 19:04:17 by maaliber          #+#    #+#             */
-/*   Updated: 2023/05/22 14:37:22 by maaliber         ###   ########.fr       */
+/*   Updated: 2023/05/22 14:48:28 by maaliber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,6 @@ char	*double_quote_mode(char **str, t_list *env, t_list *set)
 	int		ex;
 	int		i;
 
-	(void)env;
 	ex = 0;
 	i = 1;
 	while ((*str)[i] && (*str)[i] != '\"')

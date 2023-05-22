@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lletourn <lletourn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: maaliber <maaliber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 14:19:32 by maaliber          #+#    #+#             */
-/*   Updated: 2023/05/22 12:59:07 by lletourn         ###   ########.fr       */
+/*   Updated: 2023/05/22 14:54:27 by maaliber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,12 +88,13 @@ static void	add_attribute(t_tkn_lst *token, t_data *data, int proc_idx)
 			return (error_msg(E_MEM, NULL, data), (void)0);
 	}
 	i = tab_size(data->cmds_tab[proc_idx].attr);
+	
 	if (i == 0)
 	{
 		data->cmds_tab[proc_idx].attr[i] = ft_strdup(token->content);
-		//printf("fils de pute %s\n", data->cmds_tab[proc_idx].attr[i]);
 		if (!data->cmds_tab[proc_idx].attr[i])
 			return (error_msg(E_MEM, NULL, data), (void)0);
+		data->cmds_tab[proc_idx].name = token->content;
 	}
 	else
 		data->cmds_tab[proc_idx].attr[i] = token->content;

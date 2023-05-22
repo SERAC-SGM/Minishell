@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_native.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lletourn <lletourn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: maaliber <maaliber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 13:38:11 by lletourn          #+#    #+#             */
-/*   Updated: 2023/05/22 13:01:35 by lletourn         ###   ########.fr       */
+/*   Updated: 2023/05/22 14:55:29 by maaliber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,9 @@ static void	set_cmd_with_path(t_data *data, int proc_idx)
 		|| !ft_strncmp(data->cmds_tab[proc_idx].attr[0], "/", 1))
 	{
 		if (access(data->cmds_tab[proc_idx].attr[0], F_OK) == -1)
-			exit_error(E_CMD_NOT_FOUND, data->cmds_tab[proc_idx].attr[0], data);
+			exit_error(E_CMD_NOT_FOUND, data->cmds_tab[proc_idx].name, data);
 		if (access(data->cmds_tab[proc_idx].attr[0], X_OK) == -1)
-			exit_error(E_PERM, data->cmds_tab[proc_idx].attr[0], data);
+			exit_error(E_PERM, data->cmds_tab[proc_idx].name, data);
 	}
 }
 
@@ -37,14 +37,14 @@ static int	set_cmd(t_data *data, int proc_idx)
 	while (data->env_path[i])
 	{
 		free(data->cmds_tab[proc_idx].attr[0]);
-			data->cmds_tab[proc_idx].attr[0] = ft_strjoin(data->env_path[i], tmp);
+		data->cmds_tab[proc_idx].attr[0] = ft_strjoin(data->env_path[i], tmp);
 		if (access(data->cmds_tab[proc_idx].attr[0], F_OK | X_OK) == 0)
 			break ;
 		i++;
 	}
 	free(tmp);
 	if (!data->env_path[i])
-		exit_error(E_CMD_NOT_FOUND, data->cmds_tab[proc_idx].attr[0], data);
+		exit_error(E_CMD_NOT_FOUND, data->cmds_tab[proc_idx].name, data);
 	return (0);
 }
 

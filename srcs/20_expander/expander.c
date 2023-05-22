@@ -6,7 +6,7 @@
 /*   By: maaliber <maaliber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 14:19:34 by maaliber          #+#    #+#             */
-/*   Updated: 2023/05/16 17:56:28 by maaliber         ###   ########.fr       */
+/*   Updated: 2023/05/22 14:50:50 by maaliber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,7 @@ void	expand(char **content, t_list *env, t_list *set)
 	char	*val;
 	int		i;
 
+	(void)set;
 	if (!*content)
 		return ;
 	i = 0;
@@ -79,14 +80,16 @@ void	expand(char **content, t_list *env, t_list *set)
 		if ((*content)[i] == '$')
 		{
 			to_find = cpy_word(*content + i + 1);
-			val = get_var_value(to_find, env);
-			if (!val)
-				val = get_var_value(to_find, set);
+			if (ft_strcmp(to_find, "?") == 0)
+				val = ft_itoa(g_sig.error_status);
+			else
+				val = get_var_value(to_find, env);
 			replace_content(content, val, i);
 			free(to_find);
+			if (ft_strcmp(to_find, "?") == 0)
+				free(val);
 		}
 		else
 			i++;
 	}
-	return ;
 }

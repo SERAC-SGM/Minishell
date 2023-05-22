@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lletourn <lletourn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: maaliber <maaliber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 13:38:49 by lletourn          #+#    #+#             */
-/*   Updated: 2023/05/19 13:35:25 by lletourn         ###   ########.fr       */
+/*   Updated: 2023/05/22 15:37:16 by maaliber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,21 +52,14 @@ static int	is_builtin(char *name)
 static void	exec_single_cmd(t_data *data, int proc_idx, char **env)
 {
 	if (!data->cmds_tab[proc_idx].attr)
-	{
-		if (g_sig.pid == 0)
-			clear_exit(data);
-		return (close_pipe(data), (void)0);
-	}
+		return ;
 	if (is_builtin(data->cmds_tab[proc_idx].attr[0]))
 		g_sig.error_status = exec_builtin(data, proc_idx);
 	else
 	{
-		if (data->process_nb == 1)
-		{	
-			g_sig.pid = fork();
-			if (g_sig.pid == -1)
-				exit_error(E_FORK, 0, data);
-		}
+		g_sig.pid = fork();
+		if (g_sig.pid == -1)
+			exit_error(E_FORK, 0, data);
 		if (g_sig.pid == 0)
 		{
 			update_signal();
@@ -96,10 +89,9 @@ int	exec_cmd_line(t_data *data)
 {
 	char	**env;
 	int		proc_idx;
-	int		status;
 
 	env = env_to_tab(data->env);
-	proc_idx = 0;
+	proc_idx = 0;	
 	while (proc_idx < data->process_nb)
 	{
 		if (data->process_nb == 1)
@@ -108,8 +100,6 @@ int	exec_cmd_line(t_data *data)
 			exec_multiple_cmd(data, proc_idx, env);
 		proc_idx++;
 	}
-	while (waitpid(-1, &status, 0) != -1)
-		;
 	free(env);
 	return (0);
 }
