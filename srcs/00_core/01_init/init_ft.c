@@ -3,18 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   init_ft.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maaliber <maaliber@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lletourn <lletourn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 14:51:50 by maaliber          #+#    #+#             */
-/*   Updated: 2023/05/16 17:18:12 by maaliber         ###   ########.fr       */
+/*   Updated: 2023/05/19 13:55:51 by lletourn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-/*
-Initializes a environment list.
-*/
 void	init_env(t_data *data, char *env[])
 {
 	t_list	*env_list;
@@ -40,26 +37,7 @@ void	init_env(t_data *data, char *env[])
 	return ;
 }
 
-/*
-Returns the size of the command (name + optional arguments).
-*/
-char	**get_envpath(t_list *env)
-{
-	char	**path;
 
-	while (env)
-	{
-		if (!ft_strncmp("PATH", env->line, 4))
-			break ;
-		env = env->next;
-	}
-	path = ft_split(env->line + 5, ':');
-	return (path);
-}
-
-/*
-Initializes a command structure.
-*/
 void	init_cmd(t_cmd *cmd)
 {
 	cmd->process_index = 0;
@@ -74,9 +52,6 @@ void	init_cmd(t_cmd *cmd)
 	cmd->delimiter = NULL;
 }
 
-/*
-Initializes a data structure.
-*/
 void	init_data(t_data *data, char *env[])
 {
 	int	i;
@@ -91,10 +66,24 @@ void	init_data(t_data *data, char *env[])
 }
 
 /*
-Reset data structure to receive new command input :
-Free all allocated memory related to command input
-Keep environment variables.
+Returns the size of the command (name + optional arguments).
 */
+static char	**get_envpath(t_list *env)
+{
+	char	**path;
+
+	while (env)
+	{
+		if (!ft_strncmp("PATH", env->line, 4))
+			break ;
+		env = env->next;
+	}
+	if (!env)
+		return (NULL);
+	path = ft_split(env->line + 5, ':');
+	return (path);
+}
+
 void	reset_data(t_data *data)
 {
 	int	i;

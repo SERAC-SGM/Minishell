@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mshell_types.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maaliber <maaliber@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lletourn <lletourn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 13:38:57 by maaliber          #+#    #+#             */
-/*   Updated: 2023/05/17 16:04:23 by maaliber         ###   ########.fr       */
+/*   Updated: 2023/05/19 14:26:16 by lletourn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,8 @@ enum e_config_error
 	E_PIPE,
 	E_FORK,
 	E_ENV,
-	E_CMD,
+	E_CMD_NOT_FOUND,
+	E_CD,
 	E_HEREDOC
 };
 typedef enum e_config_error	t_config_error;
@@ -60,7 +61,6 @@ typedef enum e_config_error	t_config_error;
 /*
 Everything required to run a command.
 • process_index: index of the current process.
-• pid: PID of the current process.
 • arg_count: number of arguments.
 • *cmd[args] : 2-dimensional array containing each command and its
 arguments (cmd[i][0] : path of the command, cmd[i][j] : optional arguments).
@@ -129,7 +129,7 @@ Global signal structure
 */
 typedef struct s_sig
 {
-	int				exit_status;
+	int				error_status;
 	int				exit;
 	pid_t			pid;
 }					t_sig;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   token.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maaliber <maaliber@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lletourn <lletourn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 16:54:54 by maaliber          #+#    #+#             */
-/*   Updated: 2023/05/16 17:56:14 by maaliber         ###   ########.fr       */
+/*   Updated: 2023/05/19 13:22:01 by lletourn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,8 @@ t_tkn_lst	*tokenize(char **cmd_line, t_list *env, t_list *set)
 		else if (set_mode(*cmd_line) == 1)
 			store = ft_strjoin_free(store, single_quote_mode(cmd_line));
 		else if (set_mode(*cmd_line) == 2)
-			store = ft_strjoin_free(store, double_quote_mode(cmd_line, env, set));
+			store = ft_strjoin_free(store,
+					double_quote_mode(cmd_line, env, set));
 	}
 	if (store)
 		add_back_token(&tkn_list, new_token(store, 0));

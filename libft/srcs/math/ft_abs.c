@@ -1,22 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strchr.c                                        :+:      :+:    :+:   */
+/*   ft_abs.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lletourn <lletourn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/10 16:02:23 by maaliber          #+#    #+#             */
-/*   Updated: 2023/05/19 11:59:34 by lletourn         ###   ########.fr       */
+/*   Created: 2023/05/17 23:27:20 by matnam            #+#    #+#             */
+/*   Updated: 2023/05/19 13:21:08 by lletourn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-
-char	*ft_strchr(const char *s, int c)
+int	ft_abs(int nb)
 {
-	while (*s != (char)c && *s)
-		s++;
-	if (*s == (char)c)
-		return ((char *)s);
-	return (NULL);
+	if (nb < 0)
+		return (-nb);
+	else
+		return (nb);
 }

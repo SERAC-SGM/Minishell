@@ -6,7 +6,7 @@
 /*   By: maaliber <maaliber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 14:58:49 by maaliber          #+#    #+#             */
-/*   Updated: 2023/05/22 11:16:13 by maaliber         ###   ########.fr       */
+/*   Updated: 2023/05/22 11:19:22 by maaliber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,17 +15,15 @@
 int	main(int ac, char *av[], char *env[])
 {
 	t_data	data;
-	int		i;
 
 	(void)ac;
 	(void)av;
-	i = 0;
 	init_data(&data, env);
 	enable_signal();
 	while (!g_sig.exit)
 	{
 		reset_data(&data);
-		data.cmd_line = readline("\033[1;34m42\033[1;36mmini\033[0m▸");
+		data.cmd_line = readline("\033[1;34m42\033[1;36mniquelabac\033[0m▸");
 		if (!data.cmd_line)
 			break ;
 		add_history(data.cmd_line);

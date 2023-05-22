@@ -6,13 +6,13 @@
 /*   By: lletourn <lletourn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 14:42:59 by matnam            #+#    #+#             */
-/*   Updated: 2023/05/16 13:31:40 by lletourn         ###   ########.fr       */
+/*   Updated: 2023/05/19 13:57:18 by lletourn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char	*prompt(void)
+char	*prompt(void) //USELESS
 {
 	char	*prompt;
 

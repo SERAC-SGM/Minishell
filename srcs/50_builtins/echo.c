@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maaliber <maaliber@student.42.fr>          +#+  +:+       +#+        */
+/*   By: matnam <matnam@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 11:10:57 by lletourn          #+#    #+#             */
-/*   Updated: 2023/05/17 12:58:54 by maaliber         ###   ########.fr       */
+/*   Updated: 2023/05/18 13:50:11 by matnam           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,11 @@ int	ft_echo(char **attr)
 		i++;
 	}
 	while (attr[i])
+	{
 		ft_putstr_fd(attr[i++], 1);
+		if (attr[i + 1])
+			write(1, " ", 1);
+	}
 	if (n_option)
 		write(1, "\n", 1);
 	return (0);
