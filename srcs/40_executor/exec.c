@@ -6,7 +6,7 @@
 /*   By: maaliber <maaliber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 13:38:49 by lletourn          #+#    #+#             */
-/*   Updated: 2023/05/22 15:37:16 by maaliber         ###   ########.fr       */
+/*   Updated: 2023/05/22 16:11:49 by maaliber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ static int	is_builtin(char *name)
 
 static void	exec_single_cmd(t_data *data, int proc_idx, char **env)
 {
+	dup_fds(data, proc_idx);
 	if (!data->cmds_tab[proc_idx].attr)
 		return ;
 	if (is_builtin(data->cmds_tab[proc_idx].attr[0]))
@@ -89,16 +90,24 @@ int	exec_cmd_line(t_data *data)
 {
 	char	**env;
 	int		proc_idx;
+	int		i;
 
 	env = env_to_tab(data->env);
-	proc_idx = 0;	
-	while (proc_idx < data->process_nb)
+	i = -1;
+	while (++i < data->process_nb)
+	{
+		if (data->cmds_tab[i].here_doc)
+			write_heredoc(&data->cmds_tab[i]);
+		open_files(&data->cmds_tab[i]);
+	}
+	proc_idx = -1;
+	while (++proc_idx < data->process_nb)
 	{
 		if (data->process_nb == 1)
 			exec_single_cmd(data, proc_idx, env);
 		else
 			exec_multiple_cmd(data, proc_idx, env);
-		proc_idx++;
+		close_files(&data->cmds_tab[proc_idx]);
 	}
 	free(env);
 	return (0);
