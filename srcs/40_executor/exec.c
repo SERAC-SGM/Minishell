@@ -6,7 +6,7 @@
 /*   By: maaliber <maaliber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 13:38:49 by lletourn          #+#    #+#             */
-/*   Updated: 2023/05/22 16:32:30 by maaliber         ###   ########.fr       */
+/*   Updated: 2023/05/22 17:19:13 by maaliber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ static int	is_builtin(char *name)
 static void	exec_single_cmd(t_data *data, int proc_idx, char **env)
 {
 	dup_fds(data, proc_idx);
+	close_files(&data->cmds_tab[proc_idx]);
 	if (!data->cmds_tab[proc_idx].attr)
 		return ;
 	if (is_builtin(data->cmds_tab[proc_idx].attr[0]))
@@ -82,6 +83,7 @@ static void	exec_multiple_cmd(t_data *data, int proc_idx, char **env)
 	{
 		update_signal();
 		dup_fds(data, proc_idx);
+		close_files(&data->cmds_tab[proc_idx]);
 		exec_single_cmd(data, proc_idx, env);
 	}
 }

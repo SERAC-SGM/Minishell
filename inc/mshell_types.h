@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mshell_types.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maaliber <maaliber@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lletourn <lletourn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 13:38:57 by maaliber          #+#    #+#             */
-/*   Updated: 2023/05/22 16:09:27 by maaliber         ###   ########.fr       */
+/*   Updated: 2023/05/22 16:27:16 by lletourn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,7 +126,7 @@ typedef struct s_data
 }	t_data;
 
 /*
-Global signal structure
+Global signal structure.
 */
 typedef struct s_sig
 {

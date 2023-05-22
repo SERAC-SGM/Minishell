@@ -1,10 +1,2 @@
-build
-inc
-libft
-Makefile
-minishell
-objs
-out
-srcs
-[?2004h[1;34m42[1;36mniquelabac[0m▸ls > out^V^C^C[?2004l[1;34m42[1;36mniquelabac[0m▸[?2004h[?2004l
+[?2004h[1;34m42[1;36mniquelabac[0m▸ls -[K> lo[K[K^C[?2004l[1;34m42[1;36mniquelabac[0m▸[?2004h^C[?2004l[1;34m42[1;36mniquelabac[0m▸[?2004h[?2004l
 exit
