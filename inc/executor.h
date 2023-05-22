@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executor.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lletourn <lletourn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: maaliber <maaliber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/27 12:43:30 by maaliber          #+#    #+#             */
-/*   Updated: 2023/05/22 15:42:49 by lletourn         ###   ########.fr       */
+/*   Updated: 2023/05/22 16:33:08 by maaliber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,12 +27,13 @@ int		exec_cmd_line(t_data *data);
 		//here_doc.c//
 		//////////////
 
-void	write_heredoc(t_cmd *cmd);
+int		input_heredoc(t_cmd *cmd);
 
 		///////////////////
 		//files_manager.c//
 		///////////////////
 
+void	check_open_error(int fd, t_cmd *cmd);
 void	open_files(t_cmd *cmd);
 void	close_files(t_cmd *cmd);
 

@@ -6,7 +6,7 @@
 /*   By: maaliber <maaliber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 13:38:49 by lletourn          #+#    #+#             */
-/*   Updated: 2023/05/22 16:11:49 by maaliber         ###   ########.fr       */
+/*   Updated: 2023/05/22 16:32:30 by maaliber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ int	exec_cmd_line(t_data *data)
 	while (++i < data->process_nb)
 	{
 		if (data->cmds_tab[i].here_doc)
-			write_heredoc(&data->cmds_tab[i]);
+			input_heredoc(&data->cmds_tab[i]);
 		open_files(&data->cmds_tab[i]);
 	}
 	proc_idx = -1;

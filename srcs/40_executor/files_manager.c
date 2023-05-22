@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   files_manager.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lletourn <lletourn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: maaliber <maaliber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/06 12:07:41 by lletourn          #+#    #+#             */
-/*   Updated: 2023/05/22 15:39:33 by lletourn         ###   ########.fr       */
+/*   Updated: 2023/05/22 16:32:51 by maaliber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static void	check_open_error(int fd, t_cmd *cmd)
+void	check_open_error(int fd, t_cmd *cmd)
 {
 	if (fd == -1)
 		error_msg(E_PERM, cmd->infile, NULL);
