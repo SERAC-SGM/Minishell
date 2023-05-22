@@ -6,7 +6,7 @@
 /*   By: lletourn <lletourn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 14:19:32 by maaliber          #+#    #+#             */
-/*   Updated: 2023/05/22 11:59:24 by lletourn         ###   ########.fr       */
+/*   Updated: 2023/05/22 12:59:07 by lletourn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,8 @@ static void	add_attribute(t_tkn_lst *token, t_data *data, int proc_idx)
 	if (i == 0)
 	{
 		data->cmds_tab[proc_idx].attr[i] = ft_strdup(token->content);
-		if (!data->cmds_tab[proc_idx].attr[0])
+		//printf("fils de pute %s\n", data->cmds_tab[proc_idx].attr[i]);
+		if (!data->cmds_tab[proc_idx].attr[i])
 			return (error_msg(E_MEM, NULL, data), (void)0);
 	}
 	else
