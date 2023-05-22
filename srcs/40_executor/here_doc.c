@@ -6,7 +6,7 @@
 /*   By: lletourn <lletourn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 14:44:06 by lletourn          #+#    #+#             */
-/*   Updated: 2023/05/22 15:55:36 by lletourn         ###   ########.fr       */
+/*   Updated: 2023/05/22 16:44:39 by lletourn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,11 @@ static void	input_heredoc(t_cmd *cmd) // A CHANGER
 
 void	write_heredoc(t_cmd *cmd)
 {
-	cmd->infile = ft_strjoin(".here_doc_", ft_itoa(cmd->process_index));
+	char	*str_process_index;
+
+	str_process_index = ft_itoa(cmd->process_index);
+	cmd->infile = ft_strjoin(".here_doc_", str_process_index);
+	free(str_process_index);
 	cmd->fd_in = open(cmd->infile, O_WRONLY | O_CREAT | O_EXCL, 0644);
 	if (cmd->fd_in == -1)
 		error_msg(E_PERM, cmd->infile, NULL);

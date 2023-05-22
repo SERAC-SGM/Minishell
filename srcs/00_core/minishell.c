@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maaliber <maaliber@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lletourn <lletourn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 14:58:49 by maaliber          #+#    #+#             */
-/*   Updated: 2023/05/22 16:09:40 by maaliber         ###   ########.fr       */
+/*   Updated: 2023/05/22 17:04:31 by lletourn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,11 @@ static void	wait_process(void)
 {
 	int	status;
 
+	status = 0;
 	while (waitpid(-1, &status, 0) != -1)
 		;
 	if (WIFEXITED(status))
-        g_sig.error_status = WEXITSTATUS(status);
+		g_sig.error_status = WEXITSTATUS(status);
 }
 
 int	main(int ac, char *av[], char *env[])

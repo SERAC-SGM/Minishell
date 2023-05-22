@@ -6,7 +6,7 @@
 /*   By: lletourn <lletourn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/06 12:07:41 by lletourn          #+#    #+#             */
-/*   Updated: 2023/05/22 15:39:33 by lletourn         ###   ########.fr       */
+/*   Updated: 2023/05/22 16:53:00 by lletourn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,6 @@ void	close_files(t_cmd *cmd)
 	if (cmd->infile || cmd->here_doc)
 	{
 		close(cmd->fd_in);
-		cmd->infile = NULL;
 		if (cmd->here_doc)
 		{
 			unlink(cmd->infile);
