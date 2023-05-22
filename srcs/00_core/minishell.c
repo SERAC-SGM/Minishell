@@ -6,7 +6,7 @@
 /*   By: maaliber <maaliber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 14:58:49 by maaliber          #+#    #+#             */
-/*   Updated: 2023/05/17 15:46:03 by maaliber         ###   ########.fr       */
+/*   Updated: 2023/05/22 11:16:13 by maaliber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int	main(int ac, char *av[], char *env[])
 {
 	t_data	data;
-	int	i;
+	int		i;
 
 	(void)ac;
 	(void)av;

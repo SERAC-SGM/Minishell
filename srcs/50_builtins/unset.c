@@ -6,13 +6,13 @@
 /*   By: maaliber <maaliber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 17:32:02 by maaliber          #+#    #+#             */
-/*   Updated: 2023/05/17 12:59:17 by maaliber         ###   ########.fr       */
+/*   Updated: 2023/05/22 11:16:02 by maaliber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static void		delete_var(char *var, t_list **env)
+static void	delete_var(char *var, t_list **env)
 {
 	t_list	*curr;
 	t_list	*next;

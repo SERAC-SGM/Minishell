@@ -6,13 +6,13 @@
 /*   By: maaliber <maaliber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 15:57:15 by maaliber          #+#    #+#             */
-/*   Updated: 2023/05/17 15:49:31 by maaliber         ###   ########.fr       */
+/*   Updated: 2023/05/22 11:16:52 by maaliber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_sig	g_sig = { 0, 0, 1 };
+t_sig	g_sig = {0, 0, 1};
 
 void	handler(int signo)
 {
@@ -22,7 +22,6 @@ void	handler(int signo)
 		sig_quit();
 }
 
-/**/
 void	enable_signal(void)
 {
 	struct sigaction	act;
