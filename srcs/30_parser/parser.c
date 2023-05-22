@@ -6,7 +6,7 @@
 /*   By: lletourn <lletourn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 14:19:32 by maaliber          #+#    #+#             */
-/*   Updated: 2023/05/19 14:10:29 by lletourn         ###   ########.fr       */
+/*   Updated: 2023/05/22 10:46:33 by lletourn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static int	get_cmd_size(t_tkn_lst *token)
 	{
 		if (token->type == RD_IN || token->type == HERE
 			|| token->type == RD_OUT || token->type == APPEND)
-			size--; // euh ? 
+			size--;
 		else
 			size++;
 		token = token->next;

@@ -6,17 +6,30 @@
 /*   By: lletourn <lletourn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 13:38:11 by lletourn          #+#    #+#             */
-/*   Updated: 2023/05/19 13:35:52 by lletourn         ###   ########.fr       */
+/*   Updated: 2023/05/22 11:47:45 by lletourn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+static void	set_cmd_with_path(t_data *data, int proc_idx)
+{
+	if (!ft_strncmp(data->cmds_tab[proc_idx].attr[0], "./", 2)
+		|| !ft_strncmp(data->cmds_tab[proc_idx].attr[0], "/", 1))
+	{
+		if (access(data->cmds_tab[proc_idx].attr[0], F_OK) == -1)
+			exit_error(E_CMD_NOT_FOUND, data->cmds_tab[proc_idx].attr[0], data);
+		if (access(data->cmds_tab[proc_idx].attr[0], X_OK) == -1)
+			exit_error(E_PERM, data->cmds_tab[proc_idx].attr[0], data);
+	}
+}
 
 static int	set_cmd(t_data *data, int proc_idx)
 {
 	char	*tmp;
 	int		i;
 
+	set_cmd_with_path(data, proc_idx);
 	if (access(data->cmds_tab[proc_idx].attr[0], F_OK) != -1)
 		return (0);
 	tmp = ft_strjoin("/", data->cmds_tab[proc_idx].attr[0]);
@@ -24,11 +37,8 @@ static int	set_cmd(t_data *data, int proc_idx)
 	while (data->env_path[i])
 	{
 		data->cmds_tab[proc_idx].attr[0] = ft_strjoin(data->env_path[i], tmp);
-		if (access(data->cmds_tab[proc_idx].attr[0], F_OK) != -1)
-		{
-			data->cmds_tab[proc_idx].attr[0] = data->env_path[i];
+		if (access(data->cmds_tab[proc_idx].attr[0], F_OK | X_OK) == 0)
 			break ;
-		}
 		if (data->env_path[i + 1])
 			free(data->cmds_tab[proc_idx].attr[0]);
 		i++;
