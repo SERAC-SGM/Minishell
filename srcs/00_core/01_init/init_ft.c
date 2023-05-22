@@ -6,7 +6,7 @@
 /*   By: lletourn <lletourn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 14:51:50 by maaliber          #+#    #+#             */
-/*   Updated: 2023/05/22 12:30:58 by lletourn         ###   ########.fr       */
+/*   Updated: 2023/05/22 12:33:02 by lletourn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,10 +97,7 @@ void	reset_data(t_data *data)
 	while (data->cmds_tab[i].attr)
 	{
 		if (data->cmds_tab[i].attr[0])
-		{
 			free(data->cmds_tab[i].attr[0]);
-			data->cmds_tab[i].attr[0] = NULL;
-		}
 		free(data->cmds_tab[i].attr);
 		data->cmds_tab[i].attr = NULL;
 		init_cmd(&data->cmds_tab[i]);
