@@ -6,7 +6,7 @@
 /*   By: lletourn <lletourn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 13:38:49 by lletourn          #+#    #+#             */
-/*   Updated: 2023/05/23 15:27:02 by lletourn         ###   ########.fr       */
+/*   Updated: 2023/05/23 15:36:19 by lletourn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,7 @@ int	exec_cmd_line(t_data *data)
 	while (++i < data->process_nb)
 	{
 		if (data->cmds_tab[i].here_doc)
-			input_heredoc(&data->cmds_tab[i]);
+			input_heredoc(&data->cmds_tab[i], data);
 		open_files(&data->cmds_tab[i]);
 	}
 	proc_idx = -1;
