@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipe_dup.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lletourn <lletourn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: maaliber <maaliber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 17:24:22 by maaliber          #+#    #+#             */
-/*   Updated: 2023/05/23 15:27:17 by lletourn         ###   ########.fr       */
+/*   Updated: 2023/05/23 17:32:04 by maaliber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,45 +44,18 @@ void	dup_in_out(int fd_in, int fd_out)
 		dup2(fd_out, STDOUT_FILENO);
 }
 
-void	dup_first_cmd(t_data *data)
+void	dup_pipe(t_data *data, int proc_idx)
 {
-	if (data->cmds_tab[0].infile)
-		dup2(data->cmds_tab[0].fd_in, STDIN_FILENO);
-	if (data->cmds_tab[0].outfile)
-		dup2(data->cmds_tab[0].fd_out, STDOUT_FILENO);
-	else
-		dup2(data->fd[0][1], STDOUT_FILENO);
+	if (!data->cmds_tab[proc_idx].infile && proc_idx > 0)
+		dup2(data->fd[proc_idx - 1][0], STDIN_FILENO);
+	if (!data->cmds_tab[proc_idx].outfile && proc_idx < data->process_nb - 1)
+		dup2(data->fd[proc_idx][1], STDOUT_FILENO);
 }
 
-void	dup_last_cmd(t_data *data)
+void	dup_file(t_data *data, int proc_idx)
 {
-	if (data->cmds_tab[data->process_nb - 1].infile)
-		dup2(data->cmds_tab[data->process_nb - 1].fd_in, STDIN_FILENO);
-	else
-		dup2(data->fd[data->process_nb - 2][0], STDIN_FILENO);
-	if (data->cmds_tab[0].outfile)
-		dup2(data->cmds_tab[0].fd_out, STDOUT_FILENO);
-}
-
-void	dup_fds(t_data *data, int proc_idx)
-{
-	int	fd_in;
-	int	fd_out;
-
-	if (proc_idx == 0)
-		dup_first_cmd(data);
-	else if (proc_idx == data->process_nb - 1)
-		dup_last_cmd(data);
-	else
-	{
-		if (data->cmds_tab[proc_idx].infile)
-			fd_in = data->cmds_tab[proc_idx].fd_in;
-		else
-			fd_in = data->fd[proc_idx][0];
-		if (data->cmds_tab[proc_idx].outfile)
-			fd_out = data->cmds_tab[proc_idx].fd_out;
-		else
-			fd_out = data->fd[proc_idx - 1][1];
-		dup_in_out(fd_in, fd_out);
-	}
+	if (data->cmds_tab[proc_idx].infile)
+		dup2(data->cmds_tab[proc_idx].fd_in, STDIN_FILENO);
+	if (data->cmds_tab[proc_idx].outfile)
+		dup2(data->cmds_tab[proc_idx].fd_out, STDOUT_FILENO);
 }

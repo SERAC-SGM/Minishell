@@ -6,7 +6,7 @@
 /*   By: maaliber <maaliber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 14:44:06 by lletourn          #+#    #+#             */
-/*   Updated: 2023/05/23 14:12:28 by maaliber         ###   ########.fr       */
+/*   Updated: 2023/05/23 17:32:34 by maaliber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static int	exit_heredoc(int fd_hdoc, char *lim, char *line, t_data *data)
 	return (0);
 }
 
-int	input_heredoc(t_cmd *cmd, t_data *data) // A CHANGER
+int	input_heredoc(t_cmd *cmd, t_data *data)
 {
 	char		*line;
 	int			fd_hdoc;
@@ -48,8 +48,8 @@ int	input_heredoc(t_cmd *cmd, t_data *data) // A CHANGER
 	{
 		while (!g_sig.exit)
 		{
-			line = readline("$>");
-			if (!line || ft_strcmp(line, cmd->delimiter) == 0)
+			line = get_next_line(0);
+			if (!line || ft_strcmp(line, cmd->delimiter) == '\n')
 				break ;
 			write(fd_hdoc, line, ft_strlen(line));
 			free(line);

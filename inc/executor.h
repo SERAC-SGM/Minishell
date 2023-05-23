@@ -6,7 +6,7 @@
 /*   By: maaliber <maaliber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/27 12:43:30 by maaliber          #+#    #+#             */
-/*   Updated: 2023/05/23 11:57:08 by maaliber         ###   ########.fr       */
+/*   Updated: 2023/05/23 17:32:45 by maaliber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,8 @@
 void	open_pipe(t_data *data);
 void	close_pipe(t_data *data);
 void	dup_in_out(int fd_in, int fd_out);
-void	dup_fds(t_data *data, int proc_idx);
+void	dup_file(t_data *data, int proc_idx);
+void	dup_pipe(t_data *data, int proc_idx);
 int		exec_builtin(t_data *data, int proc_idx);
 void	exec_native(t_data *data, int proc_idx, char **env);
 int		exec_cmd_line(t_data *data);
@@ -27,7 +28,7 @@ int		exec_cmd_line(t_data *data);
 		//here_doc.c//
 		//////////////
 
-int	input_heredoc(t_cmd *cmd, t_data *data);
+int		input_heredoc(t_cmd *cmd, t_data *data);
 
 		///////////////////
 		//files_manager.c//
