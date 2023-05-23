@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_native.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maaliber <maaliber@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lletourn <lletourn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 13:38:11 by lletourn          #+#    #+#             */
-/*   Updated: 2023/05/22 16:11:03 by maaliber         ###   ########.fr       */
+/*   Updated: 2023/05/23 15:25:42 by lletourn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,10 +50,10 @@ static int	set_cmd(t_data *data, int proc_idx)
 }
 
 void	exec_native(t_data *data, int proc_idx, char **env)
-{	
+{
 	set_cmd(data, proc_idx);
-	if (data->process_nb != 1)
-		close_pipe(data);
+	dup_fds(data, proc_idx);
+	close_pipe(data);
 	if ((proc_idx == 0 && data->cmds_tab[proc_idx].fd_in < 0)
 		|| (proc_idx == data->process_nb - 1 && data->cmds_tab[proc_idx].fd_out
 			< 0))

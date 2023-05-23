@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maaliber <maaliber@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lletourn <lletourn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 13:38:49 by lletourn          #+#    #+#             */
-/*   Updated: 2023/05/22 17:19:13 by maaliber         ###   ########.fr       */
+/*   Updated: 2023/05/23 15:27:02 by lletourn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,6 @@ static int	is_builtin(char *name)
 
 static void	exec_single_cmd(t_data *data, int proc_idx, char **env)
 {
-	dup_fds(data, proc_idx);
-	close_files(&data->cmds_tab[proc_idx]);
 	if (!data->cmds_tab[proc_idx].attr)
 		return ;
 	if (is_builtin(data->cmds_tab[proc_idx].attr[0]))
@@ -70,7 +68,7 @@ static void	exec_single_cmd(t_data *data, int proc_idx, char **env)
 	}
 	if (g_sig.pid == 0)
 		clear_exit(data);
-	close_pipe(data);
+	close_files(&data->cmds_tab[proc_idx]);
 }
 
 static void	exec_multiple_cmd(t_data *data, int proc_idx, char **env)
@@ -82,9 +80,14 @@ static void	exec_multiple_cmd(t_data *data, int proc_idx, char **env)
 	if (g_sig.pid == 0)
 	{
 		update_signal();
-		dup_fds(data, proc_idx);
+		if (is_builtin(data->cmds_tab[proc_idx].attr[0]))
+			g_sig.error_status = exec_builtin(data, proc_idx);
+		else
+			exec_native(data, proc_idx, env);
+		if (g_sig.pid == 0)
+			clear_exit(data);
 		close_files(&data->cmds_tab[proc_idx]);
-		exec_single_cmd(data, proc_idx, env);
+		close_pipe(data);
 	}
 }
 

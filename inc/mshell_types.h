@@ -6,7 +6,7 @@
 /*   By: lletourn <lletourn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 13:38:57 by maaliber          #+#    #+#             */
-/*   Updated: 2023/05/22 16:27:16 by lletourn         ###   ########.fr       */
+/*   Updated: 2023/05/23 12:29:01 by lletourn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,27 @@ enum e_config_error
 typedef enum e_config_error	t_config_error;
 
 /*
+Token structure.
+• type:
+.   <:    0 (read from)
+.   <<:   1 (here_doc)
+.   >:    2 (overwrite - O_TRUNC)
+.   >>:   3 (append - O_APPEND)
+*/
+typedef struct s_tkn_lst
+{
+	char				*content;
+	int					type;
+	struct s_tkn_lst	*next;
+}	t_tkn_lst;
+
+typedef struct s_list
+{
+	char			*line;
+	struct s_list	*next;
+}	t_list;
+
+/*
 Everything required to run a command.
 • process_index: index of the current process.
 • arg_count: number of arguments.
@@ -87,27 +108,6 @@ typedef struct s_cmd
 }			t_cmd;
 
 /*
-Token structure.
-• type:
-.   <:    0 (read from)
-.   <<:   1 (here_doc)
-.   >:    2 (overwrite - O_TRUNC)
-.   >>:   3 (append - O_APPEND)
-*/
-typedef struct s_tkn_lst
-{
-	char				*content;
-	int					type;
-	struct s_tkn_lst	*next;
-}	t_tkn_lst;
-
-typedef struct s_list
-{
-	char			*line;
-	struct s_list	*next;
-}	t_list;
-
-/*
 Data structure.
 */
 typedef struct s_data
@@ -120,7 +120,7 @@ typedef struct s_data
 	char			*cmd_line;
 	int				process_nb;
 	struct s_cmd	cmds_tab[CMD_MAX];
-	int				fd[OPEN_MAX];
+	int				fd[OPEN_MAX / 2][2];
 	int				status;
 	int				exit;
 }	t_data;
