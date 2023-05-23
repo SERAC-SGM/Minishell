@@ -6,7 +6,7 @@
 /*   By: maaliber <maaliber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/27 12:43:30 by maaliber          #+#    #+#             */
-/*   Updated: 2023/05/22 16:33:08 by maaliber         ###   ########.fr       */
+/*   Updated: 2023/05/23 11:57:08 by maaliber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int		exec_cmd_line(t_data *data);
 		//here_doc.c//
 		//////////////
 
-int		input_heredoc(t_cmd *cmd);
+int	input_heredoc(t_cmd *cmd, t_data *data);
 
 		///////////////////
 		//files_manager.c//
