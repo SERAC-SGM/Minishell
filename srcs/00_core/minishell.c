@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lletourn <lletourn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: maaliber <maaliber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 14:58:49 by maaliber          #+#    #+#             */
-/*   Updated: 2023/05/22 17:04:31 by lletourn         ###   ########.fr       */
+/*   Updated: 2023/05/23 14:22:12 by maaliber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ int	main(int ac, char *av[], char *env[])
 	{
 		reset_data(&data);
 		data.cmd_line = readline("\033[1;34m42\033[1;36mniquelabac\033[0m▸");
+		printf("CMD line:%s\n\n", data.cmd_line);
 		if (!data.cmd_line)
 			break ;
 		add_history(data.cmd_line);

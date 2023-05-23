@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   core.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lletourn <lletourn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: maaliber <maaliber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 14:48:27 by matnam            #+#    #+#             */
-/*   Updated: 2023/05/19 14:02:43 by lletourn         ###   ########.fr       */
+/*   Updated: 2023/05/23 14:04:04 by maaliber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ void	sig_quit(void);
 
 void	handler(int signo);
 /*
-Updates signal handlers for the SIGINT and SIGQUIT signals.
+Updates signal handlers for the SIGINT and SIGQUIT signals in childs processes.
 */
 void	update_signal(void);
 /*
