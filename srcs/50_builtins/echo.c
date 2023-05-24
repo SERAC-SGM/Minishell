@@ -3,34 +3,34 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: matnam <matnam@student.42.fr>              +#+  +:+       +#+        */
+/*   By: lletourn <lletourn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 11:10:57 by lletourn          #+#    #+#             */
-/*   Updated: 2023/05/18 13:50:11 by matnam           ###   ########.fr       */
+/*   Updated: 2023/05/24 12:25:44 by lletourn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	ft_echo(char **attr)
+int	ft_echo(char **args)
 {
 	int	n_option;
 	int	i;
 
 	n_option = 1;
-	if (!attr[1])
+	if (!args[1])
 		return (0);
 	i = 1;
-	while (attr[i] && ft_strlen(attr[i]) == ft_strlen("-n")
-		&& !ft_strncmp("-n", attr[i], ft_strlen("-n")))
+	while (args[i] && ft_strlen(args[i]) == ft_strlen("-n")
+		&& !ft_strncmp("-n", args[i], ft_strlen("-n")))
 	{
 		n_option = 0;
 		i++;
 	}
-	while (attr[i])
+	while (args[i])
 	{
-		ft_putstr_fd(attr[i++], 1);
-		if (attr[i + 1])
+		ft_putstr_fd(args[i++], 1);
+		if (args[i + 1])
 			write(1, " ", 1);
 	}
 	if (n_option)

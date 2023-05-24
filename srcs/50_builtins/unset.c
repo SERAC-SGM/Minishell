@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maaliber <maaliber@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lletourn <lletourn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 17:32:02 by maaliber          #+#    #+#             */
-/*   Updated: 2023/05/22 11:20:07 by maaliber         ###   ########.fr       */
+/*   Updated: 2023/05/24 12:25:44 by lletourn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,17 +38,17 @@ static void	delete_var(char *var, t_list **env)
 	}
 }
 
-int	ft_unset(char **attr, t_data *data)
+int	ft_unset(char **args, t_data *data)
 {
 	int		i;
 
 	i = 1;
-	while (attr[i])
+	while (args[i])
 	{
-		if (get_var_value(attr[i], data->env))
-			delete_var(attr[i], &data->env);
-		if (get_var_value(attr[i], data->set))
-			delete_var(attr[i], &data->set);
+		if (get_var_value(args[i], data->env))
+			delete_var(args[i], &data->env);
+		if (get_var_value(args[i], data->set))
+			delete_var(args[i], &data->set);
 		i++;
 	}
 	return (0);

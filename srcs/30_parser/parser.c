@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maaliber <maaliber@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lletourn <lletourn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 14:19:32 by maaliber          #+#    #+#             */
-/*   Updated: 2023/05/23 17:31:07 by maaliber         ###   ########.fr       */
+/*   Updated: 2023/05/24 12:25:44 by lletourn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,22 +43,22 @@ static void	add_attribute(t_tkn_lst *token, t_data *data, int proc_idx)
 	int	size;
 
 	size = get_cmd_size(token);
-	if (!data->cmds_tab[proc_idx].attr)
+	if (!data->cmds_tab[proc_idx].args)
 	{
-		data->cmds_tab[proc_idx].attr = ft_calloc(size + 1, sizeof(char *));
-		if (!data->cmds_tab[proc_idx].attr)
+		data->cmds_tab[proc_idx].args = ft_calloc(size + 1, sizeof(char *));
+		if (!data->cmds_tab[proc_idx].args)
 			return (error_msg(E_MEM, NULL, data), (void)0);
 	}
-	i = tab_size(data->cmds_tab[proc_idx].attr);
+	i = tab_size(data->cmds_tab[proc_idx].args);
 	if (i == 0)
 	{
-		data->cmds_tab[proc_idx].attr[i] = ft_strdup(token->content);
-		if (!data->cmds_tab[proc_idx].attr[i])
+		data->cmds_tab[proc_idx].args[i] = ft_strdup(token->content);
+		if (!data->cmds_tab[proc_idx].args[i])
 			return (error_msg(E_MEM, NULL, data), (void)0);
 		data->cmds_tab[proc_idx].name = token->content;
 	}
 	else
-		data->cmds_tab[proc_idx].attr[i] = token->content;
+		data->cmds_tab[proc_idx].args[i] = token->content;
 	data->cmds_tab[proc_idx].arg_count = i;
 	data->cmds_tab[proc_idx].process_index = proc_idx;
 }

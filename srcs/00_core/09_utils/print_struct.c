@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print_struct.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maaliber <maaliber@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lletourn <lletourn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 14:56:50 by maaliber          #+#    #+#             */
-/*   Updated: 2023/05/16 18:33:51 by maaliber         ###   ########.fr       */
+/*   Updated: 2023/05/24 12:25:44 by lletourn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	print_cmd(t_cmd *cmd)
 		return (printf("Error Parsing\n"), (void)0);
 	printf("\n-----------\nIndex:[%d]\n-----------\n", cmd->process_index);
 	printf("Args_count:%d\n", cmd->arg_count);
-	print_tab(cmd->attr);
+	print_tab(cmd->args);
 	printf("Infile:%s\n", cmd->infile);
 	printf("Here_doc:%d\n", cmd->here_doc);
 	printf("Limiter:%s\n", cmd->delimiter);

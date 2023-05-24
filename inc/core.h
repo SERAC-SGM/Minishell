@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   core.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maaliber <maaliber@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lletourn <lletourn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 14:48:27 by matnam            #+#    #+#             */
-/*   Updated: 2023/05/23 14:04:04 by maaliber         ###   ########.fr       */
+/*   Updated: 2023/05/24 12:24:55 by lletourn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,13 +95,24 @@ void	enable_signal(void);
 		// 05_error //
 		//////////////
 
+/*
+Displays an error message.
+*/
 void	error_msg(int err_id, char *item, t_data *data);
+/*
+Displays an error message.
+*/
 void	error_msg_cmd(int err_id, char *prefix, char *item);
+/*
+Displays an error message and exits.
+*/
 void	exit_error(int err_id, char *item, t_data *data);
 
 		/////////////
 		// 06_free //
 		/////////////
+
+
 void	clear_data(t_data *data);
 void	clear_exit(t_data *data);
 

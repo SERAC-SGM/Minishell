@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error_manager.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maaliber <maaliber@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lletourn <lletourn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 14:57:22 by maaliber          #+#    #+#             */
-/*   Updated: 2023/05/22 15:39:49 by maaliber         ###   ########.fr       */
+/*   Updated: 2023/05/24 12:30:41 by lletourn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,9 +37,24 @@ struct s_errdesc
 	{E_HEREDOC, "here_doc\n"},
 };
 
+void	error_msg(int error_id, char *item, t_data *data)
+{
+	char	*error_message;
+
+	(void)data;
+	if (item)
+		error_message = ft_strjoin(item, errdesc[error_id].msg);
+	else
+		error_message = ft_strdup(errdesc[error_id].msg);
+	if (!error_message)
+		return ;
+	ft_putstr_fd(error_message, 2);
+	free(error_message);
+}
+
 void	error_msg_cmd(int err_id, char *prefix, char *item)
 {
-	char	*err_msg;
+	char	*error_message;
 	char	*append;
 
 	append = NULL;
@@ -49,44 +64,29 @@ void	error_msg_cmd(int err_id, char *prefix, char *item)
 		append = ft_strdup(item);
 	else if (prefix)
 		append = ft_strdup(prefix);
-	err_msg = ft_strjoin_dup1(append, errdesc[err_id].msg);
-	if (!err_msg)
+	error_message = ft_strjoin_dup1(append, errdesc[err_id].msg);
+	if (!error_message)
 		return ;
-	ft_putstr_fd(err_msg, 2);
-	free(err_msg);
-}
-
-void	error_msg(int err_id, char *item, t_data *data)
-{
-	char	*err_msg;
-
-	(void)data;
-	if (item)
-		err_msg = ft_strjoin(item, errdesc[err_id].msg);
-	else
-		err_msg = ft_strdup(errdesc[err_id].msg);
-	if (!err_msg)
-		return ;
-	ft_putstr_fd(err_msg, 2);
-	free(err_msg);
+	ft_putstr_fd(error_message, 2);
+	free(error_message);
 }
 
 void	exit_error(int err_id, char *item, t_data *data)
 {
-	char	*err_msg;
+	char	*error_message;
 
 	if (err_id == E_STD)
 		perror("");
 	else if (err_id != E_NOMSG)
 	{
 		if (item)
-			err_msg = ft_strjoin(item, errdesc[err_id].msg);
+			error_message = ft_strjoin(item, errdesc[err_id].msg);
 		else
-			err_msg = ft_strdup(errdesc[err_id].msg);
-		if (!err_msg)
+			error_message = ft_strdup(errdesc[err_id].msg);
+		if (!error_message)
 			return ;
-		ft_putstr_fd(err_msg, 2);
-		free(err_msg);
+		ft_putstr_fd(error_message, 2);
+		free(error_message);
 	}
 	clear_data(data);
 	exit(g_sig.error_status);

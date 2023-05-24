@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   files_manager.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maaliber <maaliber@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lletourn <lletourn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/06 12:07:41 by lletourn          #+#    #+#             */
-/*   Updated: 2023/05/23 14:16:35 by maaliber         ###   ########.fr       */
+/*   Updated: 2023/05/24 12:35:24 by lletourn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,17 +22,17 @@ void	open_files(t_cmd *cmd)
 {
 	if (cmd->infile)
 	{
-		cmd->fd_in = open(cmd->infile, O_RDONLY, 644);
+		cmd->fd_in = open(cmd->infile, O_RDONLY, 0644);
 		check_open_error(cmd->fd_in, cmd);
 	}
 	if (cmd->outfile)
 	{
 		if (!cmd->append)
 		cmd->fd_out = open(cmd->outfile,
-					O_WRONLY | O_TRUNC | O_CREAT, 644);
+					O_WRONLY | O_TRUNC | O_CREAT, 0644);
 		else
 			cmd->fd_out = open(cmd->outfile,
-					O_WRONLY | O_APPEND | O_CREAT, 644);
+					O_WRONLY | O_APPEND | O_CREAT, 0644);
 		check_open_error(cmd->fd_out, cmd);
 	}
 }

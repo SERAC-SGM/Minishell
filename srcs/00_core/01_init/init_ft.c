@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_ft.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maaliber <maaliber@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lletourn <lletourn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 14:51:50 by maaliber          #+#    #+#             */
-/*   Updated: 2023/05/23 17:31:36 by maaliber         ###   ########.fr       */
+/*   Updated: 2023/05/24 12:27:05 by lletourn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,14 +41,15 @@ void	init_cmd(t_cmd *cmd)
 {
 	cmd->process_index = 0;
 	cmd->arg_count = 0;
-	cmd->attr = NULL;
+	cmd->name = NULL;
+	cmd->args = NULL;
 	cmd->infile = NULL;
 	cmd->fd_in = STDIN_FILENO;
 	cmd->here_doc = 0;
+	cmd->delimiter = NULL;
 	cmd->outfile = NULL;
 	cmd->fd_out = STDOUT_FILENO;
 	cmd->append = 0;
-	cmd->delimiter = NULL;
 }
 
 void	init_data(t_data *data, char *env[])
@@ -97,12 +98,12 @@ void	reset_data(t_data *data)
 	data->env_path = get_envpath(data->env);
 	data->process_nb = 1;
 	clear_token_list(&data->token_list);
-	while (data->cmds_tab[i].attr)
+	while (data->cmds_tab[i].args)
 	{
-		if (data->cmds_tab[i].attr[0])
-			free(data->cmds_tab[i].attr[0]);
-		free(data->cmds_tab[i].attr);
-		data->cmds_tab[i].attr = NULL;
+		if (data->cmds_tab[i].args[0])
+			free(data->cmds_tab[i].args[0]);
+		free(data->cmds_tab[i].args);
+		data->cmds_tab[i].args = NULL;
 		init_cmd(&data->cmds_tab[i]);
 		i++;
 	}

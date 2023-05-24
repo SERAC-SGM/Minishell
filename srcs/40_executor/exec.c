@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maaliber <maaliber@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lletourn <lletourn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 13:38:49 by lletourn          #+#    #+#             */
-/*   Updated: 2023/05/23 17:27:05 by maaliber         ###   ########.fr       */
+/*   Updated: 2023/05/24 12:25:44 by lletourn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,9 +51,9 @@ static int	is_builtin(char *name)
 
 static void	exec_single_cmd(t_data *data, int proc_idx, char **env)
 {
-	if (!data->cmds_tab[proc_idx].attr)
+	if (!data->cmds_tab[proc_idx].args)
 		return ;
-	if (is_builtin(data->cmds_tab[proc_idx].attr[0]))
+	if (is_builtin(data->cmds_tab[proc_idx].args[0]))
 		g_sig.error_status = exec_builtin(data, proc_idx);
 	else
 	{
@@ -76,7 +76,7 @@ static void	exec_multiple_cmd(t_data *data, int proc_idx, char **env)
 	if (g_sig.pid == 0)
 	{
 		update_signal();
-		if (is_builtin(data->cmds_tab[proc_idx].attr[0]))
+		if (is_builtin(data->cmds_tab[proc_idx].args[0]))
 			g_sig.error_status = exec_builtin(data, proc_idx);
 		else
 			exec_native(data, proc_idx, env);

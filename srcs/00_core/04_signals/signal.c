@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signal.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maaliber <maaliber@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lletourn <lletourn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 15:57:15 by maaliber          #+#    #+#             */
-/*   Updated: 2023/05/23 14:03:58 by maaliber         ###   ########.fr       */
+/*   Updated: 2023/05/24 12:27:55 by lletourn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,23 +24,23 @@ void	handler(int signo)
 
 void	update_signal(void)
 {
-	struct sigaction	act;
+	struct sigaction	action;
 
-	ft_memset(&act, 0, sizeof(act));
-	act.sa_handler = &handler;
-	sigaction(SIGINT, &act, NULL);
-	sigaction(SIGQUIT, &act, NULL);
+	ft_memset(&action, 0, sizeof(action));
+	action.sa_handler = &handler;
+	sigaction(SIGINT, &action, NULL);
+	sigaction(SIGQUIT, &action, NULL);
 }
 
 void	enable_signal(void)
 {
-	struct sigaction	act1;
-	struct sigaction	act2;
+	struct sigaction	action1;
+	struct sigaction	action2;
 
-	ft_memset(&act1, 0, sizeof(act1));
-	ft_memset(&act2, 0, sizeof(act2));
-	act1.sa_handler = &handler;
-	act2.sa_handler = SIG_IGN;
-	sigaction(SIGINT, &act1, NULL);
-	sigaction(SIGQUIT, &act2, NULL);
+	ft_memset(&action1, 0, sizeof(action1));
+	ft_memset(&action2, 0, sizeof(action2));
+	action1.sa_handler = &handler;
+	action2.sa_handler = SIG_IGN;
+	sigaction(SIGINT, &action1, NULL);
+	sigaction(SIGQUIT, &action2, NULL);
 }
