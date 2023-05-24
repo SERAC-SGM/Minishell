@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lletourn <lletourn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: matnam <matnam@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 11:10:57 by lletourn          #+#    #+#             */
-/*   Updated: 2023/05/24 12:25:44 by lletourn         ###   ########.fr       */
+/*   Updated: 2023/05/24 17:30:06 by matnam           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	ft_echo(char **args)
 
 	n_option = 1;
 	if (!args[1])
-		return (0);
+		return (write(1, "\n", 1), 0);
 	i = 1;
 	while (args[i] && ft_strlen(args[i]) == ft_strlen("-n")
 		&& !ft_strncmp("-n", args[i], ft_strlen("-n")))
