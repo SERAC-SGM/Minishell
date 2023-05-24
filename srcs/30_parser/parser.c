@@ -6,7 +6,7 @@
 /*   By: maaliber <maaliber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 14:19:32 by maaliber          #+#    #+#             */
-/*   Updated: 2023/05/22 16:10:01 by maaliber         ###   ########.fr       */
+/*   Updated: 2023/05/23 17:31:07 by maaliber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,6 @@ static void	add_attribute(t_tkn_lst *token, t_data *data, int proc_idx)
 			return (error_msg(E_MEM, NULL, data), (void)0);
 	}
 	i = tab_size(data->cmds_tab[proc_idx].attr);
-	
 	if (i == 0)
 	{
 		data->cmds_tab[proc_idx].attr[i] = ft_strdup(token->content);

@@ -3,19 +3,43 @@
 /*                                                        :::      ::::::::   */
 /*   exec_builtin.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lletourn <lletourn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: maaliber <maaliber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 13:38:36 by lletourn          #+#    #+#             */
-/*   Updated: 2023/05/23 15:32:22 by lletourn         ###   ########.fr       */
+/*   Updated: 2023/05/23 17:33:08 by maaliber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+static void	save_reset_stdin_out(int i)
+{
+	static int	saved_stdin;
+	static int	saved_stdout;
+
+	if (i == 0)
+	{
+		saved_stdin = dup(STDIN_FILENO);
+		saved_stdout = dup(STDOUT_FILENO);
+	}
+	else
+	{
+		dup2(saved_stdin, STDIN_FILENO);
+		dup2(saved_stdout, STDOUT_FILENO);
+		close(saved_stdin);
+		close(saved_stdout);
+	}
+}
+
 int	exec_builtin(t_data *data, int proc_idx)
 {
 	int		ret;
 
+	save_reset_stdin_out(0);
+	dup_file(data, proc_idx);
+	dup_pipe(data, proc_idx);
+	close_files(&data->cmds_tab[proc_idx]);
+	close_pipe(data);
 	ret = 0;
 	if (ft_strcmp(data->cmds_tab[proc_idx].attr[0], "echo") == 0)
 		ret = ft_echo(data->cmds_tab[proc_idx].attr);
@@ -31,5 +55,6 @@ int	exec_builtin(t_data *data, int proc_idx)
 		ft_unset(data->cmds_tab[proc_idx].attr, data);
 	if (ft_strcmp(data->cmds_tab[proc_idx].attr[0], "exit") == 0)
 		ft_exit();
+	save_reset_stdin_out(1);
 	return (ret);
 }

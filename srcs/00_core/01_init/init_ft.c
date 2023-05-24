@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_ft.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lletourn <lletourn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: maaliber <maaliber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 14:51:50 by maaliber          #+#    #+#             */
-/*   Updated: 2023/05/23 12:14:04 by lletourn         ###   ########.fr       */
+/*   Updated: 2023/05/23 17:31:36 by maaliber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,8 +57,11 @@ void	init_data(t_data *data, char *env[])
 
 	i = 0;
 	ft_bzero(data, sizeof(t_data));
-	//while (i < OPEN_MAX)
-	//	data->fd[i++] = -1;
+	while (i++ < OPEN_MAX / 2)
+	{
+		data->fd[i][0] = -1;
+		data->fd[i][1] = -1;
+	}
 	data->process_nb = 1;
 	init_env(data, env);
 	return ;
@@ -92,6 +95,7 @@ void	reset_data(t_data *data)
 	data->cmd_line = NULL;
 	free_tab(data->env_path);
 	data->env_path = get_envpath(data->env);
+	data->process_nb = 1;
 	clear_token_list(&data->token_list);
 	while (data->cmds_tab[i].attr)
 	{
@@ -103,6 +107,9 @@ void	reset_data(t_data *data)
 		i++;
 	}
 	i = 0;
-	//while (i < OPEN_MAX)
-	//	data->fd[i++] = -1;
+	while (i++ < OPEN_MAX / 2)
+	{
+		data->fd[i][0] = -1;
+		data->fd[i][1] = -1;
+	}
 }

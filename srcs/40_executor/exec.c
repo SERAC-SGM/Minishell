@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lletourn <lletourn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: maaliber <maaliber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 13:38:49 by lletourn          #+#    #+#             */
-/*   Updated: 2023/05/23 15:36:19 by lletourn         ###   ########.fr       */
+/*   Updated: 2023/05/23 17:27:05 by maaliber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,14 +66,10 @@ static void	exec_single_cmd(t_data *data, int proc_idx, char **env)
 			exec_native(data, proc_idx, env);
 		}
 	}
-	if (g_sig.pid == 0)
-		clear_exit(data);
-	close_files(&data->cmds_tab[proc_idx]);
 }
 
 static void	exec_multiple_cmd(t_data *data, int proc_idx, char **env)
 {
-	open_pipe(data);
 	g_sig.pid = fork();
 	if (g_sig.pid == -1)
 		exit_error(E_FORK, 0, data);
@@ -84,10 +80,7 @@ static void	exec_multiple_cmd(t_data *data, int proc_idx, char **env)
 			g_sig.error_status = exec_builtin(data, proc_idx);
 		else
 			exec_native(data, proc_idx, env);
-		if (g_sig.pid == 0)
-			clear_exit(data);
-		close_files(&data->cmds_tab[proc_idx]);
-		close_pipe(data);
+		clear_exit(data);
 	}
 }
 
@@ -95,17 +88,17 @@ int	exec_cmd_line(t_data *data)
 {
 	char	**env;
 	int		proc_idx;
-	int		i;
 
 	env = env_to_tab(data->env);
-	i = -1;
-	while (++i < data->process_nb)
+	proc_idx = -1;
+	while (++proc_idx < data->process_nb)
 	{
-		if (data->cmds_tab[i].here_doc)
-			input_heredoc(&data->cmds_tab[i], data);
-		open_files(&data->cmds_tab[i]);
+		if (data->cmds_tab[proc_idx].here_doc)
+			input_heredoc(&data->cmds_tab[proc_idx], data);
+		open_files(&data->cmds_tab[proc_idx]);
 	}
 	proc_idx = -1;
+	open_pipe(data);
 	while (++proc_idx < data->process_nb)
 	{
 		if (data->process_nb == 1)
@@ -114,6 +107,7 @@ int	exec_cmd_line(t_data *data)
 			exec_multiple_cmd(data, proc_idx, env);
 		close_files(&data->cmds_tab[proc_idx]);
 	}
+	close_pipe(data);
 	free(env);
 	return (0);
 }
