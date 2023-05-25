@@ -3,33 +3,47 @@
 /*                                                        :::      ::::::::   */
 /*   expander.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maaliber <maaliber@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lletourn <lletourn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 14:19:34 by maaliber          #+#    #+#             */
-/*   Updated: 2023/05/22 14:50:50 by maaliber         ###   ########.fr       */
+/*   Updated: 2023/05/25 14:30:08 by lletourn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	word_len(char *str)
+static int	is_special_character(char c)
+{
+	if ((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z')
+		|| (c >= '0' && c <= '9') || c == '_')
+		return (0);
+	return (1);
+}
+
+int	word_len(char *str, int expander)
 {
 	int	i;
 
-	i = 0;
+	i = -1;
 	if (!str)
 		return (0);
-	while (str[i] && !ft_isspace(str[i]))
-		i++;
+	while (str[++i] && !ft_isspace(str[i]))
+	{
+		if (expander && is_special_character(str[i])) // pas fini mais là g la flemme
+			break ;
+	}
 	return (i);
 }
 
-char	*cpy_word(char *str)
+/*
+Duplicates (with malloc) the string passed as argument.
+*/
+static char	*cpy_word(char *str)
 {
 	char	*word;
 	int		l;
 
-	l = word_len(str);
+	l = word_len(str, 1);
 	word = malloc((l + 1) * sizeof(char));
 	if (!word)
 		return (NULL);
@@ -37,9 +51,10 @@ char	*cpy_word(char *str)
 	return (word);
 }
 
-void	replace_content(char **content, char *sub, int pos)
+//faut garder les caractères spéciaux à la fin mais comme dit plus haut là j'ai la flemme je suis en pleine digestion il fait beau il fait chaud j'ai envie de me casser putain il est que 14h29 j'ai qu'une hâte c'est de me barrer de cette école ET PUTAIN ALLUMEZ LA CLIM
+static void	replace_content(char **content, char *sub, int pos)
 {
-	int		l;
+	int		len;
 	int		var_l;
 	int		sub_l;
 	int		offset;
@@ -47,16 +62,16 @@ void	replace_content(char **content, char *sub, int pos)
 
 	if (!*content)
 		return ;
-	l = ft_strlen(*content);
-	var_l = word_len(&(*content)[pos]);
+	len = ft_strlen(*content);
+	var_l = word_len(&(*content)[pos], 1);
 	sub_l = ft_strlen(sub);
 	offset = sub_l - var_l;
-	new = ft_calloc(l + offset + 1, sizeof(char));
+	new = ft_calloc(len + offset + 1, sizeof(char));
 	if (!new)
 		return ;
 	ft_memcpy(new, *content, pos);
 	ft_memcpy(new + pos, sub, sub_l);
-	ft_memcpy(new + pos + sub_l, *content + pos + var_l, l - pos - var_l);
+	ft_memcpy(new + pos + sub_l, *content + pos + var_l, len - pos - var_l);
 	free(*content);
 	*content = new;
 }

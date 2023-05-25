@@ -1,3 +1,6 @@
-echo abc def ghij -> dernier espace saute
 echoWer -> command not found mais $0 renvoie 0 au lieu de 127
-echo -nnnnnnnnnnnnnn -> marche pas
+ok -> command not found et print un "1" a la nouvelle ligne
+echo $?$ doit afficher 0$ mais affiche newline
+echo $:$= doit afficher $:$= mais affiche newline
+====> echo $ doit afficher $ mais ça marche pas mskn
+echo $HOME% casse l'expandeur

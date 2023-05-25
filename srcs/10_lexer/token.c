@@ -6,7 +6,7 @@
 /*   By: lletourn <lletourn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 16:54:54 by maaliber          #+#    #+#             */
-/*   Updated: 2023/05/19 13:22:01 by lletourn         ###   ########.fr       */
+/*   Updated: 2023/05/25 13:58:33 by lletourn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ t_tkn_lst	*split_input(char **store, char *add)
 	tkn_list = NULL;
 	while (*add)
 	{
-		wrd_l = word_len(add);
+		wrd_l = word_len(add, 0);
 		if ((size_t)wrd_l == ft_strlen(add))
 			return (*store = ft_strjoin_dup1(*store, add), tkn_list);
 		content = ft_calloc(ft_strlen(*store) + wrd_l + 1, sizeof(char));
