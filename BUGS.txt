@@ -1,0 +1,3 @@
+echo abc def ghij -> dernier espace saute
+echoWer -> command not found mais $0 renvoie 0 au lieu de 127
+echo -nnnnnnnnnnnnnn -> marche pas
