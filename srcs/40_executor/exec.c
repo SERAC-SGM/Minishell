@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lletourn <lletourn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: matnam <matnam@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 13:38:49 by lletourn          #+#    #+#             */
-/*   Updated: 2023/05/24 12:25:44 by lletourn         ###   ########.fr       */
+/*   Updated: 2023/05/24 22:14:17 by matnam           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,12 @@ static void	exec_multiple_cmd(t_data *data, int proc_idx, char **env)
 		exit_error(E_FORK, 0, data);
 	if (g_sig.pid == 0)
 	{
+		if (data->cmds_tab[proc_idx].here_doc == -1)
+		{
+			close_files(&data->cmds_tab[proc_idx]);
+			close_pipe(data);
+			exit_error(E_NOMSG, 0, data);
+		}
 		update_signal();
 		if (is_builtin(data->cmds_tab[proc_idx].args[0]))
 			g_sig.error_status = exec_builtin(data, proc_idx);
@@ -94,7 +100,10 @@ int	exec_cmd_line(t_data *data)
 	while (++proc_idx < data->process_nb)
 	{
 		if (data->cmds_tab[proc_idx].here_doc)
-			input_heredoc(&data->cmds_tab[proc_idx], data);
+		{
+			if (!input_heredoc(&data->cmds_tab[proc_idx], data))
+				data->cmds_tab[proc_idx].here_doc = -1;
+		}
 		open_files(&data->cmds_tab[proc_idx]);
 	}
 	proc_idx = -1;

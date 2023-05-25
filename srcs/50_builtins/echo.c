@@ -6,7 +6,7 @@
 /*   By: lletourn <lletourn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 11:10:57 by lletourn          #+#    #+#             */
-/*   Updated: 2023/05/25 11:22:20 by lletourn         ###   ########.fr       */
+/*   Updated: 2023/05/25 11:26:43 by lletourn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	ft_echo(char **args)
 
 	end_newline = 1;
 	if (!args[1])
-		return (0);
+		return (write(1, "\n", 1), 0);
 	i = 0;
 	while (args[++i] && args[i][0] == '-')
 	{
