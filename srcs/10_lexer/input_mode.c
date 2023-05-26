@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   input_mode.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maaliber <maaliber@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lletourn <lletourn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 19:04:17 by maaliber          #+#    #+#             */
-/*   Updated: 2023/05/22 14:48:28 by maaliber         ###   ########.fr       */
+/*   Updated: 2023/05/26 16:09:01 by lletourn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ char	*standard_mode(char **str, t_list *env, t_list *set)
 	int		ex;
 	int		i;
 
+	(void)set;
 	ex = 0;
 	i = 0;
 	while ((*str)[i] && !ft_isspace((*str)[i]) && !is_special((*str) + i)
@@ -56,7 +57,7 @@ char	*standard_mode(char **str, t_list *env, t_list *set)
 		i++;
 	content = ft_substr(*str, 0, i);
 	if (ex)
-		expand(&content, env, set);
+		expand(&content, env);
 	*str += i;
 	return (content);
 }
@@ -95,6 +96,7 @@ char	*double_quote_mode(char **str, t_list *env, t_list *set)
 	int		ex;
 	int		i;
 
+	(void)set;
 	ex = 0;
 	i = 1;
 	while ((*str)[i] && (*str)[i] != '\"')
@@ -106,7 +108,7 @@ char	*double_quote_mode(char **str, t_list *env, t_list *set)
 	content = ft_substr(*str, 0, i);
 	trim_char(&content, '\"');
 	if (ex)
-		expand(&content, env, set);
+		expand(&content, env);
 	*str += i + 1;
 	return (content);
 }

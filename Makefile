@@ -142,6 +142,7 @@ SRCS += lexer.c
 
 #20_expander
 SRCS += expander.c
+SRCS += expander_utils.c
 
 #30_parser
 SRCS += parser.c
