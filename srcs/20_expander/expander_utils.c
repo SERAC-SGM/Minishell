@@ -6,7 +6,7 @@
 /*   By: lletourn <lletourn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 15:50:10 by lletourn          #+#    #+#             */
-/*   Updated: 2023/05/26 17:08:19 by lletourn         ###   ########.fr       */
+/*   Updated: 2023/05/26 17:54:10 by lletourn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	word_len(char *str, int expander)
 		return (0);
 	while (str[++i] && !ft_isspace(str[i]))
 	{
-		if (expander && !isalnum(str[i]))
+		if (expander && !isalnum(str[i]) && str[i] == '$')
 			break ;
 	}
 	return (i);

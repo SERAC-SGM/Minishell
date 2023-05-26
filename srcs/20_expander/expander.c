@@ -6,7 +6,7 @@
 /*   By: lletourn <lletourn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 14:19:34 by maaliber          #+#    #+#             */
-/*   Updated: 2023/05/26 17:07:50 by lletourn         ###   ########.fr       */
+/*   Updated: 2023/05/26 17:52:54 by lletourn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,19 @@ static char	*get_special_characters(char *content)
 	int	i;
 
 	i = 0;
-	while (content[++i] && ft_isalnum(content[i]))
+	while (content[++i] && ft_isalnum(content[i]) && content[i] != '$')
 		;
 	if (!content[i])
 		return (NULL);
 	return (ft_strdup(&content[i]));
 }
+
+// static char	*replace_content(char **content, char *new_str, int pos)
+// {
+// 	char	*new;
+
+// 	new = ft_calloc(len_tot + )
+// }
 
 /*
 Replaces the content of the variable by its value. If non-alphanumeric
@@ -43,12 +50,17 @@ static void	replace_content(char **content, char *new_str, int pos)
 		return ;
 	special_characters = get_special_characters(*content);
 	len_tot = ft_strlen(*content);
+	printf("content = %s\n", *content);
 	len_init = word_len(&(*content)[pos], 1);
+	printf("pos = %d\n", pos);
+	printf("len pos = %d\n", len_init);
+	printf("content[pos] = %s\n", &(*content)[pos]);
 	len_new_str = ft_strlen(new_str);
 	new = ft_calloc(len_tot + (len_new_str - len_init) + 1, sizeof(char));
 	if (!new)
 		return ;
 	ft_memcpy(new + pos, new_str, len_new_str);
+	ft_printf("memcpy = %s\n", new);
 	free(*content);
 	if (special_characters)
 	{
@@ -58,6 +70,7 @@ static void	replace_content(char **content, char *new_str, int pos)
 	else
 		*content = new;
 	free(special_characters);
+	printf("\n\n");
 }
 
 /*
@@ -75,9 +88,10 @@ void	expand(char **content, t_list *env)
 	i = 0;
 	while ((*content)[i])
 	{
-		if ((*content)[i] == '$')
+		if ((*content)[i] == '$' && (*content)[i + 1])
 		{
 			to_find = cpy_word(*content + i + 1);
+			printf("to find = %s\n\n", to_find);
 			if (ft_strcmp(to_find, "?") == 0)
 				value = ft_itoa(g_sig.error_status);
 			else
