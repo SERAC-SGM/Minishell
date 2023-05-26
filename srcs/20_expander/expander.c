@@ -6,87 +6,70 @@
 /*   By: lletourn <lletourn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 14:19:34 by maaliber          #+#    #+#             */
-/*   Updated: 2023/05/25 14:30:08 by lletourn         ###   ########.fr       */
+/*   Updated: 2023/05/26 17:07:50 by lletourn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static int	is_special_character(char c)
-{
-	if ((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z')
-		|| (c >= '0' && c <= '9') || c == '_')
-		return (0);
-	return (1);
-}
-
-int	word_len(char *str, int expander)
+/*
+Duplicates the ending non-alphanumeric characters.
+*/
+static char	*get_special_characters(char *content)
 {
 	int	i;
 
-	i = -1;
-	if (!str)
-		return (0);
-	while (str[++i] && !ft_isspace(str[i]))
-	{
-		if (expander && is_special_character(str[i])) // pas fini mais là g la flemme
-			break ;
-	}
-	return (i);
+	i = 0;
+	while (content[++i] && ft_isalnum(content[i]))
+		;
+	if (!content[i])
+		return (NULL);
+	return (ft_strdup(&content[i]));
 }
 
 /*
-Duplicates (with malloc) the string passed as argument.
+Replaces the content of the variable by its value. If non-alphanumeric
+characters are present at the end, they are appened to the value.
 */
-static char	*cpy_word(char *str)
+static void	replace_content(char **content, char *new_str, int pos)
 {
-	char	*word;
-	int		l;
-
-	l = word_len(str, 1);
-	word = malloc((l + 1) * sizeof(char));
-	if (!word)
-		return (NULL);
-	ft_strlcpy(word, str, l + 1);
-	return (word);
-}
-
-//faut garder les caractères spéciaux à la fin mais comme dit plus haut là j'ai la flemme je suis en pleine digestion il fait beau il fait chaud j'ai envie de me casser putain il est que 14h29 j'ai qu'une hâte c'est de me barrer de cette école ET PUTAIN ALLUMEZ LA CLIM
-static void	replace_content(char **content, char *sub, int pos)
-{
-	int		len;
-	int		var_l;
-	int		sub_l;
-	int		offset;
+	int		len_tot;
+	int		len_init;
+	int		len_new_str;
 	char	*new;
+	char	*special_characters;
 
 	if (!*content)
 		return ;
-	len = ft_strlen(*content);
-	var_l = word_len(&(*content)[pos], 1);
-	sub_l = ft_strlen(sub);
-	offset = sub_l - var_l;
-	new = ft_calloc(len + offset + 1, sizeof(char));
+	special_characters = get_special_characters(*content);
+	len_tot = ft_strlen(*content);
+	len_init = word_len(&(*content)[pos], 1);
+	len_new_str = ft_strlen(new_str);
+	new = ft_calloc(len_tot + (len_new_str - len_init) + 1, sizeof(char));
 	if (!new)
 		return ;
-	ft_memcpy(new, *content, pos);
-	ft_memcpy(new + pos, sub, sub_l);
-	ft_memcpy(new + pos + sub_l, *content + pos + var_l, len - pos - var_l);
+	ft_memcpy(new + pos, new_str, len_new_str);
 	free(*content);
-	*content = new;
+	if (special_characters)
+	{
+		*content = ft_strjoin(new, special_characters);
+		free(new);
+	}
+	else
+		*content = new;
+	free(special_characters);
 }
 
 /*
-Expand variable followed by $ in format by the corresponding value in env
+Expand variable followed by $ in format by the corresponding valueue in env
 • $ is not iterpreted when into single quote
 */
-void	expand(char **content, t_list *env, t_list *set)
+void	expand(char **content, t_list *env)
 {
 	char	*to_find;
-	char	*val;
+	char	*value;
 	int		i;
 
-	(void)set;
 	if (!*content)
 		return ;
 	i = 0;
@@ -96,13 +79,13 @@ void	expand(char **content, t_list *env, t_list *set)
 		{
 			to_find = cpy_word(*content + i + 1);
 			if (ft_strcmp(to_find, "?") == 0)
-				val = ft_itoa(g_sig.error_status);
+				value = ft_itoa(g_sig.error_status);
 			else
-				val = get_var_value(to_find, env);
-			replace_content(content, val, i);
-			free(to_find);
+				value = get_var_value(to_find, env);
+			replace_content(content, value, i);
 			if (ft_strcmp(to_find, "?") == 0)
-				free(val);
+				free(value);
+			free(to_find);
 		}
 		else
 			i++;
