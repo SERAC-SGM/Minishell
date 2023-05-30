@@ -6,3 +6,19 @@ echo $:$= doit afficher $:$= mais affiche newline --> OK
 echo $HOME% casse l'expandeur -> doit afficher /path/de/home% (caractères spéciaux de fin sont pas pris en compte dans l'expandeur) --> OK
 
 lors de plusieurs redirection outfile creer les fichiers et ecrire que dans le dernier (il cree que le dernier)
+Ignorer les signaux lorsque une commande est en execution
+Ajouter un etat pour le here_doc : sigint arret de l'exec
+Expander arrete la tokenization quand variable vide
+Parsing ignorer les signaux 
+ISATTY lorsque la rediction est un terminal 
+Simple pipe SEGFAULT
+cd pas d'arguments
+"." et ".." ne renvoit pas command not found
+update PWD et OLDPWD avec cd
+Rediction vide ambigious redirection ls > $OPIHUOHI
+echo lol > /dev/full check if printf return -1 error : No space left on device
+history not update si ligne vide 
+update exit status on last cmd executed
+$$ must print pid
+fonction variadique d'erreur pour le gestionnaire
+Revoir wait process pour avoir le dernier status dans le buildin
