@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   core.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: matnam <matnam@student.42.fr>              +#+  +:+       +#+        */
+/*   By: maaliber <maaliber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 14:48:27 by matnam            #+#    #+#             */
-/*   Updated: 2023/05/24 22:01:03 by matnam           ###   ########.fr       */
+/*   Updated: 2023/05/30 17:23:51 by maaliber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,7 +111,6 @@ void	exit_error(int err_id, char *item, t_data *data);
 		/////////////
 		// 06_free //
 		/////////////
-
 
 void	clear_data(t_data *data);
 void	clear_exit(t_data *data);

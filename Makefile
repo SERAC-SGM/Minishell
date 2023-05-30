@@ -14,7 +14,11 @@ PROJECT_NAME = Minishell
 CC = cc 
 
 # Compiler Flags
-CFLAGS = -Wall -Wextra -Werror -g
+CFLAGS = -Wall -Wextra -Werror
+
+ifeq ($(debug), true)
+	CFLAGS +=  -g3 -fsanitize=address,undefined
+endif
 
 #______________________________________________________________________________#
 ############################### Libraries ######################################
@@ -142,7 +146,6 @@ SRCS += lexer.c
 
 #20_expander
 SRCS += expander.c
-SRCS += expander_utils.c
 
 #30_parser
 SRCS += parser.c

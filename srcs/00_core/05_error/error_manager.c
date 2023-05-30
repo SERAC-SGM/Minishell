@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error_manager.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: matnam <matnam@student.42.fr>              +#+  +:+       +#+        */
+/*   By: maaliber <maaliber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 14:57:22 by maaliber          #+#    #+#             */
-/*   Updated: 2023/05/24 22:46:30 by matnam           ###   ########.fr       */
+/*   Updated: 2023/05/30 17:28:44 by maaliber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,10 @@ struct s_errdesc
 	{E_PIPE, "pipe\n", 0},
 	{E_FORK, "fork\n", 0},
 	{E_ENV, "environment\n", 0},
-	{E_CMD_NOT_FOUND, ": command not found\n", 1},
-	{E_HEREDOC, "warning: here-document at line 38 delimited by end-of-file", 1},
+	{E_CMD_NOT_FOUND, ": command not found\n", 127},
+	{E_INVALID_ID, ": not a valid identifier\n", 1},
+	{E_HEREDOC,
+		"warning: here-document at line 38 delimited by end-of-file, wanted >", 0},
 };
 
 void	error_msg(int err_id, char *item, t_data *data)
@@ -93,6 +95,5 @@ void	exit_error(int err_id, char *item, t_data *data)
 	}
 	clear_data(data);
 	g_sig.error_status = errdesc[err_id].err_no;
-	ft_putnbr_fd(g_sig.error_status, 1);
 	exit(g_sig.error_status);
 }

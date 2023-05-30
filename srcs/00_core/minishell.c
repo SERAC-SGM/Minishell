@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lletourn <lletourn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: maaliber <maaliber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 14:58:49 by maaliber          #+#    #+#             */
-/*   Updated: 2023/05/25 11:44:27 by lletourn         ###   ########.fr       */
+/*   Updated: 2023/05/30 18:02:45 by maaliber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ static void	wait_process(void)
 		;
 	if (WIFEXITED(status))
 		g_sig.error_status = WEXITSTATUS(status);
+	else if (WIFSIGNALED(status))
+		g_sig.error_status = WTERMSIG(status) + 128;
 }
 
 int	main(int ac, char *av[], char *env[])
@@ -37,7 +39,6 @@ int	main(int ac, char *av[], char *env[])
 	while (!g_sig.exit)
 	{
 		reset_data(&data);
-		//data.cmd_line = readline("\033[1;34m42\033[1;36mniquelabac\033[0m▸");
 		data.cmd_line = readline("minishell$");
 		if (!data.cmd_line)
 			break ;

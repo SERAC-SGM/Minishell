@@ -3,74 +3,75 @@
 /*                                                        :::      ::::::::   */
 /*   expander.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lletourn <lletourn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: maaliber <maaliber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 14:19:34 by maaliber          #+#    #+#             */
-/*   Updated: 2023/05/26 17:52:54 by lletourn         ###   ########.fr       */
+/*   Updated: 2023/05/30 17:22:47 by maaliber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 /*
-Duplicates the ending non-alphanumeric characters.
+Returns the variable length delimited by spaces, 
+non alphanumeric or underscores characters 
 */
-static char	*get_special_characters(char *content)
+static int	var_len(char *str)
 {
 	int	i;
 
-	i = 0;
-	while (content[++i] && ft_isalnum(content[i]) && content[i] != '$')
-		;
-	if (!content[i])
-		return (NULL);
-	return (ft_strdup(&content[i]));
+	i = 1;
+	if (!str)
+		return (0);
+	if (ft_isdigit(str[1]) || str[1] == '?')
+		return (2);
+	while (str[i] && (ft_isalnum(str[i]) || str[i] == '_'))
+		i++;
+	return (i);
 }
 
-// static char	*replace_content(char **content, char *new_str, int pos)
-// {
-// 	char	*new;
+/*
+Duplicates (with malloc) the string passed as argument.
+*/
+static char	*cpy_word(char *str)
+{
+	char	*word;
+	int		len;
 
-// 	new = ft_calloc(len_tot + )
-// }
+	len = var_len(str);
+	word = malloc((len + 1) * sizeof(char));
+	if (!word)
+		return (NULL);
+	ft_strlcpy(word, str, len + 1);
+	return (word);
+}
 
 /*
 Replaces the content of the variable by its value. If non-alphanumeric
 characters are present at the end, they are appened to the value.
 */
-static void	replace_content(char **content, char *new_str, int pos)
+static void	replace_content(char **content, char *sub, int pos)
 {
-	int		len_tot;
-	int		len_init;
-	int		len_new_str;
+	int		len;
+	int		var_l;
+	int		sub_l;
+	int		offset;
 	char	*new;
-	char	*special_characters;
 
 	if (!*content)
 		return ;
-	special_characters = get_special_characters(*content);
-	len_tot = ft_strlen(*content);
-	printf("content = %s\n", *content);
-	len_init = word_len(&(*content)[pos], 1);
-	printf("pos = %d\n", pos);
-	printf("len pos = %d\n", len_init);
-	printf("content[pos] = %s\n", &(*content)[pos]);
-	len_new_str = ft_strlen(new_str);
-	new = ft_calloc(len_tot + (len_new_str - len_init) + 1, sizeof(char));
+	len = ft_strlen(*content);
+	var_l = var_len(&(*content)[pos]);
+	sub_l = ft_strlen(sub);
+	offset = sub_l - var_l;
+	new = ft_calloc(len + offset + 1, sizeof(char));
 	if (!new)
 		return ;
-	ft_memcpy(new + pos, new_str, len_new_str);
-	ft_printf("memcpy = %s\n", new);
+	ft_memcpy(new, *content, pos);
+	ft_memcpy(new + pos, sub, sub_l);
+	ft_memcpy(new + pos + sub_l, *content + pos + var_l, len - pos - var_l);
 	free(*content);
-	if (special_characters)
-	{
-		*content = ft_strjoin(new, special_characters);
-		free(new);
-	}
-	else
-		*content = new;
-	free(special_characters);
-	printf("\n\n");
+	*content = new;
 }
 
 /*
@@ -91,7 +92,6 @@ void	expand(char **content, t_list *env)
 		if ((*content)[i] == '$' && (*content)[i + 1])
 		{
 			to_find = cpy_word(*content + i + 1);
-			printf("to find = %s\n\n", to_find);
 			if (ft_strcmp(to_find, "?") == 0)
 				value = ft_itoa(g_sig.error_status);
 			else

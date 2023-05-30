@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lletourn <lletourn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: maaliber <maaliber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 13:03:56 by matnam            #+#    #+#             */
-/*   Updated: 2023/05/19 13:15:15 by lletourn         ###   ########.fr       */
+/*   Updated: 2023/05/30 17:21:57 by maaliber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static int	find_char(char *str, char c)
 /*
 Extracts and returns the name from the variable (with malloc).
 */
-static char	*set_var_name(char *var)
+static char	*get_name(char *var)
 {
 	char	*name;
 	size_t	length;
@@ -51,7 +51,7 @@ static char	*set_var_name(char *var)
 Extracts and returns the value from the variable (with malloc).
 Returns NULL if there is no value.
 */
-static char	*set_var_value(char *var)
+static char	*get_value(char *var)
 {
 	char	*value;
 	char	*value_tmp;
@@ -75,7 +75,7 @@ static char	*set_var_value(char *var)
 /*
 Checks if the variable is assigned in set, and exports it. If it's unnasigned,
 does nothing.
-*/
+
 static void	export_unassigned(char *name, t_list *env, t_list *set)
 {
 	char	*value;
@@ -85,6 +85,28 @@ static void	export_unassigned(char *name, t_list *env, t_list *set)
 		return ;
 	set_env_var(name, value, env);
 }
+*/
+
+/*
+Checks if the variable is assigned in set, and exports it. If it's unnasigned,
+does nothing.
+*/
+
+static int	error_var_name(char *name)
+{
+	int		i;
+
+	if (!name)
+		return (0);
+	if (ft_isdigit(name[0]))
+		return (error_msg_cmd(E_INVALID_ID, "export: ", name), 1);
+	i = 0;
+	while (name[i] && (ft_isalnum(name[i]) || name[i] == '_'))
+		i++;
+	if (name[i] != 0)
+		return (error_msg_cmd(E_INVALID_ID, "export: ", name), 1);
+	return (0);
+}
 
 /*
 Builtin export function.
@@ -93,16 +115,22 @@ void	ft_export(char	**args, t_list *env, t_list *set)
 {
 	char	*name;
 	char	*value;
+	int		i;
 
+	(void)set;
+	i = -1;
+	while (args[++i])
+	{
+		if (error_var_name(get_name(args[i])))
+			return ;
+	}
 	while (args++)
 	{
 		if (!*args)
 			return ;
-		name = set_var_name(*args);
-		value = set_var_value(*args);
-		if (!value)
-			export_unassigned(name, env, set);
-		else
-			set_env_var(name, value, env);
+		name = get_name(*args);
+		value = get_value(*args);
+		set_env_var(name, value, env);
 	}
+	return ;
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mshell_types.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lletourn <lletourn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: maaliber <maaliber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 13:38:57 by maaliber          #+#    #+#             */
-/*   Updated: 2023/05/24 12:25:44 by lletourn         ###   ########.fr       */
+/*   Updated: 2023/05/30 17:17:07 by maaliber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ enum e_config_error
 	E_ENV,
 	E_CMD_NOT_FOUND,
 	E_CD,
+	E_INVALID_ID,
 	E_HEREDOC
 };
 typedef enum e_config_error	t_config_error;

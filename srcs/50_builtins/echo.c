@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lletourn <lletourn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: maaliber <maaliber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 11:10:57 by lletourn          #+#    #+#             */
-/*   Updated: 2023/05/25 12:11:28 by lletourn         ###   ########.fr       */
+/*   Updated: 2023/05/30 15:14:59 by maaliber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,15 +18,16 @@ static int	end_newline_param(char **args, int *i)
 	int	j;
 
 	newline = 1;
-	while (args[++(*i)] && args[*i][0] == '-')
+	while (args[*i] && args[*i][0] == '-')
 	{
-		j = 0;
-		while (args[*i][++j])
-		{
+		j = 1;
+		while (args[*i][j] && args[*i][j] == 'n')
+			j++;
+		if (!args[*i][j])
 			newline = 0;
-			if (args[*i][j] != 'n')
-				return (1);
-		}
+		else
+			break ;
+		(*i)++;
 	}
 	return (newline);
 }
@@ -38,7 +39,7 @@ int	ft_echo(char **args)
 
 	if (!args[1])
 		return (write(1, "\n", 1), 0);
-	i = 0;
+	i = 1;
 	end_newline = end_newline_param(args, &i);
 	while (args[i])
 	{

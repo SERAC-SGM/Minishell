@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: matnam <matnam@student.42.fr>              +#+  +:+       +#+        */
+/*   By: maaliber <maaliber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 13:38:49 by lletourn          #+#    #+#             */
-/*   Updated: 2023/05/24 22:14:17 by matnam           ###   ########.fr       */
+/*   Updated: 2023/05/30 17:49:45 by maaliber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,13 @@ static void	exec_single_cmd(t_data *data, int proc_idx, char **env)
 {
 	if (!data->cmds_tab[proc_idx].args)
 		return ;
+	if (data->cmds_tab[proc_idx].here_doc == -1)
+	{
+		close_files(&data->cmds_tab[proc_idx]);
+		close_pipe(data);
+		error_msg(E_HEREDOC, data->cmds_tab[proc_idx].delimiter, data);
+		return ;
+	}
 	if (is_builtin(data->cmds_tab[proc_idx].args[0]))
 		g_sig.error_status = exec_builtin(data, proc_idx);
 	else
@@ -79,7 +86,7 @@ static void	exec_multiple_cmd(t_data *data, int proc_idx, char **env)
 		{
 			close_files(&data->cmds_tab[proc_idx]);
 			close_pipe(data);
-			exit_error(E_NOMSG, 0, data);
+			exit_error(E_HEREDOC, data->cmds_tab[proc_idx].delimiter, data);
 		}
 		update_signal();
 		if (is_builtin(data->cmds_tab[proc_idx].args[0]))

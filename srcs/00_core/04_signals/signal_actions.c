@@ -6,7 +6,7 @@
 /*   By: maaliber <maaliber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 15:40:53 by maaliber          #+#    #+#             */
-/*   Updated: 2023/05/22 15:46:58 by maaliber         ###   ########.fr       */
+/*   Updated: 2023/05/30 17:58:18 by maaliber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	sig_int(void)
 		g_sig.error_status = 130;
 	}
 	else
-		exit(0);
+		exit(130);
 }
 
 void	sig_quit(void)

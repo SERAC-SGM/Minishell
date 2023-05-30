@@ -1,7 +1,8 @@
-echoWer -> command not found mais $? renvoie 0 au lieu de 127
-ok -> command not found et print un "1" a la nouvelle ligne
-echo $?$ doit afficher 0$ mais affiche newline
-echo $:$= doit afficher $:$= mais affiche newline
-====> echo $ doit afficher $ mais ça marche pas mskn
-echo $HOME% casse l'expandeur -> doit afficher /path/de/home% (caractères spéciaux de fin sont pas pris en compte dans l'expandeur)
+echoWer -> command not found mais $? renvoie 0 au lieu de 127 --> OK
+ok -> command not found et print un "1" a la nouvelle ligne --> OK
+echo $?$ doit afficher 0$ mais affiche newline --> OK
+echo $:$= doit afficher $:$= mais affiche newline --> OK
+====> echo $ doit afficher $ mais ça marche pas mskn --> OK
+echo $HOME% casse l'expandeur -> doit afficher /path/de/home% (caractères spéciaux de fin sont pas pris en compte dans l'expandeur) --> OK
 
+lors de plusieurs redirection outfile creer les fichiers et ecrire que dans le dernier (il cree que le dernier)
