@@ -6,7 +6,7 @@
 /*   By: maaliber <maaliber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 16:54:54 by maaliber          #+#    #+#             */
-/*   Updated: 2023/05/30 14:50:06 by maaliber         ###   ########.fr       */
+/*   Updated: 2023/05/31 14:33:07 by maaliber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,6 +112,9 @@ t_tkn_lst	*tokenize(char **cmd_line, t_list *env, t_list *set)
 	store = NULL;
 	while (!ft_isspace(**cmd_line) && !is_special(*cmd_line))
 	{
+		ft_putstr_fd("cmd_line:", 1);
+		ft_putstr_fd(*cmd_line, 1);
+		ft_putstr_fd("\n", 1);
 		if (set_mode(*cmd_line) == 0)
 		{
 			add = standard_mode(cmd_line, env, set);

@@ -3,19 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   here_doc.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: matnam <matnam@student.42.fr>              +#+  +:+       +#+        */
+/*   By: maaliber <maaliber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 14:44:06 by lletourn          #+#    #+#             */
-/*   Updated: 2023/05/24 22:48:13 by matnam           ###   ########.fr       */
+/*   Updated: 2023/05/31 12:35:48 by maaliber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static int	exit_heredoc(int fd_hdoc, char *lim, char *line, t_data *data)
+static int	wait_heredoc(int fd_hdoc, char *lim, char *line, t_data *data)
 {
 	int	status;
 
+	disable_signal();
 	status = 0;
 	if (g_sig.pid == 0)
 	{
@@ -27,8 +28,11 @@ static int	exit_heredoc(int fd_hdoc, char *lim, char *line, t_data *data)
 	}
 	while (waitpid(g_sig.pid, &status, 0) != -1)
 		;
+	enable_signal();
 	if (WIFEXITED(status))
-		return (0);
+		g_sig.error_status = WEXITSTATUS(status);
+	else if (WIFSIGNALED(status))
+		g_sig.error_status = WTERMSIG(status) + 128;
 	return (1);
 }
 
@@ -56,6 +60,6 @@ int	input_heredoc(t_cmd *cmd, t_data *data)
 			free(line);
 		}
 	}
-	ret = exit_heredoc(fd_hdoc, cmd->delimiter, line, data);
+	ret = wait_heredoc(fd_hdoc, cmd->delimiter, line, data);
 	return (ret);
 }

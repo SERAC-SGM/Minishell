@@ -6,7 +6,7 @@
 /*   By: maaliber <maaliber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 14:57:51 by maaliber          #+#    #+#             */
-/*   Updated: 2023/05/30 14:50:12 by maaliber         ###   ########.fr       */
+/*   Updated: 2023/05/31 14:37:18 by maaliber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,9 @@ t_tkn_lst	*lexer(t_data *data)
 		token = tokenize(&cmd_l, data->env, data->set);
 		if (!token)
 			return (clear_token_list(&tkn_lst), NULL);
+		ft_putstr_fd("token:", 1);
+		ft_putstr_fd(*token, 1);
+		ft_putstr_fd("\n", 1);
 		add_back_token(&tkn_lst, token);
 	}
 	if (!tkn_lst || last_token(tkn_lst)->type != END)
