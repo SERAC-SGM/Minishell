@@ -6,7 +6,7 @@
 /*   By: lletourn <lletourn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 14:19:32 by maaliber          #+#    #+#             */
-/*   Updated: 2023/05/25 12:23:42 by lletourn         ###   ########.fr       */
+/*   Updated: 2023/05/31 11:33:46 by lletourn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,7 @@ static t_tkn_lst	*redirection(t_tkn_lst *token, t_cmd *cmd)
 	}
 	else if (token->type == RD_OUT || token->type == APPEND)
 	{
+		//open_files
 		cmd->outfile = token->next->content;
 		if (token->type == APPEND)
 			cmd->append = 1;
