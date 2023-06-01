@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maaliber <maaliber@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lletourn <lletourn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 14:57:51 by maaliber          #+#    #+#             */
-/*   Updated: 2023/05/31 14:37:18 by maaliber         ###   ########.fr       */
+/*   Updated: 2023/06/01 12:17:45 by lletourn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ t_tkn_lst	*lexer(t_data *data)
 		if (!token)
 			return (clear_token_list(&tkn_lst), NULL);
 		ft_putstr_fd("token:", 1);
-		ft_putstr_fd(*token, 1);
+		ft_putstr_fd(token->content, 1);
 		ft_putstr_fd("\n", 1);
 		add_back_token(&tkn_lst, token);
 	}

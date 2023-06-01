@@ -4,17 +4,13 @@
 /////DONE/////update PWD et OLDPWD avec cd ->LEO
 "." et ".." ne renvoit pas command not found ->LEO
 
+/////DONE/////Ignorer les signaux lorsque une commande est en execution ->NAM ->DONE
+/////DONE/////history not update si ligne vide ->NAM ->DONE
 
-Ignorer les signaux lorsque une commande est en execution ->NAM
-lors de plusieurs redirection outfile creer les fichiers et ecrire que dans le dernier (il cree que le dernier) ->LEO
-Ignorer les signaux lorsque une commande est en execution ->NAM ->DONE
 Ajouter un etat pour le here_doc : sigint arret de l'exec ->NAM
 Expander arrete la tokenization quand variable vide ->NAM
 Parsing ignorer les signaux ->NAM
 Rediction vide ambigious redirection ls > $OPIHUOHI ->NAM
-history not update si ligne vide ->NAM
-echo lol > /dev/full check if printf return -1 error : No space left on device ->LEO
-history not update si ligne vide ->NAM ->DONE
 update exit status on last cmd executed ->NAM
 Revoir wait process pour avoir le dernier status dans le buildin ->NAM
 
@@ -22,3 +18,15 @@ Simple pipe SEGFAULT ->OK
 $$ must print pid -> oK
 cd pas d'arguments ->OK
 fonction variadique d'erreur pour le gestionnaire ->A VOIR
+
+Test 50 for echo:       echo > <
+Expected stdout:        ☃
+Expected stderr:        syntax error near unexpected token `<'
+Expected status:        2
+
+>>echo>> prompt cassé
+
+Test 57 for echo:       |echo|
+Expected stdout:        ☃
+Expected stderr:        syntax error near unexpected token `|'
+Expected status:        2 ->renvoie 139

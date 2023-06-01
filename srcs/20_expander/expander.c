@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expander.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maaliber <maaliber@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lletourn <lletourn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 14:19:34 by maaliber          #+#    #+#             */
-/*   Updated: 2023/05/30 17:22:47 by maaliber         ###   ########.fr       */
+/*   Updated: 2023/06/01 12:27:36 by lletourn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,8 @@ void	expand(char **content, t_list *env)
 	i = 0;
 	while ((*content)[i])
 	{
-		if ((*content)[i] == '$' && (*content)[i + 1])
+		if ((*content)[i] == '$' && (*content)[i + 1]
+			&& (ft_isalnum((*content)[i + 1]) || (*content)[i + 1] == '?'))
 		{
 			to_find = cpy_word(*content + i + 1);
 			if (ft_strcmp(to_find, "?") == 0)
