@@ -1,17 +1,20 @@
-lors de plusieurs redirection outfile creer les fichiers et ecrire que dans le dernier (il cree que le dernier) ->LEO
+/////DONE/////lors de plusieurs redirection outfile creer les fichiers et ecrire que dans le dernier (il cree que le dernier) ->LEO
+/////DONE/////ISATTY lorsque la rediction est un terminal ->LEO
+/////DONE/////echo lol > /dev/full check if printf return -1 error : No space left on device ->LEO
+/////DONE/////update PWD et OLDPWD avec cd ->LEO
+"." et ".." ne renvoit pas command not found ->LEO
+
+
 Ignorer les signaux lorsque une commande est en execution ->NAM
 Ajouter un etat pour le here_doc : sigint arret de l'exec ->NAM
 Expander arrete la tokenization quand variable vide ->NAM
-Parsing ignorer les signaux  ->NAM
-ISATTY lorsque la rediction est un terminal ->LEO 
-Simple pipe SEGFAULT ->OK
-cd pas d'arguments ->OK
-"." et ".." ne renvoit pas command not found ->LEO
-update PWD et OLDPWD avec cd ->LEO
+Parsing ignorer les signaux ->NAM
 Rediction vide ambigious redirection ls > $OPIHUOHI ->NAM
-echo lol > /dev/full check if printf return -1 error : No space left on device ->LEO
 history not update si ligne vide ->NAM
 update exit status on last cmd executed ->NAM
-$$ must print pid -> oK
-fonction variadique d'erreur pour le gestionnaire ->A VOIR
 Revoir wait process pour avoir le dernier status dans le buildin ->NAM
+
+Simple pipe SEGFAULT ->OK
+$$ must print pid -> oK
+cd pas d'arguments ->OK
+fonction variadique d'erreur pour le gestionnaire ->A VOIR

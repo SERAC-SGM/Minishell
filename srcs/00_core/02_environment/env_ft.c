@@ -6,7 +6,7 @@
 /*   By: lletourn <lletourn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 12:18:00 by maaliber          #+#    #+#             */
-/*   Updated: 2023/05/19 13:56:43 by lletourn         ###   ########.fr       */
+/*   Updated: 2023/05/31 14:33:24 by lletourn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,12 @@ char	*get_var_value(char *name, t_list *env)
 }
 
 /*
+C'est moche mais ça marche
+*/
+/*
 Creates a new environment variable by adding it at the end of env.
 */
-static void	create_env_var(char *name, char *val, t_list *env)
+static void	create_env_var(char *name, char *val, t_list *env, int malloc)
 {
 	char	*line;
 	t_list	*entry;
@@ -41,8 +44,12 @@ static void	create_env_var(char *name, char *val, t_list *env)
 	if (!env || !name)
 		return ;
 	line = ft_strjoin(name, "=");
-	free(name);
-	line = ft_strjoin_free(line, val);
+	if (malloc)
+		free(name);
+	if (malloc)
+		line = ft_strjoin_free(line, val);
+	else
+		line = ft_strjoin(line, val);
 	entry = ft_lstnew(line);
 	ft_lstadd_back(&env, entry);
 }
@@ -70,13 +77,13 @@ static void	overwrite_env_var(char *name, char *val, t_list *env)
 	free(prefix);
 }
 
-void	set_env_var(char *name, char *val, t_list *env)
+void	set_env_var(char *name, char *val, t_list *env, int malloc)
 {
 	char	*prev_val;
 
 	prev_val = get_var_value(name, env);
 	if (!prev_val)
-		create_env_var(name, val, env);
+		create_env_var(name, val, env, malloc);
 	else
 		overwrite_env_var(name, val, env);
 }

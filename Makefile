@@ -14,10 +14,10 @@ PROJECT_NAME = Minishell
 CC = cc 
 
 # Compiler Flags
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -g
 
 ifeq ($(debug), true)
-	CFLAGS +=  -g3 -fsanitize=address,undefined
+	CFLAGS += -g
 endif
 
 #______________________________________________________________________________#

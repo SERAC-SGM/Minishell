@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   core.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maaliber <maaliber@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lletourn <lletourn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 14:48:27 by matnam            #+#    #+#             */
-/*   Updated: 2023/05/30 17:23:51 by maaliber         ###   ########.fr       */
+/*   Updated: 2023/05/31 14:30:01 by lletourn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ Sets environment variable by:
 • Creating a new line at the end of env if var doesn't exist
 • Overwriting an existing line if var_name exist 
 */
-void	set_env_var(char *name, char *val, t_list *env);
+void	set_env_var(char *name, char *val, t_list *env, int malloc);
 
 		///////////////
 		// 03_prompt //

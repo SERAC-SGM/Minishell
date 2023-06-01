@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maaliber <maaliber@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lletourn <lletourn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 11:10:57 by lletourn          #+#    #+#             */
-/*   Updated: 2023/05/30 15:14:59 by maaliber         ###   ########.fr       */
+/*   Updated: 2023/06/01 12:05:30 by lletourn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,11 @@ int	ft_echo(char **args)
 	end_newline = end_newline_param(args, &i);
 	while (args[i])
 	{
-		ft_putstr_fd(args[i++], 1);
+		if (ft_putstr_fd(args[i++], 1) == -1)
+		{
+			perror("echo: write error");
+			return (1);
+		}
 		if (args[i])
 			write(1, " ", 1);
 	}

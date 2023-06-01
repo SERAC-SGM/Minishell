@@ -6,7 +6,7 @@
 /*   By: lletourn <lletourn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 14:19:32 by maaliber          #+#    #+#             */
-/*   Updated: 2023/05/31 11:33:46 by lletourn         ###   ########.fr       */
+/*   Updated: 2023/05/31 12:14:12 by lletourn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,23 @@ static void	add_attribute(t_tkn_lst *token, t_data *data, int proc_idx)
 }
 
 /*
+Creates the outfile and closes it. If the outfile is a TTY, ignores it.
+*/
+static void	create_file(t_cmd *cmd)
+{
+	open_files(cmd);
+	if (isatty(cmd->fd_out) == 1)
+	{
+		close(cmd->fd_out);
+		cmd->outfile = NULL;
+		cmd->fd_out = 0;
+		cmd->append = 0;
+		return ;
+	}
+	close(cmd->fd_out);
+}
+
+/*
 When encountering a redirection token (< << > >>), assings the correct
 following filename to the command structure.
 Returns the next token after the filename.
@@ -83,10 +100,10 @@ static t_tkn_lst	*redirection(t_tkn_lst *token, t_cmd *cmd)
 	}
 	else if (token->type == RD_OUT || token->type == APPEND)
 	{
-		//open_files
 		cmd->outfile = token->next->content;
 		if (token->type == APPEND)
 			cmd->append = 1;
+		create_file(cmd);
 	}
 	return (token->next->next);
 }
