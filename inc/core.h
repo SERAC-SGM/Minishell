@@ -6,7 +6,11 @@
 /*   By: lletourn <lletourn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 14:48:27 by matnam            #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2023/05/31 14:30:01 by lletourn         ###   ########.fr       */
+=======
+/*   Updated: 2023/05/31 12:10:40 by maaliber         ###   ########.fr       */
+>>>>>>> c20f9d895da77e145333acd3077cf0cb08377035
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +90,10 @@ void	handler(int signo);
 Updates signal handlers for the SIGINT and SIGQUIT signals in childs processes.
 */
 void	update_signal(void);
+/*
+Sleep mode waiting for child processes to finish, ignore SIGINT and SIGQUIT
+*/
+void	disable_signal(void);
 /*
 Sets up signal handlers for the SINGINT and SIGQUIT signals
 */
