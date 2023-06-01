@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lletourn <lletourn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: matnam <matnam@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 14:19:32 by maaliber          #+#    #+#             */
-/*   Updated: 2023/05/31 12:14:12 by lletourn         ###   ########.fr       */
+/*   Updated: 2023/06/01 15:09:29 by matnam           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,12 +127,13 @@ void	parser(t_tkn_lst *token, t_data *data)
 			proc_idx++;
 			init_cmd(&data->cmds_tab[proc_idx]);
 		}
-		if (token->type != END && token->content)
+		if (token->type == STD)
 		{
-			add_attribute(token, data, proc_idx);
+			if (token->content)
+				add_attribute(token, data, proc_idx);
 			token = token->next;
 		}
-		else if (token->type != END && !token->content && token->type != PIPE)
+		if (token->type != END && !token->content && token->type != PIPE)
 			token = redirection(token, &data->cmds_tab[proc_idx]);
 	}
 }

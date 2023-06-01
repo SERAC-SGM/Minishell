@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lletourn <lletourn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: matnam <matnam@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 14:58:49 by maaliber          #+#    #+#             */
-/*   Updated: 2023/06/01 12:08:32 by lletourn         ###   ########.fr       */
+/*   Updated: 2023/06/01 13:11:22 by matnam           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ int	main(int ac, char *av[], char *env[])
 		if (*data.cmd_line)
 			add_history(data.cmd_line);
 		data.token_list = lexer(&data);
+		print_lexer(data.token_list);
 		parser(data.token_list, &data);
 		exec_cmd_line(&data);
 		wait_process();

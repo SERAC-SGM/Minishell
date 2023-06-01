@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mshell_types.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maaliber <maaliber@student.42.fr>          +#+  +:+       +#+        */
+/*   By: matnam <matnam@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 13:38:57 by maaliber          #+#    #+#             */
-/*   Updated: 2023/05/30 17:17:07 by maaliber         ###   ########.fr       */
+/*   Updated: 2023/06/01 15:07:49 by matnam           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@
 # include <readline/readline.h>
 # include <readline/history.h>
 
+# define STD 0
 # define RD_IN 11
 # define HERE 12
 # define RD_OUT 21

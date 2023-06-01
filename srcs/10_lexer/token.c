@@ -6,7 +6,7 @@
 /*   By: matnam <matnam@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 16:54:54 by maaliber          #+#    #+#             */
-/*   Updated: 2023/06/01 12:37:34 by matnam           ###   ########.fr       */
+/*   Updated: 2023/06/01 15:08:37 by matnam           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,8 +70,8 @@ t_tkn_lst	*split_input(char **store, char *add)
 	char		*content;
 	int			wrd_l;
 
-	if (!*add)
-		return (new_token(0, END));
+	if (!*add && !*store)
+		return (new_token(ft_strdup(""), STD));
 	tkn_list = NULL;
 	while (*add)
 	{
@@ -85,7 +85,7 @@ t_tkn_lst	*split_input(char **store, char *add)
 		ft_memcpy(content + ft_strlen(*store), add, wrd_l);
 		free(*store);
 		*store = NULL;
-		add_back_token(&tkn_list, new_token(content, 0));
+		add_back_token(&tkn_list, new_token(content, STD));
 		add += wrd_l;
 		while (ft_isspace(*add))
 			add++;
@@ -112,9 +112,6 @@ t_tkn_lst	*tokenize(char **cmd_line, t_list *env, t_list *set)
 	store = NULL;
 	while (!ft_isspace(**cmd_line) && !is_special(*cmd_line))
 	{
-		// ft_putstr_fd("cmd_line:", 1);
-		// ft_putstr_fd(*cmd_line, 1);
-		// ft_putstr_fd("\n", 1);
 		if (set_mode(*cmd_line) == 0)
 		{
 			add = standard_mode(cmd_line, env, set);
@@ -128,6 +125,7 @@ t_tkn_lst	*tokenize(char **cmd_line, t_list *env, t_list *set)
 					double_quote_mode(cmd_line, env, set));
 	}
 	if (store)
-		add_back_token(&tkn_list, new_token(store, 0));
+		add_back_token(&tkn_list, new_token(store, STD));
+	print_lexer(tkn_list);
 	return (tkn_list);
 }
