@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: matnam <matnam@student.42.fr>              +#+  +:+       +#+        */
+/*   By: lletourn <lletourn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 14:19:32 by maaliber          #+#    #+#             */
-/*   Updated: 2023/06/01 17:52:33 by matnam           ###   ########.fr       */
+/*   Updated: 2023/06/02 12:19:57 by lletourn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,14 +113,14 @@ int	parser(t_tkn_lst *token, t_data *data)
 
 	proc_idx = 0;
 	if (token->type == PIPE)
-		return(error_msg(E_TOKEN, "|", data), 0);
+		return (error_msg(E_TOKEN, "|", data), 0);
 	init_cmd(&data->cmds_tab[proc_idx]);
 	while (token->type != END)
 	{
 		if (token->type == PIPE)
 		{
 			if (!token->next->content)
-				return(error_msg(E_TOKEN, "|", data), 0);
+				return (error_msg(E_TOKEN, "|", data), 0);
 			token = token->next;
 			data->process_nb++;
 			init_cmd(&data->cmds_tab[++proc_idx]);
@@ -134,7 +134,7 @@ int	parser(t_tkn_lst *token, t_data *data)
 		if (token->type != END && !token->content && token->type != PIPE)
 		{	
 			if (!redirection(token, &data->cmds_tab[proc_idx]))
-				return(error_msg(E_TOKEN, "|", data), 0);
+				return (error_msg(E_TOKEN, "|", data), 0);
 			token = token->next->next;
 		}
 	}

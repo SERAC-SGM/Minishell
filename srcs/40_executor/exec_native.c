@@ -6,7 +6,7 @@
 /*   By: lletourn <lletourn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 13:38:11 by lletourn          #+#    #+#             */
-/*   Updated: 2023/05/24 12:25:44 by lletourn         ###   ########.fr       */
+/*   Updated: 2023/06/02 12:31:57 by lletourn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static int	set_cmd(t_data *data, int proc_idx)
 	int		i;
 
 	set_cmd_with_path(data, proc_idx);
-	if (access(data->cmds_tab[proc_idx].args[0], F_OK) != -1)
+	if (access(data->cmds_tab[proc_idx].args[0], F_OK | X_OK) != -1)
 		return (0);
 	tmp = ft_strjoin("/", data->cmds_tab[proc_idx].args[0]);
 	i = 0;

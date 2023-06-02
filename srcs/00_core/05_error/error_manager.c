@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error_manager.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maaliber <maaliber@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lletourn <lletourn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 14:57:22 by maaliber          #+#    #+#             */
-/*   Updated: 2023/05/30 18:57:38 by maaliber         ###   ########.fr       */
+/*   Updated: 2023/06/02 13:18:52 by lletourn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,8 @@ struct s_errdesc
 	{E_CMD_NOT_FOUND, ": command not found\n", 127},
 	{E_INVALID_ID, ": not a valid identifier\n", 1},
 	{E_HEREDOC,
-		"warning: here-document at line 38 delimited by end-of-file, wanted >", 0},
+		"warning: here-document at line 38 delimited by end-of-file, wanted >",
+			0},
 };
 
 void	error_msg(int err_id, char *item, t_data *data)
