@@ -15,7 +15,6 @@
 /*
 Returns the word length (delimited by spaces).
 */
-
 static int	word_len(char *str)
 {
 	int	i;
@@ -126,6 +125,5 @@ t_tkn_lst	*tokenize(char **cmd_line, t_list *env, t_list *set)
 	}
 	if (store)
 		add_back_token(&tkn_list, new_token(store, STD));
-	print_lexer(tkn_list);
 	return (tkn_list);
 }

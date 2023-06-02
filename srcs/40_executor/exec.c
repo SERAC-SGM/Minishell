@@ -12,22 +12,22 @@
 
 #include "minishell.h"
 
-static char	**env_to_tab(t_list	*env)
+/*
+Waits for each process to finish.
+*/
+static void	wait_process(void)
 {
-	char	**env_tab;
-	int		i;
+	int	status;
 
-	env_tab = malloc((ft_lstsize(env) + 1) * sizeof(char *));
-	if (!env_tab)
-		return (error_msg(E_MEM, NULL, NULL), NULL);
-	i = 0;
-	while (env)
-	{
-		env_tab[i++] = env->line;
-		env = env->next;
-	}
-	env_tab[i] = NULL;
-	return (env_tab);
+	disable_signal();
+	status = 0;
+	while (waitpid(-1, &status, 0) != -1)
+		;
+	if (WIFEXITED(status))
+		g_sig.error_status = WEXITSTATUS(status);
+	else if (WIFSIGNALED(status))
+		g_sig.error_status = WTERMSIG(status) + 128;
+	enable_signal();
 }
 
 static int	is_builtin(char *name)
@@ -125,5 +125,6 @@ int	exec_cmd_line(t_data *data)
 	}
 	close_pipe(data);
 	free(env);
+	wait_process();
 	return (0);
 }

@@ -1,22 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parser.h                                           :+:      :+:    :+:   */
+/*   parsing_error.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lletourn <lletourn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: matnam <matnam@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/27 12:43:55 by maaliber          #+#    #+#             */
-/*   Updated: 2023/05/22 15:40:33 by lletourn         ###   ########.fr       */
+/*   Created: 2023/06/01 17:52:13 by matnam            #+#    #+#             */
+/*   Updated: 2023/06/01 17:53:22 by matnam           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PARSER_H
-# define PARSER_H
+#include "minishell.h"
 
-//////////////
-// parser.c //
-//////////////
-
-int	parser(t_tkn_lst *token, t_data *data);
-
-#endif
+int	parsing_error(t_tkn_lst *token, t_data *data)
+{
+	
+}

@@ -6,7 +6,7 @@
 /*   By: matnam <matnam@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 14:19:32 by maaliber          #+#    #+#             */
-/*   Updated: 2023/06/01 15:09:29 by matnam           ###   ########.fr       */
+/*   Updated: 2023/06/01 17:52:33 by matnam           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,14 +83,13 @@ static void	create_file(t_cmd *cmd)
 /*
 When encountering a redirection token (< << > >>), assings the correct
 following filename to the command structure.
-Returns the next token after the filename.
 If no filemame or no non-special after the filename token is found,
-returns an error.
+returns 0.
 */
-static t_tkn_lst	*redirection(t_tkn_lst *token, t_cmd *cmd)
+static int	redirection(t_tkn_lst *token, t_cmd *cmd)
 {
 	if ((!token->next->content))
-		return (error_msg(E_TOKEN, NULL, NULL), last_token(token));
+		return (error_msg(E_TOKEN, NULL, NULL), 0);
 	if (token->type == RD_IN)
 		cmd->infile = token->next->content;
 	else if (token->type == HERE)
@@ -105,27 +104,26 @@ static t_tkn_lst	*redirection(t_tkn_lst *token, t_cmd *cmd)
 			cmd->append = 1;
 		create_file(cmd);
 	}
-	return (token->next->next);
+	return (1);
 }
 
-void	parser(t_tkn_lst *token, t_data *data)
+int	parser(t_tkn_lst *token, t_data *data)
 {
 	int	proc_idx;
 
 	proc_idx = 0;
 	if (token->type == PIPE)
-		error_msg(E_TOKEN, NULL, data);
+		return(error_msg(E_TOKEN, "|", data), 0);
 	init_cmd(&data->cmds_tab[proc_idx]);
 	while (token->type != END)
 	{
 		if (token->type == PIPE)
 		{
 			if (!token->next->content)
-				error_msg(E_TOKEN, NULL, data);
+				return(error_msg(E_TOKEN, "|", data), 0);
 			token = token->next;
 			data->process_nb++;
-			proc_idx++;
-			init_cmd(&data->cmds_tab[proc_idx]);
+			init_cmd(&data->cmds_tab[++proc_idx]);
 		}
 		if (token->type == STD)
 		{
@@ -134,6 +132,11 @@ void	parser(t_tkn_lst *token, t_data *data)
 			token = token->next;
 		}
 		if (token->type != END && !token->content && token->type != PIPE)
-			token = redirection(token, &data->cmds_tab[proc_idx]);
+		{	
+			if (!redirection(token, &data->cmds_tab[proc_idx]))
+				return(error_msg(E_TOKEN, "|", data), 0);
+			token = token->next->next;
+		}
 	}
+	return (1);
 }

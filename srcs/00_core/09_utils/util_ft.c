@@ -57,3 +57,21 @@ int	tab_size(char **tab)
 		i++;
 	return (i);
 }
+
+char	**env_to_tab(t_list	*env)
+{
+	char	**env_tab;
+	int		i;
+
+	env_tab = malloc((ft_lstsize(env) + 1) * sizeof(char *));
+	if (!env_tab)
+		return (error_msg(E_MEM, NULL, NULL), NULL);
+	i = 0;
+	while (env)
+	{
+		env_tab[i++] = env->line;
+		env = env->next;
+	}
+	env_tab[i] = NULL;
+	return (env_tab);
+}

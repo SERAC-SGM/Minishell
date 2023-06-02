@@ -74,7 +74,6 @@ void	error_msg_cmd(int err_id, char *prefix, char *item)
 	ft_putstr_fd(error_message, 2);
 	free(error_message);
 	g_sig.error_status = errdesc[err_id].err_no;
-	printf("error no:%d\n", g_sig.error_status);
 }
 
 void	exit_error(int err_id, char *item, t_data *data)

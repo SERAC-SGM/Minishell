@@ -8,12 +8,11 @@
 /////DONE/////history not update si ligne vide ->NAM ->DONE
 
 Ajouter un etat pour le here_doc : sigint arret de l'exec ->NAM
-Expander arrete la tokenization quand variable vide ->NAM
-Parsing ignorer les signaux ->NAM
+/////DONE/////Expander arrete la tokenization quand variable vide ->NAM
+/////DONE/////Parsing ignorer les signaux ->NAM
 Rediction vide ambigious redirection ls > $OPIHUOHI ->NAM
-history not update si ligne vide ->NAM->DONE
 echo lol > /dev/full check if printf return -1 error : No space left on device ->LEO
-history not update si ligne vide ->NAM ->DONE
+/////DONE/////history not update si ligne vide ->NAM ->DONE
 update exit status on last cmd executed ->NAM
 Revoir wait process pour avoir le dernier status dans le buildin ->NAM
 
@@ -33,3 +32,5 @@ Test 57 for echo:       |echo|
 Expected stdout:        ☃
 Expected stderr:        syntax error near unexpected token `|'
 Expected status:        2 ->renvoie 139
+
+faire une fonction parsing error avamt parsing pour gerer la creation des files uniquement si le parsing est correct->NAM

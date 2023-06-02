@@ -167,5 +167,6 @@ void	print_cmds(t_data *data);
 void	trim_char(char **str, char c);
 char	*ft_strjoin_dup1(char *s1, char *s2);
 int		tab_size(char **tab);
+char	**env_to_tab(t_list	*env);
 
 #endif
