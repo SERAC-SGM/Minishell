@@ -6,7 +6,7 @@
 /*   By: matnam <matnam@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 14:18:43 by maaliber          #+#    #+#             */
-/*   Updated: 2023/05/18 13:59:59 by matnam           ###   ########.fr       */
+/*   Updated: 2023/06/02 20:12:41 by matnam           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ char	**env_to_tab(t_list	*env)
 
 	env_tab = malloc((ft_lstsize(env) + 1) * sizeof(char *));
 	if (!env_tab)
-		return (error_msg(E_MEM, NULL, NULL), NULL);
+		return (error_msg(E_MEM, NULL), NULL);
 	i = 0;
 	while (env)
 	{

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error_manager.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lletourn <lletourn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: matnam <matnam@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 14:57:22 by maaliber          #+#    #+#             */
-/*   Updated: 2023/06/02 13:18:52 by lletourn         ###   ########.fr       */
+/*   Updated: 2023/06/02 20:11:20 by matnam           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,11 +41,10 @@ struct s_errdesc
 			0},
 };
 
-void	error_msg(int err_id, char *item, t_data *data)
+void	error_msg(int err_id, char *item)
 {
 	char	*error_message;
 
-	(void)data;
 	if (item)
 		error_message = ft_strjoin(item, errdesc[err_id].msg);
 	else

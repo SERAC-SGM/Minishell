@@ -149,6 +149,7 @@ SRCS += expander.c
 
 #30_parser
 SRCS += parser.c
+SRCS += parsing_error.c
 
 #40_executor
 SRCS += pipe_dup.c

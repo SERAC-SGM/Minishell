@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maaliber <maaliber@student.42.fr>          +#+  +:+       +#+        */
+/*   By: matnam <matnam@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 13:38:49 by lletourn          #+#    #+#             */
-/*   Updated: 2023/05/30 17:49:45 by maaliber         ###   ########.fr       */
+/*   Updated: 2023/06/04 18:12:51 by matnam           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ static void	exec_single_cmd(t_data *data, int proc_idx, char **env)
 	{
 		close_files(&data->cmds_tab[proc_idx]);
 		close_pipe(data);
-		error_msg(E_HEREDOC, data->cmds_tab[proc_idx].delimiter, data);
+		error_msg(E_HEREDOC, data->cmds_tab[proc_idx].delimiter);
 		return ;
 	}
 	if (is_builtin(data->cmds_tab[proc_idx].args[0]))

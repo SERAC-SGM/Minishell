@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lletourn <lletourn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: matnam <matnam@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 11:49:12 by lletourn          #+#    #+#             */
-/*   Updated: 2023/06/01 12:04:13 by lletourn         ###   ########.fr       */
+/*   Updated: 2023/06/04 18:13:14 by matnam           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int	ft_cd(char **args, t_data *data)
 	{
 		chdir_val = chdir(get_var_value("HOME", data->env));
 		if (chdir_val == -1)
-			return (error_msg(E_STD, "cd", NULL), 0);
+			return (error_msg(E_STD, "cd"), 0);
 		update_pwd_env(data, "PWD");
 		return (0);
 	}

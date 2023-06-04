@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lletourn <lletourn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: matnam <matnam@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 14:19:32 by maaliber          #+#    #+#             */
-/*   Updated: 2023/06/02 12:19:57 by lletourn         ###   ########.fr       */
+/*   Updated: 2023/06/04 18:29:24 by matnam           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,14 +47,14 @@ static void	add_attribute(t_tkn_lst *token, t_data *data, int proc_idx)
 	{
 		data->cmds_tab[proc_idx].args = ft_calloc(size + 1, sizeof(char *));
 		if (!data->cmds_tab[proc_idx].args)
-			return (error_msg(E_MEM, NULL, data), (void)0);
+			return (error_msg(E_MEM, NULL), (void)0);
 	}
 	i = tab_size(data->cmds_tab[proc_idx].args);
 	if (i == 0)
 	{
 		data->cmds_tab[proc_idx].args[i] = ft_strdup(token->content);
 		if (!data->cmds_tab[proc_idx].args[i])
-			return (error_msg(E_MEM, NULL, data), (void)0);
+			return (error_msg(E_MEM, NULL), (void)0);
 		data->cmds_tab[proc_idx].name = token->content;
 	}
 	else
@@ -86,10 +86,8 @@ following filename to the command structure.
 If no filemame or no non-special after the filename token is found,
 returns 0.
 */
-static int	redirection(t_tkn_lst *token, t_cmd *cmd)
+static void	redirection(t_tkn_lst *token, t_cmd *cmd)
 {
-	if ((!token->next->content))
-		return (error_msg(E_TOKEN, NULL, NULL), 0);
 	if (token->type == RD_IN)
 		cmd->infile = token->next->content;
 	else if (token->type == HERE)
@@ -104,7 +102,6 @@ static int	redirection(t_tkn_lst *token, t_cmd *cmd)
 			cmd->append = 1;
 		create_file(cmd);
 	}
-	return (1);
 }
 
 int	parser(t_tkn_lst *token, t_data *data)
@@ -112,15 +109,13 @@ int	parser(t_tkn_lst *token, t_data *data)
 	int	proc_idx;
 
 	proc_idx = 0;
-	if (token->type == PIPE)
-		return (error_msg(E_TOKEN, "|", data), 0);
+	if (parsing_error(token))
+		return (0);
 	init_cmd(&data->cmds_tab[proc_idx]);
 	while (token->type != END)
 	{
 		if (token->type == PIPE)
 		{
-			if (!token->next->content)
-				return (error_msg(E_TOKEN, "|", data), 0);
 			token = token->next;
 			data->process_nb++;
 			init_cmd(&data->cmds_tab[++proc_idx]);
@@ -133,8 +128,7 @@ int	parser(t_tkn_lst *token, t_data *data)
 		}
 		if (token->type != END && !token->content && token->type != PIPE)
 		{	
-			if (!redirection(token, &data->cmds_tab[proc_idx]))
-				return (error_msg(E_TOKEN, "|", data), 0);
+			redirection(token, &data->cmds_tab[proc_idx]);
 			token = token->next->next;
 		}
 	}

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   files_manager.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lletourn <lletourn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: matnam <matnam@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/06 12:07:41 by lletourn          #+#    #+#             */
-/*   Updated: 2023/05/24 12:35:24 by lletourn         ###   ########.fr       */
+/*   Updated: 2023/06/04 18:12:22 by matnam           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	check_open_error(int fd, t_cmd *cmd)
 {
 	if (fd == -1)
-		error_msg(E_PERM, cmd->infile, NULL);
+		error_msg(E_PERM, cmd->infile);
 }
 
 void	open_files(t_cmd *cmd)
