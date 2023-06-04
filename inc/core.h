@@ -6,7 +6,7 @@
 /*   By: matnam <matnam@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 14:48:27 by matnam            #+#    #+#             */
-/*   Updated: 2023/06/02 20:12:18 by matnam           ###   ########.fr       */
+/*   Updated: 2023/06/04 22:56:28 by matnam           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ Sets environment variable by:
 • Creating a new line at the end of env if var doesn't exist
 • Overwriting an existing line if var_name exist 
 */
-void	set_env_var(char *name, char *val, t_list *env, int malloc);
+void	set_env_var(char *name, char *val, t_data *data, int malloc);
 
 		///////////////
 		// 03_prompt //

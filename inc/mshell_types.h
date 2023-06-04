@@ -6,7 +6,7 @@
 /*   By: matnam <matnam@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 13:38:57 by maaliber          #+#    #+#             */
-/*   Updated: 2023/06/01 15:07:49 by matnam           ###   ########.fr       */
+/*   Updated: 2023/06/04 22:36:24 by matnam           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@
 # include <signal.h>
 # include <string.h>
 # include <stdio.h>
+# include <dirent.h>
 # include <readline/readline.h>
 # include <readline/history.h>
 
@@ -46,6 +47,7 @@ enum e_config_error
 	E_MEM,
 	E_TOKEN,
 	E_FILE,
+	E_DIR,
 	E_PERM,
 	E_ARG,
 	E_TOO_FEW_ARG,
@@ -54,7 +56,7 @@ enum e_config_error
 	E_FORK,
 	E_ENV,
 	E_CMD_NOT_FOUND,
-	E_CD,
+	E_HOME_NOT_SET,
 	E_INVALID_ID,
 	E_HEREDOC
 };

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_ft.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lletourn <lletourn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: matnam <matnam@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 12:18:00 by maaliber          #+#    #+#             */
-/*   Updated: 2023/05/31 14:33:24 by lletourn         ###   ########.fr       */
+/*   Updated: 2023/06/04 22:56:07 by matnam           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ static void	create_env_var(char *name, char *val, t_list *env, int malloc)
 	char	*line;
 	t_list	*entry;
 
-	if (!env || !name)
+	if (!name)
 		return ;
 	line = ft_strjoin(name, "=");
 	if (malloc)
@@ -62,7 +62,7 @@ static void	overwrite_env_var(char *name, char *val, t_list *env)
 	char	*prefix;
 	int		length;
 
-	if (!env || !name)
+	if (!name)
 		return ;
 	prefix = ft_strjoin(name, "=");
 	length = ft_strlen(name);
@@ -77,13 +77,13 @@ static void	overwrite_env_var(char *name, char *val, t_list *env)
 	free(prefix);
 }
 
-void	set_env_var(char *name, char *val, t_list *env, int malloc)
+void	set_env_var(char *name, char *val, t_data *data, int malloc)
 {
 	char	*prev_val;
 
-	prev_val = get_var_value(name, env);
+	prev_val = get_var_value(name, data->env);
 	if (!prev_val)
-		create_env_var(name, val, env, malloc);
+		create_env_var(name, val, data->env, malloc);
 	else
-		overwrite_env_var(name, val, env);
+		overwrite_env_var(name, val, data->env);
 }

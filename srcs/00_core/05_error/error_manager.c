@@ -6,7 +6,7 @@
 /*   By: matnam <matnam@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 14:57:22 by maaliber          #+#    #+#             */
-/*   Updated: 2023/06/02 20:11:20 by matnam           ###   ########.fr       */
+/*   Updated: 2023/06/04 22:37:33 by matnam           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,8 @@ struct s_errdesc
 	{E_NOMSG, 0, 0},
 	{E_MEM, "memory allocation error\n", 0},
 	{E_TOKEN, "syntax error near unexpected token", 2},
-	{E_FILE, ": No such file or directory\n", 1},
+	{E_FILE, ": No such file or directory\n", 127},
+	{E_DIR, ": Is a directory\n", 126},
 	{E_PERM, ": permission denied\n", 1},
 	{E_ARG, "invalid number of arguments\n", 1},
 	{E_TOO_FEW_ARG, "invalid number of arguments\n", 1},
@@ -35,6 +36,7 @@ struct s_errdesc
 	{E_FORK, "fork\n", 0},
 	{E_ENV, "environment\n", 0},
 	{E_CMD_NOT_FOUND, ": command not found\n", 127},
+	{E_HOME_NOT_SET, ": HOME not set\n", 1},
 	{E_INVALID_ID, ": not a valid identifier\n", 1},
 	{E_HEREDOC,
 		"warning: here-document at line 38 delimited by end-of-file, wanted >",

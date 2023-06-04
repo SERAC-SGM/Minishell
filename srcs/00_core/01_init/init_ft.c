@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_ft.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maaliber <maaliber@student.42.fr>          +#+  +:+       +#+        */
+/*   By: matnam <matnam@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 14:51:50 by maaliber          #+#    #+#             */
-/*   Updated: 2023/05/30 18:16:03 by maaliber         ###   ########.fr       */
+/*   Updated: 2023/06/04 22:57:28 by matnam           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,27 +14,27 @@
 
 void	init_env(t_data *data, char *env[])
 {
-	t_list	*env_list;
 	t_list	*node;
+	char	cwd[BUFFER_SIZE];
 	int		i;
 
 	i = 0;
-	if (!env)
+	if (!env[0])
+	{
+		data->env = ft_lstnew(ft_strjoin("PWD=", getcwd(cwd, BUFFER_SIZE)));
 		return ;
-	env_list = NULL;
+	}
 	while (env[i])
 	{
 		node = ft_lstnew(ft_strdup(env[i]));
 		if (!node)
 		{
-			ft_lstclear(&env_list);
+			ft_lstclear(&data->env);
 			break ;
 		}	
-		ft_lstadd_back(&env_list, node);
+		ft_lstadd_back(&data->env, node);
 		i++;
 	}
-	data->env = env_list;
-	return ;
 }
 
 void	init_cmd(t_cmd *cmd)

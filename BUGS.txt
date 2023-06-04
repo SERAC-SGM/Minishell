@@ -2,7 +2,7 @@
 /////DONE/////ISATTY lorsque la rediction est un terminal ->LEO
 /////DONE/////echo lol > /dev/full check if printf return -1 error : No space left on device ->LEO
 /////DONE/////update PWD et OLDPWD avec cd ->LEO
-"." et ".." ne renvoit pas command not found ->LEO
+/////DONE/////"." et ".." ne renvoit pas command not found ->NAM->DONE
 
 /////DONE/////Ignorer les signaux lorsque une commande est en execution ->NAM ->DONE
 /////DONE/////history not update si ligne vide ->NAM ->DONE
@@ -20,8 +20,8 @@ $$ must print pid -> oK
 cd pas d'arguments ->OK
 fonction variadique d'erreur pour le gestionnaire ->A VOIR
 
->>echo>> prompt cassé
-''et "" cmd not found
-/./../.././
+/////DONE/////>>echo>> prompt cassé
+/////DONE/////''et "" ->NAM->DONE
+/////DONE//////./../.././->NAM->DONE
 
 faire une fonction parsing error avamt parsing pour gerer la creation des files uniquement si le parsing est correct->NAM

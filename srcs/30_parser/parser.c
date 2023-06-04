@@ -6,7 +6,7 @@
 /*   By: matnam <matnam@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 14:19:32 by maaliber          #+#    #+#             */
-/*   Updated: 2023/06/04 18:29:24 by matnam           ###   ########.fr       */
+/*   Updated: 2023/06/04 18:45:26 by matnam           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,8 +122,7 @@ int	parser(t_tkn_lst *token, t_data *data)
 		}
 		if (token->type == STD)
 		{
-			if (token->content)
-				add_attribute(token, data, proc_idx);
+			add_attribute(token, data, proc_idx);
 			token = token->next;
 		}
 		if (token->type != END && !token->content && token->type != PIPE)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lletourn <lletourn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: matnam <matnam@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 13:03:56 by matnam            #+#    #+#             */
-/*   Updated: 2023/05/31 14:31:11 by lletourn         ###   ########.fr       */
+/*   Updated: 2023/06/04 19:46:03 by matnam           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,13 +111,12 @@ static int	error_var_name(char *name)
 /*
 Builtin export function.
 */
-void	ft_export(char	**args, t_list *env, t_list *set)
+void	ft_export(char	**args, t_data *data)
 {
 	char	*name;
 	char	*value;
 	int		i;
 
-	(void)set;
 	i = -1;
 	while (args[++i])
 	{
@@ -130,7 +129,7 @@ void	ft_export(char	**args, t_list *env, t_list *set)
 			return ;
 		name = get_name(*args);
 		value = get_value(*args);
-		set_env_var(name, value, env, 1);
+		set_env_var(name, value, data, 1);
 	}
 	return ;
 }

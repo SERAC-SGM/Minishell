@@ -3,22 +3,40 @@
 /*                                                        :::      ::::::::   */
 /*   exec_native.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lletourn <lletourn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: matnam <matnam@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 13:38:11 by lletourn          #+#    #+#             */
-/*   Updated: 2023/06/02 12:31:57 by lletourn         ###   ########.fr       */
+/*   Updated: 2023/06/04 22:18:37 by matnam           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+static int	is_full_path(char *cmd_path, t_data *data)
+{
+	DIR	*dir;
+
+	if (!ft_strcmp(cmd_path, ".") || !ft_strcmp(cmd_path, ".."))
+		exit_error(E_CMD_NOT_FOUND, cmd_path, data);
+	if (!*cmd_path)
+		exit_error(E_CMD_NOT_FOUND, cmd_path, data);
+	dir = opendir(cmd_path);
+	if (dir)
+	{
+	    closedir(dir);
+		exit_error(E_DIR, cmd_path, data);
+	}
+	if (*cmd_path == '/' || *cmd_path == '.')
+		return (1);
+	return (0);
+}
+
 static void	set_cmd_with_path(t_data *data, int proc_idx)
 {
-	if (!ft_strncmp(data->cmds_tab[proc_idx].args[0], "./", 2)
-		|| !ft_strncmp(data->cmds_tab[proc_idx].args[0], "/", 1))
+	if (is_full_path(data->cmds_tab[proc_idx].args[0], data))
 	{
 		if (access(data->cmds_tab[proc_idx].args[0], F_OK) == -1)
-			exit_error(E_CMD_NOT_FOUND, data->cmds_tab[proc_idx].name, data);
+			exit_error(E_FILE, data->cmds_tab[proc_idx].name, data);
 		if (access(data->cmds_tab[proc_idx].args[0], X_OK) == -1)
 			exit_error(E_PERM, data->cmds_tab[proc_idx].name, data);
 	}
