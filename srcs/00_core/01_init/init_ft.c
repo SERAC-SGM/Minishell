@@ -6,7 +6,7 @@
 /*   By: matnam <matnam@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 14:51:50 by maaliber          #+#    #+#             */
-/*   Updated: 2023/06/04 22:57:28 by matnam           ###   ########.fr       */
+/*   Updated: 2023/06/05 10:48:21 by matnam           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,9 @@ void	init_env(t_data *data, char *env[])
 	i = 0;
 	if (!env[0])
 	{
-		data->env = ft_lstnew(ft_strjoin("PWD=", getcwd(cwd, BUFFER_SIZE)));
+		getcwd(cwd, BUFFER_SIZE);
+		set_env_var("PWD", cwd, data, 0);
+		set_env_var("_", "./minishell", data, 0);
 		return ;
 	}
 	while (env[i])

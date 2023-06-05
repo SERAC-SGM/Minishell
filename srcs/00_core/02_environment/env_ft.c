@@ -6,7 +6,7 @@
 /*   By: matnam <matnam@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 12:18:00 by maaliber          #+#    #+#             */
-/*   Updated: 2023/06/04 22:56:07 by matnam           ###   ########.fr       */
+/*   Updated: 2023/06/05 10:45:44 by matnam           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ C'est moche mais ça marche
 /*
 Creates a new environment variable by adding it at the end of env.
 */
-static void	create_env_var(char *name, char *val, t_list *env, int malloc)
+static void	create_env_var(char *name, char *val, t_data *data, int malloc)
 {
 	char	*line;
 	t_list	*entry;
@@ -51,17 +51,22 @@ static void	create_env_var(char *name, char *val, t_list *env, int malloc)
 	else
 		line = ft_strjoin(line, val);
 	entry = ft_lstnew(line);
-	ft_lstadd_back(&env, entry);
+	if (!data->env)
+		data->env = entry;
+	else
+		ft_lstadd_back(&data->env, entry);
 }
 
 /*
 Overwrites an existing environment variable.
 */
-static void	overwrite_env_var(char *name, char *val, t_list *env)
+static void	overwrite_env_var(char *name, char *val, t_data *data)
 {
+	t_list 	*env;
 	char	*prefix;
 	int		length;
 
+	env = data->env;
 	if (!name)
 		return ;
 	prefix = ft_strjoin(name, "=");
@@ -83,7 +88,7 @@ void	set_env_var(char *name, char *val, t_data *data, int malloc)
 
 	prev_val = get_var_value(name, data->env);
 	if (!prev_val)
-		create_env_var(name, val, data->env, malloc);
+		create_env_var(name, val, data, malloc);
 	else
-		overwrite_env_var(name, val, data->env);
+		overwrite_env_var(name, val, data);
 }
