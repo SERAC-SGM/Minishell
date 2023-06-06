@@ -6,7 +6,7 @@
 /*   By: matnam <matnam@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 14:58:49 by maaliber          #+#    #+#             */
-/*   Updated: 2023/06/04 22:14:35 by matnam           ###   ########.fr       */
+/*   Updated: 2023/06/06 14:14:24 by matnam           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@ int	main(int ac, char *av[], char *env[])
 		if (*data.cmd_line)
 		{
 			add_history(data.cmd_line);
-			data.token_list = lexer(&data);
-			if (parser(data.token_list, &data))
+			lexer(&data);
+			if (parser(&data))
 				exec_cmd_line(&data);
 			clear_token_list(&data.token_list);
 		}

@@ -6,7 +6,7 @@
 /*   By: matnam <matnam@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 14:19:32 by maaliber          #+#    #+#             */
-/*   Updated: 2023/06/04 18:45:26 by matnam           ###   ########.fr       */
+/*   Updated: 2023/06/06 14:13:35 by matnam           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,13 +104,15 @@ static void	redirection(t_tkn_lst *token, t_cmd *cmd)
 	}
 }
 
-int	parser(t_tkn_lst *token, t_data *data)
+int	parser(t_data *data)
 {
-	int	proc_idx;
+	t_tkn_lst	*token;
+	int			proc_idx;
 
-	proc_idx = 0;
-	if (parsing_error(token))
+	if (!data->token_list || parsing_error(data->token_list))
 		return (0);
+	proc_idx = 0;
+	token = data->token_list;
 	init_cmd(&data->cmds_tab[proc_idx]);
 	while (token->type != END)
 	{

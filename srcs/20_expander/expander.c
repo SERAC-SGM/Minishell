@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expander.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lletourn <lletourn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: matnam <matnam@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 14:19:34 by maaliber          #+#    #+#             */
-/*   Updated: 2023/06/01 12:27:36 by lletourn         ###   ########.fr       */
+/*   Updated: 2023/06/06 11:23:43 by matnam           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,7 @@ static int	var_len(char *str)
 	return (i);
 }
 
-/*
-Duplicates (with malloc) the string passed as argument.
-*/
-static char	*cpy_word(char *str)
+char	*cpy_var(char *str)
 {
 	char	*word;
 	int		len;
@@ -92,7 +89,7 @@ void	expand(char **content, t_list *env)
 		if ((*content)[i] == '$' && (*content)[i + 1]
 			&& (ft_isalnum((*content)[i + 1]) || (*content)[i + 1] == '?'))
 		{
-			to_find = cpy_word(*content + i + 1);
+			to_find = cpy_var(*content + i + 1);
 			if (ft_strcmp(to_find, "?") == 0)
 				value = ft_itoa(g_sig.error_status);
 			else

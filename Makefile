@@ -142,6 +142,7 @@ SRCS += lexer_util.c
 SRCS += input_mode.c
 SRCS += token_lst.c
 SRCS += token.c
+SRCS += lexer_error.c
 SRCS += lexer.c
 
 #20_expander

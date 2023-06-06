@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   input_mode.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maaliber <maaliber@student.42.fr>          +#+  +:+       +#+        */
+/*   By: matnam <matnam@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 19:04:17 by maaliber          #+#    #+#             */
-/*   Updated: 2023/05/30 16:46:00 by maaliber         ###   ########.fr       */
+/*   Updated: 2023/06/06 11:30:32 by matnam           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,13 +34,12 @@ Create standard token :
 • if it's in between single quote ['] : mode 1
 • if it's in between double quote ["] : mode 2
 */
-char	*standard_mode(char **str, t_list *env, t_list *set)
+char	*standard_mode(char **str, t_list *env)
 {
 	char	*content;
 	int		ex;
 	int		i;
 
-	(void)set;
 	ex = 0;
 	i = 0;
 	while ((*str)[i] && !ft_isspace((*str)[i]) && !is_special((*str) + i)
@@ -90,13 +89,12 @@ Create double quote token :
 • if is in between single quote ['] : mode 1 
 • if is in between double quote ["] : mode 2
 */
-char	*double_quote_mode(char **str, t_list *env, t_list *set)
+char	*double_quote_mode(char **str, t_list *env)
 {
 	char	*content;
 	int		ex;
 	int		i;
 
-	(void)set;
 	ex = 0;
 	i = 1;
 	while ((*str)[i] && (*str)[i] != '\"')

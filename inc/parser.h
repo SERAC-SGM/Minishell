@@ -6,7 +6,7 @@
 /*   By: matnam <matnam@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/27 12:43:55 by maaliber          #+#    #+#             */
-/*   Updated: 2023/06/02 20:14:31 by matnam           ###   ########.fr       */
+/*   Updated: 2023/06/06 14:14:11 by matnam           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,6 @@
 //////////////
 
 int	parsing_error(t_tkn_lst *token);
-int	parser(t_tkn_lst *token, t_data *data);
+int	parser(t_data *data);
 
 #endif
