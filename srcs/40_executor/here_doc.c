@@ -6,13 +6,24 @@
 /*   By: maaliber <maaliber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 14:44:06 by lletourn          #+#    #+#             */
-/*   Updated: 2023/05/31 12:35:48 by maaliber         ###   ########.fr       */
+/*   Updated: 2023/06/12 17:55:01 by maaliber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static int	wait_heredoc(int fd_hdoc, char *lim, char *line, t_data *data)
+static char	*heredoc_name(int proc_nb)
+{
+	char	*name;
+	char	*nb;
+	
+	nb = ft_itoa(proc_nb);
+	name = ft_strjoin(".here_doc", nb);
+	free(nb);
+	return (name);
+}
+
+static int	wait_heredoc(int fd_hdoc, t_cmd *cmd, char *line, t_data *data)
 {
 	int	status;
 
@@ -22,7 +33,7 @@ static int	wait_heredoc(int fd_hdoc, char *lim, char *line, t_data *data)
 	{
 		close(fd_hdoc);
 		if (!line)
-			exit_error(E_HEREDOC, lim, data);
+			exit_heredoc(cmd, data);
 		free(line);
 		clear_exit(data);
 	}
@@ -30,7 +41,7 @@ static int	wait_heredoc(int fd_hdoc, char *lim, char *line, t_data *data)
 		;
 	enable_signal();
 	if (WIFEXITED(status))
-		g_sig.error_status = WEXITSTATUS(status);
+		;
 	else if (WIFSIGNALED(status))
 		g_sig.error_status = WTERMSIG(status) + 128;
 	return (1);
@@ -42,7 +53,7 @@ int	input_heredoc(t_cmd *cmd, t_data *data)
 	int			fd_hdoc;
 	int			ret;
 
-	cmd->infile = ft_strjoin(".here_doc", ft_itoa(cmd->process_index));
+	cmd->infile = heredoc_name(cmd->process_index);
 	fd_hdoc = open(cmd->infile, O_WRONLY | O_CREAT | O_EXCL, 0644);
 	line = NULL;
 	g_sig.pid = fork();
@@ -60,6 +71,6 @@ int	input_heredoc(t_cmd *cmd, t_data *data)
 			free(line);
 		}
 	}
-	ret = wait_heredoc(fd_hdoc, cmd->delimiter, line, data);
+	ret = wait_heredoc(fd_hdoc, cmd, line, data);
 	return (ret);
 }

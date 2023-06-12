@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error_manager.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: matnam <matnam@student.42.fr>              +#+  +:+       +#+        */
+/*   By: maaliber <maaliber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 14:57:22 by maaliber          #+#    #+#             */
-/*   Updated: 2023/06/04 22:37:33 by matnam           ###   ########.fr       */
+/*   Updated: 2023/06/12 17:54:26 by maaliber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,9 +39,22 @@ struct s_errdesc
 	{E_HOME_NOT_SET, ": HOME not set\n", 1},
 	{E_INVALID_ID, ": not a valid identifier\n", 1},
 	{E_HEREDOC,
-		"warning: here-document at line 38 delimited by end-of-file, wanted >",
+		"\nminishell: warning: here-document delimited by end-of-file, (wanted `",
 			0},
 };
+
+void	exit_heredoc(t_cmd *cmd, t_data *data)
+{
+	char	*error_message;
+
+	error_message = ft_strjoin(errdesc[E_HEREDOC].msg, cmd->delimiter);
+	error_message = ft_strjoin_dup1(error_message, "\')\n");
+	ft_putstr_fd(error_message, 2);
+	free(error_message);
+	free(cmd->infile);
+	clear_data(data);
+	exit(1);
+}
 
 void	error_msg(int err_id, char *item)
 {
