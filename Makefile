@@ -14,7 +14,7 @@ PROJECT_NAME = Minishell
 CC = cc 
 
 # Compiler Flags
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -g
 
 ifeq ($(debug), 1)
 	CFLAGS += -g

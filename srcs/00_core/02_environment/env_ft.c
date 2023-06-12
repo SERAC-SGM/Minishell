@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_ft.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: matnam <matnam@student.42.fr>              +#+  +:+       +#+        */
+/*   By: lletourn <lletourn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 12:18:00 by maaliber          #+#    #+#             */
-/*   Updated: 2023/06/05 10:45:44 by matnam           ###   ########.fr       */
+/*   Updated: 2023/06/12 17:21:08 by lletourn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,9 +60,9 @@ static void	create_env_var(char *name, char *val, t_data *data, int malloc)
 /*
 Overwrites an existing environment variable.
 */
-static void	overwrite_env_var(char *name, char *val, t_data *data)
+static void	overwrite_env_var(char *name, char *val, t_data *data, int malloc)
 {
-	t_list 	*env;
+	t_list	*env;
 	char	*prefix;
 	int		length;
 
@@ -77,9 +77,16 @@ static void	overwrite_env_var(char *name, char *val, t_data *data)
 			break ;
 		env = env->next;
 	}
+	if (malloc)
+		free(name);
 	free(env->line);
-	env->line = ft_strjoin(prefix, val);
-	free(prefix);
+	if (malloc)
+		env->line = ft_strjoin_free(prefix, val);
+	else
+	{
+		env->line = ft_strjoin(prefix, val);
+		free(prefix);
+	}
 }
 
 void	set_env_var(char *name, char *val, t_data *data, int malloc)
@@ -90,5 +97,5 @@ void	set_env_var(char *name, char *val, t_data *data, int malloc)
 	if (!prev_val)
 		create_env_var(name, val, data, malloc);
 	else
-		overwrite_env_var(name, val, data);
+		overwrite_env_var(name, val, data, malloc);
 }
