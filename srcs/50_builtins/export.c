@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: matnam <matnam@student.42.fr>              +#+  +:+       +#+        */
+/*   By: lletourn <lletourn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 13:03:56 by matnam            #+#    #+#             */
-/*   Updated: 2023/06/04 19:46:03 by matnam           ###   ########.fr       */
+/*   Updated: 2023/06/12 17:20:01 by lletourn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,23 +75,7 @@ static char	*get_value(char *var)
 /*
 Checks if the variable is assigned in set, and exports it. If it's unnasigned,
 does nothing.
-
-static void	export_unassigned(char *name, t_list *env, t_list *set)
-{
-	char	*value;
-
-	value = get_var_value(name, set);
-	if (!value)
-		return ;
-	set_env_var(name, value, env);
-}
 */
-
-/*
-Checks if the variable is assigned in set, and exports it. If it's unnasigned,
-does nothing.
-*/
-
 static int	error_var_name(char *name)
 {
 	int		i;
@@ -115,21 +99,24 @@ void	ft_export(char	**args, t_data *data)
 {
 	char	*name;
 	char	*value;
-	int		i;
 
-	i = -1;
-	while (args[++i])
-	{
-		if (error_var_name(get_name(args[i])))
-			return ;
-	}
 	while (args++)
 	{
 		if (!*args)
 			return ;
 		name = get_name(*args);
-		value = get_value(*args);
-		set_env_var(name, value, data, 1);
+		if (error_var_name(name))
+			free(name);
+		else
+		{
+			value = get_value(*args);
+			if (value && *value)
+				set_env_var(name, value, data, 1);
+			else if (value && !*value && get_var_value(name, data->env))
+				set_env_var(name, value, data, 1);
+			else
+				free(name);
+		}
 	}
 	return ;
 }
