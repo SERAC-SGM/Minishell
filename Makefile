@@ -135,7 +135,6 @@ SRCS += free_ft.c
 SRCS += util_ft.c
 SRCS += list_ft.c
 SRCS += list_ft2.c
-SRCS += print_struct.c
 
 #10_lexer
 SRCS += lexer_util.c
@@ -159,6 +158,7 @@ SRCS += here_doc.c
 SRCS += exec_native.c
 SRCS += exec_builtin.c
 SRCS += exec.c
+SRCS += exec_2.c
 
 #50_buildins
 SRCS += cd.c

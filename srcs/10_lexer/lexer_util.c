@@ -3,26 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   lexer_util.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: matnam <matnam@student.42.fr>              +#+  +:+       +#+        */
+/*   By: lletourn <lletourn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 14:58:47 by maaliber          #+#    #+#             */
-/*   Updated: 2023/06/06 11:40:00 by matnam           ###   ########.fr       */
+/*   Updated: 2023/06/13 12:30:57 by lletourn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-/*
-Checks if the string corresponds to any special character and returns the
-matching value:
-• <:  returns RD_IN
-• <<: returns HERE
-• >:  returns RD_OUT
-• >>: returns APPEND
-• |:  returns PIPE
-• \n or \0: returns END
-• returns 0 otherwise
-*/
 int	is_special(char *str)
 {
 	int		l;

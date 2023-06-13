@@ -3,20 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   token_lst.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maaliber <maaliber@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lletourn <lletourn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 11:59:08 by maaliber          #+#    #+#             */
-/*   Updated: 2023/05/09 19:02:16 by maaliber         ###   ########.fr       */
+/*   Updated: 2023/06/13 12:33:28 by lletourn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-/*
-Allocates (with malloc) a new token list.
-• content: string
-• type:    
-*/
 t_tkn_lst	*new_token(char	*str, int type)
 {
 	t_tkn_lst	*token;
@@ -30,9 +25,6 @@ t_tkn_lst	*new_token(char	*str, int type)
 	return (token);
 }
 
-/*
-Get last token of the list
-*/
 t_tkn_lst	*last_token(t_tkn_lst *tk_list)
 {
 	if (!tk_list)
@@ -42,10 +34,6 @@ t_tkn_lst	*last_token(t_tkn_lst *tk_list)
 	return (tk_list);
 }
 
-/*
-Add a token or a token list at the end of an existing list,
-if existing list is NULL return the list added
-*/
 void	add_back_token(t_tkn_lst **tk_list, t_tkn_lst *token)
 {
 	t_tkn_lst	*tkn_last;
@@ -61,9 +49,6 @@ void	add_back_token(t_tkn_lst **tk_list, t_tkn_lst *token)
 	tkn_last->next = token;
 }
 
-/*
-Delete 1 token
-*/
 void	del1_token(t_tkn_lst *token)
 {
 	if (!token)
@@ -74,9 +59,6 @@ void	del1_token(t_tkn_lst *token)
 	free(token);
 }
 
-/*
-Free and delete all content of the list
-*/
 void	clear_token_list(t_tkn_lst **tk_list)
 {
 	t_tkn_lst	*tk_next;

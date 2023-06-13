@@ -1,36 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   signal_troller.c                                   :+:      :+:    :+:   */
+/*   exec_2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lletourn <lletourn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/30 18:25:51 by maaliber          #+#    #+#             */
-/*   Updated: 2023/06/02 13:19:06 by lletourn         ###   ########.fr       */
+/*   Created: 2023/06/13 12:58:43 by lletourn          #+#    #+#             */
+/*   Updated: 2023/06/13 14:09:24 by lletourn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <signal.h>
+#include "minishell.h"
 
-void	sigint_handler(int signum)
+void	exec_open_files(t_data *data, int proc_idx)
 {
-	(void)signum;
-	printf("SIGINT !!!\n");
-}
-
-void	sigquit_handler(int signum)
-{
-	(void)signum;
-	printf("SIGQUIT !!!\n");
-}
-
-int	main(void)
-{
-	signal(SIGINT, sigint_handler);
-	signal(SIGQUIT, sigquit_handler);
-	while (1)
+	if (data->cmds_tab[proc_idx].here_doc)
 	{
-
+		if (!input_heredoc(&data->cmds_tab[proc_idx], data))
+			data->cmds_tab[proc_idx].here_doc = -1;
 	}
+	open_files(&data->cmds_tab[proc_idx]);
 }

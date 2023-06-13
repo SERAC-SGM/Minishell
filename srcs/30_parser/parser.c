@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: matnam <matnam@student.42.fr>              +#+  +:+       +#+        */
+/*   By: lletourn <lletourn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 14:19:32 by maaliber          #+#    #+#             */
-/*   Updated: 2023/06/06 14:13:35 by matnam           ###   ########.fr       */
+/*   Updated: 2023/06/13 12:48:50 by lletourn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,34 +104,23 @@ static void	redirection(t_tkn_lst *token, t_cmd *cmd)
 	}
 }
 
-int	parser(t_data *data)
+t_tkn_lst	*parse_type(t_data *data, t_tkn_lst *token, int *proc_idx)
 {
-	t_tkn_lst	*token;
-	int			proc_idx;
-
-	if (!data->token_list || parsing_error(data->token_list))
-		return (0);
-	proc_idx = 0;
-	token = data->token_list;
-	init_cmd(&data->cmds_tab[proc_idx]);
-	while (token->type != END)
+	if (token->type == PIPE)
 	{
-		if (token->type == PIPE)
-		{
-			token = token->next;
-			data->process_nb++;
-			init_cmd(&data->cmds_tab[++proc_idx]);
-		}
-		if (token->type == STD)
-		{
-			add_attribute(token, data, proc_idx);
-			token = token->next;
-		}
-		if (token->type != END && !token->content && token->type != PIPE)
-		{	
-			redirection(token, &data->cmds_tab[proc_idx]);
-			token = token->next->next;
-		}
+		token = token->next;
+		data->process_nb++;
+		init_cmd(&data->cmds_tab[++*proc_idx]);
 	}
-	return (1);
+	if (token->type == STD)
+	{
+		add_attribute(token, data, *proc_idx);
+		token = token->next;
+	}
+	if (token->type != END && !token->content && token->type != PIPE)
+	{	
+		redirection(token, &data->cmds_tab[*proc_idx]);
+		token = token->next->next;
+	}
+	return (token);
 }

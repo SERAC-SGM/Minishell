@@ -3,15 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   exec_native.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: matnam <matnam@student.42.fr>              +#+  +:+       +#+        */
+/*   By: lletourn <lletourn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 13:38:11 by lletourn          #+#    #+#             */
-/*   Updated: 2023/06/04 22:18:37 by matnam           ###   ########.fr       */
+/*   Updated: 2023/06/13 12:55:20 by lletourn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+/*
+Checks if the provided path is correct.
+*/
 static int	is_full_path(char *cmd_path, t_data *data)
 {
 	DIR	*dir;
@@ -23,7 +26,7 @@ static int	is_full_path(char *cmd_path, t_data *data)
 	dir = opendir(cmd_path);
 	if (dir)
 	{
-	    closedir(dir);
+		closedir(dir);
 		exit_error(E_DIR, cmd_path, data);
 	}
 	if (*cmd_path == '/' || *cmd_path == '.')

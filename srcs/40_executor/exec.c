@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maaliber <maaliber@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lletourn <lletourn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 13:38:49 by lletourn          #+#    #+#             */
-/*   Updated: 2023/06/12 17:39:03 by maaliber         ###   ########.fr       */
+/*   Updated: 2023/06/13 14:08:56 by lletourn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,9 @@ static void	wait_process(void)
 	enable_signal();
 }
 
+/*
+Checks if the name correstponds to a builtin.
+*/
 static int	is_builtin(char *name)
 {
 	if (ft_strcmp(name, "echo") == 0)
@@ -105,14 +108,7 @@ int	exec_cmd_line(t_data *data)
 	env = env_to_tab(data->env);
 	proc_idx = -1;
 	while (++proc_idx < data->process_nb)
-	{
-		if (data->cmds_tab[proc_idx].here_doc)
-		{
-			if (!input_heredoc(&data->cmds_tab[proc_idx], data))
-				data->cmds_tab[proc_idx].here_doc = -1;
-		}
-		open_files(&data->cmds_tab[proc_idx]);
-	}
+		exec_open_files(data, proc_idx);
 	proc_idx = -1;
 	open_pipe(data);
 	while (++proc_idx < data->process_nb)

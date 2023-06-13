@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   token.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: matnam <matnam@student.42.fr>              +#+  +:+       +#+        */
+/*   By: lletourn <lletourn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 16:54:54 by maaliber          #+#    #+#             */
-/*   Updated: 2023/06/06 11:50:34 by matnam           ###   ########.fr       */
+/*   Updated: 2023/06/13 12:33:50 by lletourn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ Split string into token with in standard mode input [0]
 • create a token if one or several spaces are identified after expanding content
 • change stored input with the rest of the input
 */
-t_tkn_lst	*split_input(char **store, char *add)
+static t_tkn_lst	*split_input(char **store, char *add)
 {
 	t_tkn_lst	*tkn_list;
 	char		*content;
@@ -92,13 +92,6 @@ t_tkn_lst	*split_input(char **store, char *add)
 	return (tkn_list);
 }
 
-/*
-Creates token with command line with differents cases :
-• if it starts with a special character : |, <, <<, >, >>
-• if it's a standard entry : mode 0
-• if it's between single quote ['] : mode 1
-• if it's between double quote ["] : mode 2
-*/
 t_tkn_lst	*tokenize(char **cmd_line, t_list *env)
 {
 	t_tkn_lst	*tkn_list;

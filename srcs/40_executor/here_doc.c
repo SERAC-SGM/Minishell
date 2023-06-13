@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   here_doc.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maaliber <maaliber@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lletourn <lletourn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 14:44:06 by lletourn          #+#    #+#             */
-/*   Updated: 2023/06/12 17:55:01 by maaliber         ###   ########.fr       */
+/*   Updated: 2023/06/13 14:10:11 by lletourn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static char	*heredoc_name(int proc_nb)
 {
 	char	*name;
 	char	*nb;
-	
+
 	nb = ft_itoa(proc_nb);
 	name = ft_strjoin(".here_doc", nb);
 	free(nb);

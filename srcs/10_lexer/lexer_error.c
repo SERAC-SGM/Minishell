@@ -3,15 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   lexer_error.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: matnam <matnam@student.42.fr>              +#+  +:+       +#+        */
+/*   By: lletourn <lletourn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/06 11:39:49 by matnam            #+#    #+#             */
-/*   Updated: 2023/06/06 14:16:17 by matnam           ###   ########.fr       */
+/*   Updated: 2023/06/13 12:29:54 by lletourn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+/*
+Displays the "ambiguous redirect" error message.
+*/
 static void	ambiguous_redir_error_msg(char *str)
 {
 	int	i;
