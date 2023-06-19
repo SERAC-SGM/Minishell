@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lletourn <lletourn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: maaliber <maaliber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 13:38:49 by lletourn          #+#    #+#             */
-/*   Updated: 2023/06/13 14:08:56 by lletourn         ###   ########.fr       */
+/*   Updated: 2023/06/19 14:44:47 by maaliber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,9 +106,8 @@ int	exec_cmd_line(t_data *data)
 	int		proc_idx;
 
 	env = env_to_tab(data->env);
-	proc_idx = -1;
-	while (++proc_idx < data->process_nb)
-		exec_open_files(data, proc_idx);
+	while (!input_files(data))
+		return (free(env), g_sig.error_status = 130, 0);
 	proc_idx = -1;
 	open_pipe(data);
 	while (++proc_idx < data->process_nb)

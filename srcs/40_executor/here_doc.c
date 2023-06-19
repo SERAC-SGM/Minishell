@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   here_doc.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lletourn <lletourn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: maaliber <maaliber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 14:44:06 by lletourn          #+#    #+#             */
-/*   Updated: 2023/06/13 14:10:11 by lletourn         ###   ########.fr       */
+/*   Updated: 2023/06/19 14:45:42 by maaliber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ static int	wait_heredoc(int fd_hdoc, t_cmd *cmd, char *line, t_data *data)
 
 	disable_signal();
 	status = 0;
+	ret = 1;
 	if (g_sig.pid == 0)
 	{
 		close(fd_hdoc);
@@ -40,10 +41,8 @@ static int	wait_heredoc(int fd_hdoc, t_cmd *cmd, char *line, t_data *data)
 	while (waitpid(g_sig.pid, &status, 0) != -1)
 		;
 	enable_signal();
-	if (WIFEXITED(status))
-		;
-	else if (WIFSIGNALED(status))
-		g_sig.error_status = WTERMSIG(status) + 128;
+	if (WIFSIGNALED(status))
+		return (0);
 	return (1);
 }
 

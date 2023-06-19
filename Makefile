@@ -158,7 +158,6 @@ SRCS += here_doc.c
 SRCS += exec_native.c
 SRCS += exec_builtin.c
 SRCS += exec.c
-SRCS += exec_2.c
 
 #50_buildins
 SRCS += cd.c
