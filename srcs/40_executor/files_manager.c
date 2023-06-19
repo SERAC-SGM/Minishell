@@ -6,7 +6,7 @@
 /*   By: maaliber <maaliber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/06 12:07:41 by lletourn          #+#    #+#             */
-/*   Updated: 2023/06/19 14:44:23 by maaliber         ###   ########.fr       */
+/*   Updated: 2023/06/19 17:28:30 by maaliber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,8 @@ void	close_files(t_cmd *cmd)
 		close(cmd->fd_in);
 		if (cmd->here_doc)
 		{
+			
+			printf("NTM\n");
 			unlink(cmd->infile);
 			free(cmd->infile);
 			cmd->infile = NULL;
@@ -63,11 +65,17 @@ int	input_files(t_data *data)
 	proc_idx = -1;
 	while (++proc_idx < data->process_nb)
 	{
-		if (!input_heredoc(&data->cmds_tab[proc_idx], data))
+		if (data->cmds_tab[proc_idx].here_doc)
 		{
-			while (--proc_idx >= 0)
-				close_files(&data->cmds_tab[proc_idx]);
-			return (0);
+			if (!input_heredoc(&data->cmds_tab[proc_idx], data))
+			{
+				while (--proc_idx >= 0)
+				{
+					write(1, "close0\n", 7);
+					close_files(&data->cmds_tab[proc_idx]);
+				}
+				return (0);
+			}
 		}
 		open_files(&data->cmds_tab[proc_idx]);
 	}

@@ -6,7 +6,7 @@
 /*   By: maaliber <maaliber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 13:38:49 by lletourn          #+#    #+#             */
-/*   Updated: 2023/06/19 14:44:47 by maaliber         ###   ########.fr       */
+/*   Updated: 2023/06/19 17:29:36 by maaliber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,13 +56,6 @@ static void	exec_single_cmd(t_data *data, int proc_idx, char **env)
 {
 	if (!data->cmds_tab[proc_idx].args)
 		return ;
-	if (data->cmds_tab[proc_idx].here_doc == -1)
-	{
-		close_files(&data->cmds_tab[proc_idx]);
-		close_pipe(data);
-		error_msg(E_HEREDOC, data->cmds_tab[proc_idx].delimiter);
-		return ;
-	}
 	if (is_builtin(data->cmds_tab[proc_idx].args[0]))
 		g_sig.error_status = exec_builtin(data, proc_idx);
 	else
@@ -85,12 +78,6 @@ static void	exec_multiple_cmd(t_data *data, int proc_idx, char **env)
 		exit_error(E_FORK, 0, data);
 	if (g_sig.pid == 0)
 	{
-		if (data->cmds_tab[proc_idx].here_doc == -1)
-		{
-			close_files(&data->cmds_tab[proc_idx]);
-			close_pipe(data);
-			exit_error(E_HEREDOC, data->cmds_tab[proc_idx].delimiter, data);
-		}
 		update_signal();
 		if (is_builtin(data->cmds_tab[proc_idx].args[0]))
 			g_sig.error_status = exec_builtin(data, proc_idx);
@@ -106,7 +93,7 @@ int	exec_cmd_line(t_data *data)
 	int		proc_idx;
 
 	env = env_to_tab(data->env);
-	while (!input_files(data))
+	if (!input_files(data))
 		return (free(env), g_sig.error_status = 130, 0);
 	proc_idx = -1;
 	open_pipe(data);
@@ -116,6 +103,7 @@ int	exec_cmd_line(t_data *data)
 			exec_single_cmd(data, proc_idx, env);
 		else
 			exec_multiple_cmd(data, proc_idx, env);
+		write(1, "close3\n", 7);
 		close_files(&data->cmds_tab[proc_idx]);
 	}
 	close_pipe(data);

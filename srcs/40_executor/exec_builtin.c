@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_builtin.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lletourn <lletourn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: maaliber <maaliber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 13:38:36 by lletourn          #+#    #+#             */
-/*   Updated: 2023/06/13 12:52:58 by lletourn         ###   ########.fr       */
+/*   Updated: 2023/06/19 17:29:28 by maaliber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ int	exec_builtin(t_data *data, int proc_idx)
 	save_reset_stdin_out(0);
 	dup_file(data, proc_idx);
 	dup_pipe(data, proc_idx);
+	write(1, "close2\n", 7);
 	close_files(&data->cmds_tab[proc_idx]);
 	close_pipe(data);
 	ret = 0;

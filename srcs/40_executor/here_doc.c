@@ -6,7 +6,7 @@
 /*   By: maaliber <maaliber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 14:44:06 by lletourn          #+#    #+#             */
-/*   Updated: 2023/06/19 14:45:42 by maaliber         ###   ########.fr       */
+/*   Updated: 2023/06/19 17:07:41 by maaliber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ static int	wait_heredoc(int fd_hdoc, t_cmd *cmd, char *line, t_data *data)
 
 	disable_signal();
 	status = 0;
-	ret = 1;
 	if (g_sig.pid == 0)
 	{
 		close(fd_hdoc);
@@ -38,11 +37,15 @@ static int	wait_heredoc(int fd_hdoc, t_cmd *cmd, char *line, t_data *data)
 		free(line);
 		clear_exit(data);
 	}
-	while (waitpid(g_sig.pid, &status, 0) != -1)
+	while (waitpid(-1, &status, 0) != -1)
 		;
-	enable_signal();
-	if (WIFSIGNALED(status))
+	if (WIFEXITED(status))
+		status = WEXITSTATUS(status);
+	else if (WIFSIGNALED(status))
+		status = WTERMSIG(status) + 128;
+	if (status == 130)
 		return (0);
+	enable_signal();
 	return (1);
 }
 
@@ -50,7 +53,6 @@ int	input_heredoc(t_cmd *cmd, t_data *data)
 {
 	char		*line;
 	int			fd_hdoc;
-	int			ret;
 
 	cmd->infile = heredoc_name(cmd->process_index);
 	fd_hdoc = open(cmd->infile, O_WRONLY | O_CREAT | O_EXCL, 0644);
@@ -70,6 +72,7 @@ int	input_heredoc(t_cmd *cmd, t_data *data)
 			free(line);
 		}
 	}
-	ret = wait_heredoc(fd_hdoc, cmd, line, data);
-	return (ret);
+	if (!wait_heredoc(fd_hdoc, cmd, line, data))
+		return (write(1, "\n", 1), 0);
+	return (1);
 }

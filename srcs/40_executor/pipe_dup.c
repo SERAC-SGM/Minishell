@@ -6,7 +6,7 @@
 /*   By: maaliber <maaliber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 17:24:22 by maaliber          #+#    #+#             */
-/*   Updated: 2023/05/23 17:32:04 by maaliber         ###   ########.fr       */
+/*   Updated: 2023/06/19 16:57:48 by maaliber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,9 @@ void	close_pipe(t_data *data)
 	while (++i < data->process_nb - 1)
 	{
 		close(data->fd[i][0]);
+		//write(1, "TEST\n", 5);
 		close(data->fd[i][1]);
+		//write(1, "TEST\n", 5);
 	}
 }
 
