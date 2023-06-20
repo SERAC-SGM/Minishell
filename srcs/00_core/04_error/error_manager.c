@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error_manager.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lletourn <lletourn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: maaliber <maaliber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 14:57:22 by maaliber          #+#    #+#             */
-/*   Updated: 2023/06/13 12:17:03 by lletourn         ###   ########.fr       */
+/*   Updated: 2023/06/20 14:09:25 by maaliber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,6 @@ void	exit_heredoc(t_cmd *cmd, t_data *data)
 	error_message = ft_strjoin_dup1(error_message, "\')\n");
 	ft_putstr_fd(error_message, 2);
 	free(error_message);
-	free(cmd->infile);
 	clear_data(data);
 	exit(1);
 }

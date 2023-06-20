@@ -6,7 +6,7 @@
 /*   By: maaliber <maaliber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 13:38:11 by lletourn          #+#    #+#             */
-/*   Updated: 2023/06/19 17:29:31 by maaliber         ###   ########.fr       */
+/*   Updated: 2023/06/20 14:48:21 by maaliber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,6 @@ void	exec_native(t_data *data, int proc_idx, char **env)
 	set_cmd(data, proc_idx);
 	dup_file(data, proc_idx);
 	dup_pipe(data, proc_idx);
-	write(1, "close1\n", 7);
 	close_files(&data->cmds_tab[proc_idx]);
 	close_pipe(data);
 	if ((proc_idx == 0 && data->cmds_tab[proc_idx].fd_in < 0)

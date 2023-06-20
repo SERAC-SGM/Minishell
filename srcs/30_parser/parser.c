@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lletourn <lletourn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: maaliber <maaliber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 14:19:32 by maaliber          #+#    #+#             */
-/*   Updated: 2023/06/13 12:48:50 by lletourn         ###   ########.fr       */
+/*   Updated: 2023/06/20 14:04:52 by maaliber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,7 @@ static void	create_file(t_cmd *cmd)
 		return ;
 	}
 	close(cmd->fd_out);
+	close(cmd->fd_in);
 }
 
 /*
@@ -89,7 +90,7 @@ returns 0.
 static void	redirection(t_tkn_lst *token, t_cmd *cmd)
 {
 	if (token->type == RD_IN)
-		cmd->infile = token->next->content;
+		cmd->infile = ft_strdup(token->next->content);
 	else if (token->type == HERE)
 	{
 		cmd->delimiter = token->next->content;

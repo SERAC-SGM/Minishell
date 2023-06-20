@@ -6,7 +6,7 @@
 /*   By: maaliber <maaliber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/27 12:43:30 by maaliber          #+#    #+#             */
-/*   Updated: 2023/06/19 14:40:45 by maaliber         ###   ########.fr       */
+/*   Updated: 2023/06/20 14:35:30 by maaliber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ int		exec_cmd_line(t_data *data);
 		/////////////////////
 
 void	check_open_error(int fd, t_cmd *cmd);
+void	unlink_heredoc(t_cmd *cmd);
 void	open_files(t_cmd *cmd);
 void	close_files(t_cmd *cmd);
 int		input_files(t_data *data);

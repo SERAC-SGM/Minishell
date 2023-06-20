@@ -6,7 +6,7 @@
 /*   By: maaliber <maaliber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 13:38:49 by lletourn          #+#    #+#             */
-/*   Updated: 2023/06/19 17:29:36 by maaliber         ###   ########.fr       */
+/*   Updated: 2023/06/20 14:41:45 by maaliber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,7 @@ int	exec_cmd_line(t_data *data)
 			exec_single_cmd(data, proc_idx, env);
 		else
 			exec_multiple_cmd(data, proc_idx, env);
-		write(1, "close3\n", 7);
+		unlink_heredoc(&data->cmds_tab[proc_idx]);
 		close_files(&data->cmds_tab[proc_idx]);
 	}
 	close_pipe(data);

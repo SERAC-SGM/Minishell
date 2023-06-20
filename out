@@ -1,3 +1,4 @@
+a
 BUGS.txt
 build
 in
@@ -8,4 +9,3 @@ minishell
 objs
 out
 srcs
-ut

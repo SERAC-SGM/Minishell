@@ -6,7 +6,7 @@
 /*   By: maaliber <maaliber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 14:44:06 by lletourn          #+#    #+#             */
-/*   Updated: 2023/06/19 17:07:41 by maaliber         ###   ########.fr       */
+/*   Updated: 2023/06/20 14:51:31 by maaliber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,15 +23,32 @@ static char	*heredoc_name(int proc_nb)
 	return (name);
 }
 
+void	free_infile(t_data *data, int proc_idx)
+{
+	int	i;
+
+	i = -1;
+	while (++i <= proc_idx)
+	{
+		if (data->cmds_tab[i].infile)
+		{
+			if (data->cmds_tab[i].fd_in > 0)
+				close(data->cmds_tab[i].fd_in);
+			free(data->cmds_tab[i].infile);
+		}
+	}
+}
+
 static int	wait_heredoc(int fd_hdoc, t_cmd *cmd, char *line, t_data *data)
 {
 	int	status;
 
 	disable_signal();
+	close(fd_hdoc);
 	status = 0;
 	if (g_sig.pid == 0)
 	{
-		close(fd_hdoc);
+		free_infile(data, cmd->process_index);
 		if (!line)
 			exit_heredoc(cmd, data);
 		free(line);
