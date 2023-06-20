@@ -10,10 +10,10 @@
 Ajouter un etat pour le here_doc : sigint arret de l'exec ->NAM
 /////DONE/////Expander arrete la tokenization quand variable vide ->NAM
 /////DONE/////Parsing ignorer les signaux ->NAM
-Rediction vide ambigious redirection ls > $OPIHUOHI ->NAM
+/////DONE/////Rediction vide ambigious redirection ls > $OPIHUOHI ->NAM
 /////DONE/////history not update si ligne vide ->NAM ->DONE
-update exit status on last cmd executed ->NAM
-Revoir wait process pour avoir le dernier status dans le buildin ->NAM
+/////DONE/////update exit status on last cmd executed ->NAM
+/////DONE/////Revoir wait process pour avoir le dernier status dans le buildin ->NAM
 
 Simple pipe SEGFAULT ->OK
 $$ must print pid -> oK
