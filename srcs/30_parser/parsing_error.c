@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_error.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maaliber <maaliber@student.42.fr>          +#+  +:+       +#+        */
+/*   By: matnam <matnam@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 17:52:13 by matnam            #+#    #+#             */
-/*   Updated: 2023/06/19 16:47:08 by maaliber         ###   ########.fr       */
+/*   Updated: 2023/06/20 22:32:30 by matnam           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,8 @@ int	parser(t_data *data)
 		return (0);
 	proc_idx = 0;
 	token = data->token_list;
-	init_cmd(&data->cmds_tab[proc_idx]);
+	init_cmd(&data->cmds_tab[0]);
+	data->cmds_tab[0].process_index = 0;
 	while (token->type != END)
 		token = parse_type(data, token, &proc_idx);
 	return (1);

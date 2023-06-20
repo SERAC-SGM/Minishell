@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maaliber <maaliber@student.42.fr>          +#+  +:+       +#+        */
+/*   By: matnam <matnam@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 13:38:49 by lletourn          #+#    #+#             */
-/*   Updated: 2023/06/20 16:15:15 by maaliber         ###   ########.fr       */
+/*   Updated: 2023/06/20 19:50:33 by matnam           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,8 @@ static void	exec_single_cmd(t_data *data, int proc_idx, char **env)
 
 static void	exec_multiple_cmd(t_data *data, int proc_idx, char **env)
 {
+	if (!data->cmds_tab[proc_idx].args)
+		return ;
 	g_sig.pid = fork();
 	if (g_sig.pid == -1)
 		exit_error(E_FORK, 0, data);

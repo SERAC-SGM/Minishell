@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maaliber <maaliber@student.42.fr>          +#+  +:+       +#+        */
+/*   By: matnam <matnam@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 14:19:32 by maaliber          #+#    #+#             */
-/*   Updated: 2023/06/20 16:14:12 by maaliber         ###   ########.fr       */
+/*   Updated: 2023/06/20 23:08:41 by matnam           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,19 +64,22 @@ static void	add_attribute(t_tkn_lst *token, t_data *data, int proc_idx)
 }
 
 /*
-Creates the outfile and closes it. If the outfile is a TTY, ignores it.
+Check if the file is a TTY.
 */
-static void	create_file(t_cmd *cmd)
+static int	file_isatty(char *file, int read_write)
 {
-	open_files(cmd);
-	if (isatty(cmd->fd_out) == 1)
-	{
-		close(cmd->fd_out);
-		cmd->outfile = NULL;
-		cmd->fd_out = 0;
-		cmd->append = 0;
-		return ;
-	}
+	int	fd;
+	
+	if (read_write == 0)
+		fd = open(file, O_RDONLY);
+	if (read_write == 1)
+		fd = open(file, O_WRONLY);
+	if (fd < 0)
+		return (0);
+	if (isatty(fd) == 1)
+		return (close(fd), 1);
+	else
+		return (close(fd), 0);
 }
 
 /*
@@ -88,7 +91,14 @@ returns 0.
 static void	redirection(t_tkn_lst *token, t_cmd *cmd)
 {
 	if (token->type == RD_IN)
-		cmd->infile = ft_strdup(token->next->content);
+	{
+		if (!file_isatty(token->next->content, 0))
+		{
+			if (cmd->infile)
+				free(cmd->infile);
+			cmd->infile = ft_strdup(token->next->content);
+		}
+	}
 	else if (token->type == HERE)
 	{
 		cmd->delimiter = token->next->content;
@@ -96,10 +106,12 @@ static void	redirection(t_tkn_lst *token, t_cmd *cmd)
 	}
 	else if (token->type == RD_OUT || token->type == APPEND)
 	{
-		cmd->outfile = token->next->content;
-		if (token->type == APPEND)
-			cmd->append = 1;
-		create_file(cmd);
+		if (!file_isatty(token->next->content, 1))
+		{
+			cmd->outfile = token->next->content;
+			if (token->type == APPEND)
+				cmd->append = 1;
+		}
 	}
 }
 
@@ -109,7 +121,9 @@ t_tkn_lst	*parse_type(t_data *data, t_tkn_lst *token, int *proc_idx)
 	{
 		token = token->next;
 		data->process_nb++;
-		init_cmd(&data->cmds_tab[++*proc_idx]);
+		++*proc_idx;
+		init_cmd(&data->cmds_tab[*proc_idx]);
+		data->cmds_tab[*proc_idx].process_index = *proc_idx;
 	}
 	if (token->type == STD)
 	{
