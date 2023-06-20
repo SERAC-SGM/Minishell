@@ -6,7 +6,7 @@
 /*   By: maaliber <maaliber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 14:19:32 by maaliber          #+#    #+#             */
-/*   Updated: 2023/06/20 14:04:52 by maaliber         ###   ########.fr       */
+/*   Updated: 2023/06/20 16:14:12 by maaliber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,8 +77,6 @@ static void	create_file(t_cmd *cmd)
 		cmd->append = 0;
 		return ;
 	}
-	close(cmd->fd_out);
-	close(cmd->fd_in);
 }
 
 /*

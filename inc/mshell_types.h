@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mshell_types.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: matnam <matnam@student.42.fr>              +#+  +:+       +#+        */
+/*   By: maaliber <maaliber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 13:38:57 by maaliber          #+#    #+#             */
-/*   Updated: 2023/06/04 22:36:24 by matnam           ###   ########.fr       */
+/*   Updated: 2023/06/20 15:23:47 by maaliber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@
 # define END 127
 //# define OPEN_MAX 1024 //ALREADY DEFINED IN LIBFT.H
 # define CMD_MAX 1024
+# define MSG_HEREDOC "minishell: warning: here-document delimited by end-of-file, (wanted `"
 
 enum e_config_error
 {

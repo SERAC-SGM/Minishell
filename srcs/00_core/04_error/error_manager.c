@@ -6,7 +6,7 @@
 /*   By: maaliber <maaliber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 14:57:22 by maaliber          #+#    #+#             */
-/*   Updated: 2023/06/20 14:09:25 by maaliber         ###   ########.fr       */
+/*   Updated: 2023/06/20 15:19:01 by maaliber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,18 +42,6 @@ struct s_errdesc
 	"\nminishell: warning: here-document delimited by end-of-file, (wanted `",
 			0},
 };
-
-void	exit_heredoc(t_cmd *cmd, t_data *data)
-{
-	char	*error_message;
-
-	error_message = ft_strjoin(errdesc[E_HEREDOC].msg, cmd->delimiter);
-	error_message = ft_strjoin_dup1(error_message, "\')\n");
-	ft_putstr_fd(error_message, 2);
-	free(error_message);
-	clear_data(data);
-	exit(1);
-}
 
 void	error_msg(int err_id, char *item)
 {

@@ -6,7 +6,7 @@
 /*   By: maaliber <maaliber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 14:44:06 by lletourn          #+#    #+#             */
-/*   Updated: 2023/06/20 14:51:31 by maaliber         ###   ########.fr       */
+/*   Updated: 2023/06/20 16:15:12 by maaliber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static char	*heredoc_name(int proc_nb)
 	return (name);
 }
 
-void	free_infile(t_data *data, int proc_idx)
+static void	free_infile(t_data *data, int proc_idx)
 {
 	int	i;
 
@@ -39,6 +39,25 @@ void	free_infile(t_data *data, int proc_idx)
 	}
 }
 
+static void	exit_heredoc(t_cmd *cmd, char *line, t_data *data)
+{
+	char	*err_msg;
+
+	free_infile(data, cmd->process_index);
+	if (!line)
+	{
+		err_msg = ft_strjoin(MSG_HEREDOC, cmd->delimiter);
+		err_msg = ft_strjoin_dup1(err_msg, "\')\n");
+		ft_putstr_fd(err_msg, 2);
+		free(err_msg);
+		clear_data(data);
+		exit(1);
+	}
+	free(line);
+	clear_data(data);
+	exit(0);
+}
+
 static int	wait_heredoc(int fd_hdoc, t_cmd *cmd, char *line, t_data *data)
 {
 	int	status;
@@ -47,13 +66,7 @@ static int	wait_heredoc(int fd_hdoc, t_cmd *cmd, char *line, t_data *data)
 	close(fd_hdoc);
 	status = 0;
 	if (g_sig.pid == 0)
-	{
-		free_infile(data, cmd->process_index);
-		if (!line)
-			exit_heredoc(cmd, data);
-		free(line);
-		clear_exit(data);
-	}
+		exit_heredoc(cmd, line, data);
 	while (waitpid(-1, &status, 0) != -1)
 		;
 	if (WIFEXITED(status))

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   core.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lletourn <lletourn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: maaliber <maaliber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 14:48:27 by matnam            #+#    #+#             */
-/*   Updated: 2023/06/13 14:11:50 by lletourn         ###   ########.fr       */
+/*   Updated: 2023/06/20 15:25:28 by maaliber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,10 +96,6 @@ void	enable_signal(void);
 Displays an error message.
 */
 void	error_msg(int err_id, char *item);
-/*
-Displays an error message.
-*/
-void	exit_heredoc(t_cmd *cmd, t_data *data);
 /*
 Displays an error message.
 */
