@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expander.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: matnam <matnam@student.42.fr>              +#+  +:+       +#+        */
+/*   By: lletourn <lletourn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 14:19:34 by maaliber          #+#    #+#             */
-/*   Updated: 2023/06/06 11:23:43 by matnam           ###   ########.fr       */
+/*   Updated: 2023/06/13 12:37:24 by lletourn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,19 +28,6 @@ static int	var_len(char *str)
 	while (str[i] && (ft_isalnum(str[i]) || str[i] == '_'))
 		i++;
 	return (i);
-}
-
-char	*cpy_var(char *str)
-{
-	char	*word;
-	int		len;
-
-	len = var_len(str);
-	word = malloc((len + 1) * sizeof(char));
-	if (!word)
-		return (NULL);
-	ft_strlcpy(word, str, len + 1);
-	return (word);
 }
 
 /*
@@ -71,10 +58,19 @@ static void	replace_content(char **content, char *sub, int pos)
 	*content = new;
 }
 
-/*
-Expand variable followed by $ in format by the corresponding valueue in env
-• $ is not iterpreted when into single quote
-*/
+char	*cpy_var(char *str)
+{
+	char	*word;
+	int		len;
+
+	len = var_len(str);
+	word = malloc((len + 1) * sizeof(char));
+	if (!word)
+		return (NULL);
+	ft_strlcpy(word, str, len + 1);
+	return (word);
+}
+
 void	expand(char **content, t_list *env)
 {
 	char	*to_find;

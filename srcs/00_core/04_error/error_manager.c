@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error_manager.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: matnam <matnam@student.42.fr>              +#+  +:+       +#+        */
+/*   By: maaliber <maaliber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 14:57:22 by maaliber          #+#    #+#             */
-/*   Updated: 2023/06/04 22:37:33 by matnam           ###   ########.fr       */
+/*   Updated: 2023/06/20 15:19:01 by maaliber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ struct s_errdesc
 	{E_HOME_NOT_SET, ": HOME not set\n", 1},
 	{E_INVALID_ID, ": not a valid identifier\n", 1},
 	{E_HEREDOC,
-		"warning: here-document at line 38 delimited by end-of-file, wanted >",
+	"\nminishell: warning: here-document delimited by end-of-file, (wanted `",
 			0},
 };
 

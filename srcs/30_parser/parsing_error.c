@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_error.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: matnam <matnam@student.42.fr>              +#+  +:+       +#+        */
+/*   By: maaliber <maaliber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 17:52:13 by matnam            #+#    #+#             */
-/*   Updated: 2023/06/06 11:54:34 by matnam           ###   ########.fr       */
+/*   Updated: 2023/06/19 16:47:08 by maaliber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,11 +35,30 @@ int	parsing_error(t_tkn_lst *token)
 	{
 		if (token->type != STD && token->next->type != STD)
 		{
-			token_error_msg(token->next->type);
-			g_sig.error_status = 2;
-			return (1);
+			if (token->type == PIPE
+				&& (token->next->type == PIPE || token->next->type == END))
+			{
+				token_error_msg(token->next->type);
+				g_sig.error_status = 2;
+				return (1);
+			}
 		}
 		token = token->next;
 	}
-	return (0); 
+	return (0);
+}
+
+int	parser(t_data *data)
+{
+	t_tkn_lst	*token;
+	int			proc_idx;
+
+	if (!data->token_list || parsing_error(data->token_list))
+		return (0);
+	proc_idx = 0;
+	token = data->token_list;
+	init_cmd(&data->cmds_tab[proc_idx]);
+	while (token->type != END)
+		token = parse_type(data, token, &proc_idx);
+	return (1);
 }

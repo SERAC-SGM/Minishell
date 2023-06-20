@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: matnam <matnam@student.42.fr>              +#+  +:+       +#+        */
+/*   By: maaliber <maaliber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 13:38:49 by lletourn          #+#    #+#             */
-/*   Updated: 2023/06/04 18:12:51 by matnam           ###   ########.fr       */
+/*   Updated: 2023/06/20 16:15:15 by maaliber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,9 @@ static void	wait_process(void)
 	enable_signal();
 }
 
+/*
+Checks if the name correstponds to a builtin.
+*/
 static int	is_builtin(char *name)
 {
 	if (ft_strcmp(name, "echo") == 0)
@@ -53,13 +56,6 @@ static void	exec_single_cmd(t_data *data, int proc_idx, char **env)
 {
 	if (!data->cmds_tab[proc_idx].args)
 		return ;
-	if (data->cmds_tab[proc_idx].here_doc == -1)
-	{
-		close_files(&data->cmds_tab[proc_idx]);
-		close_pipe(data);
-		error_msg(E_HEREDOC, data->cmds_tab[proc_idx].delimiter);
-		return ;
-	}
 	if (is_builtin(data->cmds_tab[proc_idx].args[0]))
 		g_sig.error_status = exec_builtin(data, proc_idx);
 	else
@@ -82,12 +78,6 @@ static void	exec_multiple_cmd(t_data *data, int proc_idx, char **env)
 		exit_error(E_FORK, 0, data);
 	if (g_sig.pid == 0)
 	{
-		if (data->cmds_tab[proc_idx].here_doc == -1)
-		{
-			close_files(&data->cmds_tab[proc_idx]);
-			close_pipe(data);
-			exit_error(E_HEREDOC, data->cmds_tab[proc_idx].delimiter, data);
-		}
 		update_signal();
 		if (is_builtin(data->cmds_tab[proc_idx].args[0]))
 			g_sig.error_status = exec_builtin(data, proc_idx);
@@ -103,16 +93,8 @@ int	exec_cmd_line(t_data *data)
 	int		proc_idx;
 
 	env = env_to_tab(data->env);
-	proc_idx = -1;
-	while (++proc_idx < data->process_nb)
-	{
-		if (data->cmds_tab[proc_idx].here_doc)
-		{
-			if (!input_heredoc(&data->cmds_tab[proc_idx], data))
-				data->cmds_tab[proc_idx].here_doc = -1;
-		}
-		open_files(&data->cmds_tab[proc_idx]);
-	}
+	if (!input_files(data))
+		return (free(env), g_sig.error_status = 130, 0);
 	proc_idx = -1;
 	open_pipe(data);
 	while (++proc_idx < data->process_nb)
@@ -121,6 +103,7 @@ int	exec_cmd_line(t_data *data)
 			exec_single_cmd(data, proc_idx, env);
 		else
 			exec_multiple_cmd(data, proc_idx, env);
+		unlink_heredoc(&data->cmds_tab[proc_idx]);
 		close_files(&data->cmds_tab[proc_idx]);
 	}
 	close_pipe(data);

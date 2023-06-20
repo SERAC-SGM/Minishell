@@ -6,33 +6,76 @@
 /*   By: maaliber <maaliber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 14:44:06 by lletourn          #+#    #+#             */
-/*   Updated: 2023/05/31 12:35:48 by maaliber         ###   ########.fr       */
+/*   Updated: 2023/06/20 16:15:12 by maaliber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static int	wait_heredoc(int fd_hdoc, char *lim, char *line, t_data *data)
+static char	*heredoc_name(int proc_nb)
+{
+	char	*name;
+	char	*nb;
+
+	nb = ft_itoa(proc_nb);
+	name = ft_strjoin(".here_doc", nb);
+	free(nb);
+	return (name);
+}
+
+static void	free_infile(t_data *data, int proc_idx)
+{
+	int	i;
+
+	i = -1;
+	while (++i <= proc_idx)
+	{
+		if (data->cmds_tab[i].infile)
+		{
+			if (data->cmds_tab[i].fd_in > 0)
+				close(data->cmds_tab[i].fd_in);
+			free(data->cmds_tab[i].infile);
+		}
+	}
+}
+
+static void	exit_heredoc(t_cmd *cmd, char *line, t_data *data)
+{
+	char	*err_msg;
+
+	free_infile(data, cmd->process_index);
+	if (!line)
+	{
+		err_msg = ft_strjoin(MSG_HEREDOC, cmd->delimiter);
+		err_msg = ft_strjoin_dup1(err_msg, "\')\n");
+		ft_putstr_fd(err_msg, 2);
+		free(err_msg);
+		clear_data(data);
+		exit(1);
+	}
+	free(line);
+	clear_data(data);
+	exit(0);
+}
+
+static int	wait_heredoc(int fd_hdoc, t_cmd *cmd, char *line, t_data *data)
 {
 	int	status;
 
 	disable_signal();
+	close(fd_hdoc);
 	status = 0;
 	if (g_sig.pid == 0)
-	{
-		close(fd_hdoc);
-		if (!line)
-			exit_error(E_HEREDOC, lim, data);
-		free(line);
-		clear_exit(data);
-	}
-	while (waitpid(g_sig.pid, &status, 0) != -1)
+		exit_heredoc(cmd, line, data);
+	while (waitpid(-1, &status, 0) != -1)
 		;
-	enable_signal();
 	if (WIFEXITED(status))
-		g_sig.error_status = WEXITSTATUS(status);
+		status = WEXITSTATUS(status);
 	else if (WIFSIGNALED(status))
-		g_sig.error_status = WTERMSIG(status) + 128;
+		status = WTERMSIG(status) + 128;
+	if (status == 130)
+		return (0);
+	enable_signal();
 	return (1);
 }
 
@@ -40,9 +83,8 @@ int	input_heredoc(t_cmd *cmd, t_data *data)
 {
 	char		*line;
 	int			fd_hdoc;
-	int			ret;
 
-	cmd->infile = ft_strjoin(".here_doc", ft_itoa(cmd->process_index));
+	cmd->infile = heredoc_name(cmd->process_index);
 	fd_hdoc = open(cmd->infile, O_WRONLY | O_CREAT | O_EXCL, 0644);
 	line = NULL;
 	g_sig.pid = fork();
@@ -60,6 +102,7 @@ int	input_heredoc(t_cmd *cmd, t_data *data)
 			free(line);
 		}
 	}
-	ret = wait_heredoc(fd_hdoc, cmd->delimiter, line, data);
-	return (ret);
+	if (!wait_heredoc(fd_hdoc, cmd, line, data))
+		return (write(1, "\n", 1), 0);
+	return (1);
 }

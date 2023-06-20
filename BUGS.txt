@@ -15,13 +15,8 @@ Ajouter un etat pour le here_doc : sigint arret de l'exec ->NAM
 /////DONE/////update exit status on last cmd executed ->NAM
 /////DONE/////Revoir wait process pour avoir le dernier status dans le buildin ->NAM
 
-Simple pipe SEGFAULT ->OK
-$$ must print pid -> oK
-cd pas d'arguments ->OK
 fonction variadique d'erreur pour le gestionnaire ->A VOIR
 
 /////DONE/////>>echo>> prompt cassé
 /////DONE/////''et "" ->NAM->DONE
 /////DONE//////./../.././->NAM->DONE
-
-faire une fonction parsing error avamt parsing pour gerer la creation des files uniquement si le parsing est correct->NAM

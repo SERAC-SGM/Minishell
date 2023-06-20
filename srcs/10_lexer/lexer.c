@@ -3,23 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: matnam <matnam@student.42.fr>              +#+  +:+       +#+        */
+/*   By: lletourn <lletourn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 14:57:51 by maaliber          #+#    #+#             */
-/*   Updated: 2023/06/06 14:01:43 by matnam           ###   ########.fr       */
+/*   Updated: 2023/06/13 12:31:50 by lletourn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-/*
-Create token list from command line passed as argument
-Identifies special characters (|, ', ", <, <<, >, >>)
-Mode :
-0 = standard (interpreting everything)
-1 = Single quote (interpreting nothing)
-2 = double quote (interpreting nothing but $)
-*/
 void	lexer(t_data *data)
 {
 	t_tkn_lst	*tkn_lst;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   core.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: matnam <matnam@student.42.fr>              +#+  +:+       +#+        */
+/*   By: maaliber <maaliber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 14:48:27 by matnam            #+#    #+#             */
-/*   Updated: 2023/06/05 10:46:35 by matnam           ###   ########.fr       */
+/*   Updated: 2023/06/20 15:25:28 by maaliber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,17 +54,11 @@ Sets environment variable by:
 */
 void	set_env_var(char *name, char *val, t_data *data, int malloc);
 
-		///////////////
-		// 03_prompt //
-		///////////////
-
-char	*prompt(void); //USELESS
-
 		////////////////
-		// 04_signals //
+		// 03_signals //
 		////////////////
 
-	//signal_actions.c
+///// signal_actions.c /////
 
 /*
 Handles SIGINT signal.
@@ -78,8 +72,7 @@ Handles SIGQUIT singal by displaying a message and setting an error status.
 */
 void	sig_quit(void);
 
-	//signal.c
-// t_sig	init_sig(void);
+///// signal.c /////
 
 void	handler(int signo);
 /*
@@ -87,7 +80,7 @@ Updates signal handlers for the SIGINT and SIGQUIT signals in childs processes.
 */
 void	update_signal(void);
 /*
-Sleep mode waiting for child processes to finish, ignore SIGINT and SIGQUIT
+Sleep mode waiting for child processes to finish, ignores SIGINT and SIGQUIT
 */
 void	disable_signal(void);
 /*
@@ -96,7 +89,7 @@ Sets up signal handlers for the SINGINT and SIGQUIT signals
 void	enable_signal(void);
 
 		//////////////
-		// 05_error //
+		// 04_error //
 		//////////////
 
 /*
@@ -113,17 +106,17 @@ Displays an error message and exits.
 void	exit_error(int err_id, char *item, t_data *data);
 
 		/////////////
-		// 06_free //
+		// 05_free //
 		/////////////
 
 void	clear_data(t_data *data);
 void	clear_exit(t_data *data);
 
 		//////////////
-		// 09_utils //
+		// 06_utils //
 		//////////////
 
-	//list_ft.c
+///// list_ft.c /////
 
 /*
 Creates a new t_list node.
@@ -138,12 +131,12 @@ Returns the number of t_list nodes.
 */
 int		ft_lstsize(t_list *lst);
 
-	//list_ft2.c
+///// list_ft2.c /////
 
 /*
 Adds a new node at the end of the list.
 */
-void	ft_lstadd_back(t_list **lst, t_list *nnew);
+void	ft_lstadd_back(t_list **lst, t_list *new);
 /*
 Removes one element of the list.
 */
@@ -153,15 +146,7 @@ Removes all elements of the list.
 */
 void	ft_lstclear(t_list **lst);
 
-	//print_struct.c
-
-void	print_lexer(t_tkn_lst *lex);
-void	print_env(t_list *env);
-void	print_tab(char **tab);
-void	print_cmd(t_cmd *cmd);
-void	print_cmds(t_data *data);
-
-	//util.c
+///// util_ft.c /////
 
 void	trim_char(char **str, char c);
 char	*ft_strjoin_dup1(char *s1, char *s2);

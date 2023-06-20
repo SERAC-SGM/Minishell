@@ -14,7 +14,7 @@ PROJECT_NAME = Minishell
 CC = cc 
 
 # Compiler Flags
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -g
 
 ifeq ($(debug), 1)
 	CFLAGS += -g
@@ -93,10 +93,10 @@ PATH_SRCS_CORE = $(SRCS_DIR)/00_core
 #Core Sub-directories
 PATH_SRCS_INIT = $(SRCS_DIR)/00_core/01_init
 PATH_SRCS_ENV = $(SRCS_DIR)/00_core/02_environment
-PATH_SRCS_SIG = $(SRCS_DIR)/00_core/04_signals
-PATH_SRCS_ERR = $(SRCS_DIR)/00_core/05_error
-PATH_SRCS_FREE = $(SRCS_DIR)/00_core/06_free
-PATH_SRCS_UTIL = $(SRCS_DIR)/00_core/09_utils
+PATH_SRCS_SIG = $(SRCS_DIR)/00_core/03_signals
+PATH_SRCS_ERR = $(SRCS_DIR)/00_core/04_error
+PATH_SRCS_FREE = $(SRCS_DIR)/00_core/05_free
+PATH_SRCS_UTIL = $(SRCS_DIR)/00_core/06_utils
 #Lexer directory
 PATH_SRCS_LEXER = $(SRCS_DIR)/10_lexer
 #Expander directory
@@ -121,21 +121,20 @@ SRCS += init_ft.c
 #02_environment
 SRCS += env_ft.c
 
-#04_signals
+#03_signals
 SRCS += signal_actions.c
 SRCS += signal.c
 
-#06_error
+#04_error
 SRCS += error_manager.c
 
-#07_free
+#05_free
 SRCS += free_ft.c
 
-#09_utils
+#06_utils
 SRCS += util_ft.c
 SRCS += list_ft.c
 SRCS += list_ft2.c
-SRCS += print_struct.c
 
 #10_lexer
 SRCS += lexer_util.c
