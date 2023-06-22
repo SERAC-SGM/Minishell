@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error_manager.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lletourn <lletourn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: maaliber <maaliber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 14:57:22 by maaliber          #+#    #+#             */
-/*   Updated: 2023/06/22 16:02:57 by lletourn         ###   ########.fr       */
+/*   Updated: 2023/06/22 18:12:06 by maaliber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ void	error_msg_cmd(int err_id, char *prefix, char *item)
 void	exit_error(int err_id, char *item, t_data *data)
 {
 	char	*error_message;
-	int	i;
+	int		i;
 
 	if (err_id == E_STD)
 		perror("");
@@ -98,9 +98,7 @@ void	exit_error(int err_id, char *item, t_data *data)
 	}
 	i = -1;
 	while (++i < data->process_nb)
-	{
 		close_files(&data->cmds_tab[i]);
-	}
 	close_pipe(data);
 	free_infile(data, data->process_nb);
 	clear_data(data);

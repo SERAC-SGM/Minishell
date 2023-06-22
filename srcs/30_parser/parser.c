@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lletourn <lletourn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: maaliber <maaliber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 14:19:32 by maaliber          #+#    #+#             */
-/*   Updated: 2023/06/22 16:13:28 by lletourn         ###   ########.fr       */
+/*   Updated: 2023/06/22 18:14:37 by maaliber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ Check if the file is a TTY.
 static int	file_isatty(char *file, int read_write)
 {
 	int	fd;
-	
+
 	if (read_write == 0)
 		fd = open(file, O_RDONLY);
 	if (read_write == 1)

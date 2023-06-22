@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: matnam <matnam@student.42.fr>              +#+  +:+       +#+        */
+/*   By: maaliber <maaliber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 14:58:49 by maaliber          #+#    #+#             */
-/*   Updated: 2023/06/20 19:45:54 by matnam           ###   ########.fr       */
+/*   Updated: 2023/06/22 18:14:01 by maaliber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ int	main(int ac, char *av[], char *env[])
 	{
 		reset_data(&data);
 		data.cmd_line = readline("minishell$ ");
-		//display_prompt(&data);
 		if (!data.cmd_line)
 			break ;
 		if (*data.cmd_line)
