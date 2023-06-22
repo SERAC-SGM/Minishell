@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   files_manager.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maaliber <maaliber@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lletourn <lletourn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/06 12:07:41 by lletourn          #+#    #+#             */
-/*   Updated: 2023/06/22 15:53:53 by maaliber         ###   ########.fr       */
+/*   Updated: 2023/06/22 17:20:53 by lletourn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,16 @@
 
 void	open_files(t_cmd *cmd)
 {
+	char	*infile;
+
 	if (cmd->infile)
-		cmd->fd_in = open(cmd->infile, O_RDONLY, 0644);
+		infile = cmd->infile;
+	else
+		infile = cmd->infile_hdoc;
+	if (infile)
+		cmd->fd_in = open(infile, O_RDONLY, 0644);
 	if (cmd->fd_in == -1)
-		error_msg(E_PERM, cmd->infile);
+		error_msg(E_PERM, infile);
 	if (cmd->outfile)
 	{
 		if (!cmd->append)
@@ -34,12 +40,11 @@ void	open_files(t_cmd *cmd)
 void	unlink_heredoc(t_cmd *cmd)
 {
 	if (cmd->here_doc)
-		unlink(cmd->infile);
+		unlink(cmd->infile_hdoc);
 }
 
 void	close_files(t_cmd *cmd)
 {
-	// ft_printf("INDEX:%d->%s:%d\n", cmd->process_index, cmd->infile, cmd->fd_in);
 	if (cmd->infile)
 	{
 		free(cmd->infile);
@@ -47,7 +52,13 @@ void	close_files(t_cmd *cmd)
 			close(cmd->fd_in);
 		cmd->infile = NULL;
 	}
-	// ft_printf("INDEX:%d->%s:%d\n", cmd->process_index, cmd->outfile, cmd->fd_out);
+	if (cmd->infile_hdoc)
+	{
+		free(cmd->infile_hdoc);
+		if (!isatty(cmd->fd_in) && cmd->fd_in >= 0)
+			close(cmd->fd_in);
+		cmd->infile_hdoc = NULL;
+	}
 	if (cmd->outfile)
 	{
 		if (!isatty(cmd->fd_out) && cmd->fd_out >= 0)

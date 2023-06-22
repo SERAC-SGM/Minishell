@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipe_dup.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maaliber <maaliber@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lletourn <lletourn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 17:24:22 by maaliber          #+#    #+#             */
-/*   Updated: 2023/06/20 16:15:05 by maaliber         ###   ########.fr       */
+/*   Updated: 2023/06/22 17:07:13 by lletourn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void	dup_pipe(t_data *data, int proc_idx)
 
 void	dup_file(t_data *data, int proc_idx)
 {
-	if (data->cmds_tab[proc_idx].infile)
+	if (data->cmds_tab[proc_idx].infile || data->cmds_tab[proc_idx].infile_hdoc)
 		dup2(data->cmds_tab[proc_idx].fd_in, STDIN_FILENO);
 	if (data->cmds_tab[proc_idx].outfile)
 		dup2(data->cmds_tab[proc_idx].fd_out, STDOUT_FILENO);

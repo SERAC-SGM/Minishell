@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: matnam <matnam@student.42.fr>              +#+  +:+       +#+        */
+/*   By: lletourn <lletourn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 14:19:32 by maaliber          #+#    #+#             */
-/*   Updated: 2023/06/20 23:08:41 by matnam           ###   ########.fr       */
+/*   Updated: 2023/06/22 16:13:28 by lletourn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,6 +101,11 @@ static void	redirection(t_tkn_lst *token, t_cmd *cmd)
 	}
 	else if (token->type == HERE)
 	{
+		if (cmd->infile)
+		{
+			free(cmd->infile);
+			cmd->infile = NULL;
+		}
 		cmd->delimiter = token->next->content;
 		cmd->here_doc = 1;
 	}

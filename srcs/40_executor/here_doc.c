@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   here_doc.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maaliber <maaliber@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lletourn <lletourn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 14:44:06 by lletourn          #+#    #+#             */
-/*   Updated: 2023/06/22 15:38:33 by maaliber         ###   ########.fr       */
+/*   Updated: 2023/06/22 17:12:13 by lletourn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,12 +42,12 @@ static void	exit_heredoc(t_cmd *cmd, char *line, t_data *data)
 	exit(0);
 }
 
-static int	wait_heredoc(int fd_hdoc, t_cmd *cmd, char *line, t_data *data)
+static int	wait_heredoc(t_cmd *cmd, char *line, t_data *data)
 {
 	int	status;
 
 	disable_signal();
-	close(fd_hdoc);
+	close(cmd->fd_hdoc);
 	status = 0;
 	if (g_sig.pid == 0)
 		exit_heredoc(cmd, line, data);
@@ -66,10 +66,9 @@ static int	wait_heredoc(int fd_hdoc, t_cmd *cmd, char *line, t_data *data)
 int	input_heredoc(t_cmd *cmd, t_data *data)
 {
 	char		*line;
-	int			fd_hdoc;
 
-	cmd->infile = heredoc_name(cmd->process_index);
-	fd_hdoc = open(cmd->infile, O_WRONLY | O_CREAT | O_EXCL, 0644);
+	cmd->infile_hdoc = heredoc_name(cmd->process_index);
+	cmd->fd_hdoc = open(cmd->infile_hdoc, O_WRONLY | O_CREAT | O_EXCL, 0644);
 	line = NULL;
 	g_sig.pid = fork();
 	if (g_sig.pid == -1)
@@ -82,11 +81,11 @@ int	input_heredoc(t_cmd *cmd, t_data *data)
 			line = get_next_line(0);
 			if (!line || ft_strcmp(line, cmd->delimiter) == '\n')
 				break ;
-			write(fd_hdoc, line, ft_strlen(line));
+			write(cmd->fd_hdoc, line, ft_strlen(line));
 			free(line);
 		}
 	}
-	if (!wait_heredoc(fd_hdoc, cmd, line, data))
+	if (!wait_heredoc(cmd, line, data))
 		return (write(1, "\n", 1), 0);
 	return (1);
 }

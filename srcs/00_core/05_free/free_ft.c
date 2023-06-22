@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free_ft.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maaliber <maaliber@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lletourn <lletourn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 15:57:15 by maaliber          #+#    #+#             */
-/*   Updated: 2023/06/22 15:51:03 by maaliber         ###   ########.fr       */
+/*   Updated: 2023/06/22 17:13:05 by lletourn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,13 @@ void	free_infile(t_data *data, int proc_idx)
 	{
 		if (data->cmds_tab[i].infile)
 		{
-			// ft_printf("INDEX:%d->%s:%d\n", data->cmds_tab[proc_idx].process_index, data->cmds_tab[proc_idx].infile, data->cmds_tab[proc_idx].fd_in);
+
 			if (data->cmds_tab[i].fd_in > 2)
 				close(data->cmds_tab[i].fd_in);
 			free(data->cmds_tab[i].infile);
 		}
+		if (data->cmds_tab[i].infile_hdoc)
+			free(data->cmds_tab[i].infile_hdoc);
 	}
 }
 

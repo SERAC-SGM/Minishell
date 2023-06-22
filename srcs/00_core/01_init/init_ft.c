@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_ft.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: matnam <matnam@student.42.fr>              +#+  +:+       +#+        */
+/*   By: lletourn <lletourn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 14:51:50 by maaliber          #+#    #+#             */
-/*   Updated: 2023/06/20 22:29:20 by matnam           ###   ########.fr       */
+/*   Updated: 2023/06/22 16:32:24 by lletourn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,9 @@ void	init_cmd(t_cmd *cmd)
 	cmd->name = NULL;
 	cmd->args = NULL;
 	cmd->infile = NULL;
+	cmd->infile_hdoc = NULL;
 	cmd->fd_in = STDIN_FILENO;
+	cmd->fd_hdoc = -1;
 	cmd->here_doc = 0;
 	cmd->delimiter = NULL;
 	cmd->outfile = NULL;
