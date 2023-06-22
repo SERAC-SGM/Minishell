@@ -6,7 +6,7 @@
 /*   By: maaliber <maaliber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 13:38:11 by lletourn          #+#    #+#             */
-/*   Updated: 2023/06/20 14:48:21 by maaliber         ###   ########.fr       */
+/*   Updated: 2023/06/22 15:34:52 by maaliber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,13 +53,14 @@ static int	set_cmd(t_data *data, int proc_idx)
 	set_cmd_with_path(data, proc_idx);
 	if (access(data->cmds_tab[proc_idx].args[0], F_OK | X_OK) != -1)
 		return (0);
+	if (!data->env_path)
+		exit_error(E_CMD_NOT_FOUND, data->cmds_tab[proc_idx].name, data);
 	tmp = ft_strjoin("/", data->cmds_tab[proc_idx].args[0]);
 	i = 0;
 	while (data->env_path[i])
 	{
 		free(data->cmds_tab[proc_idx].args[0]);
-			data->cmds_tab[proc_idx].args[0]
-			= ft_strjoin(data->env_path[i], tmp);
+		data->cmds_tab[proc_idx].args[0] = ft_strjoin(data->env_path[i], tmp);
 		if (access(data->cmds_tab[proc_idx].args[0], F_OK | X_OK) == 0)
 			break ;
 		i++;

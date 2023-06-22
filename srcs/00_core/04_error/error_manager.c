@@ -6,7 +6,7 @@
 /*   By: maaliber <maaliber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 14:57:22 by maaliber          #+#    #+#             */
-/*   Updated: 2023/06/20 15:19:01 by maaliber         ###   ########.fr       */
+/*   Updated: 2023/06/22 15:40:56 by maaliber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,7 @@ void	exit_error(int err_id, char *item, t_data *data)
 		ft_putstr_fd(error_message, 2);
 		free(error_message);
 	}
+	free_infile(data, data->process_nb);
 	clear_data(data);
 	g_sig.error_status = errdesc[err_id].err_no;
 	exit(g_sig.error_status);

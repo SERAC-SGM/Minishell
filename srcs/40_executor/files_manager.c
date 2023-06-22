@@ -3,28 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   files_manager.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: matnam <matnam@student.42.fr>              +#+  +:+       +#+        */
+/*   By: maaliber <maaliber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/06 12:07:41 by lletourn          #+#    #+#             */
-/*   Updated: 2023/06/20 23:03:03 by matnam           ###   ########.fr       */
+/*   Updated: 2023/06/22 15:53:53 by maaliber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	check_open_error(int fd, t_cmd *cmd)
-{
-	if (fd == -1)
-		error_msg(E_PERM, cmd->infile);
-}
-
 void	open_files(t_cmd *cmd)
 {
 	if (cmd->infile)
-	{
 		cmd->fd_in = open(cmd->infile, O_RDONLY, 0644);
-		check_open_error(cmd->fd_in, cmd);
-	}
+	if (cmd->fd_in == -1)
+		error_msg(E_PERM, cmd->infile);
 	if (cmd->outfile)
 	{
 		if (!cmd->append)
@@ -33,8 +26,9 @@ void	open_files(t_cmd *cmd)
 		else
 			cmd->fd_out = open(cmd->outfile,
 					O_WRONLY | O_APPEND | O_CREAT, 0644);
-		check_open_error(cmd->fd_out, cmd);
 	}
+	if (cmd->fd_out == -1)
+		error_msg(E_PERM, cmd->outfile);
 }
 
 void	unlink_heredoc(t_cmd *cmd)
@@ -49,14 +43,14 @@ void	close_files(t_cmd *cmd)
 	if (cmd->infile)
 	{
 		free(cmd->infile);
-		if (!isatty(cmd->fd_in))
+		if (!isatty(cmd->fd_in) && cmd->fd_in >= 0)
 			close(cmd->fd_in);
 		cmd->infile = NULL;
 	}
 	// ft_printf("INDEX:%d->%s:%d\n", cmd->process_index, cmd->outfile, cmd->fd_out);
 	if (cmd->outfile)
 	{
-		if (!isatty(cmd->fd_out))
+		if (!isatty(cmd->fd_out) && cmd->fd_out >= 0)
 			close(cmd->fd_out);
 		cmd->outfile = NULL;
 	}
@@ -73,7 +67,7 @@ int	input_files(t_data *data)
 		{
 			if (!input_heredoc(&data->cmds_tab[proc_idx], data))
 			{
-				while (proc_idx >= 0)//
+				while (proc_idx >= 0)
 					close_files(&data->cmds_tab[proc_idx--]);
 				return (0);
 			}

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   here_doc.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: matnam <matnam@student.42.fr>              +#+  +:+       +#+        */
+/*   By: maaliber <maaliber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 14:44:06 by lletourn          #+#    #+#             */
-/*   Updated: 2023/06/20 22:33:59 by matnam           ###   ########.fr       */
+/*   Updated: 2023/06/22 15:38:33 by maaliber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,22 +21,6 @@ static char	*heredoc_name(int proc_nb)
 	name = ft_strjoin(".here_doc", nb);
 	free(nb);
 	return (name);
-}
-
-static void	free_infile(t_data *data, int proc_idx)
-{
-	int	i;
-
-	i = -1;
-	while (++i <= proc_idx)
-	{
-		if (data->cmds_tab[i].infile)
-		{
-			if (data->cmds_tab[i].fd_in > 0)
-				close(data->cmds_tab[i].fd_in);
-			free(data->cmds_tab[i].infile);
-		}
-	}
 }
 
 static void	exit_heredoc(t_cmd *cmd, char *line, t_data *data)
