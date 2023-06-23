@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   files_manager.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maaliber <maaliber@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lletourn <lletourn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/06 12:07:41 by lletourn          #+#    #+#             */
-/*   Updated: 2023/06/23 14:26:32 by maaliber         ###   ########.fr       */
+/*   Updated: 2023/06/23 14:38:38 by lletourn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,15 @@ void	close_files(t_cmd *cmd)
 			close(cmd->fd_out);
 		cmd->outfile = NULL;
 	}
+}
+
+void	close_all_files(t_data *data)
+{
+	int	i;
+
+	i = -1;
+	while (++i < data->process_nb)
+		close_files(&data->cmds_tab[i]);
 }
 
 int	input_files(t_data *data)

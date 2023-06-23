@@ -6,7 +6,7 @@
 /*   By: lletourn <lletourn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 12:18:00 by maaliber          #+#    #+#             */
-/*   Updated: 2023/06/13 12:08:27 by lletourn         ###   ########.fr       */
+/*   Updated: 2023/06/23 15:34:19 by lletourn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ static void	create_env_var(char *name, char *val, t_data *data, int malloc)
 	if (malloc)
 		line = ft_strjoin_free(line, val);
 	else
-		line = ft_strjoin(line, val);
+		line = ft_strjoin_dup1(line, val);
 	entry = ft_lstnew(line);
 	if (!data->env)
 		data->env = entry;

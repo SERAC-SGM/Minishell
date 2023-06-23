@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maaliber <maaliber@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lletourn <lletourn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 14:19:32 by maaliber          #+#    #+#             */
-/*   Updated: 2023/06/22 18:14:37 by maaliber         ###   ########.fr       */
+/*   Updated: 2023/06/23 14:41:05 by lletourn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,15 +100,7 @@ static void	redirection(t_tkn_lst *token, t_cmd *cmd)
 		}
 	}
 	else if (token->type == HERE)
-	{
-		if (cmd->infile)
-		{
-			free(cmd->infile);
-			cmd->infile = NULL;
-		}
-		cmd->delimiter = token->next->content;
-		cmd->here_doc = 1;
-	}
+		norminette_bypass_3000(token, cmd);
 	else if (token->type == RD_OUT || token->type == APPEND)
 	{
 		if (!file_isatty(token->next->content, 1))

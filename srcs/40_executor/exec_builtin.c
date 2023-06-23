@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_builtin.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maaliber <maaliber@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lletourn <lletourn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 13:38:36 by lletourn          #+#    #+#             */
-/*   Updated: 2023/06/23 14:27:41 by maaliber         ###   ########.fr       */
+/*   Updated: 2023/06/23 14:38:18 by lletourn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,12 +36,12 @@ static void	save_reset_stdin_out(int i)
 
 int	exec_builtin(t_data *data, int proc_idx)
 {
-	int		ret;
+	int	ret;
 
 	save_reset_stdin_out(0);
 	dup_file(data, proc_idx);
 	dup_pipe(data, proc_idx);
-	close_files(&data->cmds_tab[proc_idx]);
+	close_all_files(data);
 	close_pipe(data);
 	ret = 0;
 	if (ft_strcmp(data->cmds_tab[proc_idx].args[0], "echo") == 0)

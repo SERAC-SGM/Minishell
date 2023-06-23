@@ -6,7 +6,7 @@
 /*   By: lletourn <lletourn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 13:03:56 by matnam            #+#    #+#             */
-/*   Updated: 2023/06/12 17:20:01 by lletourn         ###   ########.fr       */
+/*   Updated: 2023/06/23 15:18:48 by lletourn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,9 +110,8 @@ void	ft_export(char	**args, t_data *data)
 		else
 		{
 			value = get_value(*args);
-			if (value && *value)
-				set_env_var(name, value, data, 1);
-			else if (value && !*value && get_var_value(name, data->env))
+			printf("value = %s\n", value);
+			if (value)
 				set_env_var(name, value, data, 1);
 			else
 				free(name);

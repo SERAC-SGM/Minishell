@@ -3,14 +3,25 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_error.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: matnam <matnam@student.42.fr>              +#+  +:+       +#+        */
+/*   By: lletourn <lletourn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 17:52:13 by matnam            #+#    #+#             */
-/*   Updated: 2023/06/20 22:32:30 by matnam           ###   ########.fr       */
+/*   Updated: 2023/06/23 14:42:35 by lletourn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+void	norminette_bypass_3000(t_tkn_lst *token, t_cmd *cmd)
+{
+	if (cmd->infile)
+	{
+		free(cmd->infile);
+		cmd->infile = NULL;
+	}
+	cmd->delimiter = token->next->content;
+	cmd->here_doc = 1;
+}
 
 static void	token_error_msg(int token_type)
 {
