@@ -3,14 +3,32 @@
 /*                                                        :::      ::::::::   */
 /*   here_doc.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lletourn <lletourn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: maaliber <maaliber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 14:44:06 by lletourn          #+#    #+#             */
-/*   Updated: 2023/06/22 17:12:13 by lletourn         ###   ########.fr       */
+/*   Updated: 2023/06/23 14:28:21 by maaliber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+void	free_infile(t_data *data, int proc_idx)
+{
+	int	i;
+
+	i = -1;
+	while (++i <= proc_idx)
+	{
+		if (data->cmds_tab[i].infile)
+		{
+			if (data->cmds_tab[i].fd_in > 2)
+				close(data->cmds_tab[i].fd_in);
+			free(data->cmds_tab[i].infile);
+		}
+		if (data->cmds_tab[i].infile_hdoc)
+			free(data->cmds_tab[i].infile_hdoc);
+	}
+}
 
 static char	*heredoc_name(int proc_nb)
 {
@@ -26,7 +44,11 @@ static char	*heredoc_name(int proc_nb)
 static void	exit_heredoc(t_cmd *cmd, char *line, t_data *data)
 {
 	char	*err_msg;
+	int		i;
 
+	i = -1;
+	while (++i < data->process_nb)
+		close_files(&data->cmds_tab[i]);
 	free_infile(data, cmd->process_index);
 	if (!line)
 	{

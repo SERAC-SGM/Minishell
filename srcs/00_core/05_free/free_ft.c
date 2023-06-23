@@ -6,29 +6,11 @@
 /*   By: maaliber <maaliber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 15:57:15 by maaliber          #+#    #+#             */
-/*   Updated: 2023/06/22 18:13:57 by maaliber         ###   ########.fr       */
+/*   Updated: 2023/06/23 14:23:20 by maaliber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-void	free_infile(t_data *data, int proc_idx)
-{
-	int	i;
-
-	i = -1;
-	while (++i <= proc_idx)
-	{
-		if (data->cmds_tab[i].infile)
-		{
-			if (data->cmds_tab[i].fd_in > 2)
-				close(data->cmds_tab[i].fd_in);
-			free(data->cmds_tab[i].infile);
-		}
-		if (data->cmds_tab[i].infile_hdoc)
-			free(data->cmds_tab[i].infile_hdoc);
-	}
-}
 
 void	clear_data(t_data *data)
 {

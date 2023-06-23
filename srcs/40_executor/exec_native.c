@@ -6,7 +6,7 @@
 /*   By: maaliber <maaliber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 13:38:11 by lletourn          #+#    #+#             */
-/*   Updated: 2023/06/22 15:34:52 by maaliber         ###   ########.fr       */
+/*   Updated: 2023/06/23 14:28:04 by maaliber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,10 +73,14 @@ static int	set_cmd(t_data *data, int proc_idx)
 
 void	exec_native(t_data *data, int proc_idx, char **env)
 {
+	// int	i;
+
 	set_cmd(data, proc_idx);
 	dup_file(data, proc_idx);
 	dup_pipe(data, proc_idx);
-	close_files(&data->cmds_tab[proc_idx]);
+	// i = -1;
+	// while (++i < data->process_nb)
+		close_files(&data->cmds_tab[proc_idx]);
 	close_pipe(data);
 	if ((proc_idx == 0 && data->cmds_tab[proc_idx].fd_in < 0)
 		|| (proc_idx == data->process_nb - 1 && data->cmds_tab[proc_idx].fd_out
