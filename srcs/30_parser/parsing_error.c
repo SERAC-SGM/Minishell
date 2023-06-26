@@ -6,7 +6,7 @@
 /*   By: lletourn <lletourn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 17:52:13 by matnam            #+#    #+#             */
-/*   Updated: 2023/06/23 14:42:35 by lletourn         ###   ########.fr       */
+/*   Updated: 2023/06/26 16:13:15 by lletourn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,8 @@ int	parsing_error(t_tkn_lst *token)
 	{
 		if (token->type != STD && token->next->type != STD)
 		{
-			if (token->type == PIPE
-				&& (token->next->type == PIPE || token->next->type == END))
+			if (token->type != PIPE || (token->type == PIPE
+					&& (token->next->type == PIPE || token->next->type == END)))
 			{
 				token_error_msg(token->next->type);
 				g_sig.error_status = 2;

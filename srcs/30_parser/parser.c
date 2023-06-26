@@ -6,7 +6,7 @@
 /*   By: lletourn <lletourn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 14:19:32 by maaliber          #+#    #+#             */
-/*   Updated: 2023/06/23 14:41:05 by lletourn         ###   ########.fr       */
+/*   Updated: 2023/06/26 16:41:41 by lletourn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,10 +70,12 @@ static int	file_isatty(char *file, int read_write)
 {
 	int	fd;
 
+	if (!file)
+		return (0);
 	if (read_write == 0)
 		fd = open(file, O_RDONLY);
 	if (read_write == 1)
-		fd = open(file, O_WRONLY);
+		fd = open(file, O_WRONLY | O_CREAT, 0655);
 	if (fd < 0)
 		return (0);
 	if (isatty(fd) == 1)
@@ -130,7 +132,10 @@ t_tkn_lst	*parse_type(t_data *data, t_tkn_lst *token, int *proc_idx)
 	if (token->type != END && !token->content && token->type != PIPE)
 	{	
 		redirection(token, &data->cmds_tab[*proc_idx]);
-		token = token->next->next;
+		if (token->next->type == END)
+			token = token->next;
+		else
+			token = token->next->next;
 	}
 	return (token);
 }
