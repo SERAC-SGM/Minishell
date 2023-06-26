@@ -6,7 +6,7 @@
 /*   By: lletourn <lletourn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 13:03:56 by matnam            #+#    #+#             */
-/*   Updated: 2023/06/23 15:18:48 by lletourn         ###   ########.fr       */
+/*   Updated: 2023/06/26 12:04:05 by lletourn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ static int	error_var_name(char *name)
 /*
 Builtin export function.
 */
-void	ft_export(char	**args, t_data *data)
+int	ft_export(char	**args, t_data *data)
 {
 	char	*name;
 	char	*value;
@@ -103,19 +103,18 @@ void	ft_export(char	**args, t_data *data)
 	while (args++)
 	{
 		if (!*args)
-			return ;
+			return (0);
 		name = get_name(*args);
 		if (error_var_name(name))
-			free(name);
+			return (free(name), 1);
 		else
 		{
 			value = get_value(*args);
-			printf("value = %s\n", value);
 			if (value)
 				set_env_var(name, value, data, 1);
 			else
 				free(name);
 		}
 	}
-	return ;
+	return (0);
 }

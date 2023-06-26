@@ -6,7 +6,7 @@
 /*   By: lletourn <lletourn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 13:38:36 by lletourn          #+#    #+#             */
-/*   Updated: 2023/06/23 14:38:18 by lletourn         ###   ########.fr       */
+/*   Updated: 2023/06/26 12:01:47 by lletourn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ int	exec_builtin(t_data *data, int proc_idx)
 	if (ft_strcmp(data->cmds_tab[proc_idx].args[0], "env") == 0)
 		ft_env(data->env, data->cmds_tab[proc_idx].args);
 	if (ft_strcmp(data->cmds_tab[proc_idx].args[0], "export") == 0)
-		ft_export(data->cmds_tab[proc_idx].args, data);
+		ret = ft_export(data->cmds_tab[proc_idx].args, data);
 	if (ft_strcmp(data->cmds_tab[proc_idx].args[0], "unset") == 0)
 		ft_unset(data->cmds_tab[proc_idx].args, data);
 	if (ft_strcmp(data->cmds_tab[proc_idx].args[0], "exit") == 0)

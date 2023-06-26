@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maaliber <maaliber@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lletourn <lletourn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 13:38:49 by lletourn          #+#    #+#             */
-/*   Updated: 2023/06/23 14:26:12 by maaliber         ###   ########.fr       */
+/*   Updated: 2023/06/26 11:59:50 by lletourn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,10 @@ static void	wait_process(void)
 	while (waitpid(-1, &status, 0) != -1)
 		;
 	if (WIFEXITED(status))
-		g_sig.error_status = WEXITSTATUS(status);
+	{
+		if (g_sig.error_status == 0)
+			g_sig.error_status = WEXITSTATUS(status);
+	}
 	else if (WIFSIGNALED(status))
 		g_sig.error_status = WTERMSIG(status) + 128;
 	enable_signal();
@@ -97,6 +100,7 @@ int	exec_cmd_line(t_data *data)
 	env = env_to_tab(data->env);
 	if (!input_files(data))
 		return (free(env), g_sig.error_status = 130, 0);
+	g_sig.error_status = 0;
 	proc_idx = -1;
 	open_pipe(data);
 	while (++proc_idx < data->process_nb)
