@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lletourn <lletourn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: maaliber <maaliber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 13:38:49 by lletourn          #+#    #+#             */
-/*   Updated: 2023/06/26 11:59:50 by lletourn         ###   ########.fr       */
+/*   Updated: 2023/06/26 14:16:41 by maaliber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,11 @@ static void	wait_process(void)
 			g_sig.error_status = WEXITSTATUS(status);
 	}
 	else if (WIFSIGNALED(status))
+	{
 		g_sig.error_status = WTERMSIG(status) + 128;
+		if (g_sig.error_status == 131)
+			ft_putstr_fd("Quit: (core dumped)\n", STDERR_FILENO);
+	}
 	enable_signal();
 }
 
