@@ -6,7 +6,7 @@
 /*   By: maaliber <maaliber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 13:38:49 by lletourn          #+#    #+#             */
-/*   Updated: 2023/06/26 14:16:41 by maaliber         ###   ########.fr       */
+/*   Updated: 2023/06/26 14:39:38 by maaliber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ static void	wait_process(void)
 		g_sig.error_status = WTERMSIG(status) + 128;
 		if (g_sig.error_status == 131)
 			ft_putstr_fd("Quit: (core dumped)\n", STDERR_FILENO);
+		if (g_sig.error_status == 130)
+			ft_putstr_fd("\n", STDERR_FILENO);
 	}
 	enable_signal();
 }
