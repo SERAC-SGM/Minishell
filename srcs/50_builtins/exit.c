@@ -6,7 +6,7 @@
 /*   By: lletourn <lletourn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 12:53:26 by maaliber          #+#    #+#             */
-/*   Updated: 2023/06/26 12:44:09 by lletourn         ###   ########.fr       */
+/*   Updated: 2023/06/26 14:17:14 by lletourn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,11 @@ int	ft_exit(char **args)
 	g_sig.exit = 1;
 	if (args[2])
 		return (error_msg_cmd(E_TOO_MANY_ARG, "exit: ", NULL), 1);
-	if (!is_number(args[1]))
-		return (error_msg_cmd(E_NUMERIC_ARG, "exit: ", args[1]), 2);
-	return (ft_atoi(args[1]));
+	if (args[1])
+	{
+		if (!is_number(args[1]))
+			return (error_msg_cmd(E_NUMERIC_ARG, "exit: ", args[1]), 2);
+		return (ft_atoi(args[1]));
+	}
+	return (0);
 }
