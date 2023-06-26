@@ -6,7 +6,7 @@
 /*   By: lletourn <lletourn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 14:57:22 by maaliber          #+#    #+#             */
-/*   Updated: 2023/06/26 12:40:35 by lletourn         ###   ########.fr       */
+/*   Updated: 2023/06/26 13:01:44 by lletourn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,9 @@ struct s_errdesc
 	"\nminishell: warning: here-document delimited by end-of-file, (wanted `",
 			0},
 	{E_NUMERIC_ARG,
-	": numeric argument required\n", 2}
+	": numeric argument required\n", 2},
+	{E_INVALID_OPTION,
+	": invalid option\n", 2}
 };
 
 void	error_msg(int err_id, char *item)

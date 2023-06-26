@@ -6,7 +6,7 @@
 /*   By: lletourn <lletourn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 13:38:57 by maaliber          #+#    #+#             */
-/*   Updated: 2023/06/26 12:37:08 by lletourn         ###   ########.fr       */
+/*   Updated: 2023/06/26 12:59:04 by lletourn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,8 @@ enum e_config_error
 	E_HOME_NOT_SET,
 	E_INVALID_ID,
 	E_HEREDOC,
-	E_NUMERIC_ARG
+	E_NUMERIC_ARG,
+	E_INVALID_OPTION
 };
 typedef enum e_config_error	t_config_error;
 
