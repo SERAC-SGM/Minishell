@@ -6,7 +6,7 @@
 /*   By: lletourn <lletourn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/27 12:43:27 by maaliber          #+#    #+#             */
-/*   Updated: 2023/06/26 12:00:49 by lletourn         ###   ########.fr       */
+/*   Updated: 2023/06/26 12:25:17 by lletourn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@ int		ft_cd(char **args, t_data *data);
 int		ft_echo(char **args);
 void	ft_env(t_list *env, char **args);
 int		ft_pwd(void);
-int		ft_export(char	**args, t_data *data);
+int		ft_export(char **args, t_data *data);
 int		ft_unset(char **args, t_data *data);
-void	ft_exit(void);
+int		ft_exit(char **args);
 
 #endif

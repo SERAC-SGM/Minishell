@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error_manager.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maaliber <maaliber@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lletourn <lletourn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 14:57:22 by maaliber          #+#    #+#             */
-/*   Updated: 2023/06/22 18:12:06 by maaliber         ###   ########.fr       */
+/*   Updated: 2023/06/26 12:40:35 by lletourn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,8 @@ struct s_errdesc
 	{E_HEREDOC,
 	"\nminishell: warning: here-document delimited by end-of-file, (wanted `",
 			0},
+	{E_NUMERIC_ARG,
+	": numeric argument required\n", 2}
 };
 
 void	error_msg(int err_id, char *item)

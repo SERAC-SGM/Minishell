@@ -6,7 +6,7 @@
 /*   By: lletourn <lletourn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 13:38:36 by lletourn          #+#    #+#             */
-/*   Updated: 2023/06/26 12:01:47 by lletourn         ###   ########.fr       */
+/*   Updated: 2023/06/26 12:25:36 by lletourn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ int	exec_builtin(t_data *data, int proc_idx)
 	if (ft_strcmp(data->cmds_tab[proc_idx].args[0], "unset") == 0)
 		ft_unset(data->cmds_tab[proc_idx].args, data);
 	if (ft_strcmp(data->cmds_tab[proc_idx].args[0], "exit") == 0)
-		ft_exit();
+		ret = ft_exit(data->cmds_tab[proc_idx].args);
 	save_reset_stdin_out(1);
 	return (ret);
 }
