@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lletourn <lletourn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: maaliber <maaliber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 14:19:32 by maaliber          #+#    #+#             */
-/*   Updated: 2023/06/26 16:41:41 by lletourn         ###   ########.fr       */
+/*   Updated: 2023/06/27 11:16:46 by maaliber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,58 +63,7 @@ static void	add_attribute(t_tkn_lst *token, t_data *data, int proc_idx)
 	data->cmds_tab[proc_idx].process_index = proc_idx;
 }
 
-/*
-Check if the file is a TTY.
-*/
-static int	file_isatty(char *file, int read_write)
-{
-	int	fd;
-
-	if (!file)
-		return (0);
-	if (read_write == 0)
-		fd = open(file, O_RDONLY);
-	if (read_write == 1)
-		fd = open(file, O_WRONLY | O_CREAT, 0655);
-	if (fd < 0)
-		return (0);
-	if (isatty(fd) == 1)
-		return (close(fd), 1);
-	else
-		return (close(fd), 0);
-}
-
-/*
-When encountering a redirection token (< << > >>), assings the correct
-following filename to the command structure.
-If no filemame or no non-special after the filename token is found,
-returns 0.
-*/
-static void	redirection(t_tkn_lst *token, t_cmd *cmd)
-{
-	if (token->type == RD_IN)
-	{
-		if (!file_isatty(token->next->content, 0))
-		{
-			if (cmd->infile)
-				free(cmd->infile);
-			cmd->infile = ft_strdup(token->next->content);
-		}
-	}
-	else if (token->type == HERE)
-		norminette_bypass_3000(token, cmd);
-	else if (token->type == RD_OUT || token->type == APPEND)
-	{
-		if (!file_isatty(token->next->content, 1))
-		{
-			cmd->outfile = token->next->content;
-			if (token->type == APPEND)
-				cmd->append = 1;
-		}
-	}
-}
-
-t_tkn_lst	*parse_type(t_data *data, t_tkn_lst *token, int *proc_idx)
+static t_tkn_lst	*parse_type(t_data *data, t_tkn_lst *token, int *proc_idx)
 {
 	if (token->type == PIPE)
 	{
@@ -132,10 +81,23 @@ t_tkn_lst	*parse_type(t_data *data, t_tkn_lst *token, int *proc_idx)
 	if (token->type != END && !token->content && token->type != PIPE)
 	{	
 		redirection(token, &data->cmds_tab[*proc_idx]);
-		if (token->next->type == END)
-			token = token->next;
-		else
-			token = token->next->next;
+		token = token->next->next;
 	}
 	return (token);
+}
+
+int	parser(t_data *data)
+{
+	t_tkn_lst	*token;
+	int			proc_idx;
+
+	if (!data->token_list || parsing_error(data->token_list))
+		return (0);
+	proc_idx = 0;
+	token = data->token_list;
+	init_cmd(&data->cmds_tab[0]);
+	data->cmds_tab[0].process_index = 0;
+	while (token->type != END)
+		token = parse_type(data, token, &proc_idx);
+	return (1);
 }

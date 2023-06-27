@@ -148,8 +148,9 @@ SRCS += lexer.c
 SRCS += expander.c
 
 #30_parser
-SRCS += parser.c
 SRCS += parsing_error.c
+SRCS += redirection.c
+SRCS += parser.c
 
 #40_executor
 SRCS += pipe_dup.c
