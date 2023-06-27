@@ -6,7 +6,7 @@
 /*   By: lletourn <lletourn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 11:49:12 by lletourn          #+#    #+#             */
-/*   Updated: 2023/06/27 14:58:37 by lletourn         ###   ########.fr       */
+/*   Updated: 2023/06/27 16:36:35 by lletourn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,12 +27,7 @@ static void	update_pwd_env(t_data *data, char *var)
 		set_env_var(var, getcwd(cwd, BUFFER_SIZE), data, 0);
 	}
 	else
-	{
-	//	printf("cwd = %s\nvar = %s\n", getcwd(cwd, BUFFER_SIZE), var);
 		set_env_var(var, getcwd(cwd, BUFFER_SIZE), data, 0);
-		//if (!get_var_value("PWD", data->env))
-		//	set_env_var(var, get_var_value("OLDPWD", data->env), data, 0);
-	}
 }
 
 /*
