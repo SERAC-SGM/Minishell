@@ -6,7 +6,7 @@
 /*   By: maaliber <maaliber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 14:19:32 by maaliber          #+#    #+#             */
-/*   Updated: 2023/06/27 11:16:46 by maaliber         ###   ########.fr       */
+/*   Updated: 2023/06/27 18:09:17 by maaliber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ static t_tkn_lst	*parse_type(t_data *data, t_tkn_lst *token, int *proc_idx)
 	}
 	if (token->type != END && !token->content && token->type != PIPE)
 	{	
-		redirection(token, &data->cmds_tab[*proc_idx]);
+		redirection(token, &data->cmds_tab[*proc_idx], data);
 		token = token->next->next;
 	}
 	return (token);

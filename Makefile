@@ -103,10 +103,12 @@ PATH_SRCS_LEXER = $(SRCS_DIR)/10_lexer
 PATH_SRCS_EXPAND = $(SRCS_DIR)/20_expander
 #Parser directory
 PATH_SRCS_PARSER = $(SRCS_DIR)/30_parser
+#Files management directory
+PATH_SRCS_FILES = $(SRCS_DIR)/40_files
 #Executor directory
-PATH_SRCS_EXEC = $(SRCS_DIR)/40_executor
+PATH_SRCS_EXEC = $(SRCS_DIR)/50_executor
 #Builtins directory
-PATH_SRCS_BUILTIN = $(SRCS_DIR)/50_builtins
+PATH_SRCS_BUILTIN = $(SRCS_DIR)/60_builtins
 
 #______________________________________________________________________________#
 ############################### Sources ########################################
@@ -152,7 +154,7 @@ SRCS += parsing_error.c
 SRCS += redirection.c
 SRCS += parser.c
 
-#40_executor
+#50_executor
 SRCS += pipe_dup.c
 SRCS += files_manager.c
 SRCS += here_doc.c
@@ -160,7 +162,7 @@ SRCS += exec_native.c
 SRCS += exec_builtin.c
 SRCS += exec.c
 
-#50_buildins
+#60_buildins
 SRCS += cd.c
 SRCS += echo.c
 SRCS += env.c
@@ -183,6 +185,7 @@ vpath %.c $(PATH_SRCS_FREE)
 vpath %.c $(PATH_SRCS_UTIL)
 vpath %.c $(PATH_SRCS_LEXER)
 vpath %.c $(PATH_SRCS_PARSER)
+vpath %.c $(PATH_SRCS_FILES)
 vpath %.c $(PATH_SRCS_EXPAND)
 vpath %.c $(PATH_SRCS_EXEC)
 vpath %.c $(PATH_SRCS_BUILTIN)

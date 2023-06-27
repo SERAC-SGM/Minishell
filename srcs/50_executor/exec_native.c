@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_native.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lletourn <lletourn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: maaliber <maaliber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 13:38:11 by lletourn          #+#    #+#             */
-/*   Updated: 2023/06/23 14:42:51 by lletourn         ###   ########.fr       */
+/*   Updated: 2023/06/27 15:03:20 by maaliber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ static void	set_cmd_with_path(t_data *data, int proc_idx)
 	if (is_full_path(data->cmds_tab[proc_idx].args[0], data))
 	{
 		if (access(data->cmds_tab[proc_idx].args[0], F_OK) == -1)
-			exit_error(E_FILE, data->cmds_tab[proc_idx].name, data);
+			exit_error(E_FILE_CMD, data->cmds_tab[proc_idx].name, data);
 		if (access(data->cmds_tab[proc_idx].args[0], X_OK) == -1)
 			exit_error(E_PERM, data->cmds_tab[proc_idx].name, data);
 	}
@@ -73,15 +73,14 @@ static int	set_cmd(t_data *data, int proc_idx)
 
 void	exec_native(t_data *data, int proc_idx, char **env)
 {
+	if (data->cmds_tab[proc_idx].fd_in < 0
+		|| data->cmds_tab[proc_idx].fd_out < 0)
+		exit_error(E_NOMSG, 0, data);
 	set_cmd(data, proc_idx);
 	dup_file(data, proc_idx);
 	dup_pipe(data, proc_idx);
 	close_all_files(data);
 	close_pipe(data);
-	if ((proc_idx == 0 && data->cmds_tab[proc_idx].fd_in < 0)
-		|| (proc_idx == data->process_nb - 1 && data->cmds_tab[proc_idx].fd_out
-			< 0))
-		exit_error(E_NOMSG, 0, data);
 	execve(data->cmds_tab[proc_idx].args[0],
 		data->cmds_tab[proc_idx].args, env);
 }

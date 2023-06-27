@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mshell_types.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lletourn <lletourn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: maaliber <maaliber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 13:38:57 by maaliber          #+#    #+#             */
-/*   Updated: 2023/06/26 12:59:04 by lletourn         ###   ########.fr       */
+/*   Updated: 2023/06/27 14:32:35 by maaliber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ enum e_config_error
 	E_PIPE,
 	E_FORK,
 	E_ENV,
+	E_FILE_CMD,
 	E_CMD_NOT_FOUND,
 	E_HOME_NOT_SET,
 	E_INVALID_ID,

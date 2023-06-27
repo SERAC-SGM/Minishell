@@ -6,7 +6,7 @@
 /*   By: maaliber <maaliber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 13:38:49 by lletourn          #+#    #+#             */
-/*   Updated: 2023/06/26 14:39:38 by maaliber         ###   ########.fr       */
+/*   Updated: 2023/06/27 16:40:09 by maaliber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,9 @@ static int	is_builtin(char *name)
 
 static void	exec_single_cmd(t_data *data, int proc_idx, char **env)
 {
+	if (data->cmds_tab[proc_idx].fd_in == -1
+		|| data->cmds_tab[proc_idx].fd_out == -1)
+		return (g_sig.error_status = 1, (void)0);
 	if (!data->cmds_tab[proc_idx].args)
 		return ;
 	if (is_builtin(data->cmds_tab[proc_idx].args[0]))
@@ -82,6 +85,9 @@ static void	exec_single_cmd(t_data *data, int proc_idx, char **env)
 
 static void	exec_multiple_cmd(t_data *data, int proc_idx, char **env)
 {
+	if (data->cmds_tab[proc_idx].fd_in == -1
+		|| data->cmds_tab[proc_idx].fd_out == -1)
+		return (g_sig.error_status = 1, (void)0);
 	if (!data->cmds_tab[proc_idx].args)
 		return ;
 	g_sig.pid = fork();
@@ -104,9 +110,9 @@ int	exec_cmd_line(t_data *data)
 	int		proc_idx;
 
 	env = env_to_tab(data->env);
+	g_sig.error_status = 0;
 	if (!input_files(data))
 		return (free(env), g_sig.error_status = 130, 0);
-	g_sig.error_status = 0;
 	proc_idx = -1;
 	open_pipe(data);
 	while (++proc_idx < data->process_nb)

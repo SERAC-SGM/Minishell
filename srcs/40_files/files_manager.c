@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   files_manager.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lletourn <lletourn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: maaliber <maaliber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/06 12:07:41 by lletourn          #+#    #+#             */
-/*   Updated: 2023/06/23 14:38:38 by lletourn         ###   ########.fr       */
+/*   Updated: 2023/06/27 16:53:38 by maaliber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,6 @@ void	open_files(t_cmd *cmd)
 		infile = cmd->infile_hdoc;
 	if (infile)
 		cmd->fd_in = open(infile, O_RDONLY, 0644);
-	if (cmd->fd_in == -1)
-		error_msg(E_PERM, infile);
 	if (cmd->outfile)
 	{
 		if (!cmd->append)
@@ -33,8 +31,6 @@ void	open_files(t_cmd *cmd)
 			cmd->fd_out = open(cmd->outfile,
 					O_WRONLY | O_APPEND | O_CREAT, 0644);
 	}
-	if (cmd->fd_out == -1)
-		error_msg(E_PERM, cmd->outfile);
 }
 
 void	unlink_heredoc(t_cmd *cmd)

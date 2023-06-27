@@ -6,7 +6,7 @@
 /*   By: maaliber <maaliber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/27 12:43:55 by maaliber          #+#    #+#             */
-/*   Updated: 2023/06/27 11:19:38 by maaliber         ###   ########.fr       */
+/*   Updated: 2023/06/27 18:09:43 by maaliber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ following filename to the command structure.
 If no filemame or no non-special after the filename token is found,
 returns 0.
 */
-void	redirection(t_tkn_lst *token, t_cmd *cmd);
+void	redirection(t_tkn_lst *token, t_cmd *cmd, t_data *data);
 
 ////////////////
 /// parser.c ///
