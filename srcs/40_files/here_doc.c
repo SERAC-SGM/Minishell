@@ -6,29 +6,11 @@
 /*   By: maaliber <maaliber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 14:44:06 by lletourn          #+#    #+#             */
-/*   Updated: 2023/06/27 14:44:24 by maaliber         ###   ########.fr       */
+/*   Updated: 2023/06/27 18:28:27 by maaliber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-void	free_infile(t_data *data, int proc_idx)
-{
-	int	i;
-
-	i = -1;
-	while (++i <= proc_idx)
-	{
-		if (data->cmds_tab[i].infile)
-		{
-			if (data->cmds_tab[i].fd_in > 2)
-				close(data->cmds_tab[i].fd_in);
-			free(data->cmds_tab[i].infile);
-		}
-		if (data->cmds_tab[i].infile_hdoc)
-			free(data->cmds_tab[i].infile_hdoc);
-	}
-}
 
 static char	*heredoc_name(int proc_nb)
 {

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executor.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lletourn <lletourn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: maaliber <maaliber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/27 12:43:30 by maaliber          #+#    #+#             */
-/*   Updated: 2023/06/23 14:38:49 by lletourn         ###   ########.fr       */
+/*   Updated: 2023/06/27 18:29:20 by maaliber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,23 +38,6 @@ void	exec_native(t_data *data, int proc_idx, char **env);
 		//////////////
 
 int		exec_cmd_line(t_data *data);
-
-		/////////////////////
-		// files_manager.c //
-		/////////////////////
-
-void	check_open_error(int fd, t_cmd *cmd);
-void	unlink_heredoc(t_cmd *cmd);
-void	open_files(t_cmd *cmd);
-void	close_files(t_cmd *cmd);
-void	close_all_files(t_data *data);
-int		input_files(t_data *data);
-
-		////////////////
-		// here_doc.c //
-		////////////////
-
-int		input_heredoc(t_cmd *cmd, t_data *data);
 
 		//////////////////
 		/// pipe_dup.c ///

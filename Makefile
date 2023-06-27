@@ -151,13 +151,16 @@ SRCS += expander.c
 
 #30_parser
 SRCS += parsing_error.c
-SRCS += redirection.c
 SRCS += parser.c
+
+#40_files
+SRCS += close_files.c
+SRCS += files_manager.c
+SRCS += here_doc.c
+SRCS += redirection.c
 
 #50_executor
 SRCS += pipe_dup.c
-SRCS += files_manager.c
-SRCS += here_doc.c
 SRCS += exec_native.c
 SRCS += exec_builtin.c
 SRCS += exec.c

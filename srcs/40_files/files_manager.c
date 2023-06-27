@@ -6,7 +6,7 @@
 /*   By: maaliber <maaliber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/06 12:07:41 by lletourn          #+#    #+#             */
-/*   Updated: 2023/06/27 16:53:38 by maaliber         ###   ########.fr       */
+/*   Updated: 2023/06/27 18:25:56 by maaliber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,45 +31,6 @@ void	open_files(t_cmd *cmd)
 			cmd->fd_out = open(cmd->outfile,
 					O_WRONLY | O_APPEND | O_CREAT, 0644);
 	}
-}
-
-void	unlink_heredoc(t_cmd *cmd)
-{
-	if (cmd->here_doc)
-		unlink(cmd->infile_hdoc);
-}
-
-void	close_files(t_cmd *cmd)
-{
-	if (cmd->infile)
-	{
-		free(cmd->infile);
-		if (!isatty(cmd->fd_in) && cmd->fd_in >= 0)
-			close(cmd->fd_in);
-		cmd->infile = NULL;
-	}
-	if (cmd->infile_hdoc)
-	{
-		free(cmd->infile_hdoc);
-		if (!isatty(cmd->fd_in) && cmd->fd_in >= 0)
-			close(cmd->fd_in);
-		cmd->infile_hdoc = NULL;
-	}
-	if (cmd->outfile)
-	{
-		if (!isatty(cmd->fd_out) && cmd->fd_out >= 0)
-			close(cmd->fd_out);
-		cmd->outfile = NULL;
-	}
-}
-
-void	close_all_files(t_data *data)
-{
-	int	i;
-
-	i = -1;
-	while (++i < data->process_nb)
-		close_files(&data->cmds_tab[i]);
 }
 
 int	input_files(t_data *data)
