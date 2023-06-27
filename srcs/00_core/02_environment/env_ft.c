@@ -6,7 +6,7 @@
 /*   By: lletourn <lletourn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 12:18:00 by maaliber          #+#    #+#             */
-/*   Updated: 2023/06/27 14:55:04 by lletourn         ###   ########.fr       */
+/*   Updated: 2023/06/27 16:56:34 by lletourn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,16 +19,10 @@ char	*get_var_value(char *name, t_list *env)
 	if (!env || !name)
 		return (NULL);
 	length = ft_strlen(name);
-	//ft_printf("name = %s\n", name);
 	while (env)
 	{
-		//ft_printf("strcmp = %d\t", ft_strncmp(env->line, name, length));
-		//ft_printf("%s\n", env->line);
 		if (!ft_strncmp(env->line, name, length) && env->line[length] == '=')
-		{
-		//	ft_printf("^\n");
 			break ;
-		}
 		env = env->next;
 	}
 	if (!env)
