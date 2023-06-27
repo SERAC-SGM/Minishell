@@ -6,7 +6,7 @@
 /*   By: maaliber <maaliber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 15:40:53 by maaliber          #+#    #+#             */
-/*   Updated: 2023/06/26 13:33:46 by maaliber         ###   ########.fr       */
+/*   Updated: 2023/06/27 11:09:37 by maaliber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,5 @@ void	sig_int(void)
 
 void	sig_quit(void)
 {
-	ft_putstr_fd("Quit: (core dumped)\n", STDERR_FILENO);
 	g_sig.error_status = 131;
 }

@@ -3,21 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lletourn <lletourn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: maaliber <maaliber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/27 12:43:55 by maaliber          #+#    #+#             */
-/*   Updated: 2023/06/23 14:42:43 by lletourn         ###   ########.fr       */
+/*   Updated: 2023/06/27 11:19:38 by maaliber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PARSER_H
 # define PARSER_H
-
-////////////////
-/// parser.c ///
-////////////////
-
-t_tkn_lst	*parse_type(t_data *data, t_tkn_lst *token, int *proc_idx);
 
 ///////////////////////
 /// parsing_error.c ///
@@ -26,8 +20,24 @@ t_tkn_lst	*parse_type(t_data *data, t_tkn_lst *token, int *proc_idx);
 /*
 pose pas de questions
 */
-void		norminette_bypass_3000(t_tkn_lst *token, t_cmd *cmd);
-int			parsing_error(t_tkn_lst *token);
-int			parser(t_data *data);
+int		parsing_error(t_tkn_lst *token);
+
+/////////////////////
+/// redirection.c ///
+/////////////////////
+
+/*
+When encountering a redirection token (< << > >>), assings the correct
+following filename to the command structure.
+If no filemame or no non-special after the filename token is found,
+returns 0.
+*/
+void	redirection(t_tkn_lst *token, t_cmd *cmd);
+
+////////////////
+/// parser.c ///
+////////////////
+
+int		parser(t_data *data);
 
 #endif
