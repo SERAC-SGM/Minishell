@@ -6,21 +6,21 @@
 /*   By: lletourn <lletourn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 14:58:49 by maaliber          #+#    #+#             */
-/*   Updated: 2023/06/23 14:49:36 by lletourn         ###   ########.fr       */
+/*   Updated: 2023/06/27 10:52:52 by lletourn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static void	display_prompt(t_data *data)
-{
-	char	cwd[BUFFER_SIZE];
-	char	*prompt;
+// static void	display_prompt(t_data *data)
+// {
+// 	char	cwd[BUFFER_SIZE];
+// 	char	*prompt;
 
-	prompt = ft_strjoin(getcwd(cwd, BUFFER_SIZE), "$ ");
-	data->cmd_line = readline(prompt);
-	free(prompt);
-}
+// 	prompt = ft_strjoin(getcwd(cwd, BUFFER_SIZE), "$ ");
+// 	data->cmd_line = readline(prompt);
+// 	free(prompt);
+// }
 
 int	main(int ac, char *av[], char *env[])
 {
@@ -33,7 +33,8 @@ int	main(int ac, char *av[], char *env[])
 	while (!g_sig.exit)
 	{
 		reset_data(&data);
-		display_prompt(&data);
+		//display_prompt(&data);
+		data.cmd_line = readline("minishell$ ");
 		if (!data.cmd_line)
 			break ;
 		if (*data.cmd_line)

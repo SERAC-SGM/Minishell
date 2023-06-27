@@ -6,15 +6,15 @@
 /*   By: lletourn <lletourn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 11:49:12 by lletourn          #+#    #+#             */
-/*   Updated: 2023/06/23 15:30:02 by lletourn         ###   ########.fr       */
+/*   Updated: 2023/06/27 12:06:56 by lletourn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 /*
-Update environment variable PWD and OLD_PWD
-when using cd buildin;
+Updates environment variable PWD and OLD_PWD
+when using cd builtin.
 */
 static void	update_pwd_env(t_data *data, char *var)
 {
@@ -27,14 +27,42 @@ static void	update_pwd_env(t_data *data, char *var)
 		set_env_var(var, getcwd(cwd, BUFFER_SIZE), data, 0);
 	}
 	else
+	{
+		printf("cwd = %s\nvar = %s\n", getcwd(cwd, BUFFER_SIZE), var);
 		set_env_var(var, getcwd(cwd, BUFFER_SIZE), data, 0);
+		if (!get_var_value("PWD", data->env))
+			set_env_var(var, get_var_value("OLDPWD", data->env), data, 0);
+	}
+}
+
+/*
+Checks if the provided path is correct.
+*/
+static int	is_full_path(char *cmd_path, t_data *data)
+{
+	DIR	*dir;
+
+	(void) data;
+	if (!cmd_path)
+		return (0);
+	if (ft_strncmp(cmd_path, "/", 1))
+		return (0);
+	dir = opendir(cmd_path);
+	if (!dir)
+		return (error_msg_cmd(E_FILE, "cd: ", cmd_path), 0);
+	else
+		closedir(dir);
+	return (1);
 }
 
 int	ft_cd(char **args, t_data *data)
 {
-	int	arg_nb;
-	int	chdir_val;
+	int		arg_nb;
+	int		chdir_val;
+	char	cwd[BUFFER_SIZE];
 
+	if (!getcwd(cwd, BUFFER_SIZE) && !is_full_path(args[1], data))
+		return (0);
 	update_pwd_env(data, "OLDPWD");
 	arg_nb = tab_size(args) - 1;
 	if (arg_nb == 0)
