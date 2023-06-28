@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirection.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maaliber <maaliber@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lletourn <lletourn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 11:14:45 by maaliber          #+#    #+#             */
-/*   Updated: 2023/06/28 13:03:13 by maaliber         ###   ########.fr       */
+/*   Updated: 2023/06/28 13:51:01 by lletourn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,6 @@ static int	out_redir(t_tkn_lst *token, t_cmd *cmd, int err_msg)
 	fd = open(token->next->content, O_WRONLY | O_CREAT, 0644);
 	if (fd < 0)
 	{
-		ft_printf("KO:%s\n", token->next->content);
 		if (!err_msg)
 			error_msg(E_PERM, token->next->content);
 		return (cmd->fd_out = -1, 1);
