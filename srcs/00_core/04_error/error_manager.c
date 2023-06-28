@@ -6,7 +6,7 @@
 /*   By: maaliber <maaliber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 14:57:22 by maaliber          #+#    #+#             */
-/*   Updated: 2023/06/28 11:24:47 by maaliber         ###   ########.fr       */
+/*   Updated: 2023/06/28 13:10:43 by maaliber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ struct s_errdesc
 void	error_msg(int err_id, char *item)
 {
 	char	*error_message;
+	char	*output;
 
 	if (item)
 		error_message = ft_strjoin(item, errdesc[err_id].msg);
@@ -58,14 +59,17 @@ void	error_msg(int err_id, char *item)
 		error_message = ft_strdup(errdesc[err_id].msg);
 	if (!error_message)
 		return ;
-	ft_putstr_fd(error_message, 2);
+	output = ft_strjoin("minishell: ", error_message);
 	free(error_message);
+	ft_putstr_fd(output, 2);
+	free(output);
 }
 
 void	error_msg_cmd(int err_id, char *prefix, char *item)
 {
 	char	*error_message;
 	char	*append;
+	char	*output;
 
 	append = NULL;
 	if (prefix && item)
@@ -77,8 +81,10 @@ void	error_msg_cmd(int err_id, char *prefix, char *item)
 	error_message = ft_strjoin_dup1(append, errdesc[err_id].msg);
 	if (!error_message)
 		return ;
-	ft_putstr_fd(error_message, 2);
+	output = ft_strjoin("minishell: ", error_message);
 	free(error_message);
+	ft_putstr_fd(output, 2);
+	free(output);
 	g_sig.error_status = errdesc[err_id].err_no;
 }
 
