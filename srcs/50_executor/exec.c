@@ -6,7 +6,7 @@
 /*   By: maaliber <maaliber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 13:38:49 by lletourn          #+#    #+#             */
-/*   Updated: 2023/06/27 18:24:10 by maaliber         ###   ########.fr       */
+/*   Updated: 2023/06/28 11:22:17 by maaliber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,13 +110,11 @@ int	exec_cmd_line(t_data *data)
 	int		proc_idx;
 
 	env = env_to_tab(data->env);
-	g_sig.error_status = 0;
-	if (!input_files(data))
-		return (free(env), g_sig.error_status = 130, 0);
 	proc_idx = -1;
 	open_pipe(data);
 	while (++proc_idx < data->process_nb)
 	{
+		open_files(&data->cmds_tab[proc_idx]);
 		if (data->process_nb == 1)
 			exec_single_cmd(data, proc_idx, env);
 		else

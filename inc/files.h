@@ -6,7 +6,7 @@
 /*   By: maaliber <maaliber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 18:01:58 by maaliber          #+#    #+#             */
-/*   Updated: 2023/06/27 18:32:19 by maaliber         ###   ########.fr       */
+/*   Updated: 2023/06/28 11:08:38 by maaliber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	close_files(t_cmd *cmd);
 void	close_all_files(t_data *data);
 
 /////////////////////
-// files_manager.c //
+// open_files.c //
 /////////////////////
 
 void	open_files(t_cmd *cmd);
@@ -47,6 +47,6 @@ following filename to the command structure.
 If no filemame or no non-special after the filename token is found,
 returns 0.
 */
-void	redirection(t_tkn_lst *token, t_cmd *cmd, t_data *data);
+void	redirection(t_tkn_lst *token, t_cmd *cmd, t_data *data, int reset);
 
 #endif

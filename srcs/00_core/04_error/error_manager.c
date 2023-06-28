@@ -6,7 +6,7 @@
 /*   By: maaliber <maaliber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 14:57:22 by maaliber          #+#    #+#             */
-/*   Updated: 2023/06/27 16:01:49 by maaliber         ###   ########.fr       */
+/*   Updated: 2023/06/28 11:24:47 by maaliber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,13 +31,13 @@ struct s_errdesc
 	{E_PERM, ": permission denied\n", 1},
 	{E_ARG, "invalid number of arguments\n", 1},
 	{E_TOO_FEW_ARG, "invalid number of arguments\n", 1},
-	{E_TOO_MANY_ARG, ": too many arguments\n", 1},
+	{E_TOO_MANY_ARG, "too many arguments\n", 1},
 	{E_PIPE, "pipe\n", 0},
 	{E_FORK, "fork\n", 0},
 	{E_ENV, "environment\n", 0},
 	{E_FILE_CMD, ": No such file or directory\n", 127},
 	{E_CMD_NOT_FOUND, ": command not found\n", 127},
-	{E_HOME_NOT_SET, ": HOME not set\n", 1},
+	{E_HOME_NOT_SET, "HOME not set\n", 1},
 	{E_INVALID_ID, ": not a valid identifier\n", 1},
 	{E_HEREDOC,
 	"\nminishell: warning: here-document delimited by end-of-file, (wanted `",

@@ -155,7 +155,7 @@ SRCS += parser.c
 
 #40_files
 SRCS += close_files.c
-SRCS += files_manager.c
+SRCS += open_files.c
 SRCS += here_doc.c
 SRCS += redirection.c
 

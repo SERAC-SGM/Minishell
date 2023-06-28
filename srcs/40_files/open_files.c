@@ -1,37 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   files_manager.c                                    :+:      :+:    :+:   */
+/*   open_files.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: maaliber <maaliber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/06 12:07:41 by lletourn          #+#    #+#             */
-/*   Updated: 2023/06/27 18:25:56 by maaliber         ###   ########.fr       */
+/*   Updated: 2023/06/28 13:08:20 by maaliber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-void	open_files(t_cmd *cmd)
-{
-	char	*infile;
-
-	if (cmd->infile)
-		infile = cmd->infile;
-	else
-		infile = cmd->infile_hdoc;
-	if (infile)
-		cmd->fd_in = open(infile, O_RDONLY, 0644);
-	if (cmd->outfile)
-	{
-		if (!cmd->append)
-		cmd->fd_out = open(cmd->outfile,
-					O_WRONLY | O_TRUNC | O_CREAT, 0644);
-		else
-			cmd->fd_out = open(cmd->outfile,
-					O_WRONLY | O_APPEND | O_CREAT, 0644);
-	}
-}
 
 int	input_files(t_data *data)
 {
@@ -53,3 +32,21 @@ int	input_files(t_data *data)
 	}
 	return (1);
 }
+
+void	open_files(t_cmd *cmd)
+{
+	if (cmd->fd_in < 0 || cmd->fd_out < 0)
+		return ;
+	if (cmd->infile)
+		cmd->fd_in = open(cmd->infile, O_RDONLY, 0644);
+	if (cmd->outfile)
+	{
+		if (!cmd->append)
+		cmd->fd_out = open(cmd->outfile,
+					O_WRONLY | O_TRUNC | O_CREAT, 0644);
+		else
+			cmd->fd_out = open(cmd->outfile,
+					O_WRONLY | O_APPEND | O_CREAT, 0644);
+	}
+}
+

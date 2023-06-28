@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_ft.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lletourn <lletourn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: maaliber <maaliber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 14:51:50 by maaliber          #+#    #+#             */
-/*   Updated: 2023/06/27 16:42:53 by lletourn         ###   ########.fr       */
+/*   Updated: 2023/06/28 11:08:19 by maaliber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,27 +96,26 @@ void	reset_data(t_data *data)
 {
 	int	i;
 
-	i = 0;
 	free(data->cmd_line);
 	data->cmd_line = NULL;
 	free_tab(data->env_path);
 	data->env_path = get_envpath(data->env);
 	data->process_nb = 1;
+	redirection(NULL, NULL, NULL, 1);
 	clear_token_list(&data->token_list);
-	while (data->cmds_tab[i].args)
+	i = -1;
+	while (data->cmds_tab[++i].args)
 	{
 		if (data->cmds_tab[i].args[0])
 			free(data->cmds_tab[i].args[0]);
 		free(data->cmds_tab[i].args);
 		data->cmds_tab[i].args = NULL;
 		init_cmd(&data->cmds_tab[i]);
-		i++;
 	}
-	i = 0;
-	while (i < OPEN_MAX / 2)
+	i = -1;
+	while (++i < OPEN_MAX / 2)
 	{
 		data->fd[i][0] = -1;
 		data->fd[i][1] = -1;
-		++i;
 	}
 }
