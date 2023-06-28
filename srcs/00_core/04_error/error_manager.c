@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error_manager.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maaliber <maaliber@student.42.fr>          +#+  +:+       +#+        */
+/*   By: matnam <matnam@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 14:57:22 by maaliber          #+#    #+#             */
-/*   Updated: 2023/06/28 13:10:43 by maaliber         ###   ########.fr       */
+/*   Updated: 2023/06/28 18:36:36 by matnam           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,6 @@ void	error_msg_cmd(int err_id, char *prefix, char *item)
 void	exit_error(int err_id, char *item, t_data *data)
 {
 	char	*error_message;
-	int		i;
 
 	if (err_id == E_STD)
 		perror("");
@@ -106,7 +105,6 @@ void	exit_error(int err_id, char *item, t_data *data)
 		ft_putstr_fd(error_message, 2);
 		free(error_message);
 	}
-	i = -1;
 	close_all_files(data);
 	close_pipe(data);
 	free_infile(data, data->process_nb);
