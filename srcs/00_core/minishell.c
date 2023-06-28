@@ -6,25 +6,49 @@
 /*   By: lletourn <lletourn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 14:58:49 by maaliber          #+#    #+#             */
-/*   Updated: 2023/06/27 17:11:19 by lletourn         ###   ########.fr       */
+/*   Updated: 2023/06/28 11:43:13 by lletourn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+static char	*get_home_prompt(t_data *data)
+{
+	char	*path;
+	char	*tail_path;
+	char	*prompt;
+	char	*tmp;
+
+	path = get_var_value("HOME", data->env);
+	prompt = get_var_value("PWD", data->env);
+	if (!path && prompt)
+		return (ft_strdup(prompt));
+	if (!prompt)
+		return (ft_strdup (""));
+	tmp = ft_strdup(ft_strstr(prompt, path));
+	if (!tmp || !tmp[0])
+		return (free(tmp), ft_strdup(prompt));
+	tail_path = ft_strdup(tmp + ft_strlen(path));
+	free(tmp);
+	if (!tail_path)
+		return (free(tail_path), ft_strdup(prompt));
+	tmp = ft_strjoin("~", tail_path);
+	free(tail_path);
+	return (tmp);
+}
+
 static void	display_prompt(t_data *data)
 {
 	char	*prompt;
-	char	*var;
+	char	*tmp;
 
-	var = get_var_value("PWD", data->env);
-	if (!var)
-		prompt = ft_strdup("$ ");
-	else
-		prompt = ft_strjoin(get_var_value("PWD", data->env), "$ ");
+	tmp = get_home_prompt(data);
+	prompt = ft_strjoin(tmp, "$ ");
+	free(tmp);
 	data->cmd_line = readline(prompt);
 	free(prompt);
 }
+
 
 int	main(int ac, char *av[], char *env[])
 {
