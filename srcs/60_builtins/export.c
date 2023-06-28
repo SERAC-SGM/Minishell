@@ -6,7 +6,7 @@
 /*   By: lletourn <lletourn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 13:03:56 by matnam            #+#    #+#             */
-/*   Updated: 2023/06/26 12:04:05 by lletourn         ###   ########.fr       */
+/*   Updated: 2023/06/28 12:21:02 by lletourn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,12 +83,12 @@ static int	error_var_name(char *name)
 	if (!name)
 		return (0);
 	if (ft_isdigit(name[0]))
-		return (error_msg_cmd(E_INVALID_ID, "export: ", name), 1);
+		return (error_msg_cmd(E_INVALID_ID, "export: `", name), 1);
 	i = 0;
 	while (name[i] && (ft_isalnum(name[i]) || name[i] == '_'))
 		i++;
 	if (name[i] != 0)
-		return (error_msg_cmd(E_INVALID_ID, "export: ", name), 1);
+		return (error_msg_cmd(E_INVALID_ID, "export: `", name), 1);
 	return (0);
 }
 

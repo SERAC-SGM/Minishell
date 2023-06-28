@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error_manager.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maaliber <maaliber@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lletourn <lletourn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 14:57:22 by maaliber          #+#    #+#             */
-/*   Updated: 2023/06/27 16:01:49 by maaliber         ###   ########.fr       */
+/*   Updated: 2023/06/28 12:24:16 by lletourn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ struct s_errdesc
 	{E_FILE_CMD, ": No such file or directory\n", 127},
 	{E_CMD_NOT_FOUND, ": command not found\n", 127},
 	{E_HOME_NOT_SET, ": HOME not set\n", 1},
-	{E_INVALID_ID, ": not a valid identifier\n", 1},
+	{E_INVALID_ID, "': not a valid identifier\n", 1},
 	{E_HEREDOC,
 	"\nminishell: warning: here-document delimited by end-of-file, (wanted `",
 			0},
@@ -51,6 +51,7 @@ struct s_errdesc
 void	error_msg(int err_id, char *item)
 {
 	char	*error_message;
+	char	*output;
 
 	if (item)
 		error_message = ft_strjoin(item, errdesc[err_id].msg);
@@ -58,14 +59,17 @@ void	error_msg(int err_id, char *item)
 		error_message = ft_strdup(errdesc[err_id].msg);
 	if (!error_message)
 		return ;
-	ft_putstr_fd(error_message, 2);
+	output = ft_strjoin("minishell: ", error_message);
 	free(error_message);
+	ft_putstr_fd(output, 2);
+	free(output);
 }
 
 void	error_msg_cmd(int err_id, char *prefix, char *item)
 {
 	char	*error_message;
 	char	*append;
+	char	*output;
 
 	append = NULL;
 	if (prefix && item)
@@ -77,8 +81,10 @@ void	error_msg_cmd(int err_id, char *prefix, char *item)
 	error_message = ft_strjoin_dup1(append, errdesc[err_id].msg);
 	if (!error_message)
 		return ;
-	ft_putstr_fd(error_message, 2);
+	output = ft_strjoin("minishell: ", error_message);
 	free(error_message);
+	ft_putstr_fd(output, 2);
+	free(output);
 	g_sig.error_status = errdesc[err_id].err_no;
 }
 

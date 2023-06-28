@@ -6,13 +6,13 @@
 /*   By: lletourn <lletourn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 14:58:49 by maaliber          #+#    #+#             */
-/*   Updated: 2023/06/28 11:43:13 by lletourn         ###   ########.fr       */
+/*   Updated: 2023/06/28 12:11:50 by lletourn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static char	*get_home_prompt(t_data *data)
+static char	*get_home_path(t_data *data)
 {
 	char	*path;
 	char	*tail_path;
@@ -42,7 +42,7 @@ static void	display_prompt(t_data *data)
 	char	*prompt;
 	char	*tmp;
 
-	tmp = get_home_prompt(data);
+	tmp = get_home_path(data);
 	prompt = ft_strjoin(tmp, "$ ");
 	free(tmp);
 	data->cmd_line = readline(prompt);
