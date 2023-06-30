@@ -6,7 +6,7 @@
 /*   By: lletourn <lletourn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 13:38:57 by maaliber          #+#    #+#             */
-/*   Updated: 2023/06/30 17:05:04 by lletourn         ###   ########.fr       */
+/*   Updated: 2023/06/30 17:36:04 by lletourn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,8 @@ pas parfois de l'essence même de la communication : l'échange, l'émotion, et 
 le partage.\n\n\
 Enfin, je te souhaite bonne chance dans ta quête sans fin de la perfection. \
 Je suis certain que tu seras toujours là pour pointer du doigt \
-la moindre coquille dans nos codes, même lorsque nous les lisons pour le \
-simple plaisir de nous évader.\n\n\n\
+la moindre coquille dans nos codes, même lorsque nous les écrivons pour le \
+simple plaisir de créer et d'explorer.\n\n\n\
 Cordialement,\n\n\
 Quelqu'un qui apprécie aussi les imperfections\n\n\n"
 
