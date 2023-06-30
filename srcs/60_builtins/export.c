@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lletourn <lletourn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: maaliber <maaliber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 13:03:56 by matnam            #+#    #+#             */
-/*   Updated: 2023/06/28 12:21:02 by lletourn         ###   ########.fr       */
+/*   Updated: 2023/06/30 13:58:24 by maaliber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,10 +100,12 @@ int	ft_export(char	**args, t_data *data)
 	char	*name;
 	char	*value;
 
-	while (args++)
+	if (!args || !args[1])
+		return (ft_env(data->env, NULL), 0);
+	while (++args)
 	{
-		if (!*args)
-			return (0);
+		if (!*args[0])
+			return (error_msg_cmd(E_INVALID_ID, "export: `", "'"), 1);
 		name = get_name(*args);
 		if (error_var_name(name))
 			return (free(name), 1);

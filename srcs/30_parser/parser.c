@@ -6,7 +6,7 @@
 /*   By: maaliber <maaliber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 14:19:32 by maaliber          #+#    #+#             */
-/*   Updated: 2023/06/28 11:21:59 by maaliber         ###   ########.fr       */
+/*   Updated: 2023/06/30 13:35:59 by maaliber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,7 @@ int	parser(t_data *data)
 	t_tkn_lst	*token;
 	int			proc_idx;
 
+	g_sig.exit_status = g_sig.error_status;
 	g_sig.error_status = 0;
 	if (!data->token_list || parsing_error(data->token_list))
 		return (0);

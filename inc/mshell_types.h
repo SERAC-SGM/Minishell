@@ -6,7 +6,7 @@
 /*   By: maaliber <maaliber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 13:38:57 by maaliber          #+#    #+#             */
-/*   Updated: 2023/06/27 14:32:35 by maaliber         ###   ########.fr       */
+/*   Updated: 2023/06/30 13:36:34 by maaliber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,7 +116,7 @@ typedef struct s_cmd
 	char	*outfile;
 	int		fd_out;
 	int		append;
-}			t_cmd;
+}	t_cmd;
 
 /*
 Data structure.
@@ -141,9 +141,10 @@ Global signal structure.
 */
 typedef struct s_sig
 {
-	int				error_status;
-	int				exit;
-	pid_t			pid;
-}					t_sig;
+	int		error_status;
+	int		exit;
+	int		exit_status;
+	pid_t	pid;
+}	t_sig;
 
 #endif

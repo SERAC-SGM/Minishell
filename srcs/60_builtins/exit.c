@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lletourn <lletourn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: maaliber <maaliber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 12:53:26 by maaliber          #+#    #+#             */
-/*   Updated: 2023/06/26 14:17:14 by lletourn         ###   ########.fr       */
+/*   Updated: 2023/06/30 13:42:54 by maaliber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,14 +43,15 @@ static int	is_number(char *arg)
 
 int	ft_exit(char **args)
 {
-	g_sig.exit = 1;
 	if (args[2])
 		return (error_msg_cmd(E_TOO_MANY_ARG, "exit: ", NULL), 1);
+	g_sig.exit = 1;
 	if (args[1])
 	{
 		if (!is_number(args[1]))
 			return (error_msg_cmd(E_NUMERIC_ARG, "exit: ", args[1]), 2);
 		return (ft_atoi(args[1]));
 	}
-	return (0);
+	g_sig.error_status = g_sig.exit_status;
+	return (g_sig.error_status);
 }
