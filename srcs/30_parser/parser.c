@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maaliber <maaliber@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lletourn <lletourn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 14:19:32 by maaliber          #+#    #+#             */
-/*   Updated: 2023/06/30 13:35:59 by maaliber         ###   ########.fr       */
+/*   Updated: 2023/06/30 16:59:31 by lletourn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,6 +106,8 @@ int	parser(t_data *data)
 		token = parse_type(data, token, &proc_idx);
 		if (!token)
 			return (0);
+		if (proc_idx > 100)
+			return (ft_putstr_fd(ARRETE_STP, 2), 0);
 	}
 	return (1);
 }

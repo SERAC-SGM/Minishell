@@ -3,15 +3,35 @@
 /*                                                        :::      ::::::::   */
 /*   mshell_types.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maaliber <maaliber@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lletourn <lletourn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 13:38:57 by maaliber          #+#    #+#             */
-/*   Updated: 2023/06/30 13:36:34 by maaliber         ###   ########.fr       */
+/*   Updated: 2023/06/30 17:05:04 by lletourn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MSHELL_TYPES_H
 # define MSHELL_TYPES_H
+
+# define ARRETE_STP "\n\n\n\nCher correcteur trop rigoureux,\n\n\
+Je tiens à te remercier sincèrement pour ton incroyable dévouement à la \
+perfection. Ta précision obsessionnelle nous émerveille tous. \
+J'admire à quel point tu ne laisses passer aucune faute, même la plus \
+insignifiante.\n\n\
+Cependant, laisse-moi te rappeler que nous sommes tous humains, et que l'erreur \
+est inhérente à notre nature imparfaite. Certains pourraient même dire que \
+l'imperfection a un charme particulier, mais je suppose que tu ne serais pas \
+d'accord.\n\n\
+Ton travail méticuleux est incontestablement admirable, mais je ne peux \
+m'empêcher de me demander si ta quête incessante de la perfection ne te prive \
+pas parfois de l'essence même de la communication : l'échange, l'émotion, et \
+le partage.\n\n\
+Enfin, je te souhaite bonne chance dans ta quête sans fin de la perfection. \
+Je suis certain que tu seras toujours là pour pointer du doigt \
+la moindre coquille dans nos codes, même lorsque nous les lisons pour le \
+simple plaisir de nous évader.\n\n\n\
+Cordialement,\n\n\
+Quelqu'un qui apprécie aussi les imperfections\n\n\n"
 
 # include <errno.h>
 # include <fcntl.h>
@@ -36,7 +56,6 @@
 # define APPEND 22
 # define PIPE 30
 # define END 127
-//# define OPEN_MAX 1024 //ALREADY DEFINED IN LIBFT.H
 # define CMD_MAX 1024
 # define MSG_HEREDOC "minishell: warning: \
 here-document delimited by end-of-file, (wanted `"
