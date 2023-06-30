@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lletourn <lletourn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: matnam <matnam@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 11:10:57 by lletourn          #+#    #+#             */
-/*   Updated: 2023/06/01 12:05:30 by lletourn         ###   ########.fr       */
+/*   Updated: 2023/06/28 19:29:07 by matnam           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static int	end_newline_param(char **args, int *i)
 		j = 1;
 		while (args[*i][j] && args[*i][j] == 'n')
 			j++;
-		if (!args[*i][j])
+		if (!args[*i][j] && args[*i][j - 1] == 'n')
 			newline = 0;
 		else
 			break ;

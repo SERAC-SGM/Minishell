@@ -3,35 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   open_files.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lletourn <lletourn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: matnam <matnam@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/06 12:07:41 by lletourn          #+#    #+#             */
-/*   Updated: 2023/06/28 14:01:55 by lletourn         ###   ########.fr       */
+/*   Updated: 2023/06/28 23:01:32 by matnam           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-int	input_files(t_data *data)
-{
-	int		proc_idx;
-
-	proc_idx = -1;
-	while (++proc_idx < data->process_nb)
-	{
-		if (data->cmds_tab[proc_idx].here_doc)
-		{
-			if (!input_heredoc(&data->cmds_tab[proc_idx], data))
-			{
-				while (proc_idx >= 0)
-					close_files(&data->cmds_tab[proc_idx--]);
-				return (0);
-			}
-		}
-		open_files(&data->cmds_tab[proc_idx]);
-	}
-	return (1);
-}
 
 void	open_files(t_cmd *cmd)
 {
@@ -49,3 +28,13 @@ void	open_files(t_cmd *cmd)
 					O_WRONLY | O_APPEND | O_CREAT, 0644);
 	}
 }
+
+void	open_all_files(t_data *data)
+{
+	int	i;
+
+	i = -1;
+	while (++i < data->process_nb)
+		open_files(&data->cmds_tab[i]);
+}
+

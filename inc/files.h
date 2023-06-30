@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   files.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maaliber <maaliber@student.42.fr>          +#+  +:+       +#+        */
+/*   By: matnam <matnam@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 18:01:58 by maaliber          #+#    #+#             */
-/*   Updated: 2023/06/28 11:08:38 by maaliber         ###   ########.fr       */
+/*   Updated: 2023/06/28 23:02:14 by matnam           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	close_all_files(t_data *data);
 /////////////////////
 
 void	open_files(t_cmd *cmd);
-int		input_files(t_data *data);
+void	open_all_files(t_data *data);
 
 ////////////////
 // here_doc.c //
