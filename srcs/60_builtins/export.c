@@ -6,7 +6,7 @@
 /*   By: lletourn <lletourn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 13:03:56 by matnam            #+#    #+#             */
-/*   Updated: 2023/06/30 16:39:19 by lletourn         ###   ########.fr       */
+/*   Updated: 2023/06/30 17:18:54 by lletourn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,6 +108,8 @@ int	ft_export(char	**args, t_data *data)
 	{
 		if (!args[i][0])
 			return (error_msg_cmd(E_INVALID_ID, "export: `", "'"), 1);
+		else if (args[i][0] == '=')
+			return (error_msg_cmd(E_INVALID_ID, "export: `", args[i]), 1);
 		name = get_name(args[i]);
 		if (error_var_name(name))
 			return (free(name), 1);

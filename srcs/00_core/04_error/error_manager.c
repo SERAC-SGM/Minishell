@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error_manager.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: matnam <matnam@student.42.fr>              +#+  +:+       +#+        */
+/*   By: lletourn <lletourn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 14:57:22 by maaliber          #+#    #+#             */
-/*   Updated: 2023/06/28 18:36:36 by matnam           ###   ########.fr       */
+/*   Updated: 2023/06/30 17:19:28 by lletourn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ struct s_errdesc
 	{E_FILE_CMD, ": No such file or directory\n", 127},
 	{E_CMD_NOT_FOUND, ": command not found\n", 127},
 	{E_HOME_NOT_SET, "HOME not set\n", 1},
-	{E_INVALID_ID, ": not a valid identifier\n", 1},
+	{E_INVALID_ID, "': not a valid identifier\n", 1},
 	{E_HEREDOC,
 	"\nminishell: warning: here-document delimited by end-of-file, (wanted `",
 			0},
